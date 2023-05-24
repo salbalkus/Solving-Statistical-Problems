@@ -1,0 +1,3 @@
+# Statistics {#statistics}
+
+Proving sufficient, complete, and ancillary statistics

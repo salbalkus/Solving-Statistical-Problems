@@ -1,0 +1,13 @@
+# Math Tricks {#math-tricks}
+
+This chapter will cover highly specific mathematical techniques used to solve stats problems but themselves require no statistical knowledge, i.e...
+
+- Exponential function as limits/series
+- Inductive integration by parts
+- substitution tricks for integration
+- binomial theorem
+- Gamma function properties
+- Matrices (determinants, jacobians, etc.)
+- Taylor Series (univariate and multivariate)
+- Lagrange multipliers? (Maybe save for MLEs)
+

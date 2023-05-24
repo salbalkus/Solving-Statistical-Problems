@@ -1,0 +1,7 @@
+# New Distributions {#new-distributions}
+
+This chapter will demonstrate how to derive the PDF or CDF of a random variable that is a function of other random variables, including hierarchical models.
+
+## Example one
+
+## Example two

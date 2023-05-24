@@ -1,0 +1,3 @@
+# Known Distributions {#known-distributions}
+
+This will cover proofs and useful properties of commonly used distributions, as well as location-scale and exponential families.

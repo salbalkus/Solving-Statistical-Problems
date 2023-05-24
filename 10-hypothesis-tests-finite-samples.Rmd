@@ -1,0 +1,3 @@
+# Hypothesis Tests: Finite Samples {#hypothesis-tests-finite-samples}
+
+Constructing finite-sample hypothesis tests and evaluating their properties.

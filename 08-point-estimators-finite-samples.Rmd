@@ -1,0 +1,3 @@
+# Point Estimators: Finite Samples {#point-estimators-finite-samples}
+
+Finding point estimators and evaluating their finite sample properties.

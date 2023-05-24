@@ -1,0 +1,3 @@
+# Moments {#moments}
+
+How to compute any moment of any random variable.
