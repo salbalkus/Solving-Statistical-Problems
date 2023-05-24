@@ -1,3 +1,25 @@
 # Statistics {#statistics}
 
 Proving sufficient, complete, and ancillary statistics
+
+
+## Table of Sufficient Statistics
+
+Translated from https://en.wikipedia.org/wiki/Exponential_family
+
+| Distribution | Parameter | Sufficient Statistic | 
+| :---: | :---: | :---: | 
+| Bernoulli | p | $\sum_{i=1}^n x_i$ |
+| Binomial | p | $\sum_{i=1}^n x_i$ |
+| Poisson | $\lambda$ | $\sum_{i=1}^n x_i$ |
+| Negative Binomial | p | $\sum_{i=1}^n x_i$ |
+| Exponential | $\lambda$ | $\sum_{i=1}^n x_i$ |
+| Normal (known $\sigma^2$) | $\mu$ | $\frac{1}{\sigma}\sum_{i=1}^n x_i$ |
+| Normal | $\mu$, $\sigma^2$ | $(\sum_{i=1}^n x_i, \sum_{i=1}^n x_i^2)$ | 
+| Chi-Squared | $\nu$ | $\sum_{i=1}^n \log(x_i)$ |
+| Pareto (known min $x_m$) | $\alpha$ | $\sum_{i=1}^n \log(x_i)$ |
+| Gamma | $\alpha, \beta$ | $(\sum_{i=1}^n\log(x_i), \sum_{i=1}^n x_i)$ |
+| Beta | $\alpha, \beta$ | $(\sum_{i=1}^n\log(x_i), \sum_{i=1}^n\log(1 - x_i))$ |
+| Weibull (known shape $k$) | $\lambda$ | $\sum_{i=1}^n x^k$ |
+
+

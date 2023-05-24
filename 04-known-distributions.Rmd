@@ -1,3 +1,110 @@
 # Known Distributions {#known-distributions}
 
 This will cover proofs and useful properties of commonly used distributions, as well as location-scale and exponential families.
+
+## Families of Distributions
+
+Many so-called "distributions" are actually *families* of distributions, meaning that their pdf involves one or more parameters. That is, their pdfs represent a [family of curves](https://en.wikipedia.org/wiki/Family_of_curves), a **set** of pdfs with variable parameters.
+
+For example, the $\text{Normal}(\mu, \sigma^2)$ distribution contains two parameters, $\mu$ (the mean), and $\sigma^2$ (the variance). These are also examples of two types of parameters with special properties - called *location* and *scale* parameters, respectively - that can be used to simply calculations.
+
+## Location and Scale Families
+
+### Location Families
+
+::: {.definition name="Location Family"}
+Let $Z \sim f_Z(z)$. Given a constant **location parameter** $b$, $X$ is a location family if $X \sim f_Z(z - b)$ or if $X = Z + b$.
+:::
+
+The two above definitions are equivalent because if $X = Z + b$, then $P(X < z) = P(Z + b < z) = P(Z < z - b)$, so the cdf of $Z$ is $F_Z(z - b)$ and therefore $X \sim f_Z(z - b)$ (note this makes use of a [direct probability argument](#probability))
+
+### Scale Families
+
+::: {.definition name="Scale Family"}
+Let $Z \sim f_Z(Z)$. Given a constant **scale parameter** $a$, $X$ is a scale family if... - $X \sim \frac{1}{a}f_Z(\frac{z}{a})$ - $X \sim F_Z(\frac{z}{a})$ - or $X = aZ$
+:::
+
+All of the above definitions are equivalent because if $X = aZ$, then $P(X < z)$ = $P(aZ < z) = P(Z < \frac{z}{a} = F_Z(z)$. Also, $f_X(x) = \frac{d}{dx}F_X(x) = \frac{d}{dx}F_Z(\frac{z}{a}) = \frac{1}{a}f_Z(\frac{z}{a})$
+
+### Properties of Location-Scale Families
+
+We can compute moments by using general properties of expectation (see Moments)
+
+- $E(X) = aE(Z) + b$, by linearity of expectation. If the support of $Z$ includes $0$, then we typically define $Z$ such that $E(Z) = 0$ so that $E(X) = b$. 
+
+- $Var(X) = a^2Var(Z)$, since $Var(Z + b) = Var(Z)$. We typically define $Z$ such that $Var(Z) = 1$, so that $Var(X) = a^2Var(Z) = a^2$. An example of this is the standard normal.
+
+- $\mathcal{M}_X(t) = e^{tb} \mathcal{M}_Z(at)$
+
+It may seem like the sum of a scale family should also follow the same family - indeed, this is true for a number of distributions include the Normal, Poisson, and Gamma. However, it is not true always. For instance, $X_i \sim \text{Uniform}(0,a)$ is a scale family, but $X_1 + X_2$ does not follow a uniform distribution:
+
+```{r}
+X1 = runif(1000, 0, 1)
+X2 = runif(1000, 0, 1)
+hist(X1 + X2)
+```
+## Exponential Families
+
+::: {.definition name="Exponential Family"}
+$X \sim f_X(x|\theta)$ is an exponential family if its pdf can be written in the form
+
+$$f_X(x|\theta) = h(x)c(\theta)\exp\Big(\sum_{i=1}^k w_i(\theta)t_i(x)\Big)$$
+:::
+
+How do we prove that a pdf *can* be written in the above form? Often, the easiest way is to use a simple trick to get the necessary $\exp$ function: $f(x) = \exp(\log(f(x)))$. Then, we algebraically manipulate to obtain this form.
+
+How do we prove that a pdf *cannot* be written in the above form?
+
+FORTHCOMING
+
+### Properties
+
+Exponential families have a number of incredibly useful properties:
+
+- [Leibniz's rule](#leibniz-rule) holds, meaning that the [Cramer-Rao Lower Bound](#point-estimators-finite-samples) provides a lower bound on the variance of estimators. 
+- Among most common families, **only** exponential families admit sufficient statistics with dimension bounded in $n$. This is proven by the [Pitman-Koopman-Darmois theorem](http://yaroslavvb.com/papers/koopman-on.pdf) for families with smooth, nowhere-vanishing pdfs whose domain does not depend on the parameter being estimated.
+- If $X$ is an exponential family, $$T(X) = \Big(\sum_{i=1}^n t_1(x), ..., \sum_{i=1}^n t_k(x)\Big)$$ is a minimal [sufficient statistic](#statistics).
+- Furthermore, if $\{w_1(\theta),...,w_k(\theta)\}$ contains an open set, then $T(X)$ is a [complete sufficient statistic](#statistics), which we can use to compute an UMVUE.
+- The Method of Moments (MOM) estimator is equal to the Maximum Likelihood Estimator (MLE)
+- The regularity conditions required for [consistency and asymptotic normality of the MLE](#point-estimators-asymptotics) are guaranteed to hold.
+- The family must have a Monotone Likelihood Ratio, meaning that the [Karlin-Rubin Theorem may be employed to construct an UMP test](#hypothesis-tests-finite-samples).
+
+### Natural Exponential Families
+
+::: {.definition name="Natural Exponential Family"}
+$X \sim f_X(x|\theta)$ is a natural exponential family if its pdf can be written in the form
+
+$$f_X(x|\theta) = h(x)c^*(\boldsymbol{\eta})\exp\Big(\sum_{i=1}^k \eta_i t_i(x)\Big)$$
+:::
+
+
+
+
+## Known Exponential Families
+
+### Bernoulli
+
+#### Definition
+
+|               Description               |    Parameters     |     Support      |       pmf        |
+|:----------------:|:----------------:|:----------------:|:----------------:|
+| Any random variable with domain ${0,1}$ | $0 \leq p \leq 1$ | $x \in \{0, 1\}$ | $p^x(1-p)^{1-x}$ |
+
+#### Moments {#moments}
+
+| $E(Y)$ | $Var(Y)$ |      mgf       |
+|:------:|:--------:|:--------------:|
+|  $p$   | $p(1-p)$ | $(1-p) + pe^t$ |
+
+#### iid Sample Information
+
+|                   Log-likelihood                   |                   Score Equations                   | Fisher Information |              MLE              |
+|:----------------:|:----------------:|:----------------:|:----------------:|
+| $n\log(1-p) + \log(\frac{p}{1-p})\sum_{i=1}^n x_i$ | $-\frac{n}{1-p} + \frac{1}{p(1-p)}\sum_{i=1}^n x_i$ | $\frac{1}{p(1-p)}$ | $\frac{1}{n}\sum_{i=1}^n x_i$ |
+
+#### Other Properties
+
+-   The Bernoulli is an exponential family. It satisfies the regularity conditions needed for consistency and asymptotic normality of its MLE.
+-   $\sum_{i=1}^n \sim Binomial(n, p)$
+-   All indicator functions $I(A)$ of random variables, where $A$ is a statement about the random variable (for instance, $A = \{x: x > 1\}$) are Bernoulli random variables with $p = P(A)$.
+- Its sufficient statistic is $\sum_{i=1}^n x_i$.

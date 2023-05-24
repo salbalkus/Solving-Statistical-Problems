@@ -10,4 +10,22 @@ This chapter will cover highly specific mathematical techniques used to solve st
 - Matrices (determinants, jacobians, etc.)
 - Taylor Series (univariate and multivariate)
 - Lagrange multipliers? (Maybe save for MLEs)
+- Open versus closed intervals
 
+
+## Leibniz's Rule {#leibniz-rule}
+
+::: {.theorem name="Leibniz's Rule: Simple Version"}
+
+If $a, b$ are constant and $f(x, \theta)$ is differentiable w.r.t to $\theta$, then
+
+$$\frac{d}{d\theta} \int_{a(\theta)}^{b(\theta)} f(x,\theta)dx = \int_a^b \frac{\partial}{\partial\theta}f(x,\theta)dx$$
+:::
+
+::: {.theorem name="Leibniz's Rule: Complicated Version"}
+
+
+If $a(\theta)$, $b(\theta)$, and $f(x, \theta)$ are differentiable w.r.t to $\theta$, then 
+
+$$\int_{a(\theta)}^{b(\theta)}f(x,\theta)dx = f(b(\theta), \theta)\frac{d}{d\theta}b(\theta) - f(a(\theta), \theta)\frac{d}{d\theta}a(\theta) + \int_{a(\theta)}^{b(\theta)} \frac{\partial}{\partial\theta}f(x,\theta)dx$$
+:::
