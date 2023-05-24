@@ -1,0 +1,3 @@
+# Generating Random Variables {#generating-random-variables}
+
+What the title says.

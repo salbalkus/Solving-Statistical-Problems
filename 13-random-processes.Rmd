@@ -1,0 +1,7 @@
+# Random Processes {#random-processes}
+
+Focusing on the branching processes discussed in class.
+
+## Example one
+
+## Example two
