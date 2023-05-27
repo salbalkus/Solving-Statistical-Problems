@@ -86,6 +86,9 @@ $$f_X(x|\theta) = h(x)c^*(\boldsymbol{\eta})\exp\Big(\sum_{i=1}^k \eta_i t_i(x)\
 
 #### Definition
 
+The Bernoulli distribution, represented mathematically as $\text{Bernoulli}(p)$, describes the outcome of a random variable $X$ that takes only two possible values, 0 and 1. Such an event is often termed a "Bernoulli trial".
+
+
 |               Description               |    Parameters     |     Support      |       pmf        |
 |:----------------:|:----------------:|:----------------:|:----------------:|
 | Any random variable with domain ${0,1}$ | $0 \leq p \leq 1$ | $x \in \{0, 1\}$ | $p^x(1-p)^{1-x}$ |
@@ -108,3 +111,34 @@ $$f_X(x|\theta) = h(x)c^*(\boldsymbol{\eta})\exp\Big(\sum_{i=1}^k \eta_i t_i(x)\
 -   $\sum_{i=1}^n \sim Binomial(n, p)$
 -   All indicator functions $I(A)$ of random variables, where $A$ is a statement about the random variable (for instance, $A = \{x: x > 1\}$) are Bernoulli random variables with $p = P(A)$.
 - Its sufficient statistic is $\sum_{i=1}^n x_i$.
+
+### Binomial
+
+#### Definition
+
+The Binomial distribution is represented mathematically as $Bernoulli(n, p)$. It describes the *number of successes* in a series of Bernoulli trials. 
+
+
+|               Description               |    Parameters     |     Support      |       pmf        |
+|:----------------:|:----------------:|:----------------:|:----------------:|
+| A random variable describing the number of times an event was successful out of $n$ attempts.  | $0 \leq p \leq 1$, $n \in \mathbb{N}$ | $x \in \mathbb{N}$ | ${n\choose x}p^x(1-p)^{n-x}$ |
+
+#### Moments {#moments}
+
+| $E(Y)$ | $Var(Y)$ |      mgf       |
+|:------:|:--------:|:--------------:|
+|  $np$   | $np(1-p)$ | $((1-p) + pe^t)^n$ |
+
+#### iid Sample Information
+
+Since the Binomial has $n$ as a parameter, notation in problems that involve a *sample* of $n$ iid Binomial random variables can be tricky. To clarify, in the following table let $X_i \sim Binomial(m, p)$, and let $n$ represent the number of samples. 
+
+|                   Log-likelihood                   |                   Score Equations                   | Fisher Information |              MLE              |
+|:----------------:|:----------------:|:----------------:|:----------------:|
+| $nm\log(1-p) + \log(\frac{p}{1-p})\sum_{i=1}^n x_i + \log({m\choose x_i})$ | $-\frac{nm}{1-p} + \frac{1}{p(1-p)}\sum_{i=1}^n x_i$ | $\frac{m}{p(1-p)}$ | $\frac{1}{nm}\sum_{i=1}^n x_i$ |
+
+#### Other Properties
+
+- The Binomial distribution is an exponential family.
+- The Binomial distribution is **additive**: if $X \sim Binomial(n,p)$ and $X \sim Binomial(m,p)$, then $X + Y \sim Binomial(m + n, p)$. 
+- The sufficient statistic for a sample of iid Binomial random variables is $\sum_{i=1}^n X_i$.
