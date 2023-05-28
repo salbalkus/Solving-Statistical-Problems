@@ -8,7 +8,7 @@ Many so-called "distributions" are actually *families* of distributions, meaning
 
 For example, the $\text{Normal}(\mu, \sigma^2)$ distribution contains two parameters, $\mu$ (the mean), and $\sigma^2$ (the variance). These are also examples of two types of parameters with special properties - called *location* and *scale* parameters, respectively - that can be used to simply calculations.
 
-## Location and Scale Families
+## Location and Scale Families (#location-scale)
 
 ### Location Families
 
@@ -91,7 +91,7 @@ The Bernoulli distribution, represented mathematically as $\text{Bernoulli}(p)$,
 
 |               Description               |    Parameters     |     Support      |       pmf        |
 |:----------------:|:----------------:|:----------------:|:----------------:|
-| Any random variable with domain ${0,1}$ | $0 \leq p \leq 1$ | $x \in \{0, 1\}$ | $p^x(1-p)^{1-x}$ |
+| Any random variables whose value can be either 0 or 1 | $0 \leq p \leq 1$ | $x \in \{0, 1\}$ | $p^x(1-p)^{1-x}$ |
 
 #### Moments {#moments}
 
@@ -116,12 +116,12 @@ The Bernoulli distribution, represented mathematically as $\text{Bernoulli}(p)$,
 
 #### Definition
 
-The Binomial distribution is represented mathematically as $Bernoulli(n, p)$. It describes the *number of successes* in a series of Bernoulli trials. 
+What happens when we repeat a Bernoulli trial many times and count how many 1's occur? The Binomial distribution is represented mathematically as $Bernoulli(n, p)$. It describes the *number of successes* in a series of Bernoulli trials. 
 
 
 |               Description               |    Parameters     |     Support      |       pmf        |
 |:----------------:|:----------------:|:----------------:|:----------------:|
-| A random variable describing the number of times an event was successful out of $n$ attempts.  | $0 \leq p \leq 1$, $n \in \mathbb{N}$ | $x \in \mathbb{N}$ | ${n\choose x}p^x(1-p)^{n-x}$ |
+| The number of times an event was successful out of $n$ attempts  | $0 \leq p \leq 1$, $n \in \mathbb{N}$ | $x \in \mathbb{N}$ | ${n\choose x}p^x(1-p)^{n-x}$ |
 
 #### Moments {#moments}
 
@@ -142,3 +142,356 @@ Since the Binomial has $n$ as a parameter, notation in problems that involve a *
 - The Binomial distribution is an exponential family.
 - The Binomial distribution is **additive**: if $X \sim Binomial(n,p)$ and $X \sim Binomial(m,p)$, then $X + Y \sim Binomial(m + n, p)$. 
 - The sufficient statistic for a sample of iid Binomial random variables is $\sum_{i=1}^n X_i$.
+
+### Geometric
+
+#### Definition
+
+Suppose instead of counting the number of successes, we wish to count the number of attempts until a single success occurs? The Geometric distribution is represented mathematically as $Geometric(p)$. It describes the **number of trials before a success occurs** in a series of Bernoulli trials.
+
+Note that the parametrization below does not include the final success in the number of trials, but alternatives exist in which it may.
+
+|               Description               |    Parameters     |     Support      |       pmf        |
+|:----------------:|:----------------:|:----------------:|:----------------:|
+| The number of Bernoulli trials attempted before a success occurs  | $0 < p \leq 1$ | $x \in \mathbb{N}$ | $p(1-p)^{x-1}$ |
+
+#### Moments {#moments}
+
+| $E(Y)$ | $Var(Y)$ |      mgf       |
+|:------:|:--------:|:--------------:|
+|  $\frac{1-p}{p}$   | $\frac{1-p}{p^2}$ | $\frac{p}{1 - (1 - p)e^t}$ for $t < -\log(1-p)$ |
+
+
+#### iid Sample Information
+
+
+|                   Log-likelihood                   |                   Score Equations                   | Fisher Information |              MLE              |
+|:----------------:|:----------------:|:----------------:|:----------------:|
+| $n\log(\frac{p}{1-p}) + \log(1-p)\sum_{i=1}^n x_i$ | $-\frac{n}{p(1-p)} - \frac{1}{1-p}\sum_{i=1}^n x_i$ |  |  |
+
+#### Other Properties
+
+- 
+
+### Negative Binomial
+
+#### Definition
+
+The Negative Binomial distribution generalizes the Geometric distribution to instead represent the number of Bernoulli trials until $r$ successes have occurred. It is represented mathematically as $NegBin(r, p)$. 
+
+|               Description               |    Parameters     |     Support      |       pmf        |
+|:----------------:|:----------------:|:----------------:|:----------------:|
+| The number of Bernoulli trials attempted before a success occurs  | $0 < p \leq 1$, $r \in \mathbb{N}$ | $x \in \mathbb{N}$ | ${x+r-1\choose x}p^r(1-p)^{x}$ |
+
+#### Moments {#moments}
+
+| $E(Y)$ | $Var(Y)$ |      mgf       |
+|:------:|:--------:|:--------------:|
+|  $\frac{r(1-p)}{p}$   | $\frac{r(1-p)}{p^2}$ | $\Big(\frac{p}{1 - (1 - p)e^t}\Big)^r$ for $t < -\log(p)$|
+
+
+#### iid Sample Information
+
+Since the Binomial has $n$ as a parameter, notation in problems that involve a *sample* of $n$ iid Binomial random variables can be tricky. To clarify, in the following table let $X_i \sim Binomial(m, p)$, and let $n$ represent the number of samples. 
+
+|                   Log-likelihood                   |                   Score Equations                   | Fisher Information |              MLE              |
+|:----------------:|:----------------:|:----------------:|:----------------:|
+| $nr\log(\frac{p}{1-p}) + \sum_{i=1}^n x_i\log(1-p) + \log{x_i + r - 1\choose x_i}$ | $-\frac{nr}{p} - \frac{1}{1-p}\sum_{i=1}^n x_i$ | $\frac{r}{(1-p)^2p}$ | $\frac{1}{1 - \frac{1}{nr}\sum_{i=1}^nx_i}$ |
+
+#### Other Properties
+
+- 
+
+### Poisson
+
+#### Definition
+
+The Poisson distribution describes one possible behavior of a **count** random variable. It describes the probability that a certain number of events occur within a fixed interval, such as a time period, distance or area. It is mathematically represented as $Poisson(\lambda)$. 
+
+
+|               Description               |    Parameters     |     Support      |       pmf        |
+|:----------------:|:----------------:|:----------------:|:----------------:|
+| The number of events occurring in a fixed interval | $\lambda \in (0, \infty)$ | $x \in \mathbb{N}_0$ | $\frac{1}{x!}\lambda^xe^{-\lambda}$ |
+
+#### Moments {#moments}
+
+| $E(Y)$ | $Var(Y)$ |      mgf       |
+|:------:|:--------:|:--------------:|
+|  $\lambda$   | $\lambda$ | $\exp(\lambda(e^t - 1))$ |
+
+
+#### iid Sample Information
+
+
+|                   Log-likelihood                   |                   Score Equations                   | Fisher Information |              MLE              |
+|:----------------:|:----------------:|:----------------:|:----------------:|
+| $n\lambda + \sum_{i=1}^n x_i\log(\lambda) - \log(x_i!)$ | $-n + \frac{1}{\lambda}x_i$ | $\frac{1}{\lambda}$ | $\frac{1}{n}\sum_{i=1}^nx_i$ |
+
+#### Other Properties
+
+- Like the Binomial, the Poisson is formulated by counting the number of successes within a set of Bernoulli trials. The distribution describes the asymptotic behavior of the Binomial distribution as $n \rightarrow \infty$ and $np \rightarrow \lambda$, a fixed *rate* parameter.
+- The Poisson is **additive**. If $X_i \sim Poisson(\lambda)$, then $\sum_{i=1}^n X_i \sim Poisson(n\lambda)$
+
+### Normal
+
+#### Definition
+
+Often denoted $N(\mu, \sigma^2)$, the Normal distribution
+
+|               Description               |    Parameters     |     Support      |       pdf        |
+|:----------------:|:----------------:|:----------------:|:----------------:|
+| Describes the asymptotic behavior of sample means and many distributions | $\mu \in \mathbb{R}$, $\sigma^2 \in (0, \infty)$ | $x \in \mathbb{R}$ | $\frac{1}{\sqrt{2\pi\sigma^2}}\exp\Big(-\frac{1}{2}\frac{(x-\mu)^2}{\sigma^2}\Big)$ |
+
+#### Moments {#moments}
+
+| $E(Y)$ | $Var(Y)$ |      mgf       |
+|:------:|:--------:|:--------------:|
+|  $\mu$   | $\sigma^2$ | $\exp(\mu t + \sigma^2 t^2 / 2)$ |
+
+
+#### iid Sample Information
+
+
+|                   Log-likelihood                   |                   Score Equations                   | Fisher Information |              MLE              |
+|:----------------:|:----------------:|:----------------:|:----------------:|
+| $-\frac{n}{2}\log(2\pi\sigma^2) - \frac{1}{2\sigma^2}\sum_{i=1}^n (x_i - \mu)^2$ | $U(\mu | x, \sigma^2) = -n\mu -\frac{1}{\sigma^2}\sum_{i=1}^n x_i \\ U(\sigma^2 | x, \mu) = -\frac{n}{2\sigma^2} + \frac{1}{2(\sigma^2)^2}\sum_{i=1}^n(x_i-\mu)^2$ | $\begin{bmatrix}\frac{1}{\sigma^2} & 0 \\ 0 & \frac{1}{2\sigma^4}\end{bmatrix}$ | $\frac{1}{n}\sum_{i=1}^nx_i$ |
+
+#### Other Properties
+
+- 
+
+### Exponential
+
+#### Definition
+
+The Poisson process that models the number of events occuring in an interval also gives rise to another distribution: the Exponential. This distribution models the size of the interval (time, distance, etc.) between events.
+
+The Exponential is described mathematically as $Exp(\lambda)$. It can be parametrized in two ways: with $\lambda$ as a rate parameter, describing how often events occur; or with $\lambda$ as a scale parameter (yes, the same scale parameter discussed in [Location Scale Families](#location-scale)) that is the inverse of the rate.
+
+Note that the parametrization below describes the distribution in terms of the scale parameter. The scale parameter version simply replaces $\lambda$ with $\frac{1}{\lambda}$.
+
+
+|               Description               |    Parameters     |     Support      |       pdf        |
+|:----------------:|:----------------:|:----------------:|:----------------:|
+| Models the size of the interval between events in a Poisson process | $\lambda \in (0, \infty)$ | $x \in (0, \infty)$ | $\lambda e^{-\lambda x}$ |
+
+#### Moments {#moments}
+
+| $E(Y)$ | $Var(Y)$ |      mgf       |
+|:------:|:--------:|:--------------:|
+|  $\lambda$   | $\lambda^2$ | $\frac{1}{1-\lambda t}$ for $t > \lambda$ |
+
+
+#### iid Sample Information
+
+|                   Log-likelihood                   |                   Score Equations                   | Fisher Information |              MLE              |
+|:----------------:|:----------------:|:----------------:|:----------------:|
+| $-n\log(\lambda) - \frac{1}{\lambda}\sum_{i=1}^n x_i$ | $-\frac{n}{\lambda} + \frac{1}{\lambda^2}\sum_{i=1}^n x_i$ | $\lambda^2$ | $\frac{1}{n}\sum_{i=1}^nx_i$ |
+
+#### Other Properties
+
+- The exponential has an additive property: If $X_i\sim Exp(\lambda) $, then $\sum_{i=1}^n X_i \sim Gamma(n, \lambda)$.
+
+### Gamma
+
+Similar to how the Negative Binomial generalizes the Geometric to multiple successes, the Gamma generalizes the Exponential to multiple events. The Gamma is useful for modeling random variables that are known to be greater than 0. 
+
+It is represented mathematically as $Gamma(k, \lambda)$, where $k$ is a **shape** parameter and $\lambda$ is a [scale](#location-scale) parameter. It is called "Gamma" because it involves the [gamma function](#gamma-function).
+
+
+|               Description               |    Parameters     |     Support      |       pdf        |
+|:----------------:|:----------------:|:----------------:|:----------------:|
+| Generalization of the exponential distribution | $k \in (0, \infty)$, $\lambda \in (0, \infty)$ | $x \in (0, \infty)$ | $\frac{1}{\Gamma(k)\lambda^k}x^{k-1}\exp(-\frac{x}{\theta})$ |
+
+#### Moments {#moments}
+
+| $E(Y)$ | $Var(Y)$ |      mgf       |
+|:------:|:--------:|:--------------:|
+|  $k\lambda$   | $k\lambda^2$ | $(1 - \lambda t)^{-k}$ for $t < \frac{1}{\lambda}$ |
+
+
+#### iid Sample Information
+
+|                   Log-likelihood                   |                   Score Equations                   | Fisher Information |              MLE              |
+|:----------------:|:----------------:|:----------------:|:----------------:|
+| $-n\log(\Gamma(k)) - nk\log(\lambda) + (k - 1 - \frac{1}{\lambda})\sum_{i=1}^n x_i$ | $-\frac{nk}{\lambda} + \frac{1}{\lambda^2}\sum_{i=1}^n x_i$ with $k$ known (otherwise, requires differentiating $\Gamma(k)$) | $\begin{bmatrix}\psi^{(1)}(k) & \frac{1}{\lambda}\\ \frac{1}{\lambda} & \frac{k}{\lambda^2}\end{bmatrix}$ |  |
+
+#### Other Properties
+
+- The Gamma is **additive**: If $X_i\sim Gamma(k, \lambda) $, then $\sum_{i=1}^n X_i \sim Gamma(nk, \lambda)$.
+
+### Beta
+
+#### Definition
+
+The Beta distribution models proportions. It is mathematically denoted $Beta(\alpha, \beta)$ where $\alpha$ and $\beta$ are two shape parameters. It is known as "Beta" because its pdf contains the beta function: $\Beta(\alpha, \beta) = \frac{\Gamma(\alpha)\Gamma(\beta)}{\Gamma(\alpha + \beta)}$
+
+
+|               Description               |    Parameters     |     Support      |       pdf        |
+|:----------------:|:----------------:|:----------------:|:----------------:|
+| Model of a proportion | $\lambda \in (0, \infty)$ | $x \in (0, 1)$ | $\frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)}x^{\alpha-1}(1-x)^{\beta-1}$ |
+
+#### Moments {#moments}
+
+| $E(Y)$ | $Var(Y)$ |      mgf       |
+|:------:|:--------:|:--------------:|
+|  $\frac{\alpha}{\alpha + \beta}$   | $\frac{\alpha\beta}{(\alpha + \beta)^2(\alpha + \beta + 1)}$ | $1 + \sum_{k=1}^\infty\Big(\prod_{r=0}^{k-1}\frac{\alpha + r}{\alpha + \beta + r}\Big)\frac{t^k}{k!}$ | 
+
+
+#### iid Sample Information
+
+|                   Log-likelihood                   |                   Score Equations                   | Fisher Information |              MLE              |
+|:----------------:|:----------------:|:----------------:|:----------------:|
+|  |  |  |
+
+#### Other Properties
+
+- 
+
+### Chi-squared
+
+#### Definition
+
+The Chi-squared distribution describes the distribution of the sum of squared stadnard Normal ($N(0,1)$) random variables.
+
+
+|               Description               |    Parameters     |     Support      |       pdf        |
+|:----------------:|:----------------:|:----------------:|:----------------:|
+| Squared standard normals | $\nu \in \mathbb{N}$ | $x \in (0, \infty)$ | $\frac{1}{\Gamma(\nu/2)2^{\nu / 2}}x^{\nu/2 - 1}\exp(-\nu/2)$ |
+
+#### Moments {#moments}
+
+| $E(Y)$ | $Var(Y)$ |      mgf       |
+|:------:|:--------:|:--------------:|
+|  $\nu$   | $2\nu$ | $(1 - 2t)^{-\nu/2}$ for $t < \frac{1}{2}$ | 
+
+
+#### iid Sample Information
+
+|                   Log-likelihood                   |                   Score Equations                   | Fisher Information |              MLE              |
+|:----------------:|:----------------:|:----------------:|:----------------:|
+|  |  |  |
+
+#### Other Properties
+
+- If $X_i \sim N(0,1)$, then $\sum_{i=1}^nX_i^2\sim \chi^2(n)$
+
+## Exponential families with certain parameters fixed
+
+Some families are exponential, but only when one or more parameters are fixed.
+
+### Weibull
+
+#### Definition
+
+
+|               Description               |    Parameters     |     Support      |       pdf        |
+|:----------------:|:----------------:|:----------------:|:----------------:|
+|  | $\lambda \in (0, \infty)$, $k \in (0, \infty)$ | $x \in [0, \infty)$ | $\frac{k}{\lambda}\Big(\frac{x}{\lambda}\Big)^{k-1}\exp(-(x/\lambda)^k)$ |
+
+#### Moments {#moments}
+
+| $E(Y)$ | $Var(Y)$ |      mgf       |
+|:------:|:--------:|:--------------:|
+|  $\lambda\Gamma(1 + \frac{1}{k})$   | $\lambda^2\Big(\Gamma(1 + \frac{2}{k}) - (\Gamma(1 + \frac{1}{k}))^2\Big)$ | $\sum_{n=0}^\infty\frac{t^n \lambda^n}{n!}\Gamma(1 + \frac{n}{k})$, $k \geq 1$ | 
+
+
+#### iid Sample Information
+
+|                   Log-likelihood                   |                   Score Equations                   | Fisher Information |              MLE              |
+|:----------------:|:----------------:|:----------------:|:----------------:|
+|  |  |  |
+
+### Pareto
+
+$\alpha \in (0, \infty)$ is a shape parameter, while $x_m$ is a scale parameter.
+
+#### Definition
+
+
+|               Description               |    Parameters     |     Support      |       pdf        |
+|:----------------:|:----------------:|:----------------:|:----------------:|
+|  | $\alpha \in (0, \infty)$, $k \in (0, \infty)$ | $x \in [0, \infty)$ | $\frac{\alpha x_m^\alpha}{x^{\alpha+1}}$ |
+
+#### Moments {#moments}
+
+| $E(Y)$ | $Var(Y)$ |      mgf       |
+|:------:|:--------:|:--------------:|
+|  $\begin{cases}\infty & \alpha \leq 1 \\ \frac{\alpha x_m}{a - 1} & \alpha > 1\end{cases}$   | $\begin{cases}\infty & \alpha \leq 2 \\ \frac{x_m^2 \alpha}{(a-1)^2(\alpha - 2)} & \alpha > 2\end{cases}$ | Does not exist | 
+
+
+#### iid Sample Information
+
+|                   Log-likelihood                   |                   Score Equations                   | Fisher Information |              MLE              |
+|:----------------:|:----------------:|:----------------:|:----------------:|
+| $n\log{\alpha} + n\alpha\log(x_m) - (\alpha + 1)\sum_{i=1}^n\log(x_i)$ | $U(\alpha | x_i) = \frac{n}{\alpha} + n\log(x_m) - \sum_{i=1}^n \log(x_i)$ | $\frac{n}{\alpha^2}$ | $\frac{n}{\sum_{i=1}^n\log(x_i)}$
+
+## Non-exponential families
+
+The following families are not exponential, but still commonly arise.  
+
+### Uniform
+
+#### Definition
+
+
+|               Description               |    Parameters     |     Support      |       pdf        |
+|:----------------:|:----------------:|:----------------:|:----------------:|
+|  | $-\infty < a < b < \infty$ | $x \in [a, b]$ | $\frac{1}{b-a}$ |
+
+#### Moments {#moments}
+
+| $E(Y)$ | $Var(Y)$ |      mgf       |
+|:------:|:--------:|:--------------:|
+| $\frac{1}{2}(a+b)$ | $\frac{1}{12}(b-a)^2$ | $\begin{cases}\frac{e^{tb}-e^{ta}}{t(b-a)} & t \neq 0 \\ 1 & t = 0 \\\end{cases}$ | 
+
+### Cauchy
+
+#### Definition
+
+
+|               Description               |    Parameters     |     Support      |       pdf        |
+|:----------------:|:----------------:|:----------------:|:----------------:|
+|  | $x_0 \in \mathbb{R}$, $\gamma \in (0, \infty)$ | $x \in \mathbb{R}$ | $\frac{1}{\pi \gamma\Big(1 + \Big(\frac{x - x_0}{\gamma}\Big)^2\Big)}$ |
+
+#### Moments {#moments}
+
+| $E(Y)$ | $Var(Y)$ |      cf       |
+|:------:|:--------:|:--------------:|
+| Does Not Exist | Does Not Exist | $\exp(x_0it - \gamma|t|$ |
+
+
+### t-distribution
+
+#### Definition
+
+
+|               Description               |    Parameters     |     Support      |       pdf        |
+|:----------------:|:----------------:|:----------------:|:----------------:|
+|  | $x_0 \in \mathbb{R}$, $\gamma \in (0, \infty)$ | $x \in \mathbb{R}$ | $\frac{1}{\pi \gamma\Big(1 + \Big(\frac{x - x_0}{\gamma}\Big)^2\Big)}$ |
+
+#### Moments {#moments}
+
+| $E(Y)$ | $Var(Y)$ |      mgf       |
+|:------:|:--------:|:--------------:|
+| 0 | $\begin{cases}\frac{\nu}{\nu-2} & \nu > 2\\ \infty & 1 < \nu \leq 2 \\ \text{undefined} & \text{otherwise}\end{cases}$ | undefined |
+
+### F-distribution
+
+#### Definition
+
+
+|               Description               |    Parameters     |     Support      |       pdf        |
+|:----------------:|:----------------:|:----------------:|:----------------:|
+|  | $n \in \mathbb{N}$, $m \in \mathbb{N}$ | $x \in (0, \infty)$ | $$ |
+
+#### Moments {#moments}
+
+| $E(Y)$ | $Var(Y)$ |      mgf       |
+|:------:|:--------:|:--------------:|
+| 0 | $\begin{cases}\frac{\nu}{\nu-2} & \nu > 2\\ \infty & 1 < \nu \leq 2 \\ \text{undefined} & \text{otherwise}\end{cases}$ | undefined |
+
+### Hypergeometric
+
+
+

@@ -29,3 +29,5 @@ If $a(\theta)$, $b(\theta)$, and $f(x, \theta)$ are differentiable w.r.t to $\th
 
 $$\int_{a(\theta)}^{b(\theta)}f(x,\theta)dx = f(b(\theta), \theta)\frac{d}{d\theta}b(\theta) - f(a(\theta), \theta)\frac{d}{d\theta}a(\theta) + \int_{a(\theta)}^{b(\theta)} \frac{\partial}{\partial\theta}f(x,\theta)dx$$
 :::
+
+## Gamma Function {#gamma-function}
