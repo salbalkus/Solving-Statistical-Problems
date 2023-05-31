@@ -12,6 +12,16 @@ This chapter will cover highly specific mathematical techniques used to solve st
 - Lagrange multipliers? (Maybe save for MLEs)
 - Open versus closed intervals
 
+## Combinatorials
+
+## Geometric Series (#geometric-series)
+
+The **geometric series** is a useful series convergence, defined as follows:
+
+$$\sum_{x=0}^\infty ar^x = \frac{a}{1-r} \text{ for } |r| < 1$$
+
+One place it arises is computing the moments of the [Geometric Distribution](#geometric-distribution).
+
 
 ## Leibniz's Rule {#leibniz-rule}
 

@@ -21,7 +21,11 @@ The two above definitions are equivalent because if $X = Z + b$, then $P(X < z) 
 ### Scale Families
 
 ::: {.definition name="Scale Family"}
-Let $Z \sim f_Z(Z)$. Given a constant **scale parameter** $a$, $X$ is a scale family if... - $X \sim \frac{1}{a}f_Z(\frac{z}{a})$ - $X \sim F_Z(\frac{z}{a})$ - or $X = aZ$
+Let $Z \sim f_Z(Z)$. Given a constant **scale parameter** $a$, $X$ is a scale family if...  
+
+- $X \sim \frac{1}{a}f_Z(\frac{z}{a})$  
+- $X \sim F_Z(\frac{z}{a})$   
+- or $X = aZ$  
 :::
 
 All of the above definitions are equivalent because if $X = aZ$, then $P(X < z)$ = $P(aZ < z) = P(Z < \frac{z}{a} = F_Z(z)$. Also, $f_X(x) = \frac{d}{dx}F_X(x) = \frac{d}{dx}F_Z(\frac{z}{a}) = \frac{1}{a}f_Z(\frac{z}{a})$
@@ -43,7 +47,8 @@ X1 = runif(1000, 0, 1)
 X2 = runif(1000, 0, 1)
 hist(X1 + X2)
 ```
-## Exponential Families
+
+## Exponential Families {#exponential-family}
 
 ::: {.definition name="Exponential Family"}
 $X \sim f_X(x|\theta)$ is an exponential family if its pdf can be written in the form
@@ -82,16 +87,20 @@ $$f_X(x|\theta) = h(x)c^*(\boldsymbol{\eta})\exp\Big(\sum_{i=1}^k \eta_i t_i(x)\
 
 ## Known Exponential Families
 
+Many common distributions follow exponential families. As you will come to find, virtually all of them arise in order to model variations on a common idea: the Bernoulli trial. Let's discuss this distribution, and the situations in which it arises.
+
 ### Bernoulli
 
 #### Definition
 
-The Bernoulli distribution, represented mathematically as $\text{Bernoulli}(p)$, describes the outcome of a random variable $X$ that takes only two possible values, 0 and 1. Such an event is often termed a "Bernoulli trial".
+The Bernoulli distribution, represented mathematically as $\text{Bernoulli}(p)$, describes the outcome of a random variable $X$ that takes only two possible values, 0 and 1. Such an event is often termed a "Bernoulli trial". 
 
 
 |               Description               |    Parameters     |     Support      |       pmf        |
 |:----------------:|:----------------:|:----------------:|:----------------:|
 | Any random variables whose value can be either 0 or 1 | $0 \leq p \leq 1$ | $x \in \{0, 1\}$ | $p^x(1-p)^{1-x}$ |
+
+The Bernoulli distribution occurs very commonly because many situations can be described in terms of 0 or 1 outcomes. For example, all indicator functions $I(A)$ of random variables, where $A$ is a statement about the random variable (for instance, $A = \{x: x > 1\}$) are Bernoulli random variables with $p = P(A)$. 
 
 #### Moments {#moments}
 
@@ -99,24 +108,37 @@ The Bernoulli distribution, represented mathematically as $\text{Bernoulli}(p)$,
 |:------:|:--------:|:--------------:|
 |  $p$   | $p(1-p)$ | $(1-p) + pe^t$ |
 
+The moments of a Bernoulli distribution are simple to compute, because $x$ is only 0 or 1. When $x = 0$, $0 * P(X = 0) = 0$. Hence, $E(X) = 1 * P(X = 1) = p^1(1 - p)^{1 - 1} = p$. Since $1^k = 1$, a convenient property follows:
+
+$$X \sim \text{Bernoulli}(p) \implies E(X^k) = p$$
+
+Similarly, we can compute the variance using the property $Var(X) = E(X^2) - E(X^2) = p - p^2 = p(1-p)$.  
+
+The moment generating function follows by noting $$E(e^{tx}) = e^{t*0}p^0(1-p)^{1-0} + e^{t*1}p^1(1-p)^{1-1} = (1-p) + pe^t$$
+
+
 #### iid Sample Information
 
 |                   Log-likelihood                   |                   Score Equations                   | Fisher Information |              MLE              |
 |:----------------:|:----------------:|:----------------:|:----------------:|
 | $n\log(1-p) + \log(\frac{p}{1-p})\sum_{i=1}^n x_i$ | $-\frac{n}{1-p} + \frac{1}{p(1-p)}\sum_{i=1}^n x_i$ | $\frac{1}{p(1-p)}$ | $\frac{1}{n}\sum_{i=1}^n x_i$ |
 
+| : -----------: |
+|                   Log-likelihood                   | $n\log(1-p) + \log(\frac{p}{1-p})\sum_{i=1}^n x_i$ |
+|                   Score Equations                  | $-\frac{n}{1-p} + \frac{1}{p(1-p)}\sum_{i=1}^n x_i$ |
+|                  Fisher Information                | $\frac{1}{p(1-p)}$ |
+|                         MLE                        | $\frac{1}{n}\sum_{i=1}^n x_i$ |
+
 #### Other Properties
 
--   The Bernoulli is an exponential family. It satisfies the regularity conditions needed for consistency and asymptotic normality of its MLE.
--   $\sum_{i=1}^n \sim Binomial(n, p)$
--   All indicator functions $I(A)$ of random variables, where $A$ is a statement about the random variable (for instance, $A = \{x: x > 1\}$) are Bernoulli random variables with $p = P(A)$.
-- Its sufficient statistic is $\sum_{i=1}^n x_i$.
+- The Bernoulli is a special case of the Binomial distribution: $\text{Bernoulli}(p) = \text{Binomial}(1, p)$
+- As we discuss regarding the Binomial distribution, the Bernoulli has an additive property: $\sum_{i=1}^n \sim \text{Binomial}(n, p)$. This can be proven by the [additivity technique](#additivity) discussed imminently.
 
 ### Binomial
 
 #### Definition
 
-What happens when we repeat a Bernoulli trial many times and count how many 1's occur? The Binomial distribution is represented mathematically as $Bernoulli(n, p)$. It describes the *number of successes* in a series of Bernoulli trials. 
+What happens when we repeat a Bernoulli trial many times and count how many 1's occur? The Binomial distribution is represented mathematically as $\text{Bernoulli}(n, p)$. It describes the *number of successes* in a series of Bernoulli trials. 
 
 
 |               Description               |    Parameters     |     Support      |       pmf        |
@@ -129,9 +151,47 @@ What happens when we repeat a Bernoulli trial many times and count how many 1's 
 |:------:|:--------:|:--------------:|
 |  $np$   | $np(1-p)$ | $((1-p) + pe^t)^n$ |
 
+Since the Binomial is a discrete distribution, we can compute its moments using the discrete moment formula $E(X) = \sum_{i=1}^\infty xP(X = x)$. This introduces one technique for moment calculations: the Kernel Technique
+
+::: {.example #kernel-technique name="Kernel Technique with Infinite Series"}  
+
+Fact: pmfs integrate to 1. That is, $\sum_{x=0}^\infty f_X(x) = 1$. We can use this fact to compute moments by:
+
+1. Recognizing the kernel of the distribution within the moment formula
+2. Factoring out appropriate constants to turn the kernel into the full pmf, and simplifying the infinite series to $\sum_{x=0}^\infty f_X(x) = 1$. The left-over components then, are the value of the moment.
+
+We can use this technique to compute moments of the Binomial distribution like so:
+
+\begin{align}
+E(X) = \sum_{x=0}^\infty xP(X = x) = \sum_{x=0}^\infty x{n\choose x}p^x(1-p)^{n-x} && \\
+= \sum_{x=0}^\infty \frac{x\cdot n!}{x!(n-x)!}p^x(1-p)^{n-x} && \text{(kernel)} \\
+= 0 + \sum_{x=1}^\infty \frac{n \cdot (n-1)!}{(x-1)!((n-1) - (x - 1)!}\cdot p \cdot p^{x-1}(1-p)^{(n - 1) - (x - 1)} && \text{(form pmf)}\\
+= np\sum_{x=0}^\infty \cdot {n - 1 \choose x}p^x(1-p)^{(n-1) - x} && \text{(sum pmf to 1)}\\
+= np
+\end{align}
+
+To compute the $E(X^2)$ component of the variance, this process needs to be repeated twice:
+
+\begin{align}
+E(X^2) = \sum_{x=0}^\infty x^2P(X = x) = \sum_{x=0}^\infty x^2{n\choose x}p^x(1-p)^{n-x} && \\
+= np \sum_{x=0}^\infty(x+1) \frac{(n-1)!}{x!(n-1-x)!}p^x (1-p)^{n-x-1} && \text{(from E(X))}\\
+= np(0 + (n-1)p\sum_{x=1}^\infty \frac{(n-2)!}{(x-1)!((n-2)-(x-1))!}p^{x-1}(1-p)^{(n-2)-(x-1)} + 1 && \\
+= np((n-1)p + 1) = (np)^2 + np(1-p) && \text{(pmf sums to 1)}&& \\
+\end{align}
+
+Then, $Var(X) = E(X^2) - E(X)^2 = (np)^2 + np(1-p) - (np)^2 = np(1-p)$
+
+
+:::
+
+Alternatively, we could have computed this using the fact that the Binomial is equal to a sum of Bernoulli random variables. By the linearity of expectation, if $X_i \sim \text{Bernoulli}(p)$, then $E(\sum_{i=1}^n X_i) = n\cdot E(X_i) = np$. $Var(X)$ follows similarly.
+
+
+
+
 #### iid Sample Information
 
-Since the Binomial has $n$ as a parameter, notation in problems that involve a *sample* of $n$ iid Binomial random variables can be tricky. To clarify, in the following table let $X_i \sim Binomial(m, p)$, and let $n$ represent the number of samples. 
+Since the Binomial has $n$ as a parameter, notation in problems that involve a *sample* of $n$ iid Binomial random variables can be tricky. To clarify, in the following table let $X_i \sim \text{Binomial}(m, p)$, and let $n$ represent the number of samples. 
 
 |                   Log-likelihood                   |                   Score Equations                   | Fisher Information |              MLE              |
 |:----------------:|:----------------:|:----------------:|:----------------:|
@@ -139,21 +199,38 @@ Since the Binomial has $n$ as a parameter, notation in problems that involve a *
 
 #### Other Properties
 
-- The Binomial distribution is an exponential family.
-- The Binomial distribution is **additive**: if $X \sim Binomial(n,p)$ and $X \sim Binomial(m,p)$, then $X + Y \sim Binomial(m + n, p)$. 
-- The sufficient statistic for a sample of iid Binomial random variables is $\sum_{i=1}^n X_i$.
 
-### Geometric
+::: {.example #additivity name="Proving Additive Properties of Distributions"}  
+
+The Binomial distribution is **additive**: if $X \sim \text{Binomial}(n,p)$ and $X \sim \text{Binomial}(m,p)$, then $X + Y \sim \text{Binomial}(m + n, p)$. One can prove the additivity of any distribution, not just the Binomial, by relying on the convolution property of mgfs: $\mathcal{M}_{X + Y}(t) = \mathcal{M}_X(t)\cdot\mathcal{M}_Y(t)$. 
+
+Here's an example with the Binomial: if $X \sim \text{Binomial}(n, p)$ and $Y \sim \text{Binomial}(m, p)$, then 
+
+$$\mathcal{M}_{X + Y}(t) = ((1-p) + pe^t)^n\cdot ((1-p) + pe^t)^m = ((1-p) + pe^t)^{mn}$$
+which we can recognize as the mgf of a $\text{Binomial}(n + m, p)$ distribution. Since, like the cdf and the pdf, the mgf fully characterizes a probability distribution, we've proven the additive property mentioned above.
+
+Here's another example with the Binomial, this time generalizing it to an arbitrary summation: If $X_i \overset{iid}{\sim} \text{Binomial}(m, p)$, and $Y = \sum_{i=1}^nX_i$, then 
+
+$$
+\mathcal{M}_Y(t) = \prod_{i=1}^n\mathcal{M}_{X_i}(t) = (\mathcal{M}_{X_i}(t))^n \\
+= (((1-p) + pe^t)^m)^n = ((1-p) + pe^t)^{mn}
+$$ 
+
+proving the generalized additive property that if $X_i \sim \text{Binomial}(m, p)$, then $\sum_{i=1}^n X_i \sim \text{Binomial}(nm, p)$.
+
+:::
+
+### Geometric {#geometric-distribution}
 
 #### Definition
 
-Suppose instead of counting the number of successes, we wish to count the number of attempts until a single success occurs? The Geometric distribution is represented mathematically as $Geometric(p)$. It describes the **number of trials before a success occurs** in a series of Bernoulli trials.
+Suppose instead of counting the number of successes, we wish to count the number of attempts until a single success occurs? The Geometric distribution is represented mathematically as $\text{Geo}(p)$. It describes the **number of trials before a success occurs** in a series of Bernoulli trials.
 
 Note that the parametrization below does not include the final success in the number of trials, but alternatives exist in which it may.
 
 |               Description               |    Parameters     |     Support      |       pmf        |
 |:----------------:|:----------------:|:----------------:|:----------------:|
-| The number of Bernoulli trials attempted before a success occurs  | $0 < p \leq 1$ | $x \in \mathbb{N}$ | $p(1-p)^{x-1}$ |
+| The number of Bernoulli trials attempted before a success occurs  | $0 < p \leq 1$ | $x \in \mathbb{N}$ | $p(1-p)^{x}$ |
 
 #### Moments {#moments}
 
@@ -161,23 +238,42 @@ Note that the parametrization below does not include the final success in the nu
 |:------:|:--------:|:--------------:|
 |  $\frac{1-p}{p}$   | $\frac{1-p}{p^2}$ | $\frac{p}{1 - (1 - p)e^t}$ for $t < -\log(1-p)$ |
 
+Deriving the moments of this distributions requires the use of the [Geometric Series](#geometric-series) (from where we can speculate its name originates). Note $E(X) = \sum_{x=0}^\infty xp(1-p)^x$, which does not quite match the geometric series; first, we need to take the derivative, and then interchange differentiation and summation like so:
+
+\begin{align}
+\sum_{x=0}^\infty xp(1-p)^x = p(1-p)\sum_{x=0}^\infty x(1-p)^{x-1} && \text{factor out for correct form}\\
+= p(1-p)\sum_{x=0}^\infty \frac{d}{dx}-(1-p)^{x} && \text{notice derivative}\\
+= -p(1-p) \frac{d}{dx}\sum_{x=0}^\infty (1-p)^{x} && \text{interchange derivative}\\
+= -p(1-p) \frac{d}{dx}\frac{1}{1 - (1 - p)} && \text{geometric series}\\
+= \frac{p(1-p)}{p^2} = \frac{1-p}{p} && \\
+\end{align}
+
+This can also be performed to compute $E(X)$ for the variance, though the computation is relatively long to be reproduced here. A quicker way might be to employ the moment generating function from which all moments can be computed, which can easily be found by substituting the geometric series:
+
+\begin{align}
+E(e^{tx}) = \sum_{x=0}^\infty e^{tx}(p(1-p)^x) \\
+= p\sum_{x=0}^\infty ((1-p)e^t)^x) \\
+= \frac{p}{1 - (1-p)e^t}
+\end{align}
+
 
 #### iid Sample Information
 
 
 |                   Log-likelihood                   |                   Score Equations                   | Fisher Information |              MLE              |
 |:----------------:|:----------------:|:----------------:|:----------------:|
-| $n\log(\frac{p}{1-p}) + \log(1-p)\sum_{i=1}^n x_i$ | $-\frac{n}{p(1-p)} - \frac{1}{1-p}\sum_{i=1}^n x_i$ |  |  |
+| $n\log(p) + \log(1-p)\sum_{i=1}^n x_i$ | $\frac{n}{p} - \frac{1}{1-p}\sum_{i=1}^n x_i$ |  | $\frac{n}{\sum_{i=1}^n x_i}$ |
 
 #### Other Properties
 
-- 
+- The Geometric is a special case of the Negative Binomial: $\text{Geo}(p) = \text{NegBin}(1, p)$
+- Just like the Bernoulli, the Geometric has an additive property: $\sum_{i=1}^n X_i \sim \text{NegBin}(n, p)$, proven via the same [addivity technique](#additivity) discussed previously.
 
 ### Negative Binomial
 
 #### Definition
 
-The Negative Binomial distribution generalizes the Geometric distribution to instead represent the number of Bernoulli trials until $r$ successes have occurred. It is represented mathematically as $NegBin(r, p)$. 
+The Negative Binomial distribution generalizes the Geometric distribution to instead represent the number of Bernoulli trials until $r$ successes have occurred. It is represented mathematically as $\text{NegBin}(r, p)$. 
 
 |               Description               |    Parameters     |     Support      |       pmf        |
 |:----------------:|:----------------:|:----------------:|:----------------:|
@@ -189,10 +285,13 @@ The Negative Binomial distribution generalizes the Geometric distribution to ins
 |:------:|:--------:|:--------------:|
 |  $\frac{r(1-p)}{p}$   | $\frac{r(1-p)}{p^2}$ | $\Big(\frac{p}{1 - (1 - p)e^t}\Big)^r$ for $t < -\log(p)$|
 
+INSERT MOMENT PROOF HERE
+
+
+The moments of a Negative Binomial can also be computed simply by relying on its additive property in relation to the geometric, and then using the linearity expectation. That is, if $Y \sim \text{NegBin}(r, p)$, then $Y = \sum_{i=1}^r X_i$ where $X_i \sim \text{Geo}(p)$ and $E(Y) = E(\sum_{i=1}^r X_i) = \frac{r(1-p)}{p}$.
+
 
 #### iid Sample Information
-
-Since the Binomial has $n$ as a parameter, notation in problems that involve a *sample* of $n$ iid Binomial random variables can be tricky. To clarify, in the following table let $X_i \sim Binomial(m, p)$, and let $n$ represent the number of samples. 
 
 |                   Log-likelihood                   |                   Score Equations                   | Fisher Information |              MLE              |
 |:----------------:|:----------------:|:----------------:|:----------------:|
@@ -200,13 +299,13 @@ Since the Binomial has $n$ as a parameter, notation in problems that involve a *
 
 #### Other Properties
 
-- 
+- The Negative Binomial is additive: If $X_i \sim \text{NegBin(r, p)}$, then $\sum_{i=1}^n X_i \sim \text{NegBin(nr, p)}$
 
 ### Poisson
 
 #### Definition
 
-The Poisson distribution describes one possible behavior of a **count** random variable. It describes the probability that a certain number of events occur within a fixed interval, such as a time period, distance or area. It is mathematically represented as $Poisson(\lambda)$. 
+The Poisson distribution describes one possible behavior of a **count** random variable. It describes the probability that a certain number of events occur within a fixed interval, such as a time period, distance or area. It is mathematically represented as $\text{Poisson}(\lambda)$. 
 
 
 |               Description               |    Parameters     |     Support      |       pmf        |
@@ -230,7 +329,7 @@ The Poisson distribution describes one possible behavior of a **count** random v
 #### Other Properties
 
 - Like the Binomial, the Poisson is formulated by counting the number of successes within a set of Bernoulli trials. The distribution describes the asymptotic behavior of the Binomial distribution as $n \rightarrow \infty$ and $np \rightarrow \lambda$, a fixed *rate* parameter.
-- The Poisson is **additive**. If $X_i \sim Poisson(\lambda)$, then $\sum_{i=1}^n X_i \sim Poisson(n\lambda)$
+- The Poisson is **additive**. If $X_i \sim \text{Poisson}(\lambda)$, then $\sum_{i=1}^n X_i \sim \text{Poisson}(n\lambda)$
 
 ### Normal
 
@@ -266,7 +365,7 @@ Often denoted $N(\mu, \sigma^2)$, the Normal distribution
 
 The Poisson process that models the number of events occuring in an interval also gives rise to another distribution: the Exponential. This distribution models the size of the interval (time, distance, etc.) between events.
 
-The Exponential is described mathematically as $Exp(\lambda)$. It can be parametrized in two ways: with $\lambda$ as a rate parameter, describing how often events occur; or with $\lambda$ as a scale parameter (yes, the same scale parameter discussed in [Location Scale Families](#location-scale)) that is the inverse of the rate.
+The Exponential is described mathematically as $\text{Exp}(\lambda)$. It can be parametrized in two ways: with $\lambda$ as a rate parameter, describing how often events occur; or with $\lambda$ as a scale parameter (yes, the same scale parameter discussed in [Location Scale Families](#location-scale)) that is the inverse of the rate.
 
 Note that the parametrization below describes the distribution in terms of the scale parameter. The scale parameter version simply replaces $\lambda$ with $\frac{1}{\lambda}$.
 
@@ -290,13 +389,14 @@ Note that the parametrization below describes the distribution in terms of the s
 
 #### Other Properties
 
-- The exponential has an additive property: If $X_i\sim Exp(\lambda) $, then $\sum_{i=1}^n X_i \sim Gamma(n, \lambda)$.
+- The Exponential is a special case of the Gamma distribution: $\text{Exp}(\lambda) = \text{Gamma}(1, \lambda)$
+- By extension, the exponential has an additive property: If $X_i\sim Exp(\lambda) $, then $\sum_{i=1}^n X_i \sim \text{Gamma}(n, \lambda)$.
 
 ### Gamma
 
 Similar to how the Negative Binomial generalizes the Geometric to multiple successes, the Gamma generalizes the Exponential to multiple events. The Gamma is useful for modeling random variables that are known to be greater than 0. 
 
-It is represented mathematically as $Gamma(k, \lambda)$, where $k$ is a **shape** parameter and $\lambda$ is a [scale](#location-scale) parameter. It is called "Gamma" because it involves the [gamma function](#gamma-function).
+It is represented mathematically as $\text{Gamma}(k, \lambda)$, where $k$ is a **shape** parameter and $\lambda$ is a [scale](#location-scale) parameter. It is called "Gamma" because it involves the [gamma function](#gamma-function).
 
 
 |               Description               |    Parameters     |     Support      |       pdf        |
@@ -318,13 +418,13 @@ It is represented mathematically as $Gamma(k, \lambda)$, where $k$ is a **shape*
 
 #### Other Properties
 
-- The Gamma is **additive**: If $X_i\sim Gamma(k, \lambda) $, then $\sum_{i=1}^n X_i \sim Gamma(nk, \lambda)$.
+- The Gamma is **additive**: If $X_i\sim \text{Gamma}(k, \lambda) $, then $\sum_{i=1}^n X_i \sim \text{Gamma}(nk, \lambda)$.
 
 ### Beta
 
 #### Definition
 
-The Beta distribution models proportions. It is mathematically denoted $Beta(\alpha, \beta)$ where $\alpha$ and $\beta$ are two shape parameters. It is known as "Beta" because its pdf contains the beta function: $\Beta(\alpha, \beta) = \frac{\Gamma(\alpha)\Gamma(\beta)}{\Gamma(\alpha + \beta)}$
+The Beta distribution models proportions. It is mathematically denoted $\text{Beta}(\alpha, \beta)$ where $\alpha$ and $\beta$ are two shape parameters. It is known as "Beta" because its pdf contains the beta function: $\Beta(\alpha, \beta) = \frac{\Gamma(\alpha)\Gamma(\beta)}{\Gamma(\alpha + \beta)}$
 
 
 |               Description               |    Parameters     |     Support      |       pdf        |
@@ -474,24 +574,33 @@ The following families are not exponential, but still commonly arise.
 
 | $E(Y)$ | $Var(Y)$ |      mgf       |
 |:------:|:--------:|:--------------:|
-| 0 | $\begin{cases}\frac{\nu}{\nu-2} & \nu > 2\\ \infty & 1 < \nu \leq 2 \\ \text{undefined} & \text{otherwise}\end{cases}$ | undefined |
+| 0 | $\begin{cases}\frac{\nu}{\nu-2} & \nu > 2\\ \infty & 1 < \nu \leq 2 \\ \text{undefined} & \text{otherwise}\end{cases}$ | Does Not Exist |
 
 ### F-distribution
 
 #### Definition
 
-
 |               Description               |    Parameters     |     Support      |       pdf        |
 |:----------------:|:----------------:|:----------------:|:----------------:|
-|  | $n \in \mathbb{N}$, $m \in \mathbb{N}$ | $x \in (0, \infty)$ | $$ |
+|  | $n \in \mathbb{N}$, $m \in \mathbb{N}$ | $x \in (0, \infty)$ | $\sqrt{\frac{(nx)^nm^m}{(nx + m)^{n + m}}}\frac{\Gamma(n + m)}{x\Gamma(n)\Gamma(m)}$ |
 
 #### Moments {#moments}
 
 | $E(Y)$ | $Var(Y)$ |      mgf       |
 |:------:|:--------:|:--------------:|
-| 0 | $\begin{cases}\frac{\nu}{\nu-2} & \nu > 2\\ \infty & 1 < \nu \leq 2 \\ \text{undefined} & \text{otherwise}\end{cases}$ | undefined |
+| $\frac{m}{m - 2}$ for $m > 2$ | $\frac{2m^2(n + m - 2)}{n(m - 2)^2(m - 4)$ for $m > 4$ | Does Not Exist |
 
 ### Hypergeometric
 
+#### Definition
 
 
+|               Description               |    Parameters     |     Support      |       pmf        |
+|:----------------:|:----------------:|:----------------:|:----------------:|
+|  | $N \in \mathbb{N}_0$, $K \in \{0, 1, ..., N\}$, $n \in \{0,1,...,N\}$ | $x \in \{\max(0, n+K-N),..., \min(n,K)\}$ | $\frac{{K\choose x}{N - K \choose n - x -1}}{N \choose n}$ |
+
+#### Moments {#moments}
+
+| $E(Y)$ | $Var(Y)$ |      mgf       |
+|:------:|:--------:|:--------------:|
+| $\frac{nK}{N}$ | $\frac{nK(N-K)(N-n)}{N^2(N-1)}$ | Too complicated to reproduce here! |
