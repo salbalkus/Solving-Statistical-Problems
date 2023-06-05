@@ -1,3 +1,135 @@
 # Moments {#moments}
 
 How to compute any moment of any random variable.
+
+## Common Distribution Moments
+
+| Distribution | $E(Y)$ | $Var(Y)$ |      mgf       |
+|:------:|:------:|:--------:|:--------------:|
+| $\text{Bernoulli}(p)$ |  $p$   | $p(1-p)$ | $(1-p) + pe^t$ |
+| $\text{Binom}(n, p)$ |  $np$   | $np(1-p)$ | $((1-p) + pe^t)^n$ |
+| $\text{Geo}(p)$ |  $\frac{1-p}{p}$   | $\frac{1-p}{p^2}$ | $\frac{p}{1 - (1 - p)e^t}$ for $t < -\log(1-p)$ |
+| $\text{NegBinom(r, p)}$ |  $\frac{r(1-p)}{p}$   | $\frac{r(1-p)}{p^2}$ | $\Big(\frac{p}{1 - (1 - p)e^t}\Big)^r$ for $t < -\log(p)$|
+| $\text{Pois}(\lambda)$ |  $\lambda$   | $\lambda$ | $\exp(\lambda(e^t - 1))$ |
+| $\text{Normal}(\mu, \sigma^2)$ |  $\mu$   | $\sigma^2$ | $\exp(\mu t + \sigma^2 t^2 / 2)$ |
+| $\text{Exp}(\lambda)$ |  $\lambda$   | $\lambda^2$ | $\frac{1}{1-\lambda t}$ for $t > \lambda$ |
+| $\text{Gamma}(k, \lambda)$ |  $k\lambda$   | $k\lambda^2$ | $(1 - \lambda t)^{-k}$ for $t < \frac{1}{\lambda}$ |
+| $\text{Beta}(\alpha, \beta)$ |  $\frac{\alpha}{\alpha + \beta}$   | $\frac{\alpha\beta}{(\alpha + \beta)^2(\alpha + \beta + 1)}$ | $1 + \sum_{k=1}^\infty\Big(\prod_{r=0}^{k-1}\frac{\alpha + r}{\alpha + \beta + r}\Big)\frac{t^k}{k!}$ | 
+| $\chi^2(\nu)$ |  $\nu$   | $2\nu$ | $(1 - 2t)^{-\nu/2}$ for $t < \frac{1}{2}$ | 
+| $\text{Uniform}(a, b)$ | $\frac{1}{2}(a+b)$ | $\frac{1}{12}(b-a)^2$ | $\begin{cases}\frac{e^{tb}-e^{ta}}{t(b-a)} & t \neq 0 \\ 1 & t = 0 \\\end{cases}$ | 
+| $F(n, m)$ | $\frac{m}{m - 2}$ for $m > 2$ | $\frac{2m^2(n + m - 2)}{n(m - 2)^2(m - 4)}$ for $m > 4$ | Does Not Exist |
+| $\text{HyperGeo}(N, K, n)$ | $\frac{nK}{N}$ | $\frac{nK(N-K)(N-n)}{N^2(N-1)}$ | Too complicated to reproduce here! |
+
+
+
+
+
+### Bernoulli
+
+The moments of a Bernoulli distribution are simple to compute, because $x$ is only 0 or 1. When $x = 0$, $0 * P(X = 0) = 0$. Hence, $E(X) = 1 * P(X = 1) = p^1(1 - p)^{1 - 1} = p$. Since $1^k = 1$, a convenient property follows:
+
+$$X \sim \text{Bernoulli}(p) \implies E(X^k) = p$$
+
+Similarly, we can compute the variance using the property $Var(X) = E(X^2) - E(X^2) = p - p^2 = p(1-p)$.  
+
+The moment generating function follows by noting $$E(e^{tx}) = e^{t*0}p^0(1-p)^{1-0} + e^{t*1}p^1(1-p)^{1-1} = (1-p) + pe^t$$
+
+### Binomial
+
+| $E(Y)$ | $Var(Y)$ |      mgf       |
+|:------:|:--------:|:--------------:|
+|  $np$   | $np(1-p)$ | $((1-p) + pe^t)^n$ |
+
+Since the Binomial is a discrete distribution, we can compute its moments using the discrete moment formula $E(X) = \sum_{i=1}^\infty xP(X = x)$. This introduces one technique for moment calculations: the Kernel Technique
+
+::: {.example #kernel-technique name="Kernel Technique with Infinite Series"}  
+
+Fact: pmfs integrate to 1. That is, $\sum_{x=0}^\infty f_X(x) = 1$. We can use this fact to compute moments by:
+
+1. Recognizing the kernel of the distribution within the moment formula
+2. Factoring out appropriate constants to turn the kernel into the full pmf, and simplifying the infinite series to $\sum_{x=0}^\infty f_X(x) = 1$. The left-over components then, are the value of the moment.
+
+We can use this technique to compute moments of the Binomial distribution like so:
+
+\begin{align}
+E(X) = \sum_{x=0}^\infty xP(X = x) = \sum_{x=0}^\infty x{n\choose x}p^x(1-p)^{n-x} && \\
+= \sum_{x=0}^\infty \frac{x\cdot n!}{x!(n-x)!}p^x(1-p)^{n-x} && \text{(kernel)} \\
+= 0 + \sum_{x=1}^\infty \frac{n \cdot (n-1)!}{(x-1)!((n-1) - (x - 1)!}\cdot p \cdot p^{x-1}(1-p)^{(n - 1) - (x - 1)} && \text{(form pmf)}\\
+= np\sum_{x=0}^\infty \cdot {n - 1 \choose x}p^x(1-p)^{(n-1) - x} && \text{(sum pmf to 1)}\\
+= np
+\end{align}
+
+To compute the $E(X^2)$ component of the variance, this process needs to be repeated twice:
+
+\begin{align}
+E(X^2) = \sum_{x=0}^\infty x^2P(X = x) = \sum_{x=0}^\infty x^2{n\choose x}p^x(1-p)^{n-x} && \\
+= np \sum_{x=0}^\infty(x+1) \frac{(n-1)!}{x!(n-1-x)!}p^x (1-p)^{n-x-1} && \text{(from E(X))}\\
+= np(0 + (n-1)p\sum_{x=1}^\infty \frac{(n-2)!}{(x-1)!((n-2)-(x-1))!}p^{x-1}(1-p)^{(n-2)-(x-1)} + 1 && \\
+= np((n-1)p + 1) = (np)^2 + np(1-p) && \text{(pmf sums to 1)}&& \\
+\end{align}
+
+Then, $Var(X) = E(X^2) - E(X)^2 = (np)^2 + np(1-p) - (np)^2 = np(1-p)$
+
+
+:::
+
+Alternatively, we could have computed this using the fact that the Binomial is equal to a sum of Bernoulli random variables. By the linearity of expectation, if $X_i \sim \text{Bernoulli}(p)$, then $E(\sum_{i=1}^n X_i) = n\cdot E(X_i) = np$. $Var(X)$ follows similarly.
+
+### Geometric
+
+| $E(Y)$ | $Var(Y)$ |      mgf       |
+|:------:|:--------:|:--------------:|
+|  $\frac{1-p}{p}$   | $\frac{1-p}{p^2}$ | $\frac{p}{1 - (1 - p)e^t}$ for $t < -\log(1-p)$ |
+
+Deriving the moments of this distributions requires the use of the [Geometric Series](#geometric-series) (from where we can speculate its name originates). Note $E(X) = \sum_{x=0}^\infty xp(1-p)^x$, which does not quite match the geometric series; first, we need to take the derivative, and then interchange differentiation and summation like so:
+
+\begin{align}
+\sum_{x=0}^\infty xp(1-p)^x = p(1-p)\sum_{x=0}^\infty x(1-p)^{x-1} && \text{factor out for correct form}\\
+= p(1-p)\sum_{x=0}^\infty \frac{d}{dx}-(1-p)^{x} && \text{notice derivative}\\
+= -p(1-p) \frac{d}{dx}\sum_{x=0}^\infty (1-p)^{x} && \text{interchange derivative}\\
+= -p(1-p) \frac{d}{dx}\frac{1}{1 - (1 - p)} && \text{geometric series}\\
+= \frac{p(1-p)}{p^2} = \frac{1-p}{p} && \\
+\end{align}
+
+This can also be performed to compute $E(X)$ for the variance, though the computation is relatively long to be reproduced here. A quicker way might be to employ the moment generating function from which all moments can be computed, which can easily be found by substituting the geometric series:
+
+\begin{align}
+E(e^{tx}) = \sum_{x=0}^\infty e^{tx}(p(1-p)^x) \\
+= p\sum_{x=0}^\infty ((1-p)e^t)^x) \\
+= \frac{p}{1 - (1-p)e^t}
+\end{align}
+
+### Negative Binomial
+
+| $E(Y)$ | $Var(Y)$ |      mgf       |
+|:------:|:--------:|:--------------:|
+|  $\frac{r(1-p)}{p}$   | $\frac{r(1-p)}{p^2}$ | $\Big(\frac{p}{1 - (1 - p)e^t}\Big)^r$ for $t < -\log(p)$|
+
+INSERT MOMENT PROOF HERE
+
+
+The moments of a Negative Binomial can also be computed simply by relying on its additive property in relation to the geometric, and then using the linearity expectation. That is, if $Y \sim \text{NegBin}(r, p)$, then $Y = \sum_{i=1}^r X_i$ where $X_i \sim \text{Geo}(p)$ and $E(Y) = E(\sum_{i=1}^r X_i) = \frac{r(1-p)}{p}$.
+
+
+### Poisson
+
+| $E(Y)$ | $Var(Y)$ |      mgf       |
+|:------:|:--------:|:--------------:|
+|  $\lambda$   | $\lambda$ | $\exp(\lambda(e^t - 1))$ |
+
+### Normal
+
+| $E(Y)$ | $Var(Y)$ |      mgf       |
+|:------:|:--------:|:--------------:|
+|  $\mu$   | $\sigma^2$ | $\exp(\mu t + \sigma^2 t^2 / 2)$ |
+
+
+## Other Moments (for reference)
+
+| Distribution | $E(Y)$ | $Var(Y)$ |      mgf       |
+|:------:|:------:|:--------:|:--------------:|
+| $\text{Weibull}(k, \lambda)$ |  $\lambda\Gamma(1 + \frac{1}{k})$   | $\lambda^2\Big(\Gamma(1 + \frac{2}{k}) - (\Gamma(1 + \frac{1}{k}))^2\Big)$ | $\sum_{n=0}^\infty\frac{t^n \lambda^n}{n!}\Gamma(1 + \frac{n}{k})$, $k \geq 1$ | 
+| $\text{Pareto}(x_m, \alpha)$ |  $\begin{cases}\infty & \alpha \leq 1 \\ \frac{\alpha x_m}{a - 1} & \alpha > 1\end{cases}$   | $\begin{cases}\infty & \alpha \leq 2 \\ \frac{x_m^2 \alpha}{(a-1)^2(\alpha - 2)} & \alpha > 2\end{cases}$ | Does not exist | 
+| $\text{Cauchy}(x_0, \gamma)$| Does Not Exist | Does Not Exist | $\exp(x_0it - \gamma|t|$ (cf) |
+| $t(\nu)$ | 0 | $\begin{cases}\frac{\nu}{\nu-2} & \nu > 2\\ \infty & 1 < \nu \leq 2 \\ \text{undefined} & \text{otherwise}\end{cases}$ | Does Not Exist |
+

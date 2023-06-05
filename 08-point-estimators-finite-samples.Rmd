@@ -1,3 +1,68 @@
 # Point Estimators: Finite Samples {#point-estimators-finite-samples}
 
 Finding point estimators and evaluating their finite sample properties.
+
+## Inferential Properties of Common Distributions
+
+### Bernoulli
+
+|                   Log-likelihood                   |                   Score Equations                   | Fisher Information |              MLE              |
+|:----------------:|:----------------:|:----------------:|:----------------:|
+| $n\log(1-p) + \log(\frac{p}{1-p})\sum_{i=1}^n x_i$ | $-\frac{n}{1-p} + \frac{1}{p(1-p)}\sum_{i=1}^n x_i$ | $\frac{1}{p(1-p)}$ | $\frac{1}{n}\sum_{i=1}^n x_i$ |
+
+| : -----------: |
+|                   Log-likelihood                   | $n\log(1-p) + \log(\frac{p}{1-p})\sum_{i=1}^n x_i$ |
+|                   Score Equations                  | $-\frac{n}{1-p} + \frac{1}{p(1-p)}\sum_{i=1}^n x_i$ |
+|                  Fisher Information                | $\frac{1}{p(1-p)}$ |
+|                         MLE                        | $\frac{1}{n}\sum_{i=1}^n x_i$ |
+
+### Binomial
+
+Since the Binomial has $n$ as a parameter, notation in problems that involve a *sample* of $n$ iid Binomial random variables can be tricky. To clarify, in the following table let $X_i \sim \text{Binomial}(m, p)$, and let $n$ represent the number of samples. 
+
+|                   Log-likelihood                   |                   Score Equations                   | Fisher Information |              MLE              |
+|:----------------:|:----------------:|:----------------:|:----------------:|
+| $nm\log(1-p) + \log(\frac{p}{1-p})\sum_{i=1}^n x_i + \log({m\choose x_i})$ | $-\frac{nm}{1-p} + \frac{1}{p(1-p)}\sum_{i=1}^n x_i$ | $\frac{m}{p(1-p)}$ | $\frac{1}{nm}\sum_{i=1}^n x_i$ |
+
+
+### Geometric
+
+|                   Log-likelihood                   |                   Score Equations                   | Fisher Information |              MLE              |
+|:----------------:|:----------------:|:----------------:|:----------------:|
+| $n\log(p) + \log(1-p)\sum_{i=1}^n x_i$ | $\frac{n}{p} - \frac{1}{1-p}\sum_{i=1}^n x_i$ |  | $\frac{n}{\sum_{i=1}^n x_i}$ |
+
+### Negative Binomial
+
+|                   Log-likelihood                   |                   Score Equations                   | Fisher Information |              MLE              |
+|:----------------:|:----------------:|:----------------:|:----------------:|
+| $nr\log(\frac{p}{1-p}) + \sum_{i=1}^n x_i\log(1-p) + \log{x_i + r - 1\choose x_i}$ | $-\frac{nr}{p} - \frac{1}{1-p}\sum_{i=1}^n x_i$ | $\frac{r}{(1-p)^2p}$ | $\frac{1}{1 - \frac{1}{nr}\sum_{i=1}^nx_i}$ |
+
+### Poisson
+
+|                   Log-likelihood                   |                   Score Equations                   | Fisher Information |              MLE              |
+|:----------------:|:----------------:|:----------------:|:----------------:|
+| $n\lambda + \sum_{i=1}^n x_i\log(\lambda) - \log(x_i!)$ | $-n + \frac{1}{\lambda}x_i$ | $\frac{1}{\lambda}$ | $\frac{1}{n}\sum_{i=1}^nx_i$ |
+
+### Normal
+
+|                   Log-likelihood                   |                   Score Equations                   | Fisher Information |              MLE              |
+|:----------------:|:----------------:|:----------------:|:----------------:|
+| $-\frac{n}{2}\log(2\pi\sigma^2) - \frac{1}{2\sigma^2}\sum_{i=1}^n (x_i - \mu)^2$ | $U(\mu | x, \sigma^2) = -n\mu -\frac{1}{\sigma^2}\sum_{i=1}^n x_i \\ U(\sigma^2 | x, \mu) = -\frac{n}{2\sigma^2} + \frac{1}{2(\sigma^2)^2}\sum_{i=1}^n(x_i-\mu)^2$ | $\begin{bmatrix}\frac{1}{\sigma^2} & 0 \\ 0 & \frac{1}{2\sigma^4}\end{bmatrix}$ | $\frac{1}{n}\sum_{i=1}^nx_i$ |
+
+### Exponential
+
+|                   Log-likelihood                   |                   Score Equations                   | Fisher Information |              MLE              |
+|:----------------:|:----------------:|:----------------:|:----------------:|
+| $-n\log(\lambda) - \frac{1}{\lambda}\sum_{i=1}^n x_i$ | $-\frac{n}{\lambda} + \frac{1}{\lambda^2}\sum_{i=1}^n x_i$ | $\lambda^2$ | $\frac{1}{n}\sum_{i=1}^nx_i$ |
+
+### Gamma
+
+|                   Log-likelihood                   |                   Score Equations                   | Fisher Information |              MLE              |
+|:----------------:|:----------------:|:----------------:|:----------------:|
+| $-n\log(\Gamma(k)) - nk\log(\lambda) + (k - 1 - \frac{1}{\lambda})\sum_{i=1}^n x_i$ | $-\frac{nk}{\lambda} + \frac{1}{\lambda^2}\sum_{i=1}^n x_i$ with $k$ known (otherwise, requires differentiating $\Gamma(k)$) | $\begin{bmatrix}\psi^{(1)}(k) & \frac{1}{\lambda}\\ \frac{1}{\lambda} & \frac{k}{\lambda^2}\end{bmatrix}$ |  |
+
+### Pareto
+
+|                   Log-likelihood                   |                   Score Equations                   | Fisher Information |              MLE              |
+|:----------------:|:----------------:|:----------------:|:----------------:|
+| $n\log{\alpha} + n\alpha\log(x_m) - (\alpha + 1)\sum_{i=1}^n\log(x_i)$ | $U(\alpha | x_i) = \frac{n}{\alpha} + n\log(x_m) - \sum_{i=1}^n \log(x_i)$ | $\frac{n}{\alpha^2}$ | $\frac{n}{\sum_{i=1}^n\log(x_i)}$
