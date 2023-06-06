@@ -1,3 +1,5 @@
 # Point Estimators: Asymptotics {#point-estimators-asymptotics}
 
 Evaluating the asymptotic properties of point estimators.
+
+{#wlln}

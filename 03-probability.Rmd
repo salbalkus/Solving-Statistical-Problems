@@ -1,3 +1,38 @@
 # Probability {#probability}
 
 This chapter is about how to manipulate probability functions directly
+
+## Conditional Probability
+
+:::{.definition name="Conditional Probability"}
+The probability of event $A$ occurring given that we know event $B$ has occurred is given by
+
+$$P(A|B) = \frac{P(A\cap B)}{P(B)}$$
+
+:::
+
+:::{.definition name="Bayes' Theorem"}
+
+If we need to invert the order of $A$ and $B$ in a conditional probability express, we can use the property
+
+$$P(A|B) = \frac{P(B|A)P(A)}{P(B)}$$
+:::
+
+## Independence {#independence}
+
+:::{.definition name="Independence"}
+Two events are **statistically independent** if the occurrence of one has no impact on the other. Mathematically,
+
+$$P(A | B) = P(A)$$
+
+By Bayes' Theorem,
+
+$$P(A \cap B) = P(A)P(B)$$
+:::
+
+Often, we prefer to use the second definition because it is independent and easier to generalize to multiple events or random variables. For example, if we know that the random variables $X$ and $Y$ are independent, then
+
+$$f_{X,Y}(x, y) = f_X(x)f_Y(y)$$
+
+This property is the foundation of statistical inference for iid random variables discussed in Chapters 8 and 10.
+

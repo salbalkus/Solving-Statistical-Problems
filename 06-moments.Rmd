@@ -1,6 +1,184 @@
 # Moments {#moments}
 
-How to compute any moment of any random variable.
+Finding the moments of a random variable is a chief problem in statistics. This is because moments characterize important properties about a distribution - for example, the **mean** measures the central tendency of a random variable, while the **variance** measures its dispersion. This chapter will define expected value and moments, summarize their useful properties, and discuss strategies for finding moments, especially for common distributions.
+
+## Basic Definitions
+
+::: {.definition name="Expected Value"}
+
+The **expected value** $E(g(X))$ is the average value of a random variable $g(X)$ across its support $\mathcal{X}$, weighted by their probability.  
+
+If $X$ is discrete, then this is defined
+
+$$E(g(X)) = \sum_{x \in \mathcal{X}}g(x)P(X = x)$$
+
+If $X$ is continuous, then the expected value is
+
+$$E(g(x)) = \int_{\mathcal{X}}g(x)f_X(x)dx$$
+
+:::
+
+::: {.definition name="Moments"}
+The $n$th **moment** of a random variable $X$ is defined as $E(X^n)$. Similarly, the $n$th **central moment** is defined as $E((X - E(X))^n)$.
+
+The **first moment** $E(X)$ is also known as the **mean**.  
+
+The **second central moment** is the variance, denoted $Var(X) = E((X - E(X))^2)$  
+
+:::
+
+
+## $E(X)$ Properties
+
+The **linearity of expectation** is defined as $E(aX + b) = aE(X) + b$. If multiple random variables $X$ and $Y$ are involved, then
+
+$$E(ag_1(X) + bg_2(Y) + c) = aE(g_1(X)) + bE(g_2(Y)) + c$$
+
+This follows from the linearity of the integral operator. Since sums of random variables are so common, this property is incredibly useful, especially for proving the unbiasedness of estimators (see [Chapter 8](#point-estimators-finite-samples)). For example, we can use the linearity of expectation to prove that the sample mean $\bar{X} = \frac{1}{n}\sum_{i=1}^nX_i$ is unbiased for a set of iid $X_i$ by noting, by linearity of expectation,
+
+$$E(\bar{X}) = E\Big(\frac{1}{n}\sum_{i=1}^nX_i\Big) = \frac{1}{n}\sum_{i=1}^nE(X_i) = \frac{n}{n}E(X_i) = E(X_i)$$
+
+
+When $X$ and $Y$ are independent,
+
+$$E(XY) = E(X)E(Y)$$
+
+This property can also be useful for computing the expectation of iid random variables in statistical inference problems.
+
+## $Var(X)$ Properties
+
+The most important variance property is its alternative definition:
+
+$$Var(X) = E(X^2) - E(X)^2$$
+
+Often, we are interested in both the mean and the variance. By simplifying $Var(X)$ into a function of the first and second moments, we can compute $E(X^2)$ (which is often much easier) and use what we know about $E(X)$ to more easily compute $Var(X)$. 
+
+While variance is not exactly linear, the variance of a linear transformation of a random variable is
+
+$$Var(aX + b) = a^2Var(X)$$
+
+When multiple random variables are involved in a linear expression, then
+
+$$Var(aX + bY) = a^2Var(X) + b^2Var(Y) + 2ab\cdot Cov(X, Y)$$
+
+where $Cov(X,Y)$ is described in the next subsection. If $X$ and $Y$ are [independent](#independent) then $Cov(X,Y) = 0$ and $Var(aX + bY) = a^2Var(X) + b^2Var(X)$
+
+
+
+## Covariance and Correlation
+
+From the expected value function and moments, we can also define the covariance and correlation
+
+::: {.definition name="Covariance"}
+
+**Covariance** measures the joint dispersion of two random variables. Mathematically,
+
+$$Cov(X,Y) = E((X - E(X))(Y - E(Y)))$$
+
+Equivalently,
+
+$$Cov(X,Y) = E(XY) - E(X)E(Y)$$
+
+which is usually the more convenient definition. 
+
+:::
+
+Note that if $X$ and $Y$ are [independent](#independence), then $Cov(X,Y) = 0$, which simplifies calculations. *However*, make no mistake, this implication is not bidirectional: $Cov(X,Y) = 0$ does NOT imply X, Y$ independent!!!
+
+Occasionally, we might want to work with a measure of joint dispersion that is normalized. This is called the **correlation**.
+
+::: {.definition name="Covariance"}
+
+**Correlation** is a measure of the joint dispersion of two random variables normalized to [0,1], with $Corr(X,Y) = 0$ indicating that the variables are independent and $Corr(X,Y) = 1$ indicating perfect collinearity.  Mathematically,
+
+$$Cov(X,Y) = E\Big(\frac{X - E(X)}{\sqrt{Var(X)}}\cdot \frac{Y - E(Y)}{\sqrt{Var(Y)}}$$
+
+:::
+
+## Conditional Expectation
+
+When an expectation is computed using a conditional probability, it is known as a **conditonal expectation**. For discrete random variables (or when $Y$ is simply an event), it is denoted
+
+$$E(g(X)|Y) = \sum_{\mathcal{X}}g(x)P(X = x | Y)$$ 
+
+and for continuous,
+
+$$E(g(X) | Y) = \int_{\mathcal{X}}g(x)f_{X|Y}(x|y)$$
+
+Two fundamental properties regarding conditional expectations exist that simply the computation of its unconditional counterpart. 
+
+::: {.definition name="Law of Iterated Expectation (Adam's Law)"}
+
+$E(X) = E(E(X|Y))$
+
+:::
+
+
+::: {.definition name="Law of Total Variance (EVVE's Law)"}
+
+$Var(X) = E(Var(X|Y)) + Var(E(X|Y))$
+
+:::
+
+These two properties can be used to compute $E(X)$ when only $E(X|Y)$ is known. For example, this occurs in [Chapter 8](#point-estimators-finite-samples) when finding UMVUEs.
+
+
+## Moment Generating Functions
+
+::: {.definition name="MGF"}
+The **moment generating function** (MGF) is defined as 
+
+$$\mathcal{M}_X(t) = E(e^{tx})$$
+This function has three important properties:
+
+1. The MGF fully characterizes a distribution. That is, if $\mathcal{M}_X(t) = \mathcal{M}_Y(t)$, then $X$ and $Y$ are identically distributed.
+2. $E(X^n) = \frac{d^n}{dt^n}\mathcal{M}_X(t)\Big|_{t=0}$. This means the MGF can also be used to compute any given moment simply by taking a derivative!
+3. **Convolution**: If $X$ and $Y$ and independent, then the mgf of $X+Y$ is $\mathcal{M}_{X+Y}(t) = \mathcal{M}_{X}(t)\mathcal{M}_{Y}(t)$. This is useful for finding the distribution of sums of random variables.
+
+Do note, however, that the MGF may not exist for some distributions. In this case it may be preferable to work with the [characteristic function](https://en.wikipedia.org/wiki/Characteristic_function_(probability_theory)).  
+
+:::
+
+## Moment Inequalities {#moment-bounds}
+
+Several inequalities exist that can bound moments. A general bound is that $a < g(X) < b \implies a < E(g(X)) < b$. This, coupled with the [triangle inequality](#triangle-inequality) can be used to prove the following inequalities.  
+
+The first two inequalities concern the product of moments.
+
+::: {.definition name="Cauchy-Schwarz Inequality"}
+
+
+:::
+
+::: {.definition name="Holder's Inequality"}
+
+
+:::
+
+The next two inequalities bound probabilities based on moments. They are named the student-teacher pair that developed them.
+
+::: {.definition name="Markov's Inequality"}
+
+
+:::
+
+::: {.definition name="Chebychev's Inequality"}
+
+
+:::
+
+Chebychev's inequality is instrumental in proving the [Weak Law of Large Numbers](#wlln)
+
+Finally, we conclude with an equality regarding functions of moments.
+
+::: {.definition name="Jensen's Inequality"}
+
+
+:::
+
+Jensen's inequality is useful for showing that an [estimator is biased](#biasedness)
+
+
 
 ## Common Distribution Moments
 
@@ -122,6 +300,10 @@ The moments of a Negative Binomial can also be computed simply by relying on its
 | $E(Y)$ | $Var(Y)$ |      mgf       |
 |:------:|:--------:|:--------------:|
 |  $\mu$   | $\sigma^2$ | $\exp(\mu t + \sigma^2 t^2 / 2)$ |
+
+### Gamma
+
+{#kernel-technique}
 
 
 ## Other Moments (for reference)

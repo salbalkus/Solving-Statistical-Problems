@@ -12,7 +12,7 @@ This chapter will cover highly specific mathematical techniques used to solve st
 - Lagrange multipliers? (Maybe save for MLEs)
 - Open versus closed intervals
 
-## Combinatorials
+## Combinatorics
 
 ## Geometric Series (#geometric-series)
 
@@ -41,3 +41,23 @@ $$\int_{a(\theta)}^{b(\theta)}f(x,\theta)dx = f(b(\theta), \theta)\frac{d}{d\the
 :::
 
 ## Gamma Function {#gamma-function}
+
+Defined as 
+
+$$\Gamma(z) = \int_{0}^\infty t^{z-1}e^{-t}dt$$
+
+the Gamma function commonly appears in the probability density function of several random variables, including the Gamma (duh!) and the Beta.
+
+The most important property of $\Gamma(z)$ is that 
+
+$$\Gamma(z + 1) = z\Gamma(z)$$
+This is because we can substitute $\Gamma(z) = \frac{\Gamma(z + 1)}{z}$ to perform the [Kernel Technique](#kernel-technique) on distributions involving the Gamma function in their pdf
+
+As a corollary, when $n$ is an integer, $\Gamma(n) = (n-1)!$. 
+
+## Triangle Inequality {#triangle-inequality}
+
+The triangle inequality is defined as 
+
+$$|x + y| \leq |x| + |y|$$
+with $|x + y| \leq |x| + |y|$ unless $x, y \geq 0$. This inequality is useful for proving [moment bounds](#moment-bounds) as well as asymptotic convergence in [Chapter 9](point-estimators-asymptotics) and [Chapter 11](hypothesis-tests-asymptotics)

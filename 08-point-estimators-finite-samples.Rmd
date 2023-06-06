@@ -2,6 +2,8 @@
 
 Finding point estimators and evaluating their finite sample properties.
 
+{#biasedness}
+
 ## Inferential Properties of Common Distributions
 
 ### Bernoulli
