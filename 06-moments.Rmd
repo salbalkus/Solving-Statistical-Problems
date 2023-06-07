@@ -28,7 +28,7 @@ The **second central moment** is the variance, denoted $Var(X) = E((X - E(X))^2)
 :::
 
 
-## $E(X)$ Properties
+## $E(X)$ Properties {#expected-value}
 
 The **linearity of expectation** is defined as $E(aX + b) = aE(X) + b$. If multiple random variables $X$ and $Y$ are involved, then
 
@@ -91,7 +91,7 @@ Occasionally, we might want to work with a measure of joint dispersion that is n
 
 **Correlation** is a measure of the joint dispersion of two random variables normalized to [0,1], with $Corr(X,Y) = 0$ indicating that the variables are independent and $Corr(X,Y) = 1$ indicating perfect collinearity.  Mathematically,
 
-$$Cov(X,Y) = E\Big(\frac{X - E(X)}{\sqrt{Var(X)}}\cdot \frac{Y - E(Y)}{\sqrt{Var(Y)}}$$
+$$Cov(X,Y) = E\Big(\frac{X - E(X)}{\sqrt{Var(X)}}\cdot \frac{Y - E(Y)}{\sqrt{Var(Y)}}\Big) = \frac{Cov(X,Y)}{\sqrt{Var(X)Var(Y)}}$$
 
 :::
 
@@ -143,44 +143,80 @@ Do note, however, that the MGF may not exist for some distributions. In this cas
 
 Several inequalities exist that can bound moments. A general bound is that $a < g(X) < b \implies a < E(g(X)) < b$. This, coupled with the [triangle inequality](#triangle-inequality) can be used to prove the following inequalities.  
 
-The first two inequalities concern the product of moments.
-
-::: {.definition name="Cauchy-Schwarz Inequality"}
-
-
-:::
-
-::: {.definition name="Holder's Inequality"}
-
-
-:::
 
 The next two inequalities bound probabilities based on moments. They are named the student-teacher pair that developed them.
 
 ::: {.definition name="Markov's Inequality"}
 
-
+$$P(X \geq t) \leq \frac{E(X)}{t}$$
 :::
+
+::: {.proof"}
+
+To prove Markov's inequality,
+:::
+
+
 
 ::: {.definition name="Chebychev's Inequality"}
 
+This inequality can be stated in several ways:
+
+
 
 :::
 
-Chebychev's inequality is instrumental in proving the [Weak Law of Large Numbers](#wlln)
+Chebychev's inequality is instrumental in proving the Weak Law of Large Numbers
 
-Finally, we conclude with an equality regarding functions of moments.
+Next, we present an equality regarding functions of moments.
 
 ::: {.definition name="Jensen's Inequality"}
 
+For a convex function $f$,
+
+$$E(f(X)) \geq f(E(X))$$
+
+If $f$ is instead concave,
+
+$$E(f(x)) \leq f(E(X))$$
 
 :::
 
 Jensen's inequality is useful for showing that an [estimator is biased](#biasedness)
 
+The next three inequalities are less commonly used, but are still useful is certain situations *(where?)*
 
 
-## Common Distribution Moments
+
+::: {.definition name="Cauchy-Schwarz Inequality"}
+
+$$E(XY)^2 \leq E(X)^2E(Y)^2$$
+
+:::
+
+This equality can be generalized as follows
+
+::: {.definition name="Holder's Inequality"}
+For $p, q \geq 1$ such that $\frac{1}{p} + \frac{1}{q} = 1$,
+
+$$E(|XY|) \leq E(|X|^p)^\frac{1}{p}E(|Y|^q)^\frac{1}{q}$$
+
+:::
+
+While the above inequalities deal with products of moments, the following handles sums:
+
+::: {.definition name="Minkowski's Inequality"}
+
+$$E(|X + Y|^p)^\frac{1}{p} \leq E(|X|^p)^\frac{1}{p} + E(|Y|^p)^\frac{1}{p}$$
+
+:::
+
+
+
+
+## Techniques for Deriving Moments
+
+Below, we've listed the important moments of each distribution that can be reasonably derived by hand. In this section, we discuss a myriad of techniques to derive these moments, each of which can be applied in general for their respective distributions.
 
 | Distribution | $E(Y)$ | $Var(Y)$ |      mgf       |
 |:------:|:------:|:--------:|:--------------:|
@@ -200,9 +236,7 @@ Jensen's inequality is useful for showing that an [estimator is biased](#biasedn
 
 
 
-
-
-### Bernoulli
+### Bernoulli: Direct Summation
 
 The moments of a Bernoulli distribution are simple to compute, because $x$ is only 0 or 1. When $x = 0$, $0 * P(X = 0) = 0$. Hence, $E(X) = 1 * P(X = 1) = p^1(1 - p)^{1 - 1} = p$. Since $1^k = 1$, a convenient property follows:
 
@@ -210,15 +244,50 @@ $$X \sim \text{Bernoulli}(p) \implies E(X^k) = p$$
 
 Similarly, we can compute the variance using the property $Var(X) = E(X^2) - E(X^2) = p - p^2 = p(1-p)$.  
 
-The moment generating function follows by noting $$E(e^{tx}) = e^{t*0}p^0(1-p)^{1-0} + e^{t*1}p^1(1-p)^{1-1} = (1-p) + pe^t$$
+The moment generating function follows directly by noting 
 
-### Binomial
+$$E(e^{tx}) = e^{t*0}p^0(1-p)^{1-0} + e^{t*1}p^1(1-p)^{1-1} = (1-p) + pe^t$$
 
-| $E(Y)$ | $Var(Y)$ |      mgf       |
-|:------:|:--------:|:--------------:|
-|  $np$   | $np(1-p)$ | $((1-p) + pe^t)^n$ |
+### Uniform: Direct Integration
 
-Since the Binomial is a discrete distribution, we can compute its moments using the discrete moment formula $E(X) = \sum_{i=1}^\infty xP(X = x)$. This introduces one technique for moment calculations: the Kernel Technique
+Moments of distributions with simple pdfs bounded at both ends such as the Uniform can be solved directly by integrating their pdf. The Uniform has pdf $f_X(x) = \frac{1}{b-a}$, so its moments are as follows:
+
+\begin{align}
+E(X) = \int_{a}^b \frac{x}{b-a} dx = \frac{x^2}{2(b-a)}\Big|_{a}^b\\
+= \frac{b^2 - a^2}{2(b-a)} = \frac{(b+a)(b-a)}{2(b-a)} = \frac{1}{2}(b+a)\\
+\end{align}
+
+Generalizing this, $E(X^k) = \frac{b^k - a^k}{2(b-a)}$. As a result, solving the variance is easier to do directly:
+
+\begin{align}
+Var(X) = \int_{a}^b \frac{(x - \frac{1}{2}(b-a))^2}{b-a} dx = \frac{(x - \frac{1}{2}(b-a))^3}{3(b-a)}\Big|_{a}^b
+\frac{(b - \frac{1}{2}b - \frac{1}{2}a)^3 - (a - \frac{1}{2}b - \frac{1}{2}a)^3}{3(b-a)}\Big|_{a}^b\\
+= \frac{2(b-a)^3}{24(b-a)} = \frac{1}{12}(b-a)^2\\
+\end{align}
+
+### Geometric: Series Convergence
+
+Deriving the moments of the Geometric distribution requires the use of the [Geometric Series](#geometric-series) (from where we can speculate its name originates). Note $E(X) = \sum_{x=0}^\infty xp(1-p)^x$, which does not quite match the geometric series; first, we need to take the derivative, and then interchange differentiation and summation like so:
+
+\begin{align}
+\sum_{x=0}^\infty xp(1-p)^x = p(1-p)\sum_{x=0}^\infty x(1-p)^{x-1} && \text{factor out for correct form}\\
+= p(1-p)\sum_{x=0}^\infty \frac{d}{dx}-(1-p)^{x} && \text{notice derivative}\\
+= -p(1-p) \frac{d}{dx}\sum_{x=0}^\infty (1-p)^{x} && \text{interchange derivative}\\
+= -p(1-p) \frac{d}{dx}\frac{1}{1 - (1 - p)} && \text{geometric series}\\
+= \frac{p(1-p)}{p^2} = \frac{1-p}{p} && \\
+\end{align}
+
+This can also be performed to compute $E(X)$ for the variance, though the computation is relatively long to be reproduced here. A quicker way might be to employ the moment generating function from which all moments can be computed, which can easily be found by substituting the geometric series:
+
+\begin{align}
+E(e^{tx}) = \sum_{x=0}^\infty e^{tx}(p(1-p)^x) \\
+= p\sum_{x=0}^\infty ((1-p)e^t)^x) \\
+= \frac{p}{1 - (1-p)e^t}
+\end{align}
+
+### Binomial: Kernel Technique, Series Version
+
+Moments of the Binomial are trickier since they involve an infinite sum. Since the Binomial is a discrete distribution, we can compute its moments using the discrete moment formula $E(X) = \sum_{i=1}^\infty xP(X = x)$. This introduces one technique for moment calculations: the Kernel Technique
 
 ::: {.example #kernel-technique name="Kernel Technique with Infinite Series"}  
 
@@ -253,58 +322,91 @@ Then, $Var(X) = E(X^2) - E(X)^2 = (np)^2 + np(1-p) - (np)^2 = np(1-p)$
 
 Alternatively, we could have computed this using the fact that the Binomial is equal to a sum of Bernoulli random variables. By the linearity of expectation, if $X_i \sim \text{Bernoulli}(p)$, then $E(\sum_{i=1}^n X_i) = n\cdot E(X_i) = np$. $Var(X)$ follows similarly.
 
-### Geometric
 
-| $E(Y)$ | $Var(Y)$ |      mgf       |
-|:------:|:--------:|:--------------:|
-|  $\frac{1-p}{p}$   | $\frac{1-p}{p^2}$ | $\frac{p}{1 - (1 - p)e^t}$ for $t < -\log(1-p)$ |
+### Negative Binomial: Computing $E(X(X-1))$
 
-Deriving the moments of this distributions requires the use of the [Geometric Series](#geometric-series) (from where we can speculate its name originates). Note $E(X) = \sum_{x=0}^\infty xp(1-p)^x$, which does not quite match the geometric series; first, we need to take the derivative, and then interchange differentiation and summation like so:
+The second moment of distributions with pmfs/pdfs involving factorials can often be computing more easily by finding $E(X(X-1))$ instead of $E(X^2)$ directly. One such distribution is the Negative Binomial. Its mean can be computed by the same Kernel Technique used for the Binomial:
 
 \begin{align}
-\sum_{x=0}^\infty xp(1-p)^x = p(1-p)\sum_{x=0}^\infty x(1-p)^{x-1} && \text{factor out for correct form}\\
-= p(1-p)\sum_{x=0}^\infty \frac{d}{dx}-(1-p)^{x} && \text{notice derivative}\\
-= -p(1-p) \frac{d}{dx}\sum_{x=0}^\infty (1-p)^{x} && \text{interchange derivative}\\
-= -p(1-p) \frac{d}{dx}\frac{1}{1 - (1 - p)} && \text{geometric series}\\
-= \frac{p(1-p)}{p^2} = \frac{1-p}{p} && \\
+E(X) = \sum_{x=0}^\infty x{x + r - 1 \choose x} \cdot (1-p)^x p^r && \\
+= (1-p)\sum_{x=1}^\infty \frac{((x-1) + r)!}{(x-1)!(r-1)!}\cdot (1-p)^{x-1}p^{r} && \\
+= \frac{r(1-p)}{p}\sum_{x=1}^\infty \frac{((x-1) + r)!}{(x-1)!(r-1)!}\cdot (1-p)^{x-1}p^{r} && \\
+= \frac{r(1-p)}{p}\sum_{x=0}^\infty \frac{((x-1) + r)!}{(x-1)!r!}\cdot (1-p)^{x-1}p^{r+1} && \\
+= \frac{r(1-p)}{p} && \text{pmf sums to 1}
 \end{align}
 
-This can also be performed to compute $E(X)$ for the variance, though the computation is relatively long to be reproduced here. A quicker way might be to employ the moment generating function from which all moments can be computed, which can easily be found by substituting the geometric series:
+With $E(X)$ known, we can now take advantage of the factorial to compute $E(X(X-1))$, using the same technique of simplying the combinatorial fraction and "pulling out" components to reform a pdf:
 
 \begin{align}
-E(e^{tx}) = \sum_{x=0}^\infty e^{tx}(p(1-p)^x) \\
-= p\sum_{x=0}^\infty ((1-p)e^t)^x) \\
-= \frac{p}{1 - (1-p)e^t}
+E(X(X-1)) = \sum_{x=0}^\infty x(x-1){x + r - 1 \choose x}(1-p)^x p^r \\
+= \frac{r(r+1)}{1-p)^2}{p^2}\sum_{x=0}^\infty \frac{((x-2) + (r+1))!}{(x-2)!(r+1)!}(1-p)^{x-2}p^{r+2}\\
+= \frac{r(r+1)}{1-p)^2}{p^2}\Big(0 + 0 + \sum_{x=2}^\infty {(x-2) + r + 1\choose x-2}(1-p)^{x-2}p^{r+2}\Big\\
+= \frac{r(r + 1)(1-p)^2}{p^2} \text{  pmf sums to 1}\\
 \end{align}
 
-### Negative Binomial
+Since, by [linearity of expectation](#expected-value), $E(X(X-1)) = E(X^2) - E(X)$, we can write
 
-| $E(Y)$ | $Var(Y)$ |      mgf       |
-|:------:|:--------:|:--------------:|
-|  $\frac{r(1-p)}{p}$   | $\frac{r(1-p)}{p^2}$ | $\Big(\frac{p}{1 - (1 - p)e^t}\Big)^r$ for $t < -\log(p)$|
+\begin{align}
+Var(X) = E(X^2) - E(X) + E(X) - E(X)^2 \\
+= E(X(X-1)) + E(X) - E(X)^2 \\
+= \frac{r(r+1)(1-p)^2}{p^2} + \frac{r(1-p)}{p} - \frac{r^2(1-p)^2}{p^2}\\
+= \frac{r(1-p)^2}{p^2} + \frac{r(1-p)}{p} \\
+= \frac{r(1-p)(1 - p + p)}{p^2} = \frac{r(1-p)}{p^2}
+\end{align}
 
-INSERT MOMENT PROOF HERE
+Note: The moments of a Negative Binomial can also be computed simply by relying on its additive property in relation to the geometric, and then using the linearity expectation. That is, if $Y \sim \text{NegBin}(r, p)$, then $Y = \sum_{i=1}^r X_i$ where $X_i \sim \text{Geo}(p)$. Then, $E(Y) = E(\sum_{i=1}^r X_i) = \frac{r(1-p)}{p}$.
 
 
-The moments of a Negative Binomial can also be computed simply by relying on its additive property in relation to the geometric, and then using the linearity expectation. That is, if $Y \sim \text{NegBin}(r, p)$, then $Y = \sum_{i=1}^r X_i$ where $X_i \sim \text{Geo}(p)$ and $E(Y) = E(\sum_{i=1}^r X_i) = \frac{r(1-p)}{p}$.
+### Poisson: Exponential Taylor Series
+
+Like the Geometric, we can also derive the moments of the Poisson by relying the convergence of an infinite series. This time, we rely on the [Taylor Series for the exponential distribution](#exponential-taylor), which is $\sum_{x=0}^\infty \frac{\lambda^x}{x!} = e^\lambda$. Proceed as follows:
+
+\begin{align}
+E(X) = \sum_{x=0}^\infty x\frac{e^{-\lambda}\lambda^x}{x!} && \\
+= \lambda e^{-\lambda}\sum_{x=1}^\infty \frac{\lambda^{x-1}}{(x-1)!} && \text{when }x = 0, \text{ the series term is 0}\\
+= \lambda e^{-\lambda}e^{\lambda} = \lambda && \text{exponential series}
+\end{align}
+
+### Exponential: Integration By Parts
+
+Sometimes, a pdf can be integrated directly using more advanced integration techniques. The Exponential is one such distribution - its moments can be computed using [integration by parts](#ibp)
+
+For the mean, note $E(X) = \int_0^\infty \lambda e^{-\lambda x}dx$. Let $u = x \implies du = 1$ and $du = \lambda e^{-\lambda x} \implies v = -e^{-\lambda x}$. Then,
+
+\begin{align}
+E(X) = uv - \int_{0}^\infty vdu = -xe^{-\lambda x}\Big|_{0}^\infty + \int_0^\infty e^{-\lambda x}dx\\
+= 0 + 0 - \frac{1}{\lambda}e^{-\lambda x} \Big|_0^\infty = \frac{1}{\lambda}
+\end{align}
+
+noting that $\lim_{x\rightarrow\infty}xe^{-\lambda x} = \lim_{x\rightarrow\infty}-\lambda e^{-\lambda x} = 0$ by applying L'Hopital's rule. Hence $E(X) = \frac{1}{\lambda}$
+
+For the variance, start by computing $E(X^2)$. Applying integration by parts with $u = x^2 \implies du = 2x$ and $dv = \lambda e^{-\lambda x} \implies -e^{-\lambda x}$,
+
+$$E(X^2) = uv - \int_{0}^\infty vdu = -x^2e^{-\lambda x} \Big|_0^\infty + \int_{0}^\infty 2xe^{-\lambda x}$$
+
+Now, we could apply integration by parts again, but a faster way to solve this is by **moment recognization**: noting that the second term can be transformed to equal $E(X)$ like so: $\int_{0}^\infty 2xe^{-\lambda x} = \frac{2}{\lambda}\int_{0}^\infty x\lambda e^{-\lambda x} = E(X) = \lambda$ as we've already solved.
+
+As before, the first term is $\lim_{x\rightarrow \infty}-x^2e^{-\lambda x} \Big|_0^\infty = \lim_{x\rightarrow\infty}\lambda^2e^{-\lambda x} = 0$ by applying L'Hopital's rule twice. Plugging in $E(X) = \frac{1}{\lambda}$, we get $E(X^2)$ = $\frac{2}{\lambda^2}$ and
+
+$$Var(X) = E(X^2) - E(X)^2 = \frac{2}{\lambda^2} - \frac{1}{\lambda^2} = \frac{1}{\lambda^2}$$
+
+### Gamma: Kernel Technique, Integration Version
+
+Similar to discrete distributions, we can also use the Kernel technique to more easily integrate continuous distributions as well.
+
+::: {.example #kernel-technique2 name="Kernel Technique with Integration"}  
+
+Since pdfs integrate to 1,
+
+:::
 
 
-### Poisson
 
-| $E(Y)$ | $Var(Y)$ |      mgf       |
-|:------:|:--------:|:--------------:|
-|  $\lambda$   | $\lambda$ | $\exp(\lambda(e^t - 1))$ |
 
-### Normal
+### Normal: Polar Integration
 
-| $E(Y)$ | $Var(Y)$ |      mgf       |
-|:------:|:--------:|:--------------:|
-|  $\mu$   | $\sigma^2$ | $\exp(\mu t + \sigma^2 t^2 / 2)$ |
 
-### Gamma
-
-{#kernel-technique}
-
+## Moments of Exponential Families
 
 ## Other Moments (for reference)
 

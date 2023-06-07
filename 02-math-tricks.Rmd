@@ -14,13 +14,35 @@ This chapter will cover highly specific mathematical techniques used to solve st
 
 ## Combinatorics
 
-## Geometric Series (#geometric-series)
+## Geometric Series {#geometric-series}
 
 The **geometric series** is a useful series convergence, defined as follows:
 
 $$\sum_{x=0}^\infty ar^x = \frac{a}{1-r} \text{ for } |r| < 1$$
 
 One place it arises is computing the moments of the [Geometric Distribution](#geometric-distribution).
+
+## Exponential Taylor Series {#exponential-taylor}
+Some distributions such as the Poisson rely on infinite sums. Often, we can simplify these infinite sums to an exponential by rewriting them using the following series convergence:
+
+$$\sum_{x=0}^\infty \frac{\lambda^x}{x!} = \exp(\lambda)$$
+
+This is the Taylor series for the exponential function, sometimes called the "exponential series".
+
+## Exponential Limit {#exponential-limit}
+Another way to express the exponential function is by the limit
+
+$$\exp(x) = \lim_{n\rightarrow \infty}(1 + \frac{x}{n})^n$$
+
+## Integration by Parts {#ibp}
+
+Another technique, especially for computing moments, is integration by parts, defined by:
+
+$$\int udv = uv - \int vdu$$
+
+Integration by parts is typically used for products of functions. By setting $u$ equal to a function which has a finite number of nonzero derivatives (for example, $x^k$), and $v$ equal to a function which does not (such as $e^x$), this technique can be repeatedly applied to compute integration.
+
+Of course, take caution: If both functions can be repeatedly differentiated infinitely, this may not work! However, it may be possible to use **inductive integration by parts** to prove that if we apply integration by parts infinitely, the result will yield a series which converges to some value *(where?)*
 
 
 ## Leibniz's Rule {#leibniz-rule}
