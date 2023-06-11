@@ -287,7 +287,7 @@ E(e^{tx}) = \sum_{x=0}^\infty e^{tx}(p(1-p)^x) \\
 = \frac{p}{1 - (1-p)e^t}
 \end{align}
 
-### Binomial and Hypergeometric: Kernel Technique, Series Version
+### Binomial: Kernel Technique, Series Version
 
 Moments of the Binomial are trickier since they involve an infinite sum. Since the Binomial is a discrete distribution, we can compute its moments using the discrete moment formula $E(X) = \sum_{i=1}^\infty xP(X = x)$. This introduces one technique for moment calculations: the Kernel Technique
 
@@ -323,16 +323,9 @@ Then, $Var(X) = E(X^2) - E(X)^2 = (np)^2 + np(1-p) - (np)^2 = np(1-p)$
 
 Alternatively, we could have computed this using the fact that the Binomial is equal to a sum of Bernoulli random variables. By the linearity of expectation, if $X_i \sim \text{Bernoulli}(p)$, then $E(\sum_{i=1}^n X_i) = n\cdot E(X_i) = np$. $Var(X)$ follows similarly.  
 
-*Hypergeometric Distribution*: The Kernel Technique can also be used to computed the moments of a $HGeo(N, K, n)$ random variable:
+### Negative Binomial and Hypergeometric: Computing $E(X(X-1))$
 
-\begin{align}
-
-\end{align}
-
-
-### Negative Binomial: Computing $E(X(X-1))$
-
-The second moment of distributions with pmfs/pdfs involving factorials can often be computing more easily by finding $E(X(X-1))$ instead of $E(X^2)$ directly. One such distribution is the Negative Binomial. Its mean can be computed by the same Kernel Technique used for the Binomial:
+The second moment of distributions with pmfs/pdfs involving factorials can often be computing more easily by finding $E(X(X-1))$ instead of $E(X^2)$ directly. The **Negative Binomial** is one such distribution. Its mean can be computed by the same Kernel Technique used for the Binomial:
 
 \begin{align}
 E(X) = \sum_{x=0}^\infty x{x + r - 1 \choose x} \cdot (1-p)^x p^r && \\
@@ -342,7 +335,7 @@ E(X) = \sum_{x=0}^\infty x{x + r - 1 \choose x} \cdot (1-p)^x p^r && \\
 = \frac{r(1-p)}{p} && \text{pmf sums to 1}
 \end{align}
 
-With $E(X)$ known, we can now take advantage of the factorial to compute $E(X(X-1))$, using the same technique of simplying the combinatorial fraction and "pulling out" components to reform a pdf:
+With $E(X)$ known, we can now take advantage of the factorial to compute $E(X(X-1))$, using the same technique of simplifying the combinatorial fraction and "pulling out" components to reform a pdf:
 
 \begin{align}
 E(X(X-1)) = \sum_{x=0}^\infty x(x-1){x + r - 1 \choose x}(1-p)^x p^r \\
@@ -362,6 +355,34 @@ Var(X) = E(X^2) - E(X) + E(X) - E(X)^2 \\
 \end{align}
 
 Note: The moments of a Negative Binomial can also be computed simply by relying on its additive property in relation to the geometric, and then using the linearity expectation. That is, if $Y \sim \text{NegBin}(r, p)$, then $Y = \sum_{i=1}^r X_i$ where $X_i \sim \text{Geo}(p)$. Then, $E(Y) = E(\sum_{i=1}^r X_i) = \frac{r(1-p)}{p}$.
+
+*Hypergeometric Distribution*: The above technique can also be used to find the variance of a $\text{HGeo}(N, K, n)$ random variable. First, let us use the [Kernel Technique](#kernel-technique) to compute its first moment. Writing the combinatorial functions in their full form, noting in general $y - x = (y - 1) - (x - 1)$, we can rewrite this as the pmf of a $\text{HGeo}(N-1, K-1, n-1)$:
+
+\begin{align}
+E(X) = \sum_{x=0}^n x \cdot \frac{K!}{x!(K-x)}\cdot\frac{(N-K)!}{(n-x)!(N-K-n+x)!} \cdot \frac{n!(N-n)!}{N!}\\
+= \sum_{x=1}^n \frac{K(K-1)!}{(x-1)!((K-1) - (x-1))!} \\ \cdot \frac{((N-1) - (K - 1))!}{((n-1) - (x-1))!((N-1) - (k-1) - (n-1) + (x-1))!}\cdot\frac{n(n-1)!((N-1) - (n-1))!}{N(N-1)!}\\
+= \frac{NK}{n}\sum_{x=0}^{n-1} \frac{{K-1\choose x}{(N-1) - (K-1)\choose (n-1) - x}}{{N-1\choose n-1}}\\
+= \frac{NK}{n}
+\end{align}
+
+For the variance, we first compute $E(X(X-1))$ in the same fashion. For brevity, we exclude writing down $y - x = (x - 2) - (y-2)$ expansion, but the calculations below do rely on this principle.
+
+\begin{align}
+E(X(X-1)) = \sum_{x=0}^n x(x-1) \cdot \frac{K!}{x!(K-x)}\cdot\frac{(N-K)!}{(n-x)!(N-K-n+x)!} \cdot \frac{n!(N-n)!}{N!}\\
+= \sum_{x=2}^n \frac{K(K-1)!}{(x-1)!(K - X)!} \\ \cdot \frac{(N - K)!}{((n-2) - x-2))!(N - k - (n-2) + (x-2))!}\cdot\frac{n(n-1)(n-2)!((N-2) - (n-2))!}{N(N-1)(N-2)!}\\
+= \frac{N(N-1)K(K-1)}{n(n-1)}\sum_{x=0}^{n-2} \frac{{K-2\choose x}{(N-2) - (K-2)\choose (n-2) - x}}{{N-2\choose n-2}}\\
+= \frac{N(N-1)K(K-1)}{n(n-1)}
+\end{align}
+
+Then,
+
+\begin{align}
+Var(X) = E(X(X-1)) + E(X) - E(X)^2\\
+= \frac{K(K-1)N(N-1)}{n(n-1)} + \frac{KN}{n} - \frac{KN}{n^2}\\
+= n\frac{K}{N} \cdot \frac{N - K}{N}\cdot \frac{N - n}{N-1}
+\end{align}
+
+after lengthy algebra.
 
 
 ### Poisson: Exponential Taylor Series
