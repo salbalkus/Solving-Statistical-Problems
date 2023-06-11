@@ -103,6 +103,7 @@ The Bernoulli distribution occurs very commonly because many situations can be d
 
 - The Bernoulli is a special case of the Binomial distribution: $\text{Bernoulli}(p) = \text{Binomial}(1, p)$
 - As we discuss regarding the Binomial distribution, the Bernoulli has an additive property: $\sum_{i=1}^n \sim \text{Binomial}(n, p)$. This can be proven by the [additivity technique](#additivity) discussed imminently.
+- If $X\sim \text{Bernoulli}$ then $E(X) = P(Y = 1)$, a fact which is often useful for [computing moments](#moments) as well as [finding UMVUEs](#point-estimators-finite-samples).
 
 ### Binomial
 

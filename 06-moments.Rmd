@@ -241,10 +241,11 @@ Below, we've listed the important moments of each distribution that can be reaso
 The moments of a Bernoulli distribution are simple to compute, because $x$ is only 0 or 1. When $x = 0$, $0 * P(X = 0) = 0$. Hence, $E(X) = 1 * P(X = 1) = p^1(1 - p)^{1 - 1} = p$. Since $1^k = 1$, a convenient property follows:
 
 $$X \sim \text{Bernoulli}(p) \implies E(X^k) = p$$
+This also suggests that $E(X^k) = P(X = 1)$, which can be exceptionally useful in many statistical problems, including [finding UMVUEs](#point-estimators-finite-samples).  
 
 Similarly, we can compute the variance using the property $Var(X) = E(X^2) - E(X^2) = p - p^2 = p(1-p)$.  
 
-The moment generating function follows directly by noting 
+Finally, the moment generating function follows directly by noting 
 
 $$E(e^{tx}) = e^{t*0}p^0(1-p)^{1-0} + e^{t*1}p^1(1-p)^{1-1} = (1-p) + pe^t$$
 
@@ -260,8 +261,9 @@ E(X) = \int_{a}^b \frac{x}{b-a} dx = \frac{x^2}{2(b-a)}\Big|_{a}^b\\
 Generalizing this, $E(X^k) = \frac{b^k - a^k}{2(b-a)}$. As a result, solving the variance is easier to do directly:
 
 \begin{align}
-Var(X) = \int_{a}^b \frac{(x - \frac{1}{2}(b-a))^2}{b-a} dx = \frac{(x - \frac{1}{2}(b-a))^3}{3(b-a)}\Big|_{a}^b
-\frac{(b - \frac{1}{2}b - \frac{1}{2}a)^3 - (a - \frac{1}{2}b - \frac{1}{2}a)^3}{3(b-a)}\Big|_{a}^b\\
+Var(X) = \int_{a}^b \frac{(x - \frac{1}{2}(b-a))^2}{b-a} dx \\
+= \frac{(x - \frac{1}{2}(b-a))^3}{3(b-a)}\Big|_{a}^b \\
+= \frac{(b - \frac{1}{2}b - \frac{1}{2}a)^3 - (a - \frac{1}{2}b - \frac{1}{2}a)^3}{3(b-a)}\Big|_{a}^b\\
 = \frac{2(b-a)^3}{24(b-a)} = \frac{1}{12}(b-a)^2\\
 \end{align}
 
@@ -285,7 +287,7 @@ E(e^{tx}) = \sum_{x=0}^\infty e^{tx}(p(1-p)^x) \\
 = \frac{p}{1 - (1-p)e^t}
 \end{align}
 
-### Binomial: Kernel Technique, Series Version
+### Binomial and Hypergeometric: Kernel Technique, Series Version
 
 Moments of the Binomial are trickier since they involve an infinite sum. Since the Binomial is a discrete distribution, we can compute its moments using the discrete moment formula $E(X) = \sum_{i=1}^\infty xP(X = x)$. This introduces one technique for moment calculations: the Kernel Technique
 
@@ -296,7 +298,9 @@ Fact: pmfs integrate to 1. That is, $\sum_{x=0}^\infty f_X(x) = 1$. We can use t
 1. Recognizing the kernel of the distribution within the moment formula
 2. Factoring out appropriate constants to turn the kernel into the full pmf, and simplifying the infinite series to $\sum_{x=0}^\infty f_X(x) = 1$. The left-over components then, are the value of the moment.
 
-We can use this technique to compute moments of the Binomial distribution like so:
+:::
+
+*Binomial Distribution*: We can use this technique to compute moments of the Binomial distribution like so:
 
 \begin{align}
 E(X) = \sum_{x=0}^\infty xP(X = x) = \sum_{x=0}^\infty x{n\choose x}p^x(1-p)^{n-x} && \\
@@ -317,10 +321,13 @@ E(X^2) = \sum_{x=0}^\infty x^2P(X = x) = \sum_{x=0}^\infty x^2{n\choose x}p^x(1-
 
 Then, $Var(X) = E(X^2) - E(X)^2 = (np)^2 + np(1-p) - (np)^2 = np(1-p)$
 
+Alternatively, we could have computed this using the fact that the Binomial is equal to a sum of Bernoulli random variables. By the linearity of expectation, if $X_i \sim \text{Bernoulli}(p)$, then $E(\sum_{i=1}^n X_i) = n\cdot E(X_i) = np$. $Var(X)$ follows similarly.  
 
-:::
+*Hypergeometric Distribution*: The Kernel Technique can also be used to computed the moments of a $HGeo(N, K, n)$ random variable:
 
-Alternatively, we could have computed this using the fact that the Binomial is equal to a sum of Bernoulli random variables. By the linearity of expectation, if $X_i \sim \text{Bernoulli}(p)$, then $E(\sum_{i=1}^n X_i) = n\cdot E(X_i) = np$. $Var(X)$ follows similarly.
+\begin{align}
+
+\end{align}
 
 
 ### Negative Binomial: Computing $E(X(X-1))$
@@ -340,7 +347,7 @@ With $E(X)$ known, we can now take advantage of the factorial to compute $E(X(X-
 \begin{align}
 E(X(X-1)) = \sum_{x=0}^\infty x(x-1){x + r - 1 \choose x}(1-p)^x p^r \\
 = \frac{r(r+1)}{1-p)^2}{p^2}\sum_{x=0}^\infty \frac{((x-2) + (r+1))!}{(x-2)!(r+1)!}(1-p)^{x-2}p^{r+2}\\
-= \frac{r(r+1)}{1-p)^2}{p^2}\Big(0 + 0 + \sum_{x=2}^\infty {(x-2) + r + 1\choose x-2}(1-p)^{x-2}p^{r+2}\Big\\
+= \frac{r(r+1)}{1-p)^2}{p^2}\Big(0 + 0 + \sum_{x=2}^\infty {(x-2) + r + 1\choose x-2}(1-p)^{x-2}p^{r+2}\\
 = \frac{r(r + 1)(1-p)^2}{p^2} \text{  pmf sums to 1}\\
 \end{align}
 
@@ -390,18 +397,56 @@ As before, the first term is $\lim_{x\rightarrow \infty}-x^2e^{-\lambda x} \Big|
 
 $$Var(X) = E(X^2) - E(X)^2 = \frac{2}{\lambda^2} - \frac{1}{\lambda^2} = \frac{1}{\lambda^2}$$
 
-### Gamma: Kernel Technique, Integration Version
+### Gamma and Beta: Kernel Technique, Integration Version
 
-Similar to discrete distributions, we can also use the Kernel technique to more easily integrate continuous distributions as well.
+Similar to discrete distributions, we can also use the [Kernel Technique](#kernel-technique) to more easily integrate continuous distributions as well. For example, noting [Gamma function](#gamma-function) property $\Gamma(k) = \frac{\Gamma(k+1)}{k},
 
-::: {.example #kernel-technique2 name="Kernel Technique with Integration"}  
+\begin{align}
+E(X) = \int_{0}^\infty \frac{x}{\Gamma(k)\lambda^k}x^{k-1}e^{-\frac{1}{\lambda}x}dx &&\\
+= \int_{0}^\infty \frac{\lambda}{(\Gamma(k+1) / k)\lambda^{k+1}}x^k e^{-\frac{1}{\lambda}x}dx && \text{recognize Gamma kernel}\\
+= \lambda k \int_{0}^\infty \frac{1}{\Gamma(k+1)\lambda^{k+1}}x^k e^{-\frac{1}{\lambda}x}dx && \text{pull out excess terms}\\
+= \lambda k && \text{ integrate } Gamma(k+1, \lambda) \text{ to 1}
+\end{align}
 
-Since pdfs integrate to 1,
+Similarly, the variance of the Gamma can be calculated like so:
 
-:::
+1. Solve for $E(X^2)$
 
+\begin{align}
+E(X^2) = \int_{0}^\infty \frac{x^2}{\Gamma(k)\lambda^k}x^{k-1}e^{-\frac{1}{\lambda}x}dx
+= \int_{0}^\infty \frac{\lambda^2}{(\Gamma(k+2) / (k(k+1)))\lambda^{k+2}}x^{k+1} e^{-\frac{1}{\lambda}x}dx\\
+= \lambda^2k(k+1) \text{  Pull out excess terms from } Gamma(k+1, \lambda) \text{ kernel, integrate to 1}
+\end{align}
 
+2. Compute variance using $Var(X) = E(X^2) - E(X)^2$ using the components solved previously.
 
+$$Var(X) = \lambda^2k(k+1) - \lambda^2k^2 = \lambda^2k$$
+
+Since the Beta distribution also involves Gamma function, we can compute the moments in a similar fashion. Let's start with the mean:
+
+\begin{align}
+E(X) = \int_{0}^\infty x \cdot\frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)}x^{\alpha-1}(1-x)^{\beta-1}dx && \\
+= \frac{\alpha}{\alpha + \beta}\int_{0}^{1} \frac{\Gamma(\alpha + 1 + \beta)}{\Gamma(\alpha + 1)\Gamma(\beta)}x^\alpha (1-x)^{\beta-1}dx && \text{form kernel of } Beta(\alpha+1, \beta)\\
+= \frac{\alpha}{\alpha + \beta} && \text{ integrate Beta pdf to 1}\\
+\end{align}
+
+Now, we apply this same principle twice to compute the variance:
+
+1. Compute $E(X^2)$ by using $\Gamma(\alpha) = \alpha(\alpha+1)\Gamma(\alpha+2)$ and $\Gamma(\alpha + \beta) = (\alpha + \beta)(\alpha + \beta + 2)$ to form the Beta kernel:
+
+\begin{align}
+E(X^2) = \int_{0}^1 x^2 \cdot \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)}x^{\alpha-1}(1 - x)^{\beta-1}dx && \\
+= \frac{\alpha(\alpha+1)}{(\alpha + \beta)(\alpha + \beta + 1)}\int_{0}^1x^{\alpha-1}(1-x)^{\beta-1}dx && \text{form kernel of } Beta(\alpha + 2, \beta)\\
+= \frac{\alpha(\alpha+1)}{(\alpha + \beta)(\alpha + \beta + 1)} \text{integrate Beta pdf to 1}
+\end{align}
+
+2. Compute the variance using $Var(X) = E(X^2) - E(X)^2$
+
+\begin{align}
+Var(X) = E(X^2)\frac{\alpha^2 + \alpha}{(\alpha + \beta)(\alpha + \beta + 1)} - \frac{\alpha^2}{(\alpha + \beta)^2}\\
+= \frac{\alpha^2(\alpha + \beta) + \alpha(\alpha + \beta) - \alpha^2(\alpha + \beta + 1)}{(\alpha + \beta)^2(\alpha + \beta + 1)}\\
+= \frac{\alpha\beta}{(\alpha + \beta)^2(\alpha + \beta + 1)}
+\end{align}
 
 ### Normal: Polar Integration
 
