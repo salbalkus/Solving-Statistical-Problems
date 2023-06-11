@@ -85,7 +85,7 @@ $$f_X(x|\theta) = h(x)c^*(\boldsymbol{\eta})\exp\Big(\sum_{i=1}^k \eta_i t_i(x)\
 
 
 
-## Known Exponential Families
+## Known Univariate Exponential Families
 
 Many common distributions follow exponential families. As you will come to find, virtually all of them arise in order to model variations on a common idea: the Bernoulli trial. Let's discuss this distribution, and the situations in which it arises.
 
@@ -148,6 +148,7 @@ Note that the parametrization below does not include the final success in the nu
 
 - The Geometric is a special case of the Negative Binomial: $\text{Geo}(p) = \text{NegBin}(1, p)$
 - Just like the Bernoulli, the Geometric has an additive property: $\sum_{i=1}^n X_i \sim \text{NegBin}(n, p)$, proven via the same [addivity technique](#additivity) discussed previously.
+- The Geometric is the only discrete *memoryless* distribution; that is, for $k > i$, $P(X \geq k | X > i) = P(X \geq k - i)$.
 
 ### Negative Binomial
 
@@ -156,7 +157,6 @@ The Negative Binomial distribution generalizes the Geometric distribution to ins
 |               Description               |    Parameters     |     Support      |       pmf        |
 |:----------------:|:----------------:|:----------------:|:----------------:|
 | The number of Bernoulli trials attempted before a success occurs  | $0 < p \leq 1$, $r \in \mathbb{N}$ | $x \in \mathbb{N}$ | ${x+r-1\choose x}p^r(1-p)^{x}$ |
-
 
 
 - The Negative Binomial is additive: If $X_i \sim \text{NegBin(r, p)}$, then $\sum_{i=1}^n X_i \sim \text{NegBin(nr, p)}$
@@ -176,18 +176,27 @@ The Poisson distribution describes one possible behavior of a **count** random v
 
 ### Normal
 
-Often denoted $N(\mu, \sigma^2)$, the Normal distribution
+Often denoted $N(\mu, \sigma^2)$, the Normal distribution is especially common in asymptotics - by the [Central Limit Theorem](clt), the sample mean converges in distribution to a normal. Many other variables also converge to a normal.
+
+For $X \sim N(\mu, \sigma^2)$, the mean is $\mu$ and the variance is $\sigma^2$. This means that the Normal is a **location-scale family**.
 
 |               Description               |    Parameters     |     Support      |       pdf        |
 |:----------------:|:----------------:|:----------------:|:----------------:|
 | Describes the asymptotic behavior of sample means and many distributions | $\mu \in \mathbb{R}$, $\sigma^2 \in (0, \infty)$ | $x \in \mathbb{R}$ | $\frac{1}{\sqrt{2\pi\sigma^2}}\exp\Big(-\frac{1}{2}\frac{(x-\mu)^2}{\sigma^2}\Big)$ |
+
+- The following distributions converge to a Normal:
+  - $\text{Binomial}(n, p) \approx N(np, np(1-p))$ for large $n$ and $p$ bounded away from 0 or 1
+  - $\text{Pois(\lambda)} \approx N(\lambda, \lambda)$ for large $\lambda$.
+  - $\chi^2(\nu)\approx N(\nu, 2\nu)$ for large $\nu$.
+  - $t(\nu) \approx N(0, 1)$ for large $\nu$.
+- The Normal is additive. If $X_1 \sim N(\mu_1, \sigma_1^2)$ and $X_2 \sim N(\mu_2, \sigma_2^2)$, then $X + Y \sim N(\mu_1 + \mu_2, \sigma_1^2 + \sigma_2^2)$.
 
 
 ### Exponential
 
 The Poisson process that models the number of events occuring in an interval also gives rise to another distribution: the Exponential. This distribution models the size of the interval (time, distance, etc.) between events.
 
-The Exponential is described mathematically as $\text{Exp}(\lambda)$. It can be parametrized in two ways: with $\lambda$ as a rate parameter, describing how often events occur; or with $\lambda$ as a scale parameter (yes, the same scale parameter discussed in [Location Scale Families](#location-scale)) that is the inverse of the rate.
+The Exponential is described mathematically as $\text{Exp}(\lambda)$. It can be parametrized in two ways: with $\lambda$ as a rate parameter, describing how often events occur; or with $\lambda$ as a scale parameter (yes, the same scale parameter discussed in [Location Scale Families](#location-scale)) that is the inverse of the rate. Hence, the Exponential is a **scale family**.
 
 Note that the parametrization below describes the distribution in terms of the scale parameter. The scale parameter version simply replaces $\lambda$ with $\frac{1}{\lambda}$.
 
@@ -199,12 +208,13 @@ Note that the parametrization below describes the distribution in terms of the s
 
 - The Exponential is a special case of the Gamma distribution: $\text{Exp}(\lambda) = \text{Gamma}(1, \lambda)$
 - By extension, the exponential has an additive property: If $X_i\sim Exp(\lambda) $, then $\sum_{i=1}^n X_i \sim \text{Gamma}(n, \lambda)$.
+- The Exponential is the only continuous *memoryless* distribution; that is, for $k > i$, $P(X \geq k | X > i) = P(X \geq k - i)$.
 
 ### Gamma
 
 Similar to how the Negative Binomial generalizes the Geometric to multiple successes, the Gamma generalizes the Exponential to multiple events. The Gamma is useful for modeling random variables that are known to be greater than 0. 
 
-It is represented mathematically as $\text{Gamma}(k, \lambda)$, where $k$ is a **shape** parameter and $\lambda$ is a [scale](#location-scale) parameter. It is called "Gamma" because it involves the [gamma function](#gamma-function).
+It is represented mathematically as $\text{Gamma}(k, \lambda)$, where $k$ is a **shape** parameter and $\lambda$ is a [scale](#location-scale) parameter. This means the Gamam is a **scale family**. It is called "Gamma" because it involves the [gamma function](#gamma-function).
 
 
 |               Description               |    Parameters     |     Support      |       pdf        |
@@ -216,7 +226,7 @@ It is represented mathematically as $\text{Gamma}(k, \lambda)$, where $k$ is a *
 
 ### Beta
 
-The Beta distribution models proportions. It is mathematically denoted $\text{Beta}(\alpha, \beta)$ where $\alpha$ and $\beta$ are two shape parameters. It is known as "Beta" because its pdf contains the beta function: $\Beta(\alpha, \beta) = \frac{\Gamma(\alpha)\Gamma(\beta)}{\Gamma(\alpha + \beta)}$
+The Beta distribution models proportions. It is mathematically denoted $\text{Beta}(\alpha, \beta)$ where $\alpha$ and $\beta$ are two shape parameters. It is known as "Beta" because its pdf contains the beta function: $B(\alpha, \beta) = \frac{\Gamma(\alpha)\Gamma(\beta)}{\Gamma(\alpha + \beta)}$
 
 
 |               Description               |    Parameters     |     Support      |       pdf        |
@@ -227,7 +237,9 @@ The Beta distribution models proportions. It is mathematically denoted $\text{Be
 
 ### Chi-squared
 
-The Chi-squared distribution describes the distribution of the sum of squared stadnard Normal ($N(0,1)$) random variables.
+The Chi-squared distribution describes the distribution of the sum of squared standard Normal ($N(0,1)$) random variables. As a result, it is useful in asymptotics, especially [asymptotic hypothesis testing](#hypothesis-tests-asymptotics), since if an estimator is asymptotically normal, its square is asymptotically $\chi^2$. 
+
+It is represented mathematically as $\chi^2(\nu)$ or $\chi^2_\nu$ where $\nu$ is the "degrees of freedom" - the number of squared normal random variables in the sum. 
 
 
 |               Description               |    Parameters     |     Support      |       pdf        |
@@ -236,6 +248,7 @@ The Chi-squared distribution describes the distribution of the sum of squared st
 
 
 - If $X_i \sim N(0,1)$, then $\sum_{i=1}^nX_i^2\sim \chi^2(n)$
+- The Chi-squared distribution is a special case of the Gamma. That is, if $X \sim \chi^2(\nu)$, then $X \sim \text{Gamma}(\frac{\nu}{2}, \frac{1}{2})$. This can be observed directly from the pdf. 
 
 
 ## Exponential families with certain parameters fixed
@@ -244,22 +257,27 @@ Some families are exponential, but only when one or more parameters are fixed.
 
 ### Weibull
 
-#### Definition
+The Weibull is a generalization of the exponential distribution. The extra parameter $k$ describes how the failure rate changes over time. It is an exponential family when $k$ is fixed.  
 
+Like the exponential, $\lambda$ is a scale parameter, meaning that the Weibull is a **scale family**. 
 
 |               Description               |    Parameters     |     Support      |       pdf        |
 |:----------------:|:----------------:|:----------------:|:----------------:|
-|  | $\lambda \in (0, \infty)$, $k \in (0, \infty)$ | $x \in [0, \infty)$ | $\frac{k}{\lambda}\Big(\frac{x}{\lambda}\Big)^{k-1}\exp(-(x/\lambda)^k)$ |
+| Models time-to-event variables | $\lambda \in (0, \infty)$, $k \in (0, \infty)$ | $x \in [0, \infty)$ | $\frac{k}{\lambda}\Big(\frac{x}{\lambda}\Big)^{k-1}\exp(-(x/\lambda)^k)$ |
+
+- When $k = 1$, the Weibull is equal to an $\text{Exponential}(\frac{1}{\lambda})$, which can be observed directly from its pdf. 
 
 
 ### Pareto
 
-$\alpha \in (0, \infty)$ is a shape parameter, while $x_m$ is a scale parameter.
+The Pareto distribution, written $\text{Pareto}(x_m, \alpha)$, models variables involving power-law relationships. $\alpha \in (0, \infty)$ is a shape parameter, while $x_m$ is a scale parameter. This means that the Pareto is a **scale family**. It is an exponential family when $x_m$ is fixed.  
 
 
 |               Description               |    Parameters     |     Support      |       pdf        |
 |:----------------:|:----------------:|:----------------:|:----------------:|
-|  | $\alpha \in (0, \infty)$, $k \in (0, \infty)$ | $x \in [0, \infty)$ | $\frac{\alpha x_m^\alpha}{x^{\alpha+1}}$ |
+| Power-law models | $\alpha \in (0, \infty)$, $x_m \in (0, \infty)$ | $x \in [0, \infty)$ | $\frac{\alpha x_m^\alpha}{x^{\alpha+1}}$ |
+
+- The Pareto is related to the Exponential. If $X\sim \text{Pareto}(x_m, \alpha)$, then $Y = \log(\frac{X}{x_m}) \sim \text{Exp}(\alpha)$
 
 
 ## Non-exponential families
@@ -268,40 +286,73 @@ The following families are not exponential, but still commonly arise.
 
 ### Uniform
 
+The Uniform distribution is parametrized by its minimum $a$ and maximum $b$. Denoted $U(a,b)$, it describes a scenario where every possible value of $x$ has the same probability.
 
 |               Description               |    Parameters     |     Support      |       pdf        |
 |:----------------:|:----------------:|:----------------:|:----------------:|
-|  | $-\infty < a < b < \infty$ | $x \in [a, b]$ | $\frac{1}{b-a}$ |
+| Every $x$ has same probability | $-\infty < a < b < \infty$ | $x \in [a, b]$ | $\frac{1}{b-a}$ |
+
+- If $X \sim \text{Beta}(1,1)$, then $X \sim U(0,1)$
+- If $X \sim U(0,1)$, then $-\lambda \log(X) \sim \text{Exp}(\lambda)$.
+- If $X_i \overset{iid}{\sim} U(0,1)$, then $X_{(k)} - X_{(j)} \sim \text{Beta}(k - j, n - (k - j) + 1)$
+- By the Probability Integral Transform, inverse cdfs always follow a standard uniform distribution. That is, if $X = F_X^{-1}(Y)$, then $Y \sim U(0,1)$. This can be used to [generate any random variable with a known cdf](#generating-random-variables).
 
 
 ### Cauchy
 
+The Cauchy arises in situations involving ratios of standard normal variables, as well as rotations. It is $\text{Cauchy}(x_0, \gamma)$, where $x_0$ is a location parameter and $\gamma$ is a scale parameter, making it a **location-scale family**. 
 
 |               Description               |    Parameters     |     Support      |       pdf        |
 |:----------------:|:----------------:|:----------------:|:----------------:|
-|  | $x_0 \in \mathbb{R}$, $\gamma \in (0, \infty)$ | $x \in \mathbb{R}$ | $\frac{1}{\pi \gamma\Big(1 + \Big(\frac{x - x_0}{\gamma}\Big)^2\Big)}$ |
+| Rotations and ratios of normals | $x_0 \in \mathbb{R}$, $\gamma \in (0, \infty)$ | $x \in \mathbb{R}$ | $\frac{1}{\pi \gamma\Big(1 + \Big(\frac{x - x_0}{\gamma}\Big)^2\Big)}$ |
+
+- If $U, V \sim N(0,1)$ independently, then $U/V \sim Cauchy(0,1)$
+- The Cauchy is often used as a pathological example in statistical problems, since it famously has no mean or variance ($E(X) = Var(X) = \infty$)
+- If $X\sim t(1)$, then $X\sim \text{Cauchy}(0,1)$
 
 
 ### t-distribution
 
+The t-distribution describes the distribution of the t-statistic for $X_1, ... X_n \overset{iid}{\sim}N(\mu, \sigma^2)$
+
+$$t = \frac{\bar{X} - \mu}{\sqrt{S^2/n}}$$
+
+As a result, it is commonly used in [hypothesis testing](#hypothesis-tests-finite-samples). Denoted $t(\nu)$, the parameter $\nu$ represents the degrees of freedom - the number of $X_i$ in the sample that are being summed in the computation of $\bar{X}$ and $S^2$.
 
 |               Description               |    Parameters     |     Support      |       pdf        |
 |:----------------:|:----------------:|:----------------:|:----------------:|
-|  | $x_0 \in \mathbb{R}$, $\gamma \in (0, \infty)$ | $x \in \mathbb{R}$ | $\frac{1}{\pi \gamma\Big(1 + \Big(\frac{x - x_0}{\gamma}\Big)^2\Big)}$ |
+| Distribution of the t-statistic | $\nu \in \mathbb{N}$ | $x \in \mathbb{R}$ | $\frac{\Gamma((\nu + 1) / 2)}{\sqrt{\nu\pi}\Gamma(\nu/2)}\Big(1 + \frac{x^2}{\nu}\Big)^{-(\nu+1)/2}$ |
+
+- As $\nu \rightarrow \infty$, the t-distribution converges to a $N(0,1)$.
+- If $X \sim t(1)$ then $X \sim \text{Cauchy}(0,1)$.
 
 ### F-distribution
 
+Also useful for [hypothesis testing]](#hypothesis-tests-finite-samples), the F-distribution, denoted $F(n, m)$, describes the distribution of the F-statistic:
+
+$$X = \frac{S_1 / n}{S_2 / m}$$
+where $S_1$ and $S_2$ are the sums of independent standard normal random variables with degrees of freedom $n$ and $m$, respectively - that is, $S_1 \sim \chi^2(n)$ and $S_2 \sim \chi^2(m)$.
+
 
 |               Description               |    Parameters     |     Support      |       pdf        |
 |:----------------:|:----------------:|:----------------:|:----------------:|
-|  | $n \in \mathbb{N}$, $m \in \mathbb{N}$ | $x \in (0, \infty)$ | $\sqrt{\frac{(nx)^nm^m}{(nx + m)^{n + m}}}\frac{\Gamma(n + m)}{x\Gamma(n)\Gamma(m)}$ |
+| Distribution of the $F$-statistic | $n \in \mathbb{N}$, $m \in \mathbb{N}$ | $x \in (0, \infty)$ | $\sqrt{\frac{(nx)^nm^m}{(nx + m)^{n + m}}}\frac{\Gamma(n + m)}{x\Gamma(n)\Gamma(m)}$ |
+
+- If $X \ F(n, m)$, then $\frac{1}{X} \sim F(m, n)$
+- If $X \sim t(n)$, then $X^2 \sim F(1, n)$
+- If $X \sim \chi^2(n)$ and $Y \sim \chi^2(m)$, then $\frac{X / n}{Y / m} \sim F(n, m)$
+- If $X_i \overset{iid}{\sim} \text{Gamma}(\alpha_i, \beta_i)$, then $\frac{\alpha_2\beta1X_1}{\alpha_1\beta_2X_2} \sim F(2\alpha_1, 2\alpha_2)$
+- If $X \sim \text{Beta}(n/2, m/2)$, then $\frac{mX}{n(1-X)}\sim F(n, m)$
 
 
 ### Hypergeometric
+
+Imagine drawing $n$ samples *without* replacement from a finite population of size $N$. Suppose $K$ of the units in the population are considered "successes" if drawn. The Hypergeometric distribution, denoted $\text{HGeo}(N, K, n)$, describes the probability that you will draw $x$ "successes" under these circumstances.
 
 
 |               Description               |    Parameters     |     Support      |       pmf        |
 |:----------------:|:----------------:|:----------------:|:----------------:|
 |  | $N \in \mathbb{N}_0$, $K \in \{0, 1, ..., N\}$, $n \in \{0,1,...,N\}$ | $x \in \{\max(0, n+K-N),..., \min(n,K)\}$ | $\frac{{K\choose x}{N - K \choose n - x -1}}{N \choose n}$ |
 
-
+- Fisher's Exact Test is based on the Hypergeometric distribution.
+- If $X \sim \text{HGeo}(N, K, n)$, and $N$ and $K$ are sufficiently large compared to $n$, then $X \approx \text{Binom}(n, p)$

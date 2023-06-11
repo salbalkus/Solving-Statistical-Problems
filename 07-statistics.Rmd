@@ -46,7 +46,7 @@ $$Var\Big(\sum_{i=1}^k \frac{\partial w_i(\theta)}{\partial \theta_j}t_i(X)\Big)
 
 If $X$ is a [natural exponential family](#natural-exponential-family), then these identities simplify even further.
 
-::: {.theorem name = "I Don't Know What To Call This"}
+::: {.theorem name = "I Don't Know What To Call This 2"}
 If $X$ is a natural exponential family, then$
 
 $$E(t_j(X)) = -\frac{\partial}{\partial\eta_j}\log(c^*(\eta))$$
