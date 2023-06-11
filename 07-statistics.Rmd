@@ -2,6 +2,8 @@
 
 Proving sufficient, complete, and ancillary statistics
 
+Pitman-Koopman-Darmois Theorem
+
 
 ## Table of Sufficient Statistics
 
@@ -26,5 +28,36 @@ Translated from https://en.wikipedia.org/wiki/Exponential_family
 
 Recall a convenient property of [exponential families](#exponential-family): that their maximum likelihood estimate is a function of their sufficient statistic. Because of this, in order to prove [Finite Sample Properties](#point-estimators-finite-samples) of an estimator or construct [Hypothesis Tests](#hypothesis-tests-finite-samples), it is often useful to understand their distributions. This is why the distributions of each of the sufficient statistics are included in the fourth column of the table above. These distributions are mostly derived from additive, location-scale, and other properties in [Chapter 4 - Known Distributions](#known-distributions)
 
+## Moments of the Sufficient Statistic
+
+https://en.wikipedia.org/wiki/Exponential_family
+
+As stated by @Casella1990, if $X$ is an exponential family, the moments of its exponential family can be easily computed using certain properties.
+
+::: {.theorem name = "I Don't Know What To Call This"}
+If $X$ is an [exponential family](#exponential-family), then
+
+$$E\Big(\sum_{i=1}^k \frac{\partial w_i(\theta)}{\partial \theta_j}t_i(X)\Big) = -\frac{\partial}{\partial\theta_j} \log c(\theta)$$
+and
+
+$$Var\Big(\sum_{i=1}^k \frac{\partial w_i(\theta)}{\partial \theta_j}t_i(X)\Big) = -\frac{\partial}{\partial\theta_j} \log c(\theta) - E\Big(\sum_{i=1}^k \frac{\partial^2w_i(\theta)}{\partial \theta_j^2}t_i(X)\Big)$$
+
+:::
+
+If $X$ is a [natural exponential family](#natural-exponential-family), then these identities simplify even further.
+
+::: {.theorem name = "I Don't Know What To Call This"}
+If $X$ is a natural exponential family, then$
+
+$$E(t_j(X)) = -\frac{\partial}{\partial\eta_j}\log(c^*(\eta))$$
+and
+
+$$Var(t_j(X)) = -\frac{\partial^2}{\partial\eta_j^2}\log(c^*(\eta))$$
+
+:::
+
+Using these theorems, we can calculate the moments of the sufficient statistics of exponential families directly. This is because if $T(X)$ is a sufficient statistic, then $T(X) = \Big(\sum_{i=1}^nt_1(X), ..., \sum_{i=1}^nt_k(X)\Big)$. Suppose, for simplicity, that $T(X)$ is one-dimensional and $X_i$ are iid. Then, if $X_i$ is a natural exponential family,
+
+$$E(T(X)) = E\Big(\sum_{i=1}^nt(X_i)\Big) = nE(t(X_i)) = n\cdot-\frac{\partial}{\partial \eta}\log(c^*(\eta))$$
 
 

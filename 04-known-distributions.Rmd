@@ -74,7 +74,7 @@ Exponential families have a number of incredibly useful properties:
 - The regularity conditions required for [consistency and asymptotic normality of the MLE](#point-estimators-asymptotics) are guaranteed to hold.
 - The family must have a Monotone Likelihood Ratio, meaning that the [Karlin-Rubin Theorem may be employed to construct an UMP test](#hypothesis-tests-finite-samples).
 
-### Natural Exponential Families
+### Natural Exponential Families {#natural-exponential-family}
 
 ::: {.definition name="Natural Exponential Family"}
 $X \sim f_X(x|\theta)$ is a natural exponential family if its pdf can be written in the form

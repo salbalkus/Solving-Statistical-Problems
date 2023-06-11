@@ -44,7 +44,6 @@ Integration by parts is typically used for products of functions. By setting $u$
 
 Of course, take caution: If both functions can be repeatedly differentiated infinitely, this may not work! However, it may be possible to use **inductive integration by parts** to prove that if we apply integration by parts infinitely, the result will yield a series which converges to some value *(where?)*
 
-
 ## Leibniz's Rule {#leibniz-rule}
 
 ::: {.theorem name="Leibniz's Rule: Simple Version"}

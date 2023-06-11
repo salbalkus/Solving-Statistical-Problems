@@ -1,12 +1,25 @@
+---
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
 # Moments {#moments}
 
-Finding the moments of a random variable is a chief problem in statistics. This is because moments characterize important properties about a distribution - for example, the **mean** measures the central tendency of a random variable, while the **variance** measures its dispersion. This chapter will define expected value and moments, summarize their useful properties, and discuss strategies for finding moments, especially for common distributions.
+Finding the moments of a random variable is a chief problem in
+statistics. This is because moments characterize important properties
+about a distribution - for example, the **mean** measures the central
+tendency of a random variable, while the **variance** measures its
+dispersion. This chapter will define expected value and moments,
+summarize their useful properties, and discuss strategies for finding
+moments, especially for common distributions.
 
 ## Basic Definitions
 
 ::: {.definition name="Expected Value"}
-
-The **expected value** $E(g(X))$ is the average value of a random variable $g(X)$ across its support $\mathcal{X}$, weighted by their probability.  
+The **expected value** $E(g(X))$ is the average value of a random
+variable $g(X)$ across its support $\mathcal{X}$, weighted by their
+probability.
 
 If $X$ is discrete, then this is defined
 
@@ -15,35 +28,41 @@ $$E(g(X)) = \sum_{x \in \mathcal{X}}g(x)P(X = x)$$
 If $X$ is continuous, then the expected value is
 
 $$E(g(x)) = \int_{\mathcal{X}}g(x)f_X(x)dx$$
-
 :::
 
 ::: {.definition name="Moments"}
-The $n$th **moment** of a random variable $X$ is defined as $E(X^n)$. Similarly, the $n$th **central moment** is defined as $E((X - E(X))^n)$.
+The $n$th **moment** of a random variable $X$ is defined as $E(X^n)$.
+Similarly, the $n$th **central moment** is defined as $E((X - E(X))^n)$.
 
-The **first moment** $E(X)$ is also known as the **mean**.  
+The **first moment** $E(X)$ is also known as the **mean**.
 
-The **second central moment** is the variance, denoted $Var(X) = E((X - E(X))^2)$  
-
+The **second central moment** is the variance, denoted
+$Var(X) = E((X - E(X))^2)$
 :::
-
 
 ## $E(X)$ Properties {#expected-value}
 
-The **linearity of expectation** is defined as $E(aX + b) = aE(X) + b$. If multiple random variables $X$ and $Y$ are involved, then
+The **linearity of expectation** is defined as $E(aX + b) = aE(X) + b$.
+If multiple random variables $X$ and $Y$ are involved, then
 
 $$E(ag_1(X) + bg_2(Y) + c) = aE(g_1(X)) + bE(g_2(Y)) + c$$
 
-This follows from the linearity of the integral operator. Since sums of random variables are so common, this property is incredibly useful, especially for proving the unbiasedness of estimators (see [Chapter 8](#point-estimators-finite-samples)). For example, we can use the linearity of expectation to prove that the sample mean $\bar{X} = \frac{1}{n}\sum_{i=1}^nX_i$ is unbiased for a set of iid $X_i$ by noting, by linearity of expectation,
+This follows from the linearity of the integral operator. Since sums of
+random variables are so common, this property is incredibly useful,
+especially for proving the unbiasedness of estimators (see [Chapter
+8](#point-estimators-finite-samples)). For example, we can use the
+linearity of expectation to prove that the sample mean
+$\bar{X} = \frac{1}{n}\sum_{i=1}^nX_i$ is unbiased for a set of iid
+$X_i$ by noting, by linearity of expectation,
 
 $$E(\bar{X}) = E\Big(\frac{1}{n}\sum_{i=1}^nX_i\Big) = \frac{1}{n}\sum_{i=1}^nE(X_i) = \frac{n}{n}E(X_i) = E(X_i)$$
-
 
 When $X$ and $Y$ are independent,
 
 $$E(XY) = E(X)E(Y)$$
 
-This property can also be useful for computing the expectation of iid random variables in statistical inference problems.
+This property can also be useful for computing the expectation of iid
+random variables in statistical inference problems.
 
 ## $Var(X)$ Properties
 
@@ -51,9 +70,13 @@ The most important variance property is its alternative definition:
 
 $$Var(X) = E(X^2) - E(X)^2$$
 
-Often, we are interested in both the mean and the variance. By simplifying $Var(X)$ into a function of the first and second moments, we can compute $E(X^2)$ (which is often much easier) and use what we know about $E(X)$ to more easily compute $Var(X)$. 
+Often, we are interested in both the mean and the variance. By
+simplifying $Var(X)$ into a function of the first and second moments, we
+can compute $E(X^2)$ (which is often much easier) and use what we know
+about $E(X)$ to more easily compute $Var(X)$.
 
-While variance is not exactly linear, the variance of a linear transformation of a random variable is
+While variance is not exactly linear, the variance of a linear
+transformation of a random variable is
 
 $$Var(aX + b) = a^2Var(X)$$
 
@@ -61,17 +84,18 @@ When multiple random variables are involved in a linear expression, then
 
 $$Var(aX + bY) = a^2Var(X) + b^2Var(Y) + 2ab\cdot Cov(X, Y)$$
 
-where $Cov(X,Y)$ is described in the next subsection. If $X$ and $Y$ are [independent](#independent) then $Cov(X,Y) = 0$ and $Var(aX + bY) = a^2Var(X) + b^2Var(X)$
-
-
+where $Cov(X,Y)$ is described in the next subsection. If $X$ and $Y$ are
+[independent](#independent) then $Cov(X,Y) = 0$ and
+$Var(aX + bY) = a^2Var(X) + b^2Var(X)$
 
 ## Covariance and Correlation
 
-From the expected value function and moments, we can also define the covariance and correlation
+From the expected value function and moments, we can also define the
+covariance and correlation
 
 ::: {.definition name="Covariance"}
-
-**Covariance** measures the joint dispersion of two random variables. Mathematically,
+**Covariance** measures the joint dispersion of two random variables.
+Mathematically,
 
 $$Cov(X,Y) = E((X - E(X))(Y - E(Y)))$$
 
@@ -79,99 +103,105 @@ Equivalently,
 
 $$Cov(X,Y) = E(XY) - E(X)E(Y)$$
 
-which is usually the more convenient definition. 
-
+which is usually the more convenient definition.
 :::
 
-Note that if $X$ and $Y$ are [independent](#independence), then $Cov(X,Y) = 0$, which simplifies calculations. *However*, make no mistake, this implication is not bidirectional: $Cov(X,Y) = 0$ does NOT imply X, Y$ independent!!!
+Note that if $X$ and $Y$ are [independent](#independence), then
+$Cov(X,Y) = 0$, which simplifies calculations. *However*, make no
+mistake, this implication is not bidirectional: $Cov(X,Y) = 0$ does NOT
+imply X, Y\$ independent!!!
 
-Occasionally, we might want to work with a measure of joint dispersion that is normalized. This is called the **correlation**.
+Occasionally, we might want to work with a measure of joint dispersion
+that is normalized. This is called the **correlation**.
 
 ::: {.definition name="Covariance"}
-
-**Correlation** is a measure of the joint dispersion of two random variables normalized to [0,1], with $Corr(X,Y) = 0$ indicating that the variables are independent and $Corr(X,Y) = 1$ indicating perfect collinearity.  Mathematically,
+**Correlation** is a measure of the joint dispersion of two random
+variables normalized to [0,1], with $Corr(X,Y) = 0$ indicating that the
+variables are independent and $Corr(X,Y) = 1$ indicating perfect
+collinearity. Mathematically,
 
 $$Cov(X,Y) = E\Big(\frac{X - E(X)}{\sqrt{Var(X)}}\cdot \frac{Y - E(Y)}{\sqrt{Var(Y)}}\Big) = \frac{Cov(X,Y)}{\sqrt{Var(X)Var(Y)}}$$
-
 :::
 
 ## Conditional Expectation
 
-When an expectation is computed using a conditional probability, it is known as a **conditonal expectation**. For discrete random variables (or when $Y$ is simply an event), it is denoted
+When an expectation is computed using a conditional probability, it is
+known as a **conditonal expectation**. For discrete random variables (or
+when $Y$ is simply an event), it is denoted
 
-$$E(g(X)|Y) = \sum_{\mathcal{X}}g(x)P(X = x | Y)$$ 
+$$E(g(X)|Y) = \sum_{\mathcal{X}}g(x)P(X = x | Y)$$
 
 and for continuous,
 
 $$E(g(X) | Y) = \int_{\mathcal{X}}g(x)f_{X|Y}(x|y)$$
 
-Two fundamental properties regarding conditional expectations exist that simply the computation of its unconditional counterpart. 
+Two fundamental properties regarding conditional expectations exist that
+simply the computation of its unconditional counterpart.
 
 ::: {.definition name="Law of Iterated Expectation (Adam's Law)"}
-
 $E(X) = E(E(X|Y))$
-
 :::
-
 
 ::: {.definition name="Law of Total Variance (EVVE's Law)"}
-
 $Var(X) = E(Var(X|Y)) + Var(E(X|Y))$
-
 :::
 
-These two properties can be used to compute $E(X)$ when only $E(X|Y)$ is known. For example, this occurs in [Chapter 8](#point-estimators-finite-samples) when finding UMVUEs.
-
+These two properties can be used to compute $E(X)$ when only $E(X|Y)$ is
+known. For example, this occurs in [Chapter
+8](#point-estimators-finite-samples) when finding UMVUEs.
 
 ## Moment Generating Functions
 
 ::: {.definition name="MGF"}
-The **moment generating function** (MGF) is defined as 
+The **moment generating function** (MGF) is defined as
 
-$$\mathcal{M}_X(t) = E(e^{tx})$$
-This function has three important properties:
+$$\mathcal{M}_X(t) = E(e^{tx})$$ This function has three important
+properties:
 
-1. The MGF fully characterizes a distribution. That is, if $\mathcal{M}_X(t) = \mathcal{M}_Y(t)$, then $X$ and $Y$ are identically distributed.
-2. $E(X^n) = \frac{d^n}{dt^n}\mathcal{M}_X(t)\Big|_{t=0}$. This means the MGF can also be used to compute any given moment simply by taking a derivative!
-3. **Convolution**: If $X$ and $Y$ and independent, then the mgf of $X+Y$ is $\mathcal{M}_{X+Y}(t) = \mathcal{M}_{X}(t)\mathcal{M}_{Y}(t)$. This is useful for finding the distribution of sums of random variables.
+1.  The MGF fully characterizes a distribution. That is, if
+    $\mathcal{M}_X(t) = \mathcal{M}_Y(t)$, then $X$ and $Y$ are
+    identically distributed.
+2.  $E(X^n) = \frac{d^n}{dt^n}\mathcal{M}_X(t)\Big|_{t=0}$. This means
+    the MGF can also be used to compute any given moment simply by
+    taking a derivative!
+3.  **Convolution**: If $X$ and $Y$ and independent, then the mgf of
+    $X+Y$ is
+    $\mathcal{M}_{X+Y}(t) = \mathcal{M}_{X}(t)\mathcal{M}_{Y}(t)$. This
+    is useful for finding the distribution of sums of random variables.
 
-Do note, however, that the MGF may not exist for some distributions. In this case it may be preferable to work with the [characteristic function](https://en.wikipedia.org/wiki/Characteristic_function_(probability_theory)).  
-
+Do note, however, that the MGF may not exist for some distributions. In
+this case it may be preferable to work with the [characteristic
+function](https://en.wikipedia.org/wiki/Characteristic_function_(probability_theory)).
 :::
 
 ## Moment Inequalities {#moment-bounds}
 
-Several inequalities exist that can bound moments. A general bound is that $a < g(X) < b \implies a < E(g(X)) < b$. This, coupled with the [triangle inequality](#triangle-inequality) can be used to prove the following inequalities.  
+Several inequalities exist that can bound moments. A general bound is
+that $a < g(X) < b \implies a < E(g(X)) < b$. This, coupled with the
+[triangle inequality](#triangle-inequality) can be used to prove the
+following inequalities.
 
-
-The next two inequalities bound probabilities based on moments. They are named the student-teacher pair that developed them.
+The next two inequalities bound probabilities based on moments. They are
+named the student-teacher pair that developed them.
 
 ::: {.definition name="Markov's Inequality"}
-
 $$P(X \geq t) \leq \frac{E(X)}{t}$$
 :::
 
 ::: {.proof"}
-
 To prove Markov's inequality,
 :::
 
-
-
 ::: {.definition name="Chebychev's Inequality"}
-
 This inequality can be stated in several ways:
-
-
-
 :::
 
-Chebychev's inequality is instrumental in proving the Weak Law of Large Numbers
+Chebychev's inequality is instrumental in proving the Weak Law of Large
+Numbers
 
 Next, we present an equality regarding functions of moments.
 
 ::: {.definition name="Jensen's Inequality"}
-
 For a convex function $f$,
 
 $$E(f(X)) \geq f(E(X))$$
@@ -179,19 +209,16 @@ $$E(f(X)) \geq f(E(X))$$
 If $f$ is instead concave,
 
 $$E(f(x)) \leq f(E(X))$$
-
 :::
 
-Jensen's inequality is useful for showing that an [estimator is biased](#biasedness)
+Jensen's inequality is useful for showing that an [estimator is
+biased](#biasedness)
 
-The next three inequalities are less commonly used, but are still useful is certain situations *(where?)*
-
-
+The next three inequalities are less commonly used, but are still useful
+is certain situations *(where?)*
 
 ::: {.definition name="Cauchy-Schwarz Inequality"}
-
 $$E(XY)^2 \leq E(X)^2E(Y)^2$$
-
 :::
 
 This equality can be generalized as follows
@@ -200,77 +227,89 @@ This equality can be generalized as follows
 For $p, q \geq 1$ such that $\frac{1}{p} + \frac{1}{q} = 1$,
 
 $$E(|XY|) \leq E(|X|^p)^\frac{1}{p}E(|Y|^q)^\frac{1}{q}$$
-
 :::
 
-While the above inequalities deal with products of moments, the following handles sums:
+While the above inequalities deal with products of moments, the
+following handles sums:
 
 ::: {.definition name="Minkowski's Inequality"}
-
 $$E(|X + Y|^p)^\frac{1}{p} \leq E(|X|^p)^\frac{1}{p} + E(|Y|^p)^\frac{1}{p}$$
-
 :::
-
-
-
 
 ## Techniques for Deriving Moments
 
-Below, we've listed the important moments of each distribution that can be reasonably derived by hand. In this section, we discuss a myriad of techniques to derive these moments, each of which can be applied in general for their respective distributions.
+Below, we've listed the important moments of each distribution that can
+be reasonably derived by hand. In this section, we discuss a myriad of
+techniques to derive these moments, each of which can be applied in
+general for their respective distributions.
 
-| Distribution | $E(Y)$ | $Var(Y)$ |      mgf       |
-|:------:|:------:|:--------:|:--------------:|
-| $\text{Bernoulli}(p)$ |  $p$   | $p(1-p)$ | $(1-p) + pe^t$ |
-| $\text{Binom}(n, p)$ |  $np$   | $np(1-p)$ | $((1-p) + pe^t)^n$ |
-| $\text{Geo}(p)$ |  $\frac{1-p}{p}$   | $\frac{1-p}{p^2}$ | $\frac{p}{1 - (1 - p)e^t}$ for $t < -\log(1-p)$ |
-| $\text{NegBinom(r, p)}$ |  $\frac{r(1-p)}{p}$   | $\frac{r(1-p)}{p^2}$ | $\Big(\frac{p}{1 - (1 - p)e^t}\Big)^r$ for $t < -\log(p)$|
-| $\text{Pois}(\lambda)$ |  $\lambda$   | $\lambda$ | $\exp(\lambda(e^t - 1))$ |
-| $\text{Normal}(\mu, \sigma^2)$ |  $\mu$   | $\sigma^2$ | $\exp(\mu t + \sigma^2 t^2 / 2)$ |
-| $\text{Exp}(\lambda)$ |  $\lambda$   | $\lambda^2$ | $\frac{1}{1-\lambda t}$ for $t > \lambda$ |
-| $\text{Gamma}(k, \lambda)$ |  $k\lambda$   | $k\lambda^2$ | $(1 - \lambda t)^{-k}$ for $t < \frac{1}{\lambda}$ |
-| $\text{Beta}(\alpha, \beta)$ |  $\frac{\alpha}{\alpha + \beta}$   | $\frac{\alpha\beta}{(\alpha + \beta)^2(\alpha + \beta + 1)}$ | $1 + \sum_{k=1}^\infty\Big(\prod_{r=0}^{k-1}\frac{\alpha + r}{\alpha + \beta + r}\Big)\frac{t^k}{k!}$ | 
-| $\chi^2(\nu)$ |  $\nu$   | $2\nu$ | $(1 - 2t)^{-\nu/2}$ for $t < \frac{1}{2}$ | 
-| $\text{Uniform}(a, b)$ | $\frac{1}{2}(a+b)$ | $\frac{1}{12}(b-a)^2$ | $\begin{cases}\frac{e^{tb}-e^{ta}}{t(b-a)} & t \neq 0 \\ 1 & t = 0 \\\end{cases}$ | 
-| $F(n, m)$ | $\frac{m}{m - 2}$ for $m > 2$ | $\frac{2m^2(n + m - 2)}{n(m - 2)^2(m - 4)}$ for $m > 4$ | Does Not Exist |
-| $\text{HyperGeo}(N, K, n)$ | $\frac{nK}{N}$ | $\frac{nK(N-K)(N-n)}{N^2(N-1)}$ | Too complicated to reproduce here! |
-
-
+|          Distribution          |             $E(Y)$              |                           $Var(Y)$                           |                                                  mgf                                                  |
+|:--------------:|:--------------:|:--------------:|:-----------------------:|
+|     $\text{Bernoulli}(p)$      |               $p$               |                           $p(1-p)$                           |                                            $(1-p) + pe^t$                                             |
+|      $\text{Binom}(n, p)$      |              $np$               |                          $np(1-p)$                           |                                          $((1-p) + pe^t)^n$                                           |
+|        $\text{Geo}(p)$         |         $\frac{1-p}{p}$         |                      $\frac{1-p}{p^2}$                       |                            $\frac{p}{1 - (1 - p)e^t}$ for $t < -\log(1-p)$                            |
+|    $\text{NegBinom(r, p)}$     |       $\frac{r(1-p)}{p}$        |                     $\frac{r(1-p)}{p^2}$                     |                       $\Big(\frac{p}{1 - (1 - p)e^t}\Big)^r$ for $t < -\log(p)$                       |
+|     $\text{Pois}(\lambda)$     |            $\lambda$            |                          $\lambda$                           |                                       $\exp(\lambda(e^t - 1))$                                        |
+| $\text{Normal}(\mu, \sigma^2)$ |              $\mu$              |                          $\sigma^2$                          |                                   $\exp(\mu t + \sigma^2 t^2 / 2)$                                    |
+|     $\text{Exp}(\lambda)$      |            $\lambda$            |                         $\lambda^2$                          |                               $\frac{1}{1-\lambda t}$ for $t > \lambda$                               |
+|   $\text{Gamma}(k, \lambda)$   |           $k\lambda$            |                         $k\lambda^2$                         |                          $(1 - \lambda t)^{-k}$ for $t < \frac{1}{\lambda}$                           |
+|  $\text{Beta}(\alpha, \beta)$  | $\frac{\alpha}{\alpha + \beta}$ | $\frac{\alpha\beta}{(\alpha + \beta)^2(\alpha + \beta + 1)}$ | $1 + \sum_{k=1}^\infty\Big(\prod_{r=0}^{k-1}\frac{\alpha + r}{\alpha + \beta + r}\Big)\frac{t^k}{k!}$ |
+|         $\chi^2(\nu)$          |              $\nu$              |                            $2\nu$                            |                               $(1 - 2t)^{-\nu/2}$ for $t < \frac{1}{2}$                               |
+|     $\text{Uniform}(a, b)$     |       $\frac{1}{2}(a+b)$        |                    $\frac{1}{12}(b-a)^2$                     |           $\begin{cases}\frac{e^{tb}-e^{ta}}{t(b-a)} & t \neq 0 \\ 1 & t = 0 \\\end{cases}$           |
+|           $F(n, m)$            |  $\frac{m}{m - 2}$ for $m > 2$  |   $\frac{2m^2(n + m - 2)}{n(m - 2)^2(m - 4)}$ for $m > 4$    |                                            Does Not Exist                                             |
+|   $\text{HyperGeo}(N, K, n)$   |         $\frac{nK}{N}$          |               $\frac{nK(N-K)(N-n)}{N^2(N-1)}$                |                                  Too complicated to reproduce here!                                   |
 
 ### Bernoulli: Direct Summation
 
-The moments of a Bernoulli distribution are simple to compute, because $x$ is only 0 or 1. When $x = 0$, $0 * P(X = 0) = 0$. Hence, $E(X) = 1 * P(X = 1) = p^1(1 - p)^{1 - 1} = p$. Since $1^k = 1$, a convenient property follows:
+The moments of a Bernoulli distribution are simple to compute, because
+$x$ is only 0 or 1. When $x = 0$, $0 * P(X = 0) = 0$. Hence,
+$E(X) = 1 * P(X = 1) = p^1(1 - p)^{1 - 1} = p$. Since $1^k = 1$, a
+convenient property follows:
 
-$$X \sim \text{Bernoulli}(p) \implies E(X^k) = p$$
-This also suggests that $E(X^k) = P(X = 1)$, which can be exceptionally useful in many statistical problems, including [finding UMVUEs](#point-estimators-finite-samples).  
+$$X \sim \text{Bernoulli}(p) \implies E(X^k) = p$$ This also suggests
+that $E(X^k) = P(X = 1)$, which can be exceptionally useful in many
+statistical problems, including [finding
+UMVUEs](#point-estimators-finite-samples).
 
-Similarly, we can compute the variance using the property $Var(X) = E(X^2) - E(X^2) = p - p^2 = p(1-p)$.  
+Similarly, we can compute the variance using the property
+$Var(X) = E(X^2) - E(X^2) = p - p^2 = p(1-p)$.
 
-Finally, the moment generating function follows directly by noting 
+Finally, the moment generating function follows directly by noting
 
 $$E(e^{tx}) = e^{t*0}p^0(1-p)^{1-0} + e^{t*1}p^1(1-p)^{1-1} = (1-p) + pe^t$$
 
 ### Uniform: Direct Integration
 
-Moments of distributions with simple pdfs bounded at both ends such as the Uniform can be solved directly by integrating their pdf. The Uniform has pdf $f_X(x) = \frac{1}{b-a}$, so its moments are as follows:
+Moments of distributions with simple pdfs bounded at both ends such as
+the Uniform can be solved directly by integrating their pdf. The Uniform
+has pdf $f_X(x) = \frac{1}{b-a}$, so its moments are as follows:
 
+```{=tex}
 \begin{align}
 E(X) = \int_{a}^b \frac{x}{b-a} dx = \frac{x^2}{2(b-a)}\Big|_{a}^b\\
 = \frac{b^2 - a^2}{2(b-a)} = \frac{(b+a)(b-a)}{2(b-a)} = \frac{1}{2}(b+a)\\
 \end{align}
+```
+Generalizing this, $E(X^k) = \frac{b^k - a^k}{2(b-a)}$. As a result,
+solving the variance is easier to do directly:
 
-Generalizing this, $E(X^k) = \frac{b^k - a^k}{2(b-a)}$. As a result, solving the variance is easier to do directly:
-
+```{=tex}
 \begin{align}
 Var(X) = \int_{a}^b \frac{(x - \frac{1}{2}(b-a))^2}{b-a} dx \\
 = \frac{(x - \frac{1}{2}(b-a))^3}{3(b-a)}\Big|_{a}^b \\
 = \frac{(b - \frac{1}{2}b - \frac{1}{2}a)^3 - (a - \frac{1}{2}b - \frac{1}{2}a)^3}{3(b-a)}\Big|_{a}^b\\
 = \frac{2(b-a)^3}{24(b-a)} = \frac{1}{12}(b-a)^2\\
 \end{align}
-
+```
 ### Geometric: Series Convergence
 
-Deriving the moments of the Geometric distribution requires the use of the [Geometric Series](#geometric-series) (from where we can speculate its name originates). Note $E(X) = \sum_{x=0}^\infty xp(1-p)^x$, which does not quite match the geometric series; first, we need to take the derivative, and then interchange differentiation and summation like so:
+Deriving the moments of the Geometric distribution requires the use of
+the [Geometric Series](#geometric-series) (from where we can speculate
+its name originates). Note $E(X) = \sum_{x=0}^\infty xp(1-p)^x$, which
+does not quite match the geometric series; first, we need to take the
+derivative, and then interchange differentiation and summation like so:
 
+```{=tex}
 \begin{align}
 \sum_{x=0}^\infty xp(1-p)^x = p(1-p)\sum_{x=0}^\infty x(1-p)^{x-1} && \text{factor out for correct form}\\
 = p(1-p)\sum_{x=0}^\infty \frac{d}{dx}-(1-p)^{x} && \text{notice derivative}\\
@@ -278,30 +317,43 @@ Deriving the moments of the Geometric distribution requires the use of the [Geom
 = -p(1-p) \frac{d}{dx}\frac{1}{1 - (1 - p)} && \text{geometric series}\\
 = \frac{p(1-p)}{p^2} = \frac{1-p}{p} && \\
 \end{align}
+```
+This can also be performed to compute $E(X)$ for the variance, though
+the computation is relatively long to be reproduced here. A quicker way
+might be to employ the moment generating function from which all moments
+can be computed, which can easily be found by substituting the geometric
+series:
 
-This can also be performed to compute $E(X)$ for the variance, though the computation is relatively long to be reproduced here. A quicker way might be to employ the moment generating function from which all moments can be computed, which can easily be found by substituting the geometric series:
-
+```{=tex}
 \begin{align}
 E(e^{tx}) = \sum_{x=0}^\infty e^{tx}(p(1-p)^x) \\
 = p\sum_{x=0}^\infty ((1-p)e^t)^x) \\
 = \frac{p}{1 - (1-p)e^t}
 \end{align}
-
+```
 ### Binomial: Kernel Technique, Series Version
 
-Moments of the Binomial are trickier since they involve an infinite sum. Since the Binomial is a discrete distribution, we can compute its moments using the discrete moment formula $E(X) = \sum_{i=1}^\infty xP(X = x)$. This introduces one technique for moment calculations: the Kernel Technique
+Moments of the Binomial are trickier since they involve an infinite sum.
+Since the Binomial is a discrete distribution, we can compute its
+moments using the discrete moment formula
+$E(X) = \sum_{i=1}^\infty xP(X = x)$. This introduces one technique for
+moment calculations: the Kernel Technique
 
-::: {.example #kernel-technique name="Kernel Technique with Infinite Series"}  
+::: {#kernel-technique .example name="Kernel Technique with Infinite Series"}
+Fact: pmfs integrate to 1. That is, $\sum_{x=0}^\infty f_X(x) = 1$. We
+can use this fact to compute moments by:
 
-Fact: pmfs integrate to 1. That is, $\sum_{x=0}^\infty f_X(x) = 1$. We can use this fact to compute moments by:
-
-1. Recognizing the kernel of the distribution within the moment formula
-2. Factoring out appropriate constants to turn the kernel into the full pmf, and simplifying the infinite series to $\sum_{x=0}^\infty f_X(x) = 1$. The left-over components then, are the value of the moment.
-
+1.  Recognizing the kernel of the distribution within the moment formula
+2.  Factoring out appropriate constants to turn the kernel into the full
+    pmf, and simplifying the infinite series to
+    $\sum_{x=0}^\infty f_X(x) = 1$. The left-over components then, are
+    the value of the moment.
 :::
 
-*Binomial Distribution*: We can use this technique to compute moments of the Binomial distribution like so:
+*Binomial Distribution*: We can use this technique to compute moments of
+the Binomial distribution like so:
 
+```{=tex}
 \begin{align}
 E(X) = \sum_{x=0}^\infty xP(X = x) = \sum_{x=0}^\infty x{n\choose x}p^x(1-p)^{n-x} && \\
 = \sum_{x=0}^\infty \frac{x\cdot n!}{x!(n-x)!}p^x(1-p)^{n-x} && \text{(kernel)} \\
@@ -309,24 +361,34 @@ E(X) = \sum_{x=0}^\infty xP(X = x) = \sum_{x=0}^\infty x{n\choose x}p^x(1-p)^{n-
 = np\sum_{x=0}^\infty \cdot {n - 1 \choose x}p^x(1-p)^{(n-1) - x} && \text{(sum pmf to 1)}\\
 = np
 \end{align}
+```
+To compute the $E(X^2)$ component of the variance, this process needs to
+be repeated twice:
 
-To compute the $E(X^2)$ component of the variance, this process needs to be repeated twice:
-
+```{=tex}
 \begin{align}
 E(X^2) = \sum_{x=0}^\infty x^2P(X = x) = \sum_{x=0}^\infty x^2{n\choose x}p^x(1-p)^{n-x} && \\
 = np \sum_{x=0}^\infty(x+1) \frac{(n-1)!}{x!(n-1-x)!}p^x (1-p)^{n-x-1} && \text{(from E(X))}\\
 = np(0 + (n-1)p\sum_{x=1}^\infty \frac{(n-2)!}{(x-1)!((n-2)-(x-1))!}p^{x-1}(1-p)^{(n-2)-(x-1)} + 1 && \\
 = np((n-1)p + 1) = (np)^2 + np(1-p) && \text{(pmf sums to 1)}&& \\
 \end{align}
-
+```
 Then, $Var(X) = E(X^2) - E(X)^2 = (np)^2 + np(1-p) - (np)^2 = np(1-p)$
 
-Alternatively, we could have computed this using the fact that the Binomial is equal to a sum of Bernoulli random variables. By the linearity of expectation, if $X_i \sim \text{Bernoulli}(p)$, then $E(\sum_{i=1}^n X_i) = n\cdot E(X_i) = np$. $Var(X)$ follows similarly.  
+Alternatively, we could have computed this using the fact that the
+Binomial is equal to a sum of Bernoulli random variables. By the
+linearity of expectation, if $X_i \sim \text{Bernoulli}(p)$, then
+$E(\sum_{i=1}^n X_i) = n\cdot E(X_i) = np$. $Var(X)$ follows similarly.
 
 ### Negative Binomial and Hypergeometric: Computing $E(X(X-1))$
 
-The second moment of distributions with pmfs/pdfs involving factorials can often be computing more easily by finding $E(X(X-1))$ instead of $E(X^2)$ directly. The **Negative Binomial** is one such distribution. Its mean can be computed by the same Kernel Technique used for the Binomial:
+The second moment of distributions with pmfs/pdfs involving factorials
+can often be computing more easily by finding $E(X(X-1))$ instead of
+$E(X^2)$ directly. The **Negative Binomial** is one such distribution.
+Its mean can be computed by the same Kernel Technique used for the
+Binomial:
 
+```{=tex}
 \begin{align}
 E(X) = \sum_{x=0}^\infty x{x + r - 1 \choose x} \cdot (1-p)^x p^r && \\
 = (1-p)\sum_{x=1}^\infty \frac{((x-1) + r)!}{(x-1)!(r-1)!}\cdot (1-p)^{x-1}p^{r} && \\
@@ -334,18 +396,23 @@ E(X) = \sum_{x=0}^\infty x{x + r - 1 \choose x} \cdot (1-p)^x p^r && \\
 = \frac{r(1-p)}{p}\sum_{x=0}^\infty \frac{((x-1) + r)!}{(x-1)!r!}\cdot (1-p)^{x-1}p^{r+1} && \\
 = \frac{r(1-p)}{p} && \text{pmf sums to 1}
 \end{align}
+```
+With $E(X)$ known, we can now take advantage of the factorial to compute
+$E(X(X-1))$, using the same technique of simplifying the combinatorial
+fraction and "pulling out" components to reform a pdf:
 
-With $E(X)$ known, we can now take advantage of the factorial to compute $E(X(X-1))$, using the same technique of simplifying the combinatorial fraction and "pulling out" components to reform a pdf:
-
+```{=tex}
 \begin{align}
 E(X(X-1)) = \sum_{x=0}^\infty x(x-1){x + r - 1 \choose x}(1-p)^x p^r \\
 = \frac{r(r+1)}{1-p)^2}{p^2}\sum_{x=0}^\infty \frac{((x-2) + (r+1))!}{(x-2)!(r+1)!}(1-p)^{x-2}p^{r+2}\\
 = \frac{r(r+1)}{1-p)^2}{p^2}\Big(0 + 0 + \sum_{x=2}^\infty {(x-2) + r + 1\choose x-2}(1-p)^{x-2}p^{r+2}\\
 = \frac{r(r + 1)(1-p)^2}{p^2} \text{  pmf sums to 1}\\
 \end{align}
+```
+Since, by [linearity of expectation](#expected-value),
+$E(X(X-1)) = E(X^2) - E(X)$, we can write
 
-Since, by [linearity of expectation](#expected-value), $E(X(X-1)) = E(X^2) - E(X)$, we can write
-
+```{=tex}
 \begin{align}
 Var(X) = E(X^2) - E(X) + E(X) - E(X)^2 \\
 = E(X(X-1)) + E(X) - E(X)^2 \\
@@ -353,133 +420,231 @@ Var(X) = E(X^2) - E(X) + E(X) - E(X)^2 \\
 = \frac{r(1-p)^2}{p^2} + \frac{r(1-p)}{p} \\
 = \frac{r(1-p)(1 - p + p)}{p^2} = \frac{r(1-p)}{p^2}
 \end{align}
+```
+Note: The moments of a Negative Binomial can also be computed simply by
+relying on its additive property in relation to the geometric, and then
+using the linearity expectation. That is, if
+$Y \sim \text{NegBin}(r, p)$, then $Y = \sum_{i=1}^r X_i$ where
+$X_i \sim \text{Geo}(p)$. Then,
+$E(Y) = E(\sum_{i=1}^r X_i) = \frac{r(1-p)}{p}$.
 
-Note: The moments of a Negative Binomial can also be computed simply by relying on its additive property in relation to the geometric, and then using the linearity expectation. That is, if $Y \sim \text{NegBin}(r, p)$, then $Y = \sum_{i=1}^r X_i$ where $X_i \sim \text{Geo}(p)$. Then, $E(Y) = E(\sum_{i=1}^r X_i) = \frac{r(1-p)}{p}$.
+*Hypergeometric Distribution*: The above technique can also be used to
+find the variance of a $\text{HGeo}(N, K, n)$ random variable. First,
+let us use the [Kernel Technique](#kernel-technique) to compute its
+first moment. Writing the combinatorial functions in their full form,
+noting in general $y - x = (y - 1) - (x - 1)$, we can rewrite this as
+the pmf of a $\text{HGeo}(N-1, K-1, n-1)$:
 
-*Hypergeometric Distribution*: The above technique can also be used to find the variance of a $\text{HGeo}(N, K, n)$ random variable. First, let us use the [Kernel Technique](#kernel-technique) to compute its first moment. Writing the combinatorial functions in their full form, noting in general $y - x = (y - 1) - (x - 1)$, we can rewrite this as the pmf of a $\text{HGeo}(N-1, K-1, n-1)$:
-
+```{=tex}
 \begin{align}
 E(X) = \sum_{x=0}^n x \cdot \frac{K!}{x!(K-x)}\cdot\frac{(N-K)!}{(n-x)!(N-K-n+x)!} \cdot \frac{n!(N-n)!}{N!}\\
 = \sum_{x=1}^n \frac{K(K-1)!}{(x-1)!((K-1) - (x-1))!} \\ \cdot \frac{((N-1) - (K - 1))!}{((n-1) - (x-1))!((N-1) - (k-1) - (n-1) + (x-1))!}\cdot\frac{n(n-1)!((N-1) - (n-1))!}{N(N-1)!}\\
 = \frac{NK}{n}\sum_{x=0}^{n-1} \frac{{K-1\choose x}{(N-1) - (K-1)\choose (n-1) - x}}{{N-1\choose n-1}}\\
 = \frac{NK}{n}
 \end{align}
+```
+For the variance, we first compute $E(X(X-1))$ in the same fashion. For
+brevity, we exclude writing down $y - x = (x - 2) - (y-2)$ expansion,
+but the calculations below do rely on this principle.
 
-For the variance, we first compute $E(X(X-1))$ in the same fashion. For brevity, we exclude writing down $y - x = (x - 2) - (y-2)$ expansion, but the calculations below do rely on this principle.
-
+```{=tex}
 \begin{align}
 E(X(X-1)) = \sum_{x=0}^n x(x-1) \cdot \frac{K!}{x!(K-x)}\cdot\frac{(N-K)!}{(n-x)!(N-K-n+x)!} \cdot \frac{n!(N-n)!}{N!}\\
 = \sum_{x=2}^n \frac{K(K-1)!}{(x-1)!(K - X)!} \\ \cdot \frac{(N - K)!}{((n-2) - x-2))!(N - k - (n-2) + (x-2))!}\cdot\frac{n(n-1)(n-2)!((N-2) - (n-2))!}{N(N-1)(N-2)!}\\
 = \frac{N(N-1)K(K-1)}{n(n-1)}\sum_{x=0}^{n-2} \frac{{K-2\choose x}{(N-2) - (K-2)\choose (n-2) - x}}{{N-2\choose n-2}}\\
 = \frac{N(N-1)K(K-1)}{n(n-1)}
 \end{align}
-
+```
 Then,
 
+```{=tex}
 \begin{align}
 Var(X) = E(X(X-1)) + E(X) - E(X)^2\\
 = \frac{K(K-1)N(N-1)}{n(n-1)} + \frac{KN}{n} - \frac{KN}{n^2}\\
 = n\frac{K}{N} \cdot \frac{N - K}{N}\cdot \frac{N - n}{N-1}
 \end{align}
-
+```
 after lengthy algebra.
-
 
 ### Poisson: Exponential Taylor Series
 
-Like the Geometric, we can also derive the moments of the Poisson by relying the convergence of an infinite series. This time, we rely on the [Taylor Series for the exponential distribution](#exponential-taylor), which is $\sum_{x=0}^\infty \frac{\lambda^x}{x!} = e^\lambda$. Proceed as follows:
+Like the Geometric, we can also derive the moments of the Poisson by
+relying the convergence of an infinite series. This time, we rely on the
+[Taylor Series for the exponential distribution](#exponential-taylor),
+which is $\sum_{x=0}^\infty \frac{\lambda^x}{x!} = e^\lambda$. Proceed
+as follows:
 
+```{=tex}
 \begin{align}
 E(X) = \sum_{x=0}^\infty x\frac{e^{-\lambda}\lambda^x}{x!} && \\
 = \lambda e^{-\lambda}\sum_{x=1}^\infty \frac{\lambda^{x-1}}{(x-1)!} && \text{when }x = 0, \text{ the series term is 0}\\
 = \lambda e^{-\lambda}e^{\lambda} = \lambda && \text{exponential series}
 \end{align}
-
+```
 ### Exponential: Integration By Parts
 
-Sometimes, a pdf can be integrated directly using more advanced integration techniques. The Exponential is one such distribution - its moments can be computed using [integration by parts](#ibp)
+Sometimes, a pdf can be integrated directly using more advanced
+integration techniques. The Exponential is one such distribution - its
+moments can be computed using [integration by parts](#ibp)
 
-For the mean, note $E(X) = \int_0^\infty \lambda e^{-\lambda x}dx$. Let $u = x \implies du = 1$ and $du = \lambda e^{-\lambda x} \implies v = -e^{-\lambda x}$. Then,
+For the mean, note $E(X) = \int_0^\infty \lambda e^{-\lambda x}dx$. Let
+$u = x \implies du = 1$ and
+$du = \lambda e^{-\lambda x} \implies v = -e^{-\lambda x}$. Then,
 
+```{=tex}
 \begin{align}
 E(X) = uv - \int_{0}^\infty vdu = -xe^{-\lambda x}\Big|_{0}^\infty + \int_0^\infty e^{-\lambda x}dx\\
 = 0 + 0 - \frac{1}{\lambda}e^{-\lambda x} \Big|_0^\infty = \frac{1}{\lambda}
 \end{align}
+```
+noting that
+$\lim_{x\rightarrow\infty}xe^{-\lambda x} = \lim_{x\rightarrow\infty}-\lambda e^{-\lambda x} = 0$
+by applying L'Hopital's rule. Hence $E(X) = \frac{1}{\lambda}$
 
-noting that $\lim_{x\rightarrow\infty}xe^{-\lambda x} = \lim_{x\rightarrow\infty}-\lambda e^{-\lambda x} = 0$ by applying L'Hopital's rule. Hence $E(X) = \frac{1}{\lambda}$
-
-For the variance, start by computing $E(X^2)$. Applying integration by parts with $u = x^2 \implies du = 2x$ and $dv = \lambda e^{-\lambda x} \implies -e^{-\lambda x}$,
+For the variance, start by computing $E(X^2)$. Applying integration by
+parts with $u = x^2 \implies du = 2x$ and
+$dv = \lambda e^{-\lambda x} \implies -e^{-\lambda x}$,
 
 $$E(X^2) = uv - \int_{0}^\infty vdu = -x^2e^{-\lambda x} \Big|_0^\infty + \int_{0}^\infty 2xe^{-\lambda x}$$
 
-Now, we could apply integration by parts again, but a faster way to solve this is by **moment recognization**: noting that the second term can be transformed to equal $E(X)$ like so: $\int_{0}^\infty 2xe^{-\lambda x} = \frac{2}{\lambda}\int_{0}^\infty x\lambda e^{-\lambda x} = E(X) = \lambda$ as we've already solved.
+Now, we could apply integration by parts again, but a faster way to
+solve this is by **moment recognization**: noting that the second term
+can be transformed to equal $E(X)$ like so:
+$\int_{0}^\infty 2xe^{-\lambda x} = \frac{2}{\lambda}\int_{0}^\infty x\lambda e^{-\lambda x} = E(X) = \lambda$
+as we've already solved.
 
-As before, the first term is $\lim_{x\rightarrow \infty}-x^2e^{-\lambda x} \Big|_0^\infty = \lim_{x\rightarrow\infty}\lambda^2e^{-\lambda x} = 0$ by applying L'Hopital's rule twice. Plugging in $E(X) = \frac{1}{\lambda}$, we get $E(X^2)$ = $\frac{2}{\lambda^2}$ and
+As before, the first term is
+$\lim_{x\rightarrow \infty}-x^2e^{-\lambda x} \Big|_0^\infty = \lim_{x\rightarrow\infty}\lambda^2e^{-\lambda x} = 0$
+by applying L'Hopital's rule twice. Plugging in
+$E(X) = \frac{1}{\lambda}$, we get $E(X^2)$ = $\frac{2}{\lambda^2}$ and
 
 $$Var(X) = E(X^2) - E(X)^2 = \frac{2}{\lambda^2} - \frac{1}{\lambda^2} = \frac{1}{\lambda^2}$$
 
 ### Gamma and Beta: Kernel Technique, Integration Version
 
-Similar to discrete distributions, we can also use the [Kernel Technique](#kernel-technique) to more easily integrate continuous distributions as well. For example, noting [Gamma function](#gamma-function) property $\Gamma(k) = \frac{\Gamma(k+1)}{k},
+Similar to discrete distributions, we can also use the [Kernel
+Technique](#kernel-technique) to more easily integrate continuous
+distributions as well. For example, noting [Gamma
+function](#gamma-function) property \$\Gamma(k) = \frac{\Gamma(k+1)}{k},
 
+```{=tex}
 \begin{align}
 E(X) = \int_{0}^\infty \frac{x}{\Gamma(k)\lambda^k}x^{k-1}e^{-\frac{1}{\lambda}x}dx &&\\
 = \int_{0}^\infty \frac{\lambda}{(\Gamma(k+1) / k)\lambda^{k+1}}x^k e^{-\frac{1}{\lambda}x}dx && \text{recognize Gamma kernel}\\
 = \lambda k \int_{0}^\infty \frac{1}{\Gamma(k+1)\lambda^{k+1}}x^k e^{-\frac{1}{\lambda}x}dx && \text{pull out excess terms}\\
 = \lambda k && \text{ integrate } Gamma(k+1, \lambda) \text{ to 1}
 \end{align}
-
+```
 Similarly, the variance of the Gamma can be calculated like so:
 
-1. Solve for $E(X^2)$
+1.  Solve for $E(X^2)$
 
+```{=tex}
 \begin{align}
 E(X^2) = \int_{0}^\infty \frac{x^2}{\Gamma(k)\lambda^k}x^{k-1}e^{-\frac{1}{\lambda}x}dx
 = \int_{0}^\infty \frac{\lambda^2}{(\Gamma(k+2) / (k(k+1)))\lambda^{k+2}}x^{k+1} e^{-\frac{1}{\lambda}x}dx\\
 = \lambda^2k(k+1) \text{  Pull out excess terms from } Gamma(k+1, \lambda) \text{ kernel, integrate to 1}
 \end{align}
-
-2. Compute variance using $Var(X) = E(X^2) - E(X)^2$ using the components solved previously.
+```
+2.  Compute variance using $Var(X) = E(X^2) - E(X)^2$ using the
+    components solved previously.
 
 $$Var(X) = \lambda^2k(k+1) - \lambda^2k^2 = \lambda^2k$$
 
-Since the Beta distribution also involves Gamma function, we can compute the moments in a similar fashion. Let's start with the mean:
+Since the Beta distribution also involves Gamma function, we can compute
+the moments in a similar fashion. Let's start with the mean:
 
+```{=tex}
 \begin{align}
 E(X) = \int_{0}^\infty x \cdot\frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)}x^{\alpha-1}(1-x)^{\beta-1}dx && \\
 = \frac{\alpha}{\alpha + \beta}\int_{0}^{1} \frac{\Gamma(\alpha + 1 + \beta)}{\Gamma(\alpha + 1)\Gamma(\beta)}x^\alpha (1-x)^{\beta-1}dx && \text{form kernel of } Beta(\alpha+1, \beta)\\
 = \frac{\alpha}{\alpha + \beta} && \text{ integrate Beta pdf to 1}\\
 \end{align}
-
+```
 Now, we apply this same principle twice to compute the variance:
 
-1. Compute $E(X^2)$ by using $\Gamma(\alpha) = \alpha(\alpha+1)\Gamma(\alpha+2)$ and $\Gamma(\alpha + \beta) = (\alpha + \beta)(\alpha + \beta + 2)$ to form the Beta kernel:
+1.  Compute $E(X^2)$ by using
+    $\Gamma(\alpha) = \alpha(\alpha+1)\Gamma(\alpha+2)$ and
+    $\Gamma(\alpha + \beta) = (\alpha + \beta)(\alpha + \beta + 2)$ to
+    form the Beta kernel:
 
+```{=tex}
 \begin{align}
 E(X^2) = \int_{0}^1 x^2 \cdot \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)}x^{\alpha-1}(1 - x)^{\beta-1}dx && \\
 = \frac{\alpha(\alpha+1)}{(\alpha + \beta)(\alpha + \beta + 1)}\int_{0}^1x^{\alpha-1}(1-x)^{\beta-1}dx && \text{form kernel of } Beta(\alpha + 2, \beta)\\
 = \frac{\alpha(\alpha+1)}{(\alpha + \beta)(\alpha + \beta + 1)} \text{integrate Beta pdf to 1}
 \end{align}
+```
+2.  Compute the variance using $Var(X) = E(X^2) - E(X)^2$
 
-2. Compute the variance using $Var(X) = E(X^2) - E(X)^2$
-
+```{=tex}
 \begin{align}
 Var(X) = E(X^2)\frac{\alpha^2 + \alpha}{(\alpha + \beta)(\alpha + \beta + 1)} - \frac{\alpha^2}{(\alpha + \beta)^2}\\
 = \frac{\alpha^2(\alpha + \beta) + \alpha(\alpha + \beta) - \alpha^2(\alpha + \beta + 1)}{(\alpha + \beta)^2(\alpha + \beta + 1)}\\
 = \frac{\alpha\beta}{(\alpha + \beta)^2(\alpha + \beta + 1)}
 \end{align}
+```
+Virtually identical steps are used to compute the moments of the
+**Chi-squared** (which is a special case of the Gamma) and **F**
+distributions as well.
 
-### Normal: Polar Integration
+### Normal: Location-Scale Trick and Polar Integration
 
+Proving that the moments of the $\text{Normal}(\mu, \sigma^2)$ can be a bit
+tricky. However, if we use the fact that it is a [location-scale
+family](#location-scale), it becomes much easier. Letting
+$X = \sigma Z + \mu$, then
 
-## Moments of Exponential Families
+$$E(X) = \sigma E(Z) + \mu$$
+
+by linearity of expectation. Since $Z \sim N(0,1)$, noting that the
+antiderivative of $z\exp(-\frac{1}{2}z^2)$ is $-\exp(-\frac{1}{2}z^2)$,
+we get
+
+\begin{align}
+E(Z) = \int_{\infty}^\infty \frac{z}{\sqrt{2\pi}}\exp(-\frac{1}{2}z^2)dx\\ 
+= -\exp(-\frac{1}{2}z^2)\Big|_{-\infty}^\infty = 0
+\end{align}
+
+since $\lim_{z^2\rightarrow\infty} \exp(-\frac{1}{2}z^2) = 0$. Therefore, $E(X) = E(\sigma Z + \mu) = \sigma E(Z) +\mu = \mu$.
+
+Computing the variance necessitates a more advanced integration technique: Polar Coordinates. Proceed with [Integration by Parts](#ibp), letting $u = \frac{z}{\sqrt{2\pi}} \implies du = \frac{1}{\sqrt{2\pi}}$ and $dv = z\exp(-\frac{1}{2}z^2)\implies v = -\exp(-\frac{1}{2}z^2)$ as used previously. Then,
+
+\begin{align}
+E(Z^2) = \int_{\infty}^\infty \frac{z^2}{\sqrt{2\pi}}\exp(-\frac{1}{2}z^2)dx\\
+= \frac{z}{\sqrt{2\pi}}\exp(-\frac{1}{2}z^2)\Big|_{-\infty}^\infty + \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty \exp(-\frac{1}{2}z^2)dz
+\end{align}
+
+By L'Hopital's rule, 
+
+$$\lim_{z\rightarrow\infty} \frac{z}{\sqrt{2\pi}}\exp(-\frac{1}{2}z^2) = \lim_{z\rightarrow\infty}\frac{1}{\sqrt{2\pi}z\exp(\frac{1}{2}z^2)} = 0$$
+
+so $\frac{z}{\sqrt{2\pi}}\exp(\frac{1}{2}z^2)\Big|_{-\infty}^\infty = 0$. But how do we solve the second integral? This is where polar coordinates come into play. From @Strang2010, if $A = \int_{-\infty}^\infty \exp(-\frac{1}{2}x^2)dx$, then we can solve the integral by converting into polar like so:
+
+\begin{align}
+A^2 = \int_{-\infty}^\infty \exp(-\frac{1}{2}x^2)dx \cdot \int_{-\infty}^\infty \exp(-\frac{1}{2}xy^2)dy\\
+= \int_{-\infty}^\infty\int_{-\infty}^\infty \exp(-\frac{1}{2}(x^2 + y^2))dxdy \\
+= \int_{0}^{2\pi}\int_{0}^\infty r\exp(-\frac{1}{2}r^2(\cos^2(\theta) + \sin^2(\theta)))drd\theta\\
+= \int_{0}^{2\pi}\int_{0}^\infty r\exp(-\frac{1}{2}r^2)drd\theta\\
+= 2\pi \implies A = \sqrt{2\pi}
+\end{align}
+
+Hence, $E(Z^2) = 0 + \frac{\sqrt{2\pi}}{\sqrt{2\pi}} = 1$ and therefore,
+
+\begin{align}
+Var(X) = E((\sigma Z + \mu - E(Z))^2) \\
+= E((\sigma Z + \mu - \mu)^2) = \sigma^2E(Z^2) \\
+= \sigma^2
+\end{align}
+
+Hence, we have proven that, for $X \sim \text{Normal}(\mu, \sigma^2)$, that the mean is $\mu$ and variance is $\sigma^2$ - as we *expected* (ba-dum tss).
+
 
 ## Other Moments (for reference)
 
-| Distribution | $E(Y)$ | $Var(Y)$ |      mgf       |
-|:------:|:------:|:--------:|:--------------:|
-| $\text{Weibull}(k, \lambda)$ |  $\lambda\Gamma(1 + \frac{1}{k})$   | $\lambda^2\Big(\Gamma(1 + \frac{2}{k}) - (\Gamma(1 + \frac{1}{k}))^2\Big)$ | $\sum_{n=0}^\infty\frac{t^n \lambda^n}{n!}\Gamma(1 + \frac{n}{k})$, $k \geq 1$ | 
-| $\text{Pareto}(x_m, \alpha)$ |  $\begin{cases}\infty & \alpha \leq 1 \\ \frac{\alpha x_m}{a - 1} & \alpha > 1\end{cases}$   | $\begin{cases}\infty & \alpha \leq 2 \\ \frac{x_m^2 \alpha}{(a-1)^2(\alpha - 2)} & \alpha > 2\end{cases}$ | Does not exist | 
-| $\text{Cauchy}(x_0, \gamma)$| Does Not Exist | Does Not Exist | $\exp(x_0it - \gamma|t|$ (cf) |
-| $t(\nu)$ | 0 | $\begin{cases}\frac{\nu}{\nu-2} & \nu > 2\\ \infty & 1 < \nu \leq 2 \\ \text{undefined} & \text{otherwise}\end{cases}$ | Does Not Exist |
-
+|         Distribution         |                                          $E(Y)$                                           |                                                        $Var(Y)$                                                        |                                      mgf                                       |
+|:--------------:|:--------------:|:--------------:|:-----------------------:|
+| $\text{Weibull}(k, \lambda)$ |                             $\lambda\Gamma(1 + \frac{1}{k})$                              |                       $\lambda^2\Big(\Gamma(1 + \frac{2}{k}) - (\Gamma(1 + \frac{1}{k}))^2\Big)$                       | $\sum_{n=0}^\infty\frac{t^n \lambda^n}{n!}\Gamma(1 + \frac{n}{k})$, $k \geq 1$ |
+| $\text{Pareto}(x_m, \alpha)$ | $\begin{cases}\infty & \alpha \leq 1 \\ \frac{\alpha x_m}{a - 1} & \alpha > 1\end{cases}$ |       $\begin{cases}\infty & \alpha \leq 2 \\ \frac{x_m^2 \alpha}{(a-1)^2(\alpha - 2)} & \alpha > 2\end{cases}$        |                                 Does not exist                                 |
+| $\text{Cauchy}(x_0, \gamma)$ |                                      Does Not Exist                                       |                                                     Does Not Exist                                                     |                         $\exp(x_0it - \gamma|t|$ (cf)                          |
+|           $t(\nu)$           |                                             0                                             | $\begin{cases}\frac{\nu}{\nu-2} & \nu > 2\\ \infty & 1 < \nu \leq 2 \\ \text{undefined} & \text{otherwise}\end{cases}$ |                                 Does Not Exist                                 |
