@@ -36,3 +36,81 @@ $$f_{X,Y}(x, y) = f_X(x)f_Y(y)$$
 
 This property is the foundation of statistical inference for iid random variables discussed in Chapters 8 and 10.
 
+## Convergence
+
+What happens when, instead of a set of events or random variables, we observe a *sequence* of $n$ random variables? There exist two major types of **convergence** of random variables with which we are typically concerned: **convergence in probability** and **convergence in distribution**
+
+### Convergence in Probability
+
+:::{.definition name="Convergence in Probability"}
+
+If $Z$ is a random variable and $Z_n$ is a sequence of random variables, then
+
+$$Z_n \overset{p}{\rightarrow} Z \iff\lim_{n\rightarrow\infty}P(|Z_n - Z| > \epsilon) = 0$$
+:::
+
+Convergence in probability has several properties. If $A_n \overset{p}{\rightarrow} a$ and $B_n\overset{p}{\rightarrow}b$, then
+
+1. $A_n + B_n \overset{p}{\rightarrow} a + b$
+2. $A_n - B_n \overset{p}{\rightarrow} a - b$
+3. $A_n \cdot B_n \overset{p}{\rightarrow} a \cdot b$
+4. $A_n / B_n \overset{p}{\rightarrow} a / b$
+
+Convergence in probability can also be extended to the multivariate setting, where it takes on a slightly different meaning.
+
+:::{.definition name="Multivariate Convergence in Probability"}
+If $X$ is random vector and $X_n$ is a sequence of random vectors, then
+
+\begin{align}
+X_n \overset{p}{\rightarrow} X \iff\lim_{n\rightarrow\infty}P(||X_n - X|| > \epsilon) = 0 \\
+\iff X_{jn} \overset{p}{\rightarrow}X_j, \forall j \in 1,...,k
+\end{align}
+
+:::
+
+
+### Convergence in Distribution
+
+:::{.definition name="Convergence in Probability"}
+
+$$Z_n \overset{\mathcal{D}}{\rightarrow} Z \iff\lim_{n\rightarrow\infty}F_n(Z) = F(z), \forall\text{ continuity points of }F$$
+:::
+
+Note that convergence in probability implies convergence in distribution, but not the converse. That is,
+
+$$Z_n \overset{p}{\rightarrow} Z \implies Z_n \overset{\mathcal{D}}{\rightarrow} Z$$
+Unless, that is, the random variable converges in distribution to a *constant* - then, convergence in distribution *does* imply convergence in probability! That is,
+
+$$Z_n \overset{\mathcal{D}}{\rightarrow} c \implies Z_n \overset{p}{\rightarrow} c $$
+:::{.definition name="Multivariate Convergence in Distribution"}
+If $X$ is random vector and $X_n$ is a sequence of random vectors, then
+
+$$X_n \overset{\mathcal{D}}{\rightarrow} X \iff \lim_{n\rightarrow\infty}F_n(X_1, ..., X_k) = F(X_1,...,X_k), \forall\text{ continuity points of }F$$
+
+
+:::
+
+
+### Important Theorems
+
+:::{.theorem name="Slutsky's Theorem"}
+
+If $Z_n \overset{\mathcal{D}}{\rightarrow} Z$ and $Y_n \overset{p}{\rightarrow} c$, then
+
+1. $Z_n + Y_n \overset{\mathcal{D}}{\rightarrow} Z + c$
+2. $Z_nY_n \overset{\mathcal{D}}{\rightarrow} cZ$
+3. $\frac{Z_n}{Y_n}\overset{\mathcal{D}}{\rightarrow}\frac{Z}{c}$. 
+
+:::
+
+For problem-solving, Slutsky's theorem is generally applied whenever we deal with both convergence in probability and convergence in distribution together.
+
+:::{.theorem name="Continuous Mapping Theorem"}
+
+Suppose $Y_n$ is a sequence of random variables (possibly vectors), $Y$ is a random variable (or vector the same length as $Y_n$), $c$ is a constant, and $g$ is a function. Then,
+
+1. If $Y_n \overset{p}{\rightarrow} c$, and $g$ is continuous at $c$, then $g(Y_n) \overset{p}{\rightarrow} g(c)$
+
+2. If $Y_n \overset{\mathcal{D}}{\rightarrow} Y$, and $g$ is continuous (with $g: \mathbb{R}^k \mapsto \mathbb{R}^m$ for vectors), then $g(Y_n) \overset{\mathcal{D}}{\rightarrow} g(Y)$ (in $\mathbb{R}^m$ for vectors)
+
+:::

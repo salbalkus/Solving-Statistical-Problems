@@ -2,4 +2,27 @@
 
 Evaluating the asymptotic properties of point estimators.
 
-{#wlln}
+## Consistency
+
+An important asymptotic property of an estimator is that it converges in probability to the true value being estimated as $n \rightarrow \infty$. This is called **consistency**. 
+
+One strategy for proving consistency is to use the Weak Law of Large Numbers.
+
+::: {#wlln .theorem name = "Weak Law of Large Numbers"}
+
+**iid version**: If $Z_i$ are iid with finite mean, then
+
+$$\bar{X} = \frac{1}{n}\sum_{i=1}^nX_i\overset{\mathcal{p}}{\rightarrow}E(X_i)$$
+
+**Non-iid version**: Alternatively, we can drop the iid assumption; if $X_i$ have finite mean and variance, $Cov(X_i, X_j) = 0$, and $\lim_{n\rightarrow\infty}\sum_{i=1}^n\frac{\sigma_i^2}{n^2} = 0$, then
+
+$$\frac{1}{n}\sum_{i=1}^nX_i - \frac{1}{n}\sum_{i=1}^nE(X_i) \overset{\mathcal{p}}{\rightarrow} 0$$
+:::
+
+The WLLN can be combined with the Continuous Mapping Theorem to show a variety of estimators are consistent.
+
+## Asymptotic Normality
+
+::: {#clt .theorem name = "Central Limit Theorem (iid)"}
+
+:::
