@@ -352,7 +352,56 @@ Imagine drawing $n$ samples *without* replacement from a finite population of si
 
 |               Description               |    Parameters     |     Support      |       pmf        |
 |:----------------:|:----------------:|:----------------:|:----------------:|
-|  | $N \in \mathbb{N}_0$, $K \in \{0, 1, ..., N\}$, $n \in \{0,1,...,N\}$ | $x \in \{\max(0, n+K-N),..., \min(n,K)\}$ | $\frac{{K\choose x}{N - K \choose n - x -1}}{N \choose n}$ |
+| Sampling without replacement | $N \in \mathbb{N}_0$, $K \in \{0, 1, ..., N\}$, $n \in \{0,1,...,N\}$ | $x \in \{\max(0, n+K-N),..., \min(n,K)\}$ | $\frac{{K\choose x}{N - K \choose n - x -1}}{N \choose n}$ |
 
 - Fisher's Exact Test is based on the Hypergeometric distribution.
 - If $X \sim \text{HGeo}(N, K, n)$, and $N$ and $K$ are sufficiently large compared to $n$, then $X \approx \text{Binom}(n, p)$
+
+## Multivariate Distributions
+
+### Bivariate Normal
+
+The bivariate normal describes a situation where two random variables $X$ and $Y$ are normally distributed, and their sum is also normally distributed.
+
+
+|               Description               |    Parameters     |     Support      |       pmf        |
+|:----------------:|:----------------:|:----------------:|:----------------:|
+| Two-dimensional normal | $\mu_x, \mu_y \in \mathbb{R}$, $\sigma_x, \sigma_y \in \mathbb{R} > 0$, $\rho \in [-1, 1]$ | $x\in\mathbb{R}^2$ | $\frac{1}{2\pi\sigma_x\sigma_y\sqrt{1-\rho^2}}\exp\Big(-\frac{1}{2(1-\rho^2)}\Big((\frac{x-\mu_x}{\sigma_x})^2 - 2\rho(\frac{x - \mu_x}{\sigma_x})(\frac{y - \mu_y}{\sigma_y}) + (\frac{y-\mu_y}{\sigma_y})^2\Big)\Big)$  |
+
+
+Suppose that $(X, Y)$ follows the bivariate normal distribution above. Then,
+
+- The marginal distributions are $X \sim N(\mu_x, \sigma_x^2)$ and $Y \sim N(\mu_y, \sigma_y^2)$
+- $Corr(X, Y) = \rho$
+- Any linear combination of $X$ and $Y$ is univariate normal. That is, $aX + bY \sim N(a\mu_x + b\mu_y, a^2\sigma_x^2 + b^2\sigma_y^2 +2ab\rho\sigma_x\sigma_y$.
+
+#### Multivariate Normal
+
+The Multivariate Normal, often denoted $MVN(\mu, \Sigma)$, generalizes the normal to a random vector $X$ where all linear combinations of its components have a univariate normal distribution.
+
+|               Description               |    Parameters     |     Support      |       pmf        |
+|:----------------:|:----------------:|:----------------:|:----------------:|
+| $k$-dimension normal | $\mu \in \mathbb{R}^k$, $\Sigma \in \mathbb{R}^{k \times k}$ | $x\in\mathbb{R}^k$ | $\frac{1}{\sqrt{(2\pi)^{k}\det(\Sigma)}}\exp\Big(-\frac{1}{2}(x - \mu)^\top\Sigma^{-1}(x-\mu)\Big)$  |
+
+If a vector $X\sim MVN(\mu, \Sigma)$, then
+
+- All marginal distributions of $X$ follow a multivariate normal with the marginalized means and rows/columns in the covariance matrix dropped. For example, $X_1 \sim N(\mu_1, \sigma_1)$
+- If $Y = c + BX$, then $Y \sim MVN(c + B\mu, B\Sigma B^\top)$
+
+Note that two normally distributed random variables may not be jointly bivariate normal!
+
+### Multinomial
+
+Consider an event in which one of $k$ discrete outcomes is guaranteed to occur - for instance, rolling a 6-sided die, where there are $k = 6$ possible outcomes. Repeat this event $n$ times. If outcome $i$ occurs with probability $p_i$ (not necessarily equal), then the number of times $X_i$ that each outcome $i = 1,...,k$ occurs after $n$ trials is modeled by the Multinomial distribution. $X$ is a vector representing the number of successes of each event.
+
+
+|               Description               |    Parameters     |     Support      |       pmf        |
+|:----------------:|:----------------:|:----------------:|:----------------:|
+| $k$ joint binomials | $n \in \mathbb{N}$, $k \in \mathbb{N}$, $p_1,...,p_k\in (0,1)$, $\sum_{i=1}^kp_i = 1$ | $x_i\in \mathbb{N}$, $\sum_{i=1}^kx_i = n$ | $\frac{n!}{\prod_{i=1}^kx_i!}\prod_{i=1}^kp_i^{x_i}$ |
+
+If the vector $X$ is multinomial, then
+
+- All marginal distributions of $X$ are multinomial
+- All conditional distributions are multinomial
+- $X_i \sim \text{Binomial}(n, p_i)$
+- $Cov(X_i, X_j) = E((X_i - mp_i)(X_j - mp_j)) = -mp_ip_j, \forall i\neq j$
