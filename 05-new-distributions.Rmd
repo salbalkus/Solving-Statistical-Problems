@@ -2,48 +2,79 @@
 
 This chapter will demonstrate how to derive the PDF or CDF of a random variable that is a function of other random variables, including hierarchical models.
 
-## Transformation Theorems
+## Transformations
 
-We'll start by introducing two useful theorems for finding the pdf of a transformed random variable $Y=g(X)$ where $g(X)$ is a monotone, one-to-one function over the domain of interest.
+### Theorems
+
+We'll start by introducing two useful theorems for finding the PDF of a transformed random variable $Y=g(X)$ where $g(X)$ is a monotone, one-to-one function over the domain of interest.
 
 &nbsp;
 
->**Theorem 2.1.5** Let $X$ have $p d f f_X(x)$ and let $Y=g(X)$, where $g$ is a monotone function. Let $\mathcal{X}$ and $\mathcal{Y}$ be defined by (2.1.7). Suppose that $f_X(x)$ is continuous on $\mathcal{X}$ and that $g^{-1}(y)$ has a continuous derivative on $\mathcal{Y}$. Then the pdf of $Y$ is given by
+::: {.definition name="Theorem 2.1.5"}
+Let $X$ have $p d f f_X(x)$ and let $Y=g(X)$, where $g$ is a monotone function. Let $\mathcal{X}$ and $\mathcal{Y}$ be defined by (2.1.7). Suppose that $f_X(x)$ is continuous on $\mathcal{X}$ and that $g^{-1}(y)$ has a continuous derivative on $\mathcal{Y}$. Then the PDF of $Y$ is given by
 $$
 f_Y(y)= \begin{cases}f_X\left(g^{-1}(y)\right)\left|\frac{d}{d y} g^{-1}(y)\right| & y \in \mathcal{Y} \\ 0 & \text { otherwise}\end{cases}
 $$
-
-&nbsp;
+:::
 
 In some cases, $g(X)$ will only be a monotone, one-to-one function over subsets of the domain of interest. Below, **Theorem 2.1.8** provides a generalization of **Theorem 2.1.5** that can be applied in these situations. 
 
-&nbsp;
+::: {.definition name="Theorem 2.1.8"}
+Let $X$ have PDF $f_X(x)$, let $Y=g(X)$, and define the sample space $\mathcal{X}$ as in (2.1.7). Suppose there exists a partition, $A_0, A_1, \ldots, A_k$, of $\mathcal{X}$ such that $P\left(X \in A_0\right)=0$ and $f_X(x)$ is continuous on each $A_i$. Further, suppose there exist functions $g_1(x), \ldots, g_k(x)$, defined on $A_1, \ldots, A_k$, respectively, satisfying
 
->**Theorem 2.1.8** Let $X$ have pdf $f_X(x)$, let $Y=g(X)$, and define the sample space $\mathcal{X}$ as in (2.1.7). Suppose there exists a partition, $A_0, A_1, \ldots, A_k$, of $\mathcal{X}$ such that $P\left(X \in A_0\right)=0$ and $f_X(x)$ is continuous on each $A_i$. Further, suppose there exist functions $g_1(x), \ldots, g_k(x)$, defined on $A_1, \ldots, A_k$, respectively, satisfying 
->
 1. $g(x)=g_i(x)$, for $x \in A_i$,
 2. $g_i(x)$ is monotone on $A_i$,
 3. the set $\mathcal{Y}=\left\{y: y=g_i(x)\right.$ for some $\left.x \in A_i\right\}$ is the same for each $i=1, \ldots, k$, and
 4. $g_i^{-1}(y)$ has a continuous derivative on $\mathcal{Y}$, for each $i=1, \ldots, k$.
 Then
+
 $$
 f_Y(y)= \begin{cases}\sum_{i=1}^k f_X\left(g_i^{-1}(y)\right)\left|\frac{d}{d y} g_i^{-1}(y)\right| & y \in \mathcal{Y} \\ 0 & \text { otherwise }\end{cases}
 $$
+:::
 
-&nbsp;
+### Practical Strategy
 
-For transformations of multiple random variables, recall the bivariate Jacobian:
+Now, we will outline a practical strategy for solving problems that involve transformations. Given a transformation $y=g(x)$ (univariate) or $u,v=g(x,y)$ (multivariate), perform a transformation by following these steps:
 
+**Step 1**: Define PMF/PDF of the untransformed random variable(s).
+
+* Univariate: $f(x)$ (given) 
+* Multivariate: calculate joint density $f(x,y)$ (not always given)
+
+**Step 2**: Find the inverse.
+
+* Univariate: $y=g(x) \quad \Rightarrow \quad x=g^{-1}(y)$
+* Multivariate: $u=g(x,y), v=g(x,y) \quad \Rightarrow \quad x=g^{-1}(u,v),y=g^{-1}(u,v)$ 
+
+*(Note: for multivariate case, solve system of equations)*
+
+**Step 3**: Calculate jacobian of the transformation.
+
+* For transformations of multiple random variables, recall bivariate Jacobian:
 $$
-J=\left|\begin{array}{ll}
+|J|=\left|\begin{array}{ll}
 \frac{\partial x}{\partial u} & \frac{\partial x}{\partial v} \\
 \frac{\partial y}{\partial u} & \frac{\partial y}{\partial v}
-\end{array}\right|=\frac{\partial x}{\partial u} \frac{\partial y}{\partial v}-\frac{\partial y}{\partial u} \frac{\partial x}{\partial v}
+\end{array}\right|=\left| \frac{\partial x}{\partial u} \frac{\partial y}{\partial v}-\frac{\partial y}{\partial u} \frac{\partial x}{\partial v} \right|
 $$
+
+**Step 4**: Calculate PMF/PDF of the transformed random variable.
+
+$$
+f_Y(y)= f_X\left(g^{-1}(y)\right)\left|\frac{d}{d y} g^{-1}(y)\right|
+$$
+$$
+f_{U,V}(u,v)= f_{X,Y}\left(g^{-1}(u,v)\right) \left|\begin{array}{ll}
+\frac{\partial x}{\partial u} & \frac{\partial x}{\partial v} \\
+\frac{\partial y}{\partial u} & \frac{\partial y}{\partial v}
+\end{array}\right|
+$$
+
 
 ## Probability Integral Transform
 
-The probability integral transform is a powerful technique that allows for the simulation of random variables from any distribution, given that you have access to a source of uniformly distributed random numbers. This method is particularly useful because it provides a straightforward way to transform uniform random variables into random variables following a desired distribution. We'll start with the general idea:
+The probability integral transform is a powerful technique that allows for the simulation of random variables from any distribution, given that you have access to a source of uniformly distributed random numbers. This method is particularly useful because it provides a straightforward way to transform uniform random variables into random variables following a desired distribution. The general idea is as follows:
 
 When you plug any continuous random variable $X$ into its own CDF, you get $U \sim$ Uniform(0,1):
 $$
@@ -55,26 +86,31 @@ $$
 F_X^{-1}(U) \text{ has CDF } F_X(x)
 $$
 
-The general procedure for constructing a random variable $X$ with a particular CDF $F_X(x)$ is as follows:
+**Procedure**: Construct a random variable $X$ with a particular CDF $F_X(x)$
 
 1. Generate $U \sim$ Uniform(0,1)
 2. Plug $U$ into the inverse CDF: $X=F^{-1}_X(U)$
 3. $X$ is distributed according to the CDF $F_X(x)$
 
-*[For a visual explanation, click here](https://www.youtube.com/watch?v=TzKANDzAXnQ)*
+&nbsp;
 
+*[Click Here: Visual Explanation of Universality of the Uniform](https://www.youtube.com/watch?v=TzKANDzAXnQ)*
 
-## Hiearchical Models (Iterated Moments)
+### Hiearchical Models (Iterated Moments)
 
->**Theorem 4.4 .3** and **Theorem 4.4 .7** If $X$ and $Y$ are any two random variables and the relevant expectations exist, then
+::: {.definition name="Theorem 4.4.3 and Theorem 4.4.7"}
+If $X$ and $Y$ are any two random variables and the relevant expectations exist, then
 $$
 \begin{aligned}
 E_X(X) & =E_Y\left(E_{X \mid Y}(X \mid Y)\right) \\
 \operatorname{Var}_X(X) & =E_Y\left(\operatorname{Var}_{X \mid Y}(X \mid Y)\right)+\operatorname{Var}_Y\left(E_{X \mid Y}(X \mid Y)\right)
 \end{aligned}
 $$
+::: 
 
-## Convolutions
+### Convolutions
+
+Convolutions arise when we calculate the probability distribution of the sum or linear combination of independent random variables. In the following table, we provide a compilation of convolutions involving random variables from well-established probability distributions. Acquainting yourself with these convolutions can significantly improve the efficiency of computing moment generating functions and other statistical expressions of interest.
 
 $$
 \begin{array}{l|l}
@@ -90,3 +126,56 @@ f_{X_i} & f_{\Sigma X_i}\left(X_i \text { independent }\right) \\
 \operatorname{Norm}\left(\mu_i, \sigma_i^2\right) & \operatorname{Norm}\left(\sum_i \mu_i, \sum_i \sigma_i^2\right)
 \end{array}
 $$
+
+&nbsp;
+
+Convolutions can also be computed directly as follows:
+
+::: {.definition name="Theorem"}
+Let $X$ and $Y$ be two independent continuous random variables with possible values $\mathcal{X}$ and $\mathcal{Y}$ and let $Z=X+Y$. Then, the probability density function of $Z$ is given by
+$$
+\begin{aligned}
+f_Z(z) & =\int_{-\infty}^{+\infty} f_X(z-y) f_Y(y) \mathrm{d} y \\
+\text { or } \quad f_Z(z) & =\int_{-\infty}^{+\infty} f_Y(z-x) f_X(x) \mathrm{d} x
+\end{aligned}
+$$
+where $f_X(x), f_Y(y)$ and $f_Z(z)$ are the probability density functions of $X, Y$ and $Z$.
+:::
+
+*Tip: For convolutions, this theorem provides an alternative to the multivariate Jacobian above.*
+
+&nbsp;
+
+Lastly, we can apply the below theorem to **easily** compute the moment generating function and characteristic function of a convolution:
+
+::: {.definition name="Theorem 4.2.12"}
+Let $X$ and $Y$ be independent random variables with moment generating $M_X(t)$ and $M_Y(t)$. Then the moment generating and characteristic functions of the random variable $Z=X+Y$ are given by
+$$
+M_Z(t)=M_X(t) \cdot M_Y(t)
+$$
+$$
+\varphi_Z(t) =\varphi_X(t) \cdot \varphi_Y(t) 
+$$
+For the random variable $Z = X-Y$, the moment generating and characteristic functions are given by:
+$$
+M_Z(t)=M_X(t) \cdot M_Y(-t)
+$$
+$$
+\varphi_Z(t) =\varphi_X(t) \cdot \varphi_Y(-t) 
+$$
+:::
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
