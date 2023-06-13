@@ -138,6 +138,12 @@ Estimating $\mathcal{I}(\theta_0)$ can be performed in two ways: (is this correc
 
 ## Variance Stabilizing Transformations
 
+Sometimes, the asymptotic variance of a distribution may depend on the value of a particular parameter. This may be undesirable because the parameter might be unknown. In this case, we can perform a **variance-stabilizing transformation** to remove the variance.
+
+This is done by setting $f'(\theta) = \frac{c}{\tau(\theta)}$. Then, for $T_n(X)$ such that $\sqrt{n}(T_n - \theta) \overset{\mathcal{D}}{\rightarrow} N(0, \tau^2(\theta))$, by the Delta Method we get
+
+$$\sqrt{n}(f(T_n) - f(\theta)) \overset{\mathcal{D}}{\rightarrow} N(0, f'(\theta)^2 \cdot\tau^2(\theta)) = N(0, c)$$
+
 ## Asymptotic Confidence Intervals
 
 
