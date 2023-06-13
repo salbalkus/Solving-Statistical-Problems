@@ -16,7 +16,54 @@ $$P(A|B) = \frac{P(A\cap B)}{P(B)}$$
 If we need to invert the order of $A$ and $B$ in a conditional probability express, we can use the property
 
 $$P(A|B) = \frac{P(B|A)P(A)}{P(B)}$$
+More generally, let $A_1, A_2, ...$ be a partition of the sample space and let $B$ be any set
+
+$$P(A_i|B) = \frac{P(B|A_i)P(A_i)}{\sum_{j=1}^{\infty} P(B|A_j)P(A_j)}$$
 :::
+
+:::{.definition name="Law of Total Probability"}
+
+Let $A_1, A_2, ..., A_n$ be a partition of the sample space and let $B$ be any set. 
+
+$$P(B) = \sum_{i=1}^{n} P(B \cap A_i) = \sum_{i=1}^{n} P(B|A_i) P(A_i)$$ 
+
+:::
+
+### Conditional Probability in practice
+
+Public health research often relies on the task of comparison. There are several standard measures of association that are widely used in public health research. Here we present two of them. 
+
+:::{.definition name="Relative Risk, RR"}
+
+Let $D$ be an outcome event and $S$ be an exposure event. The relative risk (or risk ratio), denoted by $RR$ is given by
+
+$$RR = \frac{P(D|S)}{P(D|\bar{S})}$$
+where $\bar{S}$ is the complement of $S$. 
+
+:::
+
+:::{.definition name="Odds Ratio, OR"}
+
+Let $D$ be an outcome event and $S$ be an exposure event. The odds ratio, denoted by $OR$, is given by
+
+$$OR = \frac{P(D|S)/P(\bar{D}|S)}{P(D|\bar{S})/P(\bar{D}|\bar{S})}$$
+Note that $P(\bar{D}|S) = 1 - P(D|S)$. 
+
+- The odds ratio is invariant to switching $D$ and $S$, ie. 
+$$\frac{P(D|S)/P(\bar{D}|S)}{P(D|\bar{S})/P(\bar{D}|\bar{S})} = \frac{P(S|D)/P(\bar{S}|D)}{P(S|\bar{D})/P(\bar{S}|\bar{D})}.$$
+**Proof.**
+
+$$
+\begin{aligned}
+\frac{P(D|S)/P(\bar{D}|S)}{P(D|\bar{S})/P(\bar{D}|\bar{S})} &= P(D|S) \cdot \frac{1}{P(\bar{D}|S)} \cdot \frac{1}{P(D|\bar{S})} \cdot P(\bar{D}|\bar{S})\\
+&= \frac{P(S|D) P(D)}{P(S)} \cdot \frac{P(S)}{P(S|\bar{D})P(\bar{D})} \cdot \frac{P(\bar{S})}{P(\bar{S}|D)P(D)} \cdot \frac{P(\bar{S}|\bar{D})P(\bar{D})}{P(\bar{S})} \\
+&= \frac{P(S|D)/P(\bar{S}|D)}{P(S|\bar{D})/P(\bar{S}|\bar{D})}
+\end{aligned}
+$$
+The second step plugs in the following equalities which follow from Bayes' Rule
+
+$$P(D|S) = \frac{P(S|D) P(D)}{P(S)}, P(\bar{D}|S) = \frac{P(S|\bar{D})P(\bar{D})}{P(S)},$$
+$$P(D|\bar{S}) = \frac{P(\bar{S}|D)P(D)}{P(\bar{S})}, \text{and } P(\bar{D}|\bar{S}) = \frac{P(\bar{S}|\bar{D})P(\bar{D})}{P(\bar{S})}$$
 
 ## Independence {#independence}
 
@@ -35,6 +82,10 @@ Often, we prefer to use the second definition because it is independent and easi
 $$f_{X,Y}(x, y) = f_X(x)f_Y(y)$$
 
 This property is the foundation of statistical inference for iid random variables discussed in Chapters 8 and 10.
+
+
+
+
 
 ## Convergence
 
