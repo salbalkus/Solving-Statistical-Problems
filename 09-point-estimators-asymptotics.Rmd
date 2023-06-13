@@ -6,7 +6,7 @@ Evaluating the asymptotic properties of point estimators.
 
 An important asymptotic property of an estimator is that it converges in probability to the true value being estimated as $n \rightarrow \infty$. This is called **consistency**. 
 
-One strategy for proving consistency is to use the Weak Law of Large Numbers.
+The most common strategy for proving consistency is to use the Weak Law of Large Numbers.
 
 ::: {#wlln .theorem name = "Weak Law of Large Numbers"}
 
@@ -21,9 +21,27 @@ $$\frac{1}{n}\sum_{i=1}^nX_i - \frac{1}{n}\sum_{i=1}^nE(X_i) \overset{\mathcal{p
 
 The WLLN can be combined with the Continuous Mapping Theorem to show a variety of estimators are consistent.
 
-## Asymptotic Normality
+## Asymptotic Efficiency
+
+In addition to checking that an estimator converges to the correct value, we are also often concerned with the estimator's *variance* as $\n \rightarrow \infty$. Often, estimators converge asymptotically to a normal distribution. If an estimator $T_n(X)$ has the property $k_n(T_n(X) - \tau(\theta)) \overset{\mathcal{D}}{\rightarrow} N(0,\sigma^2)$, then $\sigma^2$ is called the *asymptotic variance* [@Casella1990].
+
+Furthermore, $T_n(X)$ is **asymptotically efficient* if $\sigma^2$ achieves the Cramer-Rao Lower Bound. If $T_n(X)$ is one-dimensional, then the **asymptotic efficiency** of $T_n(X)$ can be computed as the ratio
+
+$$AE(\theta, T_n) = \frac{(\tau'(\theta))^2}{\mathcal{I}(\theta)\sigma^2}$$
+If $T_n(X)$ is $k$-dimensional, let $d = \begin{bmatrix}\frac{\partial}{\partial\theta_1}\tau(\theta),...,\frac{\partial}{\partial\theta_k}\tau(\theta)\end{bmatrix}$. Then, the asymptotic efficiency is 
+
+$$AE(\theta, T_n) = \frac{d'\mathcal{I}(\theta)^{-1}d}{\sigma^2}$$
+
+We can also compare estimators via their **asymptotic relative efficiency (ARE)**, which for estimators $S_n$ and $T_n$ is 
+
+$$AE(\theta, S_n, T_n) = \frac{\sigma_T^2}{\sigma_S^2}$$
+
+Let's explore first how we might prove that an estimator converges asymptotically to a normal distribution to show this directly.
+
 
 ### Central Limit Theorems
+
+These theorems are used to show asymptotic normality. There are many different types; let us focus on the three most common.
 
 
 ::: {#clt .theorem name = "Central Limit Theorem (iid)"}
@@ -60,6 +78,8 @@ $$\frac{1}{S_n}\sum_{i=1}^n (X_i - E(X_i)) \overset{\mathcal{D}}{\rightarrow} N(
 
 ### The Delta Method
 
+What if our estimator is not a sample mean? In this case, if it is a function of a sample mean, we can still use the Delta Method to prove that it converges asymptotically to either a Normal or a $\chi^2$ distribution.
+
 :::{#delta-method .theorem name="Delta Method"}
 
 If $\sqrt{n}(\hat{\theta}_n - \theta) \overset{\mathcal{D}}{\rightarrow} N(0,\sigma^2)$, then for a continuous $g$ with continuous nonzero derivative in an interval containing $\theta$...
@@ -71,7 +91,7 @@ If $\sqrt{n}(\hat{\theta}_n - \theta) \overset{\mathcal{D}}{\rightarrow} N(0,\si
 
 Generally, the Second-Order Delta Method is required if $g'(\theta) = 0$.
 
-:::{#delta-method .theorem name="Multivariate Delta Method"}
+:::{#multivariate-delta-method .theorem name="Multivariate Delta Method"}
 
 If $\sqrt{n}(\hat{\theta}_n - \theta) \overset{\mathcal{D}}{\rightarrow} N(0,V)$, where $V$ is a $k \times k$ matrix, then for a continuous real-valued function $g(x)$ of $k$ variables with continuous nonzero first partial derivatives,
 
@@ -80,5 +100,44 @@ $$\sqrt{n}\Big(g(\hat{\theta}_n) - g(\theta)\Big) \overset{\mathcal{D}}{\rightar
 where $u = \begin{bmatrix}\frac{\partial}{\partial \theta_1}g(\theta),...,\frac{\partial}{\partial \theta_k}g(\theta)\end{bmatrix}$
 
 :::
+
+### Cramer-Wold Device
+
+One final technique for proving convergence in distribution is to use the Cramer-Wold Device.
+
+:::{#cramer-wold-device .theorem name="Cramer Wold Device"}
+
+For a sequence of random vectors $X_n$, a random vector $X$, and a vector $a$ of constants,
+
+$$X_n \overset{\mathcal{D}}{\rightarrow} \iff a'X_n \overset{\mathcal{D}}{\rightarrow}a'X, \forall a$$
+In other words, we can show convergence in distribution of a random vector by showing that every linear combination of that random vector converges in distribution to the same linear combination of $X$.
+
+:::
+
+The Cramer-Wold Device allows us to convert a problem involving convergence of random vectors into a problem involving convergence of a single random variable.
+
+### Asymptotic Distribution in Practice.
+
+Statistical problems are often more complicated than simply applying the CLT or Delta Method. Often, we may need to consider the convergences of other random variables. To do this, we can combine the CLT/Delta Method with Slutsky's Theorem or the Continuous Mapping Theorem to prove desired results.
+
+
+## Asymptotic Properties of MLEs
+
+While the CLT and Delta Method are extremely useful, if you are working with MLEs, it can often be faster to rely on their known properties. For $X_i$ satisfying a certain set of [regularity conditions](https://myweb.uiowa.edu/pbreheny/7110/wiki/regularity-conditions.html) (where? better link), the MLE $\hat{\theta}_n has the two import properties discussed above:
+
+- **Consistency**: $\hat{\theta}_n \overset{p}{\rightarrow} \theta$
+- **Asymptotic Efficiency**: $\sqrt{n}(\hat{\theta}_n - \theta) \overset{\mathcal{D}}{\rightarrow} N(0, \mathcal{I}(\theta_0)^{-1})$, the [Cramer-Rao Lower Bound](#crlb)
+
+This holds true even for multi-parameter MLEs. Note that the regularity conditions are met by the MLE of all exponential families for which $\nu \in \Theta \subset \mathbb{R}$ is an open set, which can be useful in problem-solving.
+
+Estimating $\mathcal{I}(\theta_0)$ can be performed in two ways: (is this correct?)
+
+1. $-\frac{1}{n} \frac{\partial^2}{\partial\theta^2}\ell(\hat{\theta}_n | X_n) \overset{p}{\rightarrow} \mathcal{I}(\theta_0)$
+2. $\frac{1}{n} I_n(\hat{\theta}_n) \overset{p}{\rightarrow} \mathcal{I}(\theta_0)$
+
+
+## Variance Stabilizing Transformations
+
+## Asymptotic Confidence Intervals
 
 
