@@ -1,6 +1,6 @@
 # Random Processes {#random-processes}
 
-This section will focus on two types of random processes discussed in class: poisson processes and branching processes.
+This section elaborates on two types of random processes: poisson processes and branching processes.
 
 ## Poisson Processes
 

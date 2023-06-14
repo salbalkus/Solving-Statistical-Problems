@@ -156,7 +156,11 @@ $$
 $$
 \varphi_Z(t) =\varphi_X(t) \cdot \varphi_Y(t) 
 $$
+<<<<<<< HEAD
 For the random variable $Z = X-Y$, the moment generating and characteristic functions are analogously given by:
+=======
+For the random variable $Z = X-Y$, the moment generating and characteristic functions are given by:
+>>>>>>> 111b97e1cc614f657524efe62f33b45cb7fd6858
 $$
 M_Z(t)=M_X(t) \cdot M_Y(-t)
 $$
