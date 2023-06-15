@@ -27,9 +27,20 @@ $$W_n = (\hat{\theta}_n - \theta_0)^\top(I_n(\theta_0))(\hat{\theta}_n - \theta_
 which follows from the fact that $\hat{\theta}_n \approx MVN_k(\theta_0, (I_n(\theta_0))^{-1})$
 :::
 
-What is $I_n(\hat{\theta}_0)$?
+To obtain $I_n(\theta_0)$, we can estimate it using either...
 
-The advantage of the Wald Test is that constructing confidence intervals is very simple. However, in practice the approximation may not be as accurate as the other two tests.
+- $I_n(\hat{\theta}_n)$; simply plug the MLE into the expected information 
+- $-\frac{\partial^2}{\partial\theta^2}\ell(\hat{\theta}_n | X_n)$; plug the MLE into the observed information
+
+However, $I_n(\hat{\theta}_0)$ is generally preferred, because it is more efficient.  
+
+Advantages:
+- Simple to compute if you know the form of the MLE
+- Constructing confidence intervals is easy
+
+Disadvantages:
+- Requires knowing the form of the MLE
+- Approximation may not be as accurate as the other two tests.
 
 
 ## Score Test
@@ -50,7 +61,12 @@ which follows from the fact that $U_n(\theta_0) \approx MVN_k(0, I_n(\theta_0))$
 
 :::
 
-The advantage of the Score Test is that it is not actually necessary to know the form of the MLE to construct the test - all that is needed is the score equation and information under $H_0$. This eases computation. However, constructing confidence intervals is more complicated, since inverting the Score test statistic may be challenging.
+Advantages:
+- Not actually necessary to know the form of the MLE to construct the test - all that is needed is the score equation and information under $H_0$
+- More computationally efficient as a result
+
+Disadvantages:
+- Constructing confidence intervals is more complicated, since inverting the Score test statistic may be challenging
 
 ## Likelihood Ratio Test
 
@@ -64,9 +80,13 @@ This can be extended to multiple dimensions by letting $\ell(\theta|X_n)$ by a $
 $$Q_n = 2(\ell(\hat{\theta}_n|X_n) - \ell(\theta_0|X_n)) \approx\chi^2(k)$$
 :::
 
-The advantage of the Likelihood Ratio test is that no derivative needs to be calculated. In addition, it generally provides the most accurate approximation, especially if we decide to reparametrize the model, in which case the derivative in the Wald/Score tests would need to be recomputed. 
+Advantages:
+- No derivatives need to be calculated
+- Provides the most accurate approximation, especially if we decide to reparametrize the model, in which case the derivative in the Wald/Score tests would need to be recomputed. 
 
-The disadvantage is that inverting the test to construct a confidence interval is difficult, and that the test requires knowledge of the log-likelihood under both the null hypothesis $H_0$ and the alternative $H_1$.
+Disadvantages:
+- Inverting the test to construct a confidence interval is difficult
+- Requires knowledge of the log-likelihood under both the null hypothesis $H_0$ and the alternative $H_1$.
 
 
 ## Composite Null Hypotheses
