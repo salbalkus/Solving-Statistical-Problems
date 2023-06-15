@@ -7,8 +7,8 @@ Evaluating the asymptotic properties of point estimators.
 An important asymptotic property of an estimator is that it converges in probability to the true value being estimated as $n \rightarrow \infty$. This is called **consistency**. 
 
 The most common strategy for proving consistency is to use the Weak Law of Large Numbers.
-
-::: {#wlln .theorem name = "Weak Law of Large Numbers"}
+ 
+::: {.theorem name="Weak Law of Large Numbers" #wlln}
 
 **iid version**: If $Z_i$ are iid with finite mean, then
 
@@ -23,7 +23,7 @@ The WLLN can be combined with the Continuous Mapping Theorem to show a variety o
 
 ## Asymptotic Efficiency
 
-In addition to checking that an estimator converges to the correct value, we are also often concerned with the estimator's *variance* as $\n \rightarrow \infty$. Often, estimators converge asymptotically to a normal distribution. If an estimator $T_n(X)$ has the property $k_n(T_n(X) - \tau(\theta)) \overset{\mathcal{D}}{\rightarrow} N(0,\sigma^2)$, then $\sigma^2$ is called the *asymptotic variance* [@Casella1990].
+In addition to checking that an estimator converges to the correct value, we are also often concerned with the estimator's *variance* as $n \rightarrow \infty$. Often, estimators converge asymptotically to a normal distribution. If an estimator $T_n(X)$ has the property $k_n(T_n(X) - \tau(\theta)) \overset{\mathcal{D}}{\rightarrow} N(0,\sigma^2)$, then $\sigma^2$ is called the *asymptotic variance* [@Casella1990].
 
 Furthermore, $T_n(X)$ is **asymptotically efficient* if $\sigma^2$ achieves the Cramer-Rao Lower Bound. If $T_n(X)$ is one-dimensional, then the **asymptotic efficiency** of $T_n(X)$ can be computed as the ratio
 
@@ -44,7 +44,7 @@ Let's explore first how we might prove that an estimator converges asymptoticall
 These theorems are used to show asymptotic normality. There are many different types; let us focus on the three most common.
 
 
-::: {#clt .theorem name = "Central Limit Theorem (iid)"}
+::: {#clt .theorem name="Central Limit Theorem (iid)"}
 
 If $X_i$ are iid with finite first and second moments ($E(X_i), Var(X_i) < \infty$)  then
 
@@ -52,7 +52,7 @@ $$\sqrt{n}\Big(\frac{1}{n}\sum_{i=1}^nX_i - E(X_i)\Big) \overset{\mathcal{D}}{\r
 
 :::
 
-::: {#clt .theorem name = "Lyapunov's Central Limit Theorem (non-iid)"}
+::: {#clt .theorem name="Lyapunov's Central Limit Theorem (non-iid)"}
 
 Consider $X_i$ that are independent with finite first and second moments ($E(X_i), Var(X_i) < \infty$). Let $S_n^2 = \sum_{i=1}^n Var(X_i)$. Then, for some $\delta > 0$, if the condition
 
@@ -65,7 +65,7 @@ $$\frac{1}{S_n}\sum_{i=1}^n (X_i - E(X_i)) \overset{\mathcal{D}}{\rightarrow} N(
 
 In practice, to prove that Lyapunov's CLT holds true, we typically take $\delta = 1$ and compute the third moments contained in the Lyapunov condition. Alternatively, we can use Lindeberg's CLT for non-iid data:
 
-::: {#clt .theorem name = "Lindeberg's Central Limit Theorem (non-iid)"}
+::: {#clt .theorem name="Lindeberg's Central Limit Theorem (non-iid)"}
 Like the Lyapunov CLT, consider $X_i$ that are independent with finite first and second moments ($E(X_i), Var(X_i) < \infty$). Let $S_n^2 = \sum_{i=1}^n Var(X_i)$. Then if
 
 $$\lim_{n\rightarrow \infty} \frac{1}{S_n^{2}}\sum_{i=1}^n E((X_i - E(X_i))^{2})\cdot I(|X_i - E(X_i) > \varepsilon S_n) = 0$$

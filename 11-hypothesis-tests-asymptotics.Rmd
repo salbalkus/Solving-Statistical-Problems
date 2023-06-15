@@ -1,3 +1,93 @@
 # Hypothesis Tests: Asymptotics {#hypothesis-tests-asymptotics}
 
-Constructing asymptotic hypothesis tests.
+Constructing a finite-sample hypothesis test requires deriving the full distribution of the test statistic, which may be difficult. Oftentimes, however, we can use the Central Limit Theorem and other asymptotic tools to prove that, as $n \rightarrow \infty$, a test statistic converges to either a standard **normal** or **chi-squared** distribution. This permits the construction of *asymptotic* hypothesis tests.
+
+
+This section will focus on constructing and evaluating tests based on the MLE $\hat{\theta}_n$ when regularity conditions are met under **both** the null hypothesis $H_0$ and the alternative $H_1$.. In this scenario, there are three possible tests that may be constructed:
+
+1. Wald Test
+2. Score Test
+3. Likelihood Ratio Test
+
+All of these tests are asymptotically equivalent. One-sided tests are generally based on a Normal approximation, while two-sided are based on a $\chi^2$ approximation. Let's discuss each in detail, including their strengths and weaknesses.
+
+## Wald Test
+
+::: {#wald-test .definition name="Wald Test"}  
+The one-sided, one-dimensional Wald test is constructed based on
+
+$$W_n = (\hat{\theta}_n - \theta_0)(I_n(\theta_0))^\frac{1}{2} \approx N(0,1)$$
+The two-sided one-dimensional Wald test is constructed based on the square of this; that is,
+
+$$W_n = (\hat{\theta}_n - \theta_0)^2(I_n(\theta_0)) \approx \chi^2(1)$$
+It can be extended to the multidimensional setting by representing $\hat{\theta}_n$ and $\theta$ as $k$-dimensional vectors and $I_n(\hat{\theta}_0)$ a $k \times k$ matrix.
+
+$$W_n = (\hat{\theta}_n - \theta_0)^\top(I_n(\theta_0))(\hat{\theta}_n - \theta_0) \approx \chi^2_k$$
+
+which follows from the fact that $\hat{\theta}_n \approx MVN_k(\theta_0, (I_n(\theta_0))^{-1})$
+:::
+
+What is $I_n(\hat{\theta}_0)$?
+
+The advantage of the Wald Test is that constructing confidence intervals is very simple. However, in practice the approximation may not be as accurate as the other two tests.
+
+
+## Score Test
+
+::: {#score-test .definition name="Score Test"}
+
+The one-sided, one-dimensional Score Test is constructed by
+
+$$S_n = \Big(\frac{\partial}{\partial \theta}\ell(\theta_0|X_n)\Big)(I_n(\theta_0))^{-\frac{1}{2}}$$
+
+The two-sided, one-dimensional Score test is constructed based on its square:
+
+$$S_n = \Big(\frac{\partial}{\partial\theta}\ell(\theta_0 | X_n)\Big)^2(I_n(\theta_0))^{-1}$$
+It can be extended to the multivariate setting by representing $U_n(\theta_0) = \begin{bmatrix}\frac{\partial}{\partial\theta_1}\ell(\theta|X_n) & ... & \frac{\partial}{\partial\theta_k}\ell(\theta|X_n) \end{bmatrix}$ and $I_n(\hat{\theta}_0)$ a $k \times k$ matrix:
+
+$$(U_n(\theta_0))^\top(I_n(\theta_0))^{-1}(U_n(\theta_0)) \approx \chi^2_k$$
+which follows from the fact that $U_n(\theta_0) \approx MVN_k(0, I_n(\theta_0))$
+
+:::
+
+The advantage of the Score Test is that it is not actually necessary to know the form of the MLE to construct the test - all that is needed is the score equation and information under $H_0$. This eases computation. However, constructing confidence intervals is more complicated, since inverting the Score test statistic may be challenging.
+
+## Likelihood Ratio Test
+
+::: {#lr-test .definition name="Likelihood Ratio Test"}
+
+The one-dimensional asymptotic Likelihood Ratio Test (LRT) is constructed based on
+
+$$Q_n = 2\log\Big(\frac{\mathcal{L}(\hat{\theta}_n)}{\mathcal{L}(\theta_0)}\Big) = 2(\ell(\hat{\theta}_n|X_n) - \ell(\theta_0|X_n)) \approx \chi^2(1)$$
+This can be extended to multiple dimensions by letting $\ell(\theta|X_n)$ by a $k$-dimensional vector. Then,
+
+$$Q_n = 2(\ell(\hat{\theta}_n|X_n) - \ell(\theta_0|X_n)) \approx\chi^2(k)$$
+:::
+
+The advantage of the Likelihood Ratio test is that no derivative needs to be calculated. In addition, it generally provides the most accurate approximation, especially if we decide to reparametrize the model, in which case the derivative in the Wald/Score tests would need to be recomputed. 
+
+The disadvantage is that inverting the test to construct a confidence interval is difficult, and that the test requires knowledge of the log-likelihood under both the null hypothesis $H_0$ and the alternative $H_1$.
+
+
+## Composite Null Hypotheses
+
+A composite null hypothesis involves multiple parameters, some of which are [nuisance parameters](#nuisance-parameters). Suppose we have a null hypothesis $H_0: \alpha = \alpha_0$, where $\alpha$ is a vector of length $k$, and we have a vector $\beta$ of nuisance parameters. In a composite null, we can partition $\theta^\top = (\alpha^\top, \beta^\top)$.
+
+::: {#adjusted-information .definition name="Adjusted Information}
+To use a normal asymptotic approximation in this situation, it is necessary to compute the "adjusted information" $I_{n,\alpha\alpha|\beta}(\alpha, \beta)$ - the information for $\alpha$, conditional on our $\beta$ estimate:
+
+$$I_{n,\alpha\alpha|\beta}(\alpha, \beta) = I_{n,\alpha\alpha}(\alpha, \beta) - I_{n,\alpha\beta}(\alpha, \beta)(I_{n,\beta\beta}(\alpha, \beta))^{-1}I_{n,\beta\alpha}(\alpha, \beta)$$
+
+::
+
+The adjusted information is derived from the block-matrix partition formula for the partition
+
+$$I_n(\alpha, \beta) = \begin{bmatrix} I_{n,\alpha\alpha}(\alpha, \beta) & I_{n,\alpha\beta}(\alpha, \beta) \\ I_{n,\beta\alpha}(\alpha, \beta) & I_{n,\beta\beta}(\alpha, \beta) \\\end{bmatrix}$$
+With the adjusted information computed, the previously-discussed asymptotic tests become the following:
+
+- Wald: $W_n = (\hat{\alpha}_n - \alpha_0)^\top I_{n,\alpha\alpha|\beta}(\hat{\alpha}_n, \hat{\beta}_n)(\hat{\alpha}_n - \alpha_0)$
+- Score: $S_n = U_{n,\alpha}(\alpha_0, \hat{\beta}_n)^\top I_{n,\alpha\alpha|\beta}(\alpha_0, \hat{\beta}_n)U_{n,\alpha}(\alpha_0, \hat{\beta}_n)$
+- Likelihood Ratio: $Q_n = 2(\ell(\hat{\alpha}_n, \hat{\beta}_n) - \ell(\alpha_0, \hat{\beta}_n))$
+
+all of which follow a $\chi^2(k)$ distribution, where $k$ is the number of parameters being tested in $\alpha$.
+
