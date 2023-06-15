@@ -16,7 +16,54 @@ $$P(A|B) = \frac{P(A\cap B)}{P(B)}$$
 If we need to invert the order of $A$ and $B$ in a conditional probability express, we can use the property
 
 $$P(A|B) = \frac{P(B|A)P(A)}{P(B)}$$
+More generally, let $A_1, A_2, ...$ be a partition of the sample space and let $B$ be any set
+
+$$P(A_i|B) = \frac{P(B|A_i)P(A_i)}{\sum_{j=1}^{\infty} P(B|A_j)P(A_j)}$$
 :::
+
+:::{.definition name="Law of Total Probability"}
+
+Let $A_1, A_2, ..., A_n$ be a partition of the sample space and let $B$ be any set. 
+
+$$P(B) = \sum_{i=1}^{n} P(B \cap A_i) = \sum_{i=1}^{n} P(B|A_i) P(A_i)$$ 
+
+:::
+
+### Conditional Probability in practice
+
+Public health research often relies on the task of comparison. There are several standard measures of association that are widely used in public health research. Here we present two of them. 
+
+:::{.definition name="Relative Risk, RR"}
+
+Let $D$ be an outcome event and $S$ be an exposure event. The relative risk (or risk ratio), denoted by $RR$ is given by
+
+$$RR = \frac{P(D|S)}{P(D|\bar{S})}$$
+where $\bar{S}$ is the complement of $S$. 
+
+:::
+
+:::{.definition name="Odds Ratio, OR"}
+
+Let $D$ be an outcome event and $S$ be an exposure event. The odds ratio, denoted by $OR$, is given by
+
+$$OR = \frac{P(D|S)/P(\bar{D}|S)}{P(D|\bar{S})/P(\bar{D}|\bar{S})}$$
+Note that $P(\bar{D}|S) = 1 - P(D|S)$. 
+
+- The odds ratio is invariant to switching $D$ and $S$, ie. 
+$$\frac{P(D|S)/P(\bar{D}|S)}{P(D|\bar{S})/P(\bar{D}|\bar{S})} = \frac{P(S|D)/P(\bar{S}|D)}{P(S|\bar{D})/P(\bar{S}|\bar{D})}.$$
+*Proof.*
+
+$$
+\begin{aligned}
+\frac{P(D|S)/P(\bar{D}|S)}{P(D|\bar{S})/P(\bar{D}|\bar{S})} &= P(D|S) \cdot \frac{1}{P(\bar{D}|S)} \cdot \frac{1}{P(D|\bar{S})} \cdot P(\bar{D}|\bar{S})\\
+&= \frac{P(S|D) P(D)}{P(S)} \cdot \frac{P(S)}{P(S|\bar{D})P(\bar{D})} \cdot \frac{P(\bar{S})}{P(\bar{S}|D)P(D)} \cdot \frac{P(\bar{S}|\bar{D})P(\bar{D})}{P(\bar{S})} \\
+&= \frac{P(S|D)/P(\bar{S}|D)}{P(S|\bar{D})/P(\bar{S}|\bar{D})}
+\end{aligned}
+$$
+The second step plugs in the following equalities which follow from Bayes' Rule
+
+$$P(D|S) = \frac{P(S|D) P(D)}{P(S)}, P(\bar{D}|S) = \frac{P(S|\bar{D})P(\bar{D})}{P(S)},$$
+$$P(D|\bar{S}) = \frac{P(\bar{S}|D)P(D)}{P(\bar{S})}, \text{and } P(\bar{D}|\bar{S}) = \frac{P(\bar{S}|\bar{D})P(\bar{D})}{P(\bar{S})}$$
 
 ## Independence {#independence}
 
@@ -35,6 +82,56 @@ Often, we prefer to use the second definition because it is independent and easi
 $$f_{X,Y}(x, y) = f_X(x)f_Y(y)$$
 
 This property is the foundation of statistical inference for iid random variables discussed in Chapters 8 and 10.
+
+
+## Order Statistics
+
+::: {.definition name="Order statistic"} 
+
+The $k$th order statistic of a random sample from a random variable $X$ is the $k$th smallest value. We denote the $k$th order statistic as $X_{(k)}$. 
+
+Let $X_1, X_2, ..., X_n$ be a random sample from $X  \sim f_X(x)$ with cumulative distribution $F_X(x)$. The order statistics are random variables themselves that satisfy $X_{(1)} \leq X_{(2)}\leq ... \leq X_{(n)}$. In particular, $X_{(1)} = min(X_1, X_2, ..., X_n)$ and  $X_{(n)} = max(X_1, X_2, ..., X_n)$. 
+
+- The **sample range**, $R = X_{(n)} - X_{(1)}$,  is the distance between the smallest and the largest order statistics of the sample. 
+- The **sample median** is a number $M$ such that approximately half of the observations in the sample are less than $M$ and the other half are greater. 
+
+$$M = \begin{cases} 
+      X_{((n+1)/2)}& \text{if } n  \text{ is odd} \\
+      (X_{(n/2)} + X_{(n/2 + 1)})/2 & \text{if } n  \text{ is even.}
+   \end{cases}$$
+:::
+
+::: {.theorem} 
+
+Let $X_1, X_2, ..., X_n$ be a random sample from a discrete distribution with pmf $f_X(x_i) = p_i$, where $x_1<x_2< \cdots$ are the possible values of $X$ in ascending order. Define $P_i = p_1 + p_2 + \cdots p_i$. Let $X_{(1)}, X_{(2)}, ... ,X_{(n)}$ denote the order statistics from the sample. Then 
+
+$$P(X_{(j)}\leq x_i) = \sum_{k=j}^{n} {n \choose k} P_i^k(1-P_i)^{n-k}$$
+and 
+
+$$P(X_{(j)}= x_i) = \sum_{k=j}^{n} {n \choose k} [P_i^k(1-P_i)^{n-k} - P_{i-1}^k(1-P_{i-1})^{n-k}].$$
+:::
+
+
+::: {.theorem} 
+
+Let $X_1, X_2, ..., X_n$ be a random sample from a continuous distribution with pdf $f_X(x_i)$ and cdf $F_X(x)$. Then the pdf of $X_{(j)}$ is 
+
+$$f_{X_{(j)}}(x) = \frac{n!}{(j-1)!(n-j)!} f_X(x)[F_X(x)]^{j-1}[1-F_X(x)]^{n-j}.$$
+
+:::
+
+::: {.theorem} 
+Let $X_1, X_2, ..., X_n$ be a random sample from a continuous distribution with pdf $f_X(x_i)$ and cdf $F_X(x)$. Then the joint pdf of  $X_{(i)}$ and $X_{(j)}, 1\leq i \leq j \leq n$, is 
+
+$$f_{X_{(i)}, X_{(j)}} (u,v) = \frac{n!}{(i-1)!(j-1-i)!(n-j)!}f_X(u)f_X(v)[F_X(u)]^{i-1} [F_X(v)-F_X(u)]^{j-1-i}[1-F_X(v)]^{n-j}.$$
+
+The joint pdf of all order statistics is 
+
+$$f_{X_{(1)}, X_{(2)}, ..., X_{(n)}} (x_1,x_2, ..., x_n) = \begin{cases} 
+n!f_X(x_1)f_X(x_2) \cdots f_X(x_n) & -\infty< x_1<x_2<\cdots<x_n<\infty\\
+0 & otherwise
+\end{cases}$$
+::: 
 
 ## Convergence
 
@@ -67,6 +164,7 @@ X_n \overset{p}{\rightarrow} X \iff\lim_{n\rightarrow\infty}P(||X_n - X|| > \eps
 \end{align}
 
 :::
+
 
 
 ### Convergence in Distribution

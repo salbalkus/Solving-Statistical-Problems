@@ -1,7 +1,275 @@
 # Random Processes {#random-processes}
 
-Focusing on the branching processes discussed in class.
+This section elaborates on two types of random processes: poisson processes and branching processes.
 
-## Example one
+## Poisson Processes
 
-## Example two
+A **Poisson Process** is a model for a series of discrete events where the average time between events is known, but the exact timing of events is random. A poisson process has the following properties:
+
+* Events are independent of each other.
+* The average rate (events per time period) is constant.
+* Two events cannot occur at the same time.
+
+### Memorylessness of the Exponential 
+
+Recall that the exponential distribution is **memoryless**, meaning $P(X>x+a \mid X>a)=P(X>x)$. The memoryless property of the exponential distribution applies to waiting times in a Poisson process. It means that the time between events remains independent of past events, allowing us to predict future waiting times solely based on the average rate of event occurrences (i.e., the interarrival times between events are i.i.d.). 
+
+
+### Count-Time Duality 
+
+$$
+\{T_n>t\}=\{N_t<n\}
+$$
+
+In words, the following 2 statements are equivalent:
+
+* $T_n$ (time to the $n^{th}$ event) is greater than some fixed time $t$ 
+* $N_t$ (number of events up to time $t$) is less than some fixed number $n$
+
+$$
+\int_t^{\infty} \underbrace{\frac{1}{\Gamma(n)\lambda^{-n}}  x^{n-1} e^{-\lambda x}}_{T_n \sim \text{Gamma}(n,\lambda)} d x
+\quad = \quad \sum_{x=0}^{n-1} \underbrace{\frac{e^{-\lambda t} (\lambda t)^x}{x!}}_{N_t \sim \text{Poisson}(\lambda t)}
+$$
+
+
+### Poisson Distribution 
+
+Suppose that we are interested in the expected **number of events** that will occur over a particular interval. The probability of observing a particular number of events can be modeled using the (discrete) poisson distribution:
+
+* $X=$ Discrete number of events occurring over a finite interval
+* Moments: $\mathbb{E}[X]=\lambda$, $\operatorname{Var}(X)=\lambda$
+* $\lambda=$ Expected number of events over interval $=\underbrace{\frac{Events}{Time}}_{Rate}\times Time$
+
+&nbsp;
+
+```{R, echo = FALSE, warning = FALSE}
+library(ggplot2)
+
+lambdas <- c(1, 2, 3, 4, 5)  # Rate parameters for Poisson distributions
+x <- 0:20  # Range of values for x-axis
+
+# Create an empty data frame
+data <- data.frame(x = numeric(), pmf = numeric(), lambda = factor())
+
+# Generate the PMF values for each lambda and store in the data frame
+for (lambda in lambdas) {
+  pmf <- dpois(x, lambda)
+  data <- rbind(data, data.frame(x = x, pmf = pmf, lambda = as.factor(lambda)))
+}
+
+# Create the plot using ggplot2
+ggplot(data, aes(x = x, y = pmf, color = lambda)) +
+  geom_line(size = 1) +  # Smooth line plot
+  geom_point(size = 2) +  # Add points for each value
+  labs(x = "x", y = "P(X = x)", title = "Poisson PMF") +
+  scale_color_discrete(name = "Lambda") +  # Legend for different lambdas
+  theme_minimal()
+
+
+
+
+```
+
+### Exponential Distribution
+
+Suppose that we are interested in the expected **time before the next event**. The probability of observing a particular time before the next event can be modeled using the (continuous) exponential distribution:
+
+* $X=$ Continuous time between events
+* Moments: $\mathbb{E}[X]=\frac{1}{\lambda}$, $\operatorname{Var}(X)=\frac{1}{\lambda^2}$
+* $\lambda=$ Rate of events $=\underbrace{\frac{Events}{Time}}_{Rate}$
+
+*Note: There is an inverse relationship between the rate of events ($\lambda$) and expected time before the next event ($x$). As the rate of events ($\lambda$) increases, the time before the next event ($x$) decreases.*
+
+&nbsp;
+
+```{R, echo = FALSE, warning = FALSE}
+
+library(ggplot2)
+
+rates <- c(0.5, 1, 1.5, 2, 2.5)  # Rate parameters for Exponential distributions
+x <- seq(0, 5, by = 0.1)  # Range of values for x-axis
+
+# Create an empty data frame
+data <- data.frame(x = numeric(), pdf = numeric(), rate = factor())
+
+# Generate the PDF values for each rate and store in the data frame
+for (rate in rates) {
+  pdf <- dexp(x, rate)
+  data <- rbind(data, data.frame(x = x, pdf = pdf, rate = as.factor(rate)))
+}
+
+# Create the plot using ggplot2
+ggplot(data, aes(x = x, y = pdf, color = rate)) +
+  geom_line(size = 1) +  # Smooth line plot
+  geom_point(size = 2) +  # Add points for each value
+  labs(x = "x", y = "P(X = x)", title = "Exponential PDF") +
+  scale_color_discrete(name = "Lambda") +  # Legend for different rates
+  theme_minimal()
+
+```
+
+&nbsp;
+
+### Example
+
+Consider a Poisson process $(\lambda)$ with a twist: After every event there is a guaranteed period of length $\nu$ during which no event can occur. 
+
+Typical Poisson process:  
+
+* Distribution of time between events: $T_n-T_{n-1} \sim \operatorname{Exp}(\lambda)$
+* Distribution of time to the $n^{th}$ event: $\sum_{i=1}^n T_i \sim \operatorname{Gamma}(n, \lambda)$
+
+Poisson process with a twist: 
+
+* Distribution of time between events: $T_n-T_{n-1} \sim \operatorname{Exp}(\lambda)+\nu$
+
+$$
+f_{T_n-T_{n-1}}(x)=\lambda e^{-\lambda(x-\nu)}
+$$
+
+* Distribution of time to the $n^{th}$ event: $\sum_{i=1}^n T_i \sim  \operatorname{Gamma}(n, \lambda)+n \nu$
+
+$$
+f_{T_n}(x)=\frac{1}{\Gamma(n) \lambda^{-n}}(x-n \nu)^{n-1} e^{-\lambda(x-n \nu)}
+$$
+
+Further, by count time duality, we can write:
+
+$$
+P(T_n>t)=P(N_t<n)
+$$
+
+$$
+\int_t^{\infty} \frac{1}{\Gamma(n)\lambda^{-n}}  (x-n \nu)^{n-1} e^{-\lambda (x-n \nu)} d x
+\quad = \quad \sum_{x=0}^{n-1} \frac{e^{-\lambda (t-n \nu)} (\lambda (t-n \nu))^x}{x!}
+$$
+
+
+
+## Branching Processes
+
+### Random Variables
+
+We'll start by defining the random variables that characterize a branching process.
+
+* $X_n$ = size of the population at time (or generation) $n$
+* $Y_{i,n-1}$ = number of offspring produced by the $i^{th}$ individual in generation $n-1$
+
+&nbsp;
+
+How are random variables $X_n$ and $Y_{i,n-1}$ related? Intuitively, we can think of the population size of the current generation ($n$) as the sum of the offspring produced by each individual in the previous generation ($n-1$):
+
+$$
+\begin{aligned}
+X_n &= \sum_{i=1}^{X_{n-1}} Y_{i,n-1}\\
+&= Y_{1,n-1} + Y_{2,n-1} +...+Y_{X_{n-1},n-1}
+\end{aligned}
+$$
+
+### Probability Generating Function
+
+Now we'll define the **Probability Generating Function** (PGF), which allows us to compute probabilities from branching processes.
+
+$$
+g_X(t)=\mathbb{E}_X\left(t^X\right)=\sum_{n=0}^{\infty} t^n P(X=n)
+$$
+
+Similar to MGFs, independent random variables can be convoluted by multiplying their PGFs. For i.i.d. $Y_{i,j}$, the PGF gives the first two moments:
+
+$$
+\begin{aligned}
+\mathbb{E}\left(X_n\right) & =[\mathbb{E}(Y)]^n \\
+\operatorname{Var}\left(X_n\right) & =\operatorname{Var}(Y)\left(\sum_{i=n-1}^{2(n-1)}[\mathbb{E}(Y)]^i\right)
+\end{aligned}
+$$
+&nbsp;
+
+Asymptotics exists for Branching Processes on i.i.d. $\left\{Y_{i,j}\right\}$ with finite variance:
+$$
+\begin{gathered}
+\text{Population-Level} \quad \quad \text{Individual-Level} \\
+\\
+\mathrm{E}\left(X_n\right) \rightarrow \begin{cases}0 & \mathrm{E}(Y)<1 \\
+1 & \mathrm{E}(Y)=1 \\
+\infty & \mathrm{E}(Y)>1\end{cases} \\
+\\
+\operatorname{Var}\left(X_n\right) \rightarrow \begin{cases}0 & \mathrm{E}(Y)<1 \\
+\infty & \mathrm{E}(Y) \geq 1\end{cases}
+\end{gathered}
+$$
+
+
+### Criticality Theorem
+
+Criticality Theorem states that the probability of ultimate extinction of a branching process is the smallest solution to $\eta=g_Y(\eta)$. In general, we can solve for $\eta$ using the quadratic equation:
+
+$$
+\begin{aligned}
+&0=a\eta^2+b\eta+c\\
+\\
+&\eta=\frac{-b \pm \sqrt{b^2-4 a c}}{2 a}
+\end{aligned}
+$$
+
+
+
+
+### Example
+
+Consider a Branching Process where individuals duplicate with probability $p$ and die with probability $q$.
+
+a. Describe the mean and variance over time for this branching process. For what values of $p$ will the process go extinct with probability 1?
+b. Establish the probability of eventual extinction for arbitrary $p$.
+
+&nbsp;
+
+**Step 1**: Define the pmf of $Y$ based on the given reproduction probabilities. Does $Y$ follow a known distribution?
+
+$f_y(y)=\left\{\begin{array}{ll}y=0 & \text { w.p. } q=1-p \\ y=2 & \text { w.p. } p\end{array} \quad \Rightarrow \quad y \sim 2\right.$ Bernoulli$(p)$
+
+&nbsp;
+
+**Step 2**: Calculate the moments of $Y$, which can be used to calculate the moments of $X_n$.
+
+$$
+\begin{aligned}
+\mathbb{E}[Y]=2 p \quad \quad \quad \quad \mathbb{E}\left[X_n\right] & =(2 p)^n \\
+\operatorname{Var}(Y)=4 p q \quad \quad \operatorname{Var}\left(X_n\right) & =\operatorname{Var}(y) \sum_{i=n-1}^{2(n-1)} \mathbb{E}[Y]^i \\
+& =4 p q \sum_{i=n-1}^{2(n-1)}(2 p)^i
+\end{aligned}
+$$
+
+Based on our asymptotic results, we know that the process $X_n$ will go extinct with probability 1 if $\mathbb{E}[Y]<1$
+
+$$
+\mathbb{E}[Y]=2 p \Rightarrow \text { process will go extinct with probability 1 if } p< \frac{1}{2}
+$$
+
+&nbsp;
+
+**Step 3**: Find the probability of ultimate extinction using Criticality Theorem.
+
+First, find the PGF of $Y$:
+$$
+\begin{aligned}
+ g_Y(\eta) =\mathbb{E}\left[\eta^Y\right]&=\sum_Y \eta^Y f_Y(y) \\
+& =\eta^2 P(Y=2)+\eta^0 P(Y=0) \\
+& =\eta^2 p+q 
+\end{aligned}
+$$
+
+Second, find the probability of ultimate extinction, which is the smallest solution to $\eta=g_Y(\eta)$:
+
+$$
+\begin{aligned}
+\eta&=\eta^2 p+q \\
+0&=\eta^2 p-\eta+q\\
+\\
+a&=p, b=-1, c=q\\
+\\
+\eta&= \frac{1 \pm \sqrt{1-4pq}}{2p} \\&= \frac{1 \pm \sqrt{1-4p(1-p)}}{2p} \\&= \frac{1 \pm \sqrt{1-4p+4p^2}}{2p} \\&= \frac{1 \pm \sqrt{(2p-1)^2}}{2p} \\&= \frac{1 \pm (2p-1)}{2p}\\
+&=\text{min}\left(1 \quad \text{or} \quad \frac{1}{p}-1\right)
+\end{aligned}
+$$
+
+For $p \leq \frac{1}{2}, 1$ is the minimum. Thus, $\eta=P(\text{Extinction})=1.$
