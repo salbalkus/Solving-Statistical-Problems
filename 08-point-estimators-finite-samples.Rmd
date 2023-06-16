@@ -98,24 +98,29 @@ This theorem
 
 ## Inferential Properties of Exponential Families Distributions
 
+Suppose we draw a sample of $n$ iid random variables $X_1,...,X_n$ following one of the distributions below. The proceeding tables list the inferential properties of this sample.
+
 ### Bernoulli
 
 |   |   |
 | :-----------: | :-----------: | 
 |  Log-likelihood |  $\ell(\theta|X) = n\log(1-p) + \log(\frac{p}{1-p})\sum_{i=1}^n x_i$ |
 |   Score Equations | $U_n(\theta|X) = -\frac{n}{1-p} + \frac{1}{p(1-p)}\sum_{i=1}^n x_i$ |
-|  Fisher Information | $\mathcal{I}(\theta)= \frac{1}{p(1-p)}$ |
-| Observed Information | $-\frac{\partial^2}{\partial\theta^2}\ell(\theta|X) = $ | 
+| Observed Information | $-\frac{\partial^2}{\partial\theta^2}\ell(\theta|X) = \frac{n}{(1-p)^2} + \frac{1-2p}{p^2(1-p)^2}\sum_{i=1}^n x_i$ | 
+|  Fisher Information | $I(\theta)= \frac{n}{p(1-p)}$ |
 |   MLE  | $\frac{1}{n}\sum_{i=1}^n x_i$ |
 
 ### Binomial
 
 Since the Binomial has $n$ as a parameter, notation in problems that involve a *sample* of $n$ iid Binomial random variables can be tricky. To clarify, in the following table let $X_i \sim \text{Binomial}(m, p)$, and let $n$ represent the number of samples. 
 
-|                   Log-likelihood                   |                   Score Equations                   | Fisher Information |              MLE              |
-|:----------------:|:----------------:|:----------------:|:----------------:|
-| $nm\log(1-p) + \log(\frac{p}{1-p})\sum_{i=1}^n x_i + \log({m\choose x_i})$ | $-\frac{nm}{1-p} + \frac{1}{p(1-p)}\sum_{i=1}^n x_i$ | $\frac{m}{p(1-p)}$ | $\frac{1}{nm}\sum_{i=1}^n x_i$ |
-
+|   |   |
+| :-----------: | :-----------: | 
+|  Log-likelihood |  $\ell(\theta|X) = nm\log(1-p) + \log(\frac{p}{1-p})\sum_{i=1}^n x_i + \log({m\choose x_i})$ |
+|   Score Equations | $U_n(\theta|X) = -\frac{nm}{1-p} + \frac{1}{p(1-p)}\sum_{i=1}^n x_i$ |
+| Observed Information | $-\frac{\partial^2}{\partial\theta^2}\ell(\theta|X) = \frac{nm}{(1-p)^2} + \frac{1-2p}{p^2(1-p)^2}\sum_{i=1}^n x_i$ | 
+|  Fisher Information | $I(\theta)= \frac{nm}{p(1-p)}$ |
+|   MLE  | $\frac{1}{nm}\sum_{i=1}^n x_i$ |
 
 ### Geometric
 
