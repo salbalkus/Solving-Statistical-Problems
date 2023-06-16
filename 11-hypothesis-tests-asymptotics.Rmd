@@ -29,7 +29,7 @@ which follows from the fact that $\hat{\theta}_n \approx MVN_k(\theta_0, (I_n(\t
 
 To obtain $I_n(\theta_0)$, we can estimate it using either...
 
-- $I_n(\hat{\theta}_n)$; simply plug the MLE into the expected information 
+- $I_n(\hat{\theta}_n)$; simply plug the MLE into the expected information.
 - $-\frac{\partial^2}{\partial\theta^2}\ell(\hat{\theta}_n | X_n)$; plug the MLE into the observed information
 
 However, $I_n(\hat{\theta}_0)$ is generally preferred, because it is more efficient.  
@@ -40,7 +40,8 @@ Advantages:
 
 Disadvantages:
 - Requires knowing the form of the MLE
-- Approximation may not be as accurate as the other two tests.
+- Not invariant if you transform the MLE
+- Approximation may not be as accurate as the other two tests
 
 
 ## Score Test
@@ -67,6 +68,7 @@ Advantages:
 
 Disadvantages:
 - Constructing confidence intervals is more complicated, since inverting the Score test statistic may be challenging
+- [Not invariant to under reparametrization](https://www.jstor.org/stable/2938281)
 
 ## Likelihood Ratio Test
 
@@ -82,6 +84,7 @@ $$Q_n = 2(\ell(\hat{\theta}_n|X_n) - \ell(\theta_0|X_n)) \approx\chi^2(k)$$
 
 Advantages:
 - No derivatives need to be calculated
+- Invariant to transformations of the MLE
 - Provides the most accurate approximation, especially if we decide to reparametrize the model, in which case the derivative in the Wald/Score tests would need to be recomputed. 
 
 Disadvantages:

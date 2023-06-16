@@ -2,7 +2,7 @@
 
 Finding point estimators and evaluating their finite sample properties.
 
-{#biasedness}
+
 
 ## Method of Moments
 
@@ -63,37 +63,50 @@ If $\theta$ is one-dimensional, $Var(U(\theta|X)) = E(U(\theta|X)^2) = -E\Big(\f
 
 In statistics, **information** refers to the amount of information that a random variable $X$ contains about a parameter $\theta$. It is defined mathematically as the variance of the score, which is
 
-$$\mathcal{I}(\theta) = E\Big((\frac{\partial}{\partial\theta}\log f(X|\theta))^2\Big|\theta\Big)$$
+$$I(\theta) = E\Big((\frac{\partial}{\partial\theta}\log f(X|\theta))^2\Big|\theta\Big)$$
 Under MLE regularity conditions, 
 
-$$\mathcal{I}(\theta) = -E\Big(\frac{\partial^2}{\partial\theta^2}\log f(X|\theta) \Big|\theta\Big)$$
+$$I(\theta) = -E\Big(\frac{\partial^2}{\partial\theta^2}\log f(X|\theta) \Big|\theta\Big)$$
 :::
 
 As the mean value of a second derivative, the information measures the curve of $\ell(\theta|X)$ *(expand?)*
 
-There are two ways to estimate the information.
+The negative second derivative of the log-likelihood also has a special name itself: the **observed information**.
 
 :::{.definition name="Observed Information"}
 The observed information is defined as
 
-$$-\frac{\partial^2}{\partial\theta^2}\ell(\theta|X_i)$$
+$$\mathcal{J}(\theta|X) = -\frac{\partial^2}{\partial\theta^2}\ell(\theta|X)$$
+When $\theta$ is a $k$-dimensional vector, the observed information is the Hessian of the log-likelihood:
+
+$$\mathcal{J}(\theta|X) = -\nabla\nabla^\top\ell(\theta|X) = \begin{bmatrix}\frac{\partial^2}{\partial\theta_1^2} & ... & \frac{\partial^2}{\partial\theta_1\partial\theta_k}\\ \vdots & & \vdots\\ \frac{\partial^2}{\partial\theta_k\partial\theta_1} & ... & \frac{\partial^2}{\partial\theta_k^2}\end{bmatrix}$$
+
 :::
 
+The observed information can be used to estimate the Fisher information for a given sample $X$.
 
+## Unbiasedness
 
-## Inferential Properties of Common Distributions
+## Minimum Variance (Cramer-Rao Lower Bound)
+
+## Uniform Minimum Variance Unbiased Estimators (UMVUEs)
+
+::: {.definition name="Lehmann-Scheffe Theorem"}
+This theorem
+
+:::
+
+## Inferential Properties of Exponential Families Distributions
 
 ### Bernoulli
 
-|                   Log-likelihood                   |                   Score Equations                   | Fisher Information |              MLE              |
-|:----------------:|:----------------:|:----------------:|:----------------:|
-| $n\log(1-p) + \log(\frac{p}{1-p})\sum_{i=1}^n x_i$ | $-\frac{n}{1-p} + \frac{1}{p(1-p)}\sum_{i=1}^n x_i$ | $\frac{1}{p(1-p)}$ | $\frac{1}{n}\sum_{i=1}^n x_i$ |
-
-| : -----------: |
-|                   Log-likelihood                   | $n\log(1-p) + \log(\frac{p}{1-p})\sum_{i=1}^n x_i$ |
-|                   Score Equations                  | $-\frac{n}{1-p} + \frac{1}{p(1-p)}\sum_{i=1}^n x_i$ |
-|                  Fisher Information                | $\frac{1}{p(1-p)}$ |
-|                         MLE                        | $\frac{1}{n}\sum_{i=1}^n x_i$ |
+|   |   |
+| :-----------: | :-----------: | 
+|  Log-likelihood |  $\ell(\theta|X) = n\log(1-p) + \log(\frac{p}{1-p})\sum_{i=1}^n x_i$ |
+|   Score Equations | $U_n(\theta|X) = -\frac{n}{1-p} + \frac{1}{p(1-p)}\sum_{i=1}^n x_i$ |
+|  Fisher Information | $\mathcal{I}(\theta)= \frac{1}{p(1-p)}$ |
+| Observed Information | $-\frac{\partial^2}{\partial\theta^2}\ell(\theta|X) = $ | 
+|   MLE  | $\frac{1}{n}\sum_{i=1}^n x_i$ |
 
 ### Binomial
 
