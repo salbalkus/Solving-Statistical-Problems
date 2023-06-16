@@ -4,6 +4,83 @@ Finding point estimators and evaluating their finite sample properties.
 
 {#biasedness}
 
+## Method of Moments
+
+## MLE Theory
+
+:::{.definition name="Likelihood"}
+
+Let $X$ be a random variable or random vector, and $\theta$ a parameter or vector of parameters describing the distribution of $X$. Then, the **likelihood** is
+
+$$\mathcal{L}(\theta | X) = f_X(x|\theta)$$
+
+:::
+
+:::{.definition name="Log-Likelihood"}
+Let $X$ be a random variable or random vector, and $\theta$ a parameter or vector of parameters describing the distribution of $X$. Then, the **log-likelihood** is
+$$\ell(\theta|X) = \log\mathcal{L}(\theta | X) = \log f_X(x|\theta)$$
+:::
+
+The log-likelihood is often easier to use. Furthermore, When $X$ is an iid sample $X_1, X_2, ... X_n$, by the properties of logarithms, $\ell(\theta|X) = \log\Big(\prod_{i=1}^nf_{X_i}(x|\theta)\Big) = \sum_{i=1}^n \log f_{X_i}(x|\theta)$. Working with a sum is much easier than with a product.
+
+Of course, the whole reason this is permissible in finding a maximum likelihood estimate is that the $\log$ function is monotonic - finding the maximum of a function is equivalent to finding the maximum of its logarithm.
+
+Maximizing this likelihood often requires calculus - specifically, the First Derivative Test. In statistics, the gradient of the log-likelihood has a special name: the **score**.
+
+:::{.definition name="Score Equations"}
+If $\theta$ is a vector of parameters, the **score equations** are defined as the gradient of the log-likelihood (as described above). That is,
+
+$$U(\theta | X) = \begin{bmatrix}\frac{\partial}{\partial\theta_1}\ell(\theta_1|X) & ... & \frac{\partial}{\partial\theta_k}\ell(\theta_k|X) \end{bmatrix}$$
+Of course, if $\theta$ is a single parameter, then $U(\theta|X) = \frac{d}{d\theta}\ell(\theta|X)$
+
+:::
+
+Therefore, the first step in finding an MLE is to set the score to 0, and solve for the desired parameter. Let's see an example.
+
+:::{.example name="MLE of _______"}
+example
+:::
+
+
+The score has two useful properties in MLE theory. First, under [regularity conditions](#regularity-conditions), $E(U(\theta|X)) = 0$ - its mean is 0. This is because the regularity conditions imply [Leibniz's rule](#leibniz-rule); that is,
+
+\begin{align}
+E(U(\theta|X)) = \int_{\mathcal{X}}\frac{\partial}{\partial\theta}\log\mathcal{L}(\theta|X)f(x|\theta)dx \\
+= \int_{\mathcal{X}}\frac{1}{f(x|\theta)}\frac{\partial}{\partial\theta}f(x|\theta)f(x|\theta)dx \\ 
+= \frac{\partial}{\partial\theta}\frac{f(x|\theta)}{f(x|\theta)}f(x|\theta)dx = \frac{\partial}{\partial\theta}1 = 0
+\end{align}
+
+The second useful property is that, under the same regularity conditions, the variance of the score is
+
+\begin{align}
+Var(U(\theta|X)) = E(U(\theta|X)U(\theta|X)^\top) \\
+= -E\Big(\frac{\partial^2}{\partial\partial^\top}\ell(\theta|X)\Big) 
+\end{align}
+
+If $\theta$ is one-dimensional, $Var(U(\theta|X)) = E(U(\theta|X)^2) = -E\Big(\frac{\partial^2}{\partial\theta^2}\ell(\theta|X)\Big)$. The rather insightful derivation of this is available [here](https://en.wikipedia.org/wiki/Score_(statistics)#Variance). This variance has a special name, the **information** (or sometimes, "Fisher Information")
+
+:::{.definition name="Information"}
+
+In statistics, **information** refers to the amount of information that a random variable $X$ contains about a parameter $\theta$. It is defined mathematically as the variance of the score, which is
+
+$$\mathcal{I}(\theta) = E\Big((\frac{\partial}{\partial\theta}\log f(X|\theta))^2\Big|\theta\Big)$$
+Under MLE regularity conditions, 
+
+$$\mathcal{I}(\theta) = -E\Big(\frac{\partial^2}{\partial\theta^2}\log f(X|\theta) \Big|\theta\Big)$$
+:::
+
+As the mean value of a second derivative, the information measures the curve of $\ell(\theta|X)$ *(expand?)*
+
+There are two ways to estimate the information.
+
+:::{.definition name="Observed Information"}
+The observed information is defined as
+
+$$-\frac{\partial^2}{\partial\theta^2}\ell(\theta|X_i)$$
+:::
+
+
+
 ## Inferential Properties of Common Distributions
 
 ### Bernoulli
