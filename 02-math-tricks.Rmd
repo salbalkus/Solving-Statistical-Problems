@@ -50,7 +50,7 @@ Of course, take caution: If both functions can be repeatedly differentiated infi
 
 If $a, b$ are constant and $f(x, \theta)$ is differentiable w.r.t to $\theta$, then
 
-$$\frac{d}{d\theta} \int_{a(\theta)}^{b(\theta)} f(x,\theta)dx = \int_a^b \frac{\partial}{\partial\theta}f(x,\theta)dx$$
+$$\frac{d}{d\theta} \int_{a}^{b} f(x,\theta)dx = \int_a^b \frac{\partial}{\partial\theta}f(x,\theta)dx$$
 :::
 
 ::: {.theorem name="Leibniz's Rule: Complicated Version"}
