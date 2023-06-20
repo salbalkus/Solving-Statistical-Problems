@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 4 Known Distributions | Solving Statistical Problems</title>
+  <meta name="description" content="Chapter 4 Known Distributions | Solving Statistical Problems" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 4 Known Distributions | Solving Statistical Problems" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Chapter 4 Known Distributions | Solving Statistical Problems" />
+  <meta name="github-repo" content="salbalkus/Solving-Statistical-Problems" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 Known Distributions | Solving Statistical Problems" />
+  
+  <meta name="twitter:description" content="Chapter 4 Known Distributions | Solving Statistical Problems" />
+  
+
+<meta name="author" content="Salvador Balkus, Kimberly Greco, and Mónica Robles Fontán" />
+
+
+<meta name="date" content="2023-06-20" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="probability.html"/>
+<link rel="next" href="new-distributions.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Solving Statistical Problems</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="math-tricks.html"><a href="math-tricks.html"><i class="fa fa-check"></i><b>2</b> Math Tricks</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="math-tricks.html"><a href="math-tricks.html#combinatorics"><i class="fa fa-check"></i><b>2.1</b> Combinatorics</a></li>
+<li class="chapter" data-level="2.2" data-path="math-tricks.html"><a href="math-tricks.html#geometric-series"><i class="fa fa-check"></i><b>2.2</b> Geometric Series</a></li>
+<li class="chapter" data-level="2.3" data-path="math-tricks.html"><a href="math-tricks.html#exponential-taylor"><i class="fa fa-check"></i><b>2.3</b> Exponential Taylor Series</a></li>
+<li class="chapter" data-level="2.4" data-path="math-tricks.html"><a href="math-tricks.html#exponential-limit"><i class="fa fa-check"></i><b>2.4</b> Exponential Limit</a></li>
+<li class="chapter" data-level="2.5" data-path="math-tricks.html"><a href="math-tricks.html#ibp"><i class="fa fa-check"></i><b>2.5</b> Integration by Parts</a></li>
+<li class="chapter" data-level="2.6" data-path="math-tricks.html"><a href="math-tricks.html#leibniz-rule"><i class="fa fa-check"></i><b>2.6</b> Leibniz’s Rule</a></li>
+<li class="chapter" data-level="2.7" data-path="math-tricks.html"><a href="math-tricks.html#gamma-function"><i class="fa fa-check"></i><b>2.7</b> Gamma Function</a></li>
+<li class="chapter" data-level="2.8" data-path="math-tricks.html"><a href="math-tricks.html#triangle-inequality"><i class="fa fa-check"></i><b>2.8</b> Triangle Inequality</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="probability.html"><a href="probability.html"><i class="fa fa-check"></i><b>3</b> Probability</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="probability.html"><a href="probability.html#conditional-probability"><i class="fa fa-check"></i><b>3.1</b> Conditional Probability</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="probability.html"><a href="probability.html#conditional-probability-in-practice"><i class="fa fa-check"></i><b>3.1.1</b> Conditional Probability in practice</a></li>
+<li class="chapter" data-level="3.4.3" data-path="probability.html"><a href="probability.html#important-theorems"><i class="fa fa-check"></i><b>3.4.3</b> Important Theorems</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="known-distributions.html"><a href="known-distributions.html"><i class="fa fa-check"></i><b>4</b> Known Distributions</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="known-distributions.html"><a href="known-distributions.html#families-of-distributions"><i class="fa fa-check"></i><b>4.1</b> Families of Distributions</a></li>
+<li class="chapter" data-level="4.2" data-path="known-distributions.html"><a href="known-distributions.html#location-and-scale-families-location-scale"><i class="fa fa-check"></i><b>4.2</b> Location and Scale Families (#location-scale)</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="known-distributions.html"><a href="known-distributions.html#location-families"><i class="fa fa-check"></i><b>4.2.1</b> Location Families</a></li>
+<li class="chapter" data-level="4.2.2" data-path="known-distributions.html"><a href="known-distributions.html#scale-families"><i class="fa fa-check"></i><b>4.2.2</b> Scale Families</a></li>
+<li class="chapter" data-level="4.2.3" data-path="known-distributions.html"><a href="known-distributions.html#properties-of-location-scale-families"><i class="fa fa-check"></i><b>4.2.3</b> Properties of Location-Scale Families</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="known-distributions.html"><a href="known-distributions.html#exponential-family"><i class="fa fa-check"></i><b>4.3</b> Exponential Families</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="known-distributions.html"><a href="known-distributions.html#properties"><i class="fa fa-check"></i><b>4.3.1</b> Properties</a></li>
+<li class="chapter" data-level="4.3.2" data-path="known-distributions.html"><a href="known-distributions.html#natural-exponential-family"><i class="fa fa-check"></i><b>4.3.2</b> Natural Exponential Families</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="known-distributions.html"><a href="known-distributions.html#known-univariate-exponential-families"><i class="fa fa-check"></i><b>4.4</b> Known Univariate Exponential Families</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="known-distributions.html"><a href="known-distributions.html#bernoulli"><i class="fa fa-check"></i><b>4.4.1</b> Bernoulli</a></li>
+<li class="chapter" data-level="4.4.2" data-path="known-distributions.html"><a href="known-distributions.html#binomial"><i class="fa fa-check"></i><b>4.4.2</b> Binomial</a></li>
+<li class="chapter" data-level="4.4.3" data-path="known-distributions.html"><a href="known-distributions.html#geometric-distribution"><i class="fa fa-check"></i><b>4.4.3</b> Geometric</a></li>
+<li class="chapter" data-level="4.4.4" data-path="known-distributions.html"><a href="known-distributions.html#negative-binomial"><i class="fa fa-check"></i><b>4.4.4</b> Negative Binomial</a></li>
+<li class="chapter" data-level="4.4.5" data-path="known-distributions.html"><a href="known-distributions.html#poisson"><i class="fa fa-check"></i><b>4.4.5</b> Poisson</a></li>
+<li class="chapter" data-level="4.4.6" data-path="known-distributions.html"><a href="known-distributions.html#normal"><i class="fa fa-check"></i><b>4.4.6</b> Normal</a></li>
+<li class="chapter" data-level="4.4.7" data-path="known-distributions.html"><a href="known-distributions.html#exponential"><i class="fa fa-check"></i><b>4.4.7</b> Exponential</a></li>
+<li class="chapter" data-level="4.4.8" data-path="known-distributions.html"><a href="known-distributions.html#gamma"><i class="fa fa-check"></i><b>4.4.8</b> Gamma</a></li>
+<li class="chapter" data-level="4.4.9" data-path="known-distributions.html"><a href="known-distributions.html#beta"><i class="fa fa-check"></i><b>4.4.9</b> Beta</a></li>
+<li class="chapter" data-level="4.4.10" data-path="known-distributions.html"><a href="known-distributions.html#chi-squared"><i class="fa fa-check"></i><b>4.4.10</b> Chi-squared</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="known-distributions.html"><a href="known-distributions.html#exponential-families-with-certain-parameters-fixed"><i class="fa fa-check"></i><b>4.5</b> Exponential families with certain parameters fixed</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="known-distributions.html"><a href="known-distributions.html#weibull"><i class="fa fa-check"></i><b>4.5.1</b> Weibull</a></li>
+<li class="chapter" data-level="4.5.2" data-path="known-distributions.html"><a href="known-distributions.html#pareto"><i class="fa fa-check"></i><b>4.5.2</b> Pareto</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="known-distributions.html"><a href="known-distributions.html#non-exponential-families"><i class="fa fa-check"></i><b>4.6</b> Non-exponential families</a>
+<ul>
+<li class="chapter" data-level="4.6.1" data-path="known-distributions.html"><a href="known-distributions.html#uniform"><i class="fa fa-check"></i><b>4.6.1</b> Uniform</a></li>
+<li class="chapter" data-level="4.6.2" data-path="known-distributions.html"><a href="known-distributions.html#cauchy"><i class="fa fa-check"></i><b>4.6.2</b> Cauchy</a></li>
+<li class="chapter" data-level="4.6.3" data-path="known-distributions.html"><a href="known-distributions.html#t-distribution"><i class="fa fa-check"></i><b>4.6.3</b> t-distribution</a></li>
+<li class="chapter" data-level="4.6.4" data-path="known-distributions.html"><a href="known-distributions.html#f-distribution"><i class="fa fa-check"></i><b>4.6.4</b> F-distribution</a></li>
+<li class="chapter" data-level="4.6.5" data-path="known-distributions.html"><a href="known-distributions.html#hypergeometric"><i class="fa fa-check"></i><b>4.6.5</b> Hypergeometric</a></li>
+</ul></li>
+<li class="chapter" data-level="4.7" data-path="known-distributions.html"><a href="known-distributions.html#multivariate-distributions"><i class="fa fa-check"></i><b>4.7</b> Multivariate Distributions</a>
+<ul>
+<li class="chapter" data-level="4.7.1" data-path="known-distributions.html"><a href="known-distributions.html#bivariate-normal"><i class="fa fa-check"></i><b>4.7.1</b> Bivariate Normal</a></li>
+<li class="chapter" data-level="4.7.2" data-path="known-distributions.html"><a href="known-distributions.html#multinomial"><i class="fa fa-check"></i><b>4.7.2</b> Multinomial</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="new-distributions.html"><a href="new-distributions.html"><i class="fa fa-check"></i><b>5</b> New Distributions</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="new-distributions.html"><a href="new-distributions.html#transformations"><i class="fa fa-check"></i><b>5.1</b> Transformations</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="new-distributions.html"><a href="new-distributions.html#theorems"><i class="fa fa-check"></i><b>5.1.1</b> Theorems</a></li>
+<li class="chapter" data-level="5.1.2" data-path="new-distributions.html"><a href="new-distributions.html#practical-strategy"><i class="fa fa-check"></i><b>5.1.2</b> Practical Strategy</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="new-distributions.html"><a href="new-distributions.html#probability-integral-transform"><i class="fa fa-check"></i><b>5.2</b> Probability Integral Transform</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="new-distributions.html"><a href="new-distributions.html#hiearchical-models-iterated-moments"><i class="fa fa-check"></i><b>5.2.1</b> Hiearchical Models (Iterated Moments)</a></li>
+<li class="chapter" data-level="5.2.2" data-path="new-distributions.html"><a href="new-distributions.html#convolutions"><i class="fa fa-check"></i><b>5.2.2</b> Convolutions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="moments.html"><a href="moments.html"><i class="fa fa-check"></i><b>6</b> Moments</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="moments.html"><a href="moments.html#basic-definitions"><i class="fa fa-check"></i><b>6.1</b> Basic Definitions</a></li>
+<li class="chapter" data-level="6.2" data-path="moments.html"><a href="moments.html#expected-value"><i class="fa fa-check"></i><b>6.2</b> <span class="math inline">\(E(X)\)</span> Properties</a></li>
+<li class="chapter" data-level="6.3" data-path="moments.html"><a href="moments.html#varx-properties"><i class="fa fa-check"></i><b>6.3</b> <span class="math inline">\(Var(X)\)</span> Properties</a></li>
+<li class="chapter" data-level="6.4" data-path="moments.html"><a href="moments.html#covariance-and-correlation"><i class="fa fa-check"></i><b>6.4</b> Covariance and Correlation</a></li>
+<li class="chapter" data-level="6.5" data-path="moments.html"><a href="moments.html#conditional-expectation"><i class="fa fa-check"></i><b>6.5</b> Conditional Expectation</a></li>
+<li class="chapter" data-level="6.6" data-path="moments.html"><a href="moments.html#moment-generating-functions"><i class="fa fa-check"></i><b>6.6</b> Moment Generating Functions</a></li>
+<li class="chapter" data-level="6.7" data-path="moments.html"><a href="moments.html#moment-bounds"><i class="fa fa-check"></i><b>6.7</b> Moment Inequalities</a></li>
+<li class="chapter" data-level="6.8" data-path="moments.html"><a href="moments.html#techniques-for-deriving-moments"><i class="fa fa-check"></i><b>6.8</b> Techniques for Deriving Moments</a>
+<ul>
+<li class="chapter" data-level="6.8.1" data-path="moments.html"><a href="moments.html#bernoulli-direct-summation"><i class="fa fa-check"></i><b>6.8.1</b> Bernoulli: Direct Summation</a></li>
+<li class="chapter" data-level="6.8.2" data-path="moments.html"><a href="moments.html#uniform-direct-integration"><i class="fa fa-check"></i><b>6.8.2</b> Uniform: Direct Integration</a></li>
+<li class="chapter" data-level="6.8.3" data-path="moments.html"><a href="moments.html#geometric-series-convergence"><i class="fa fa-check"></i><b>6.8.3</b> Geometric: Series Convergence</a></li>
+<li class="chapter" data-level="6.8.4" data-path="moments.html"><a href="moments.html#binomial-kernel-technique-series-version"><i class="fa fa-check"></i><b>6.8.4</b> Binomial: Kernel Technique, Series Version</a></li>
+<li class="chapter" data-level="6.8.5" data-path="moments.html"><a href="moments.html#negative-binomial-and-hypergeometric-computing-exx-1"><i class="fa fa-check"></i><b>6.8.5</b> Negative Binomial and Hypergeometric: Computing <span class="math inline">\(E(X(X-1))\)</span></a></li>
+<li class="chapter" data-level="6.8.6" data-path="moments.html"><a href="moments.html#poisson-exponential-taylor-series"><i class="fa fa-check"></i><b>6.8.6</b> Poisson: Exponential Taylor Series</a></li>
+<li class="chapter" data-level="6.8.7" data-path="moments.html"><a href="moments.html#exponential-integration-by-parts"><i class="fa fa-check"></i><b>6.8.7</b> Exponential: Integration By Parts</a></li>
+<li class="chapter" data-level="6.8.8" data-path="moments.html"><a href="moments.html#gamma-and-beta-kernel-technique-integration-version"><i class="fa fa-check"></i><b>6.8.8</b> Gamma and Beta: Kernel Technique, Integration Version</a></li>
+<li class="chapter" data-level="6.8.9" data-path="moments.html"><a href="moments.html#normal-location-scale-trick-and-polar-integration"><i class="fa fa-check"></i><b>6.8.9</b> Normal: Location-Scale Trick and Polar Integration</a></li>
+</ul></li>
+<li class="chapter" data-level="6.9" data-path="moments.html"><a href="moments.html#other-moments-for-reference"><i class="fa fa-check"></i><b>6.9</b> Other Moments (for reference)</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="statistics.html"><a href="statistics.html"><i class="fa fa-check"></i><b>7</b> Statistics</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="statistics.html"><a href="statistics.html#table-of-sufficient-statistics"><i class="fa fa-check"></i><b>7.1</b> Table of Sufficient Statistics</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="statistics.html"><a href="statistics.html#a-note-on-distributions-of-sufficient-statistics"><i class="fa fa-check"></i><b>7.1.1</b> A Note on Distributions of Sufficient Statistics</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="statistics.html"><a href="statistics.html#moments-of-the-sufficient-statistic"><i class="fa fa-check"></i><b>7.2</b> Moments of the Sufficient Statistic</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="point-estimators-finite-samples.html"><a href="point-estimators-finite-samples.html"><i class="fa fa-check"></i><b>8</b> Point Estimators: Finite Samples</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="point-estimators-finite-samples.html"><a href="point-estimators-finite-samples.html#method-of-moments"><i class="fa fa-check"></i><b>8.1</b> Method of Moments</a></li>
+<li class="chapter" data-level="8.2" data-path="point-estimators-finite-samples.html"><a href="point-estimators-finite-samples.html#mle-theory"><i class="fa fa-check"></i><b>8.2</b> MLE Theory</a></li>
+<li class="chapter" data-level="8.3" data-path="point-estimators-finite-samples.html"><a href="point-estimators-finite-samples.html#unbiasedness"><i class="fa fa-check"></i><b>8.3</b> Unbiasedness</a></li>
+<li class="chapter" data-level="8.4" data-path="point-estimators-finite-samples.html"><a href="point-estimators-finite-samples.html#minimum-variance-cramer-rao-lower-bound"><i class="fa fa-check"></i><b>8.4</b> Minimum Variance (Cramer-Rao Lower Bound)</a></li>
+<li class="chapter" data-level="8.5" data-path="point-estimators-finite-samples.html"><a href="point-estimators-finite-samples.html#uniform-minimum-variance-unbiased-estimators-umvues"><i class="fa fa-check"></i><b>8.5</b> Uniform Minimum Variance Unbiased Estimators (UMVUEs)</a></li>
+<li class="chapter" data-level="8.6" data-path="point-estimators-finite-samples.html"><a href="point-estimators-finite-samples.html#inferential-properties-of-exponential-families-distributions"><i class="fa fa-check"></i><b>8.6</b> Inferential Properties of Exponential Families Distributions</a>
+<ul>
+<li class="chapter" data-level="8.6.1" data-path="point-estimators-finite-samples.html"><a href="point-estimators-finite-samples.html#bernoulli-1"><i class="fa fa-check"></i><b>8.6.1</b> Bernoulli</a></li>
+<li class="chapter" data-level="8.6.2" data-path="point-estimators-finite-samples.html"><a href="point-estimators-finite-samples.html#binomial-1"><i class="fa fa-check"></i><b>8.6.2</b> Binomial</a></li>
+<li class="chapter" data-level="8.6.3" data-path="point-estimators-finite-samples.html"><a href="point-estimators-finite-samples.html#geometric"><i class="fa fa-check"></i><b>8.6.3</b> Geometric</a></li>
+<li class="chapter" data-level="8.6.4" data-path="point-estimators-finite-samples.html"><a href="point-estimators-finite-samples.html#negative-binomial-1"><i class="fa fa-check"></i><b>8.6.4</b> Negative Binomial</a></li>
+<li class="chapter" data-level="8.6.5" data-path="point-estimators-finite-samples.html"><a href="point-estimators-finite-samples.html#poisson-1"><i class="fa fa-check"></i><b>8.6.5</b> Poisson</a></li>
+<li class="chapter" data-level="8.6.6" data-path="point-estimators-finite-samples.html"><a href="point-estimators-finite-samples.html#normal-1"><i class="fa fa-check"></i><b>8.6.6</b> Normal</a></li>
+<li class="chapter" data-level="8.6.7" data-path="point-estimators-finite-samples.html"><a href="point-estimators-finite-samples.html#exponential-1"><i class="fa fa-check"></i><b>8.6.7</b> Exponential</a></li>
+<li class="chapter" data-level="8.6.8" data-path="point-estimators-finite-samples.html"><a href="point-estimators-finite-samples.html#gamma-1"><i class="fa fa-check"></i><b>8.6.8</b> Gamma</a></li>
+<li class="chapter" data-level="8.6.9" data-path="point-estimators-finite-samples.html"><a href="point-estimators-finite-samples.html#pareto-1"><i class="fa fa-check"></i><b>8.6.9</b> Pareto</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="point-estimators-asymptotics.html"><a href="point-estimators-asymptotics.html"><i class="fa fa-check"></i><b>9</b> Point Estimators: Asymptotics</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="point-estimators-asymptotics.html"><a href="point-estimators-asymptotics.html#consistency"><i class="fa fa-check"></i><b>9.1</b> Consistency</a></li>
+<li class="chapter" data-level="9.2" data-path="point-estimators-asymptotics.html"><a href="point-estimators-asymptotics.html#asymptotic-efficiency"><i class="fa fa-check"></i><b>9.2</b> Asymptotic Efficiency</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="point-estimators-asymptotics.html"><a href="point-estimators-asymptotics.html#central-limit-theorems"><i class="fa fa-check"></i><b>9.2.1</b> Central Limit Theorems</a></li>
+<li class="chapter" data-level="9.2.2" data-path="point-estimators-asymptotics.html"><a href="point-estimators-asymptotics.html#the-delta-method"><i class="fa fa-check"></i><b>9.2.2</b> The Delta Method</a></li>
+<li class="chapter" data-level="9.2.3" data-path="point-estimators-asymptotics.html"><a href="point-estimators-asymptotics.html#cramer-wold-device"><i class="fa fa-check"></i><b>9.2.3</b> Cramer-Wold Device</a></li>
+<li class="chapter" data-level="9.2.4" data-path="point-estimators-asymptotics.html"><a href="point-estimators-asymptotics.html#asymptotic-distribution-in-practice."><i class="fa fa-check"></i><b>9.2.4</b> Asymptotic Distribution in Practice.</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="point-estimators-asymptotics.html"><a href="point-estimators-asymptotics.html#asymptotic-properties-of-mles"><i class="fa fa-check"></i><b>9.3</b> Asymptotic Properties of MLEs</a></li>
+<li class="chapter" data-level="9.4" data-path="point-estimators-asymptotics.html"><a href="point-estimators-asymptotics.html#variance-stabilizing-transformations"><i class="fa fa-check"></i><b>9.4</b> Variance Stabilizing Transformations</a></li>
+<li class="chapter" data-level="9.5" data-path="point-estimators-asymptotics.html"><a href="point-estimators-asymptotics.html#asymptotic-confidence-intervals"><i class="fa fa-check"></i><b>9.5</b> Asymptotic Confidence Intervals</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="hypothesis-tests-finite-samples.html"><a href="hypothesis-tests-finite-samples.html"><i class="fa fa-check"></i><b>10</b> Hypothesis Tests: Finite Samples</a></li>
+<li class="chapter" data-level="11" data-path="hypothesis-tests-asymptotics.html"><a href="hypothesis-tests-asymptotics.html"><i class="fa fa-check"></i><b>11</b> Hypothesis Tests: Asymptotics</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="hypothesis-tests-asymptotics.html"><a href="hypothesis-tests-asymptotics.html#wald-test"><i class="fa fa-check"></i><b>11.1</b> Wald Test</a></li>
+<li class="chapter" data-level="11.2" data-path="hypothesis-tests-asymptotics.html"><a href="hypothesis-tests-asymptotics.html#score-test"><i class="fa fa-check"></i><b>11.2</b> Score Test</a></li>
+<li class="chapter" data-level="11.3" data-path="hypothesis-tests-asymptotics.html"><a href="hypothesis-tests-asymptotics.html#likelihood-ratio-test"><i class="fa fa-check"></i><b>11.3</b> Likelihood Ratio Test</a></li>
+<li class="chapter" data-level="11.4" data-path="hypothesis-tests-asymptotics.html"><a href="hypothesis-tests-asymptotics.html#composite-null-hypotheses"><i class="fa fa-check"></i><b>11.4</b> Composite Null Hypotheses</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="generating-random-variables.html"><a href="generating-random-variables.html"><i class="fa fa-check"></i><b>12</b> Generating Random Variables</a></li>
+<li class="chapter" data-level="13" data-path="random-processes.html"><a href="random-processes.html"><i class="fa fa-check"></i><b>13</b> Random Processes</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="random-processes.html"><a href="random-processes.html#poisson-processes"><i class="fa fa-check"></i><b>13.1</b> Poisson Processes</a>
+<ul>
+<li class="chapter" data-level="13.1.1" data-path="random-processes.html"><a href="random-processes.html#memorylessness-of-the-exponential"><i class="fa fa-check"></i><b>13.1.1</b> Memorylessness of the Exponential</a></li>
+<li class="chapter" data-level="13.1.2" data-path="random-processes.html"><a href="random-processes.html#count-time-duality"><i class="fa fa-check"></i><b>13.1.2</b> Count-Time Duality</a></li>
+<li class="chapter" data-level="13.1.3" data-path="random-processes.html"><a href="random-processes.html#poisson-distribution"><i class="fa fa-check"></i><b>13.1.3</b> Poisson Distribution</a></li>
+<li class="chapter" data-level="13.1.4" data-path="random-processes.html"><a href="random-processes.html#exponential-distribution"><i class="fa fa-check"></i><b>13.1.4</b> Exponential Distribution</a></li>
+<li class="chapter" data-level="13.1.5" data-path="random-processes.html"><a href="random-processes.html#example"><i class="fa fa-check"></i><b>13.1.5</b> Example</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="random-processes.html"><a href="random-processes.html#branching-processes"><i class="fa fa-check"></i><b>13.2</b> Branching Processes</a>
+<ul>
+<li class="chapter" data-level="13.2.1" data-path="random-processes.html"><a href="random-processes.html#random-variables"><i class="fa fa-check"></i><b>13.2.1</b> Random Variables</a></li>
+<li class="chapter" data-level="13.2.2" data-path="random-processes.html"><a href="random-processes.html#probability-generating-function"><i class="fa fa-check"></i><b>13.2.2</b> Probability Generating Function</a></li>
+<li class="chapter" data-level="13.2.3" data-path="random-processes.html"><a href="random-processes.html#criticality-theorem"><i class="fa fa-check"></i><b>13.2.3</b> Criticality Theorem</a></li>
+<li class="chapter" data-level="13.2.4" data-path="random-processes.html"><a href="random-processes.html#example-1"><i class="fa fa-check"></i><b>13.2.4</b> Example</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Solving Statistical Problems</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="known-distributions" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">Chapter 4</span> Known Distributions<a href="known-distributions.html#known-distributions" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>This will cover proofs and useful properties of commonly used distributions, as well as location-scale and exponential families.</p>
+<div id="families-of-distributions" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> Families of Distributions<a href="known-distributions.html#families-of-distributions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Many so-called “distributions” are actually <em>families</em> of distributions, meaning that their pdf involves one or more parameters. That is, their pdfs represent a <a href="https://en.wikipedia.org/wiki/Family_of_curves">family of curves</a>, a <strong>set</strong> of pdfs with variable parameters.</p>
+<p>For example, the <span class="math inline">\(\text{Normal}(\mu, \sigma^2)\)</span> distribution contains two parameters, <span class="math inline">\(\mu\)</span> (the mean), and <span class="math inline">\(\sigma^2\)</span> (the variance). These are also examples of two types of parameters with special properties - called <em>location</em> and <em>scale</em> parameters, respectively - that can be used to simply calculations.</p>
+</div>
+<div id="location-and-scale-families-location-scale" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> Location and Scale Families (#location-scale)<a href="known-distributions.html#location-and-scale-families-location-scale" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="location-families" class="section level3 hasAnchor" number="4.2.1">
+<h3><span class="header-section-number">4.2.1</span> Location Families<a href="known-distributions.html#location-families" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="definition">
+<p><span id="def:unlabeled-div-18" class="definition"><strong>Definition 4.1  (Location Family) </strong></span>Let <span class="math inline">\(Z \sim f_Z(z)\)</span>. Given a constant <strong>location parameter</strong> <span class="math inline">\(b\)</span>, <span class="math inline">\(X\)</span> is a location family if <span class="math inline">\(X \sim f_Z(z - b)\)</span> or if <span class="math inline">\(X = Z + b\)</span>.</p>
+</div>
+<p>The two above definitions are equivalent because if <span class="math inline">\(X = Z + b\)</span>, then <span class="math inline">\(P(X &lt; z) = P(Z + b &lt; z) = P(Z &lt; z - b)\)</span>, so the cdf of <span class="math inline">\(Z\)</span> is <span class="math inline">\(F_Z(z - b)\)</span> and therefore <span class="math inline">\(X \sim f_Z(z - b)\)</span> (note this makes use of a <a href="probability.html#probability">direct probability argument</a>)</p>
+</div>
+<div id="scale-families" class="section level3 hasAnchor" number="4.2.2">
+<h3><span class="header-section-number">4.2.2</span> Scale Families<a href="known-distributions.html#scale-families" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="definition">
+<p><span id="def:unlabeled-div-19" class="definition"><strong>Definition 4.2  (Scale Family) </strong></span>Let <span class="math inline">\(Z \sim f_Z(Z)\)</span>. Given a constant <strong>scale parameter</strong> <span class="math inline">\(a\)</span>, <span class="math inline">\(X\)</span> is a scale family if…</p>
+<ul>
+<li><span class="math inline">\(X \sim \frac{1}{a}f_Z(\frac{z}{a})\)</span><br />
+</li>
+<li><span class="math inline">\(X \sim F_Z(\frac{z}{a})\)</span><br />
+</li>
+<li>or <span class="math inline">\(X = aZ\)</span><br />
+</li>
+</ul>
+</div>
+<p>All of the above definitions are equivalent because if <span class="math inline">\(X = aZ\)</span>, then <span class="math inline">\(P(X &lt; z)\)</span> = <span class="math inline">\(P(aZ &lt; z) = P(Z &lt; \frac{z}{a} = F_Z(z)\)</span>. Also, <span class="math inline">\(f_X(x) = \frac{d}{dx}F_X(x) = \frac{d}{dx}F_Z(\frac{z}{a}) = \frac{1}{a}f_Z(\frac{z}{a})\)</span></p>
+</div>
+<div id="properties-of-location-scale-families" class="section level3 hasAnchor" number="4.2.3">
+<h3><span class="header-section-number">4.2.3</span> Properties of Location-Scale Families<a href="known-distributions.html#properties-of-location-scale-families" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We can compute moments by using general properties of expectation (see Moments)</p>
+<ul>
+<li><p><span class="math inline">\(E(X) = aE(Z) + b\)</span>, by linearity of expectation. If the support of <span class="math inline">\(Z\)</span> includes <span class="math inline">\(0\)</span>, then we typically define <span class="math inline">\(Z\)</span> such that <span class="math inline">\(E(Z) = 0\)</span> so that <span class="math inline">\(E(X) = b\)</span>.</p></li>
+<li><p><span class="math inline">\(Var(X) = a^2Var(Z)\)</span>, since <span class="math inline">\(Var(Z + b) = Var(Z)\)</span>. We typically define <span class="math inline">\(Z\)</span> such that <span class="math inline">\(Var(Z) = 1\)</span>, so that <span class="math inline">\(Var(X) = a^2Var(Z) = a^2\)</span>. An example of this is the standard normal.</p></li>
+<li><p><span class="math inline">\(\mathcal{M}_X(t) = e^{tb} \mathcal{M}_Z(at)\)</span></p></li>
+</ul>
+<p>It may seem like the sum of a scale family should also follow the same family - indeed, this is true for a number of distributions include the Normal, Poisson, and Gamma. However, it is not true always. For instance, <span class="math inline">\(X_i \sim \text{Uniform}(0,a)\)</span> is a scale family, but <span class="math inline">\(X_1 + X_2\)</span> does not follow a uniform distribution:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="known-distributions.html#cb1-1" tabindex="-1"></a>X1 <span class="ot">=</span> <span class="fu">runif</span>(<span class="dv">1000</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb1-2"><a href="known-distributions.html#cb1-2" tabindex="-1"></a>X2 <span class="ot">=</span> <span class="fu">runif</span>(<span class="dv">1000</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb1-3"><a href="known-distributions.html#cb1-3" tabindex="-1"></a><span class="fu">hist</span>(X1 <span class="sc">+</span> X2)</span></code></pre></div>
+<p><img src="Solving-Statistical-Problems_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+</div>
+</div>
+<div id="exponential-family" class="section level2 hasAnchor" number="4.3">
+<h2><span class="header-section-number">4.3</span> Exponential Families<a href="known-distributions.html#exponential-family" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="definition">
+<p><span id="def:unlabeled-div-20" class="definition"><strong>Definition 4.3  (Exponential Family) </strong></span><span class="math inline">\(X \sim f_X(x|\theta)\)</span> is an exponential family if its pdf can be written in the form</p>
+<p><span class="math display">\[f_X(x|\theta) = h(x)c(\theta)\exp\Big(\sum_{i=1}^k w_i(\theta)t_i(x)\Big)\]</span></p>
+</div>
+<p>How do we prove that a pdf <em>can</em> be written in the above form? Often, the easiest way is to use a simple trick to get the necessary <span class="math inline">\(\exp\)</span> function: <span class="math inline">\(f(x) = \exp(\log(f(x)))\)</span>. Then, we algebraically manipulate to obtain this form.</p>
+<p>How do we prove that a pdf <em>cannot</em> be written in the above form?</p>
+<p>FORTHCOMING</p>
+<div id="properties" class="section level3 hasAnchor" number="4.3.1">
+<h3><span class="header-section-number">4.3.1</span> Properties<a href="known-distributions.html#properties" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Exponential families have a number of incredibly useful properties:</p>
+<ul>
+<li><a href="math-tricks.html#leibniz-rule">Leibniz’s rule</a> holds, meaning that the <a href="point-estimators-finite-samples.html#point-estimators-finite-samples">Cramer-Rao Lower Bound</a> provides a lower bound on the variance of estimators.</li>
+<li>Among most common families, <strong>only</strong> exponential families admit sufficient statistics with dimension bounded in <span class="math inline">\(n\)</span>. This is proven by the <a href="http://yaroslavvb.com/papers/koopman-on.pdf">Pitman-Koopman-Darmois theorem</a> for families with smooth, nowhere-vanishing pdfs whose domain does not depend on the parameter being estimated.</li>
+<li>If <span class="math inline">\(X\)</span> is an exponential family, <span class="math display">\[T(X) = \Big(\sum_{i=1}^n t_1(x), ..., \sum_{i=1}^n t_k(x)\Big)\]</span> is a minimal <a href="statistics.html#statistics">sufficient statistic</a>.</li>
+<li>Furthermore, if <span class="math inline">\(\{w_1(\theta),...,w_k(\theta)\}\)</span> contains an open set, then <span class="math inline">\(T(X)\)</span> is a <a href="statistics.html#statistics">complete sufficient statistic</a>, which we can use to compute an UMVUE.</li>
+<li>The Method of Moments (MOM) estimator is equal to the Maximum Likelihood Estimator (MLE)</li>
+<li>The regularity conditions required for <a href="point-estimators-asymptotics.html#point-estimators-asymptotics">consistency and asymptotic normality of the MLE</a> are guaranteed to hold.</li>
+<li>The family must have a Monotone Likelihood Ratio, meaning that the <a href="hypothesis-tests-finite-samples.html#hypothesis-tests-finite-samples">Karlin-Rubin Theorem may be employed to construct an UMP test</a>.</li>
+</ul>
+</div>
+<div id="natural-exponential-family" class="section level3 hasAnchor" number="4.3.2">
+<h3><span class="header-section-number">4.3.2</span> Natural Exponential Families<a href="known-distributions.html#natural-exponential-family" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="definition">
+<p><span id="def:unlabeled-div-21" class="definition"><strong>Definition 4.4  (Natural Exponential Family) </strong></span><span class="math inline">\(X \sim f_X(x|\theta)\)</span> is a natural exponential family if its pdf can be written in the form</p>
+<p><span class="math display">\[f_X(x|\theta) = h(x)c^*(\boldsymbol{\eta})\exp\Big(\sum_{i=1}^k \eta_i t_i(x)\Big)\]</span></p>
+</div>
+</div>
+</div>
+<div id="known-univariate-exponential-families" class="section level2 hasAnchor" number="4.4">
+<h2><span class="header-section-number">4.4</span> Known Univariate Exponential Families<a href="known-distributions.html#known-univariate-exponential-families" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Many common distributions follow exponential families. As you will come to find, virtually all of them arise in order to model variations on a common idea: the Bernoulli trial. Let’s discuss this distribution, and the situations in which it arises.</p>
+<div id="bernoulli" class="section level3 hasAnchor" number="4.4.1">
+<h3><span class="header-section-number">4.4.1</span> Bernoulli<a href="known-distributions.html#bernoulli" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The Bernoulli distribution, represented mathematically as <span class="math inline">\(\text{Bernoulli}(p)\)</span>, describes the outcome of a random variable <span class="math inline">\(X\)</span> that takes only two possible values, 0 and 1. Such an event is often termed a “Bernoulli trial”.</p>
+<table>
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Description</th>
+<th align="center">Parameters</th>
+<th align="center">Support</th>
+<th align="center">pmf</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Any random variables whose value can be either 0 or 1</td>
+<td align="center"><span class="math inline">\(0 \leq p \leq 1\)</span></td>
+<td align="center"><span class="math inline">\(x \in \{0, 1\}\)</span></td>
+<td align="center"><span class="math inline">\(p^x(1-p)^{1-x}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>The Bernoulli distribution occurs very commonly because many situations can be described in terms of 0 or 1 outcomes. For example, all indicator functions <span class="math inline">\(I(A)\)</span> of random variables, where <span class="math inline">\(A\)</span> is a statement about the random variable (for instance, <span class="math inline">\(A = \{x: x &gt; 1\}\)</span>) are Bernoulli random variables with <span class="math inline">\(p = P(A)\)</span>.</p>
+<ul>
+<li>The Bernoulli is a special case of the Binomial distribution: <span class="math inline">\(\text{Bernoulli}(p) = \text{Binomial}(1, p)\)</span></li>
+<li>As we discuss regarding the Binomial distribution, the Bernoulli has an additive property: <span class="math inline">\(\sum_{i=1}^n \sim \text{Binomial}(n, p)\)</span>. This can be proven by the <a href="#additivity">additivity technique</a> discussed imminently.</li>
+<li>If <span class="math inline">\(X\sim \text{Bernoulli}\)</span> then <span class="math inline">\(E(X) = P(Y = 1)\)</span>, a fact which is often useful for <a href="moments.html#moments">computing moments</a> as well as <a href="point-estimators-finite-samples.html#point-estimators-finite-samples">finding UMVUEs</a>.</li>
+</ul>
+</div>
+<div id="binomial" class="section level3 hasAnchor" number="4.4.2">
+<h3><span class="header-section-number">4.4.2</span> Binomial<a href="known-distributions.html#binomial" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>What happens when we repeat a Bernoulli trial many times and count how many 1’s occur? The Binomial distribution is represented mathematically as <span class="math inline">\(\text{Bernoulli}(n, p)\)</span>. It describes the <em>number of successes</em> in a series of Bernoulli trials.</p>
+<table>
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Description</th>
+<th align="center">Parameters</th>
+<th align="center">Support</th>
+<th align="center">pmf</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">The number of times an event was successful out of <span class="math inline">\(n\)</span> attempts</td>
+<td align="center"><span class="math inline">\(0 \leq p \leq 1\)</span>, <span class="math inline">\(n \in \mathbb{N}\)</span></td>
+<td align="center"><span class="math inline">\(x \in \mathbb{N}\)</span></td>
+<td align="center"><span class="math inline">\({n\choose x}p^x(1-p)^{n-x}\)</span></td>
+</tr>
+</tbody>
+</table>
+<div class="example">
+<p><span id="exm:additivity" class="example"><strong>Example 4.1  (Proving Additive Properties of Distributions) </strong></span>The Binomial distribution is <strong>additive</strong>: if <span class="math inline">\(X \sim \text{Binomial}(n,p)\)</span> and <span class="math inline">\(X \sim \text{Binomial}(m,p)\)</span>, then <span class="math inline">\(X + Y \sim \text{Binomial}(m + n, p)\)</span>. One can prove the additivity of any distribution, not just the Binomial, by relying on the convolution property of mgfs: <span class="math inline">\(\mathcal{M}_{X + Y}(t) = \mathcal{M}_X(t)\cdot\mathcal{M}_Y(t)\)</span>.</p>
+<p>Here’s an example with the Binomial: if <span class="math inline">\(X \sim \text{Binomial}(n, p)\)</span> and <span class="math inline">\(Y \sim \text{Binomial}(m, p)\)</span>, then</p>
+<p><span class="math display">\[\mathcal{M}_{X + Y}(t) = ((1-p) + pe^t)^n\cdot ((1-p) + pe^t)^m = ((1-p) + pe^t)^{mn}\]</span>
+which we can recognize as the mgf of a <span class="math inline">\(\text{Binomial}(n + m, p)\)</span> distribution. Since, like the cdf and the pdf, the mgf fully characterizes a probability distribution, we’ve proven the additive property mentioned above.</p>
+<p>Here’s another example with the Binomial, this time generalizing it to an arbitrary summation: If <span class="math inline">\(X_i \overset{iid}{\sim} \text{Binomial}(m, p)\)</span>, and <span class="math inline">\(Y = \sum_{i=1}^nX_i\)</span>, then</p>
+<p><span class="math display">\[
+\mathcal{M}_Y(t) = \prod_{i=1}^n\mathcal{M}_{X_i}(t) = (\mathcal{M}_{X_i}(t))^n \\
+= (((1-p) + pe^t)^m)^n = ((1-p) + pe^t)^{mn}
+\]</span></p>
+<p>proving the generalized additive property that if <span class="math inline">\(X_i \sim \text{Binomial}(m, p)\)</span>, then <span class="math inline">\(\sum_{i=1}^n X_i \sim \text{Binomial}(nm, p)\)</span>.</p>
+</div>
+</div>
+<div id="geometric-distribution" class="section level3 hasAnchor" number="4.4.3">
+<h3><span class="header-section-number">4.4.3</span> Geometric<a href="known-distributions.html#geometric-distribution" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Suppose instead of counting the number of successes, we wish to count the number of attempts until a single success occurs? The Geometric distribution is represented mathematically as <span class="math inline">\(\text{Geo}(p)\)</span>. It describes the <strong>number of trials before a success occurs</strong> in a series of Bernoulli trials.</p>
+<p>Note that the parametrization below does not include the final success in the number of trials, but alternatives exist in which it may.</p>
+<table>
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Description</th>
+<th align="center">Parameters</th>
+<th align="center">Support</th>
+<th align="center">pmf</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">The number of Bernoulli trials attempted before a success occurs</td>
+<td align="center"><span class="math inline">\(0 &lt; p \leq 1\)</span></td>
+<td align="center"><span class="math inline">\(x \in \mathbb{N}\)</span></td>
+<td align="center"><span class="math inline">\(p(1-p)^{x}\)</span></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>The Geometric is a special case of the Negative Binomial: <span class="math inline">\(\text{Geo}(p) = \text{NegBin}(1, p)\)</span></li>
+<li>Just like the Bernoulli, the Geometric has an additive property: <span class="math inline">\(\sum_{i=1}^n X_i \sim \text{NegBin}(n, p)\)</span>, proven via the same <a href="#additivity">addivity technique</a> discussed previously.</li>
+<li>The Geometric is the only discrete <em>memoryless</em> distribution; that is, for <span class="math inline">\(k &gt; i\)</span>, <span class="math inline">\(P(X \geq k | X &gt; i) = P(X \geq k - i)\)</span>.</li>
+</ul>
+</div>
+<div id="negative-binomial" class="section level3 hasAnchor" number="4.4.4">
+<h3><span class="header-section-number">4.4.4</span> Negative Binomial<a href="known-distributions.html#negative-binomial" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The Negative Binomial distribution generalizes the Geometric distribution to instead represent the number of Bernoulli trials until <span class="math inline">\(r\)</span> successes have occurred. It is represented mathematically as <span class="math inline">\(\text{NegBin}(r, p)\)</span>.</p>
+<table>
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Description</th>
+<th align="center">Parameters</th>
+<th align="center">Support</th>
+<th align="center">pmf</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">The number of Bernoulli trials attempted before a success occurs</td>
+<td align="center"><span class="math inline">\(0 &lt; p \leq 1\)</span>, <span class="math inline">\(r \in \mathbb{N}\)</span></td>
+<td align="center"><span class="math inline">\(x \in \mathbb{N}\)</span></td>
+<td align="center"><span class="math inline">\({x+r-1\choose x}p^r(1-p)^{x}\)</span></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>The Negative Binomial is additive: If <span class="math inline">\(X_i \sim \text{NegBin(r, p)}\)</span>, then <span class="math inline">\(\sum_{i=1}^n X_i \sim \text{NegBin(nr, p)}\)</span></li>
+</ul>
+</div>
+<div id="poisson" class="section level3 hasAnchor" number="4.4.5">
+<h3><span class="header-section-number">4.4.5</span> Poisson<a href="known-distributions.html#poisson" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The Poisson distribution describes one possible behavior of a <strong>count</strong> random variable. It describes the probability that a certain number of events occur within a fixed interval, such as a time period, distance or area. It is mathematically represented as <span class="math inline">\(\text{Poisson}(\lambda)\)</span>.</p>
+<table>
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Description</th>
+<th align="center">Parameters</th>
+<th align="center">Support</th>
+<th align="center">pmf</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">The number of events occurring in a fixed interval</td>
+<td align="center"><span class="math inline">\(\lambda \in (0, \infty)\)</span></td>
+<td align="center"><span class="math inline">\(x \in \mathbb{N}_0\)</span></td>
+<td align="center"><span class="math inline">\(\frac{1}{x!}\lambda^xe^{-\lambda}\)</span></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Like the Binomial, the Poisson is formulated by counting the number of successes within a set of Bernoulli trials. The distribution describes the asymptotic behavior of the Binomial distribution as <span class="math inline">\(n \rightarrow \infty\)</span> and <span class="math inline">\(np \rightarrow \lambda\)</span>, a fixed <em>rate</em> parameter.</li>
+<li>The Poisson is <strong>additive</strong>. If <span class="math inline">\(X_i \sim \text{Poisson}(\lambda)\)</span>, then <span class="math inline">\(\sum_{i=1}^n X_i \sim \text{Poisson}(n\lambda)\)</span></li>
+</ul>
+</div>
+<div id="normal" class="section level3 hasAnchor" number="4.4.6">
+<h3><span class="header-section-number">4.4.6</span> Normal<a href="known-distributions.html#normal" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Often denoted <span class="math inline">\(N(\mu, \sigma^2)\)</span>, the Normal distribution is especially common in asymptotics - by the <a href="clt">Central Limit Theorem</a>, the sample mean converges in distribution to a normal. Many other variables also converge to a normal.</p>
+<p>For <span class="math inline">\(X \sim N(\mu, \sigma^2)\)</span>, the mean is <span class="math inline">\(\mu\)</span> and the variance is <span class="math inline">\(\sigma^2\)</span>. This means that the Normal is a <strong>location-scale family</strong>.</p>
+<table>
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Description</th>
+<th align="center">Parameters</th>
+<th align="center">Support</th>
+<th align="center">pdf</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Describes the asymptotic behavior of sample means and many distributions</td>
+<td align="center"><span class="math inline">\(\mu \in \mathbb{R}\)</span>, <span class="math inline">\(\sigma^2 \in (0, \infty)\)</span></td>
+<td align="center"><span class="math inline">\(x \in \mathbb{R}\)</span></td>
+<td align="center"><span class="math inline">\(\frac{1}{\sqrt{2\pi\sigma^2}}\exp\Big(-\frac{1}{2}\frac{(x-\mu)^2}{\sigma^2}\Big)\)</span></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>The following distributions converge to a Normal:
+<ul>
+<li><span class="math inline">\(\text{Binomial}(n, p) \approx N(np, np(1-p))\)</span> for large <span class="math inline">\(n\)</span> and <span class="math inline">\(p\)</span> bounded away from 0 or 1</li>
+<li><span class="math inline">\(\text{Pois(\lambda)} \approx N(\lambda, \lambda)\)</span> for large <span class="math inline">\(\lambda\)</span>.</li>
+<li><span class="math inline">\(\chi^2(\nu)\approx N(\nu, 2\nu)\)</span> for large <span class="math inline">\(\nu\)</span>.</li>
+<li><span class="math inline">\(t(\nu) \approx N(0, 1)\)</span> for large <span class="math inline">\(\nu\)</span>.</li>
+</ul></li>
+<li>The Normal is additive. If <span class="math inline">\(X_1 \sim N(\mu_1, \sigma_1^2)\)</span> and <span class="math inline">\(X_2 \sim N(\mu_2, \sigma_2^2)\)</span>, then <span class="math inline">\(X + Y \sim N(\mu_1 + \mu_2, \sigma_1^2 + \sigma_2^2)\)</span>.</li>
+</ul>
+</div>
+<div id="exponential" class="section level3 hasAnchor" number="4.4.7">
+<h3><span class="header-section-number">4.4.7</span> Exponential<a href="known-distributions.html#exponential" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The Poisson process that models the number of events occuring in an interval also gives rise to another distribution: the Exponential. This distribution models the size of the interval (time, distance, etc.) between events.</p>
+<p>The Exponential is described mathematically as <span class="math inline">\(\text{Exp}(\lambda)\)</span>. It can be parametrized in two ways: with <span class="math inline">\(\lambda\)</span> as a rate parameter, describing how often events occur; or with <span class="math inline">\(\lambda\)</span> as a scale parameter (yes, the same scale parameter discussed in <a href="#location-scale">Location Scale Families</a>) that is the inverse of the rate. Hence, the Exponential is a <strong>scale family</strong>.</p>
+<p>Note that the parametrization below describes the distribution in terms of the scale parameter. The scale parameter version simply replaces <span class="math inline">\(\lambda\)</span> with <span class="math inline">\(\frac{1}{\lambda}\)</span>.</p>
+<table>
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Description</th>
+<th align="center">Parameters</th>
+<th align="center">Support</th>
+<th align="center">pdf</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Models the size of the interval between events in a Poisson process</td>
+<td align="center"><span class="math inline">\(\lambda \in (0, \infty)\)</span></td>
+<td align="center"><span class="math inline">\(x \in (0, \infty)\)</span></td>
+<td align="center"><span class="math inline">\(\lambda e^{-\lambda x}\)</span></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>The Exponential is a special case of the Gamma distribution: <span class="math inline">\(\text{Exp}(\lambda) = \text{Gamma}(1, \lambda)\)</span></li>
+<li>By extension, the exponential has an additive property: If $X_iExp() $, then <span class="math inline">\(\sum_{i=1}^n X_i \sim \text{Gamma}(n, \lambda)\)</span>.</li>
+<li>The Exponential is the only continuous <em>memoryless</em> distribution; that is, for <span class="math inline">\(k &gt; i\)</span>, <span class="math inline">\(P(X \geq k | X &gt; i) = P(X \geq k - i)\)</span>.</li>
+</ul>
+</div>
+<div id="gamma" class="section level3 hasAnchor" number="4.4.8">
+<h3><span class="header-section-number">4.4.8</span> Gamma<a href="known-distributions.html#gamma" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Similar to how the Negative Binomial generalizes the Geometric to multiple successes, the Gamma generalizes the Exponential to multiple events. The Gamma is useful for modeling random variables that are known to be greater than 0.</p>
+<p>It is represented mathematically as <span class="math inline">\(\text{Gamma}(k, \lambda)\)</span>, where <span class="math inline">\(k\)</span> is a <strong>shape</strong> parameter and <span class="math inline">\(\lambda\)</span> is a <a href="#location-scale">scale</a> parameter. This means the Gamam is a <strong>scale family</strong>. It is called “Gamma” because it involves the <a href="math-tricks.html#gamma-function">gamma function</a>.</p>
+<table>
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Description</th>
+<th align="center">Parameters</th>
+<th align="center">Support</th>
+<th align="center">pdf</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Generalization of the exponential distribution</td>
+<td align="center"><span class="math inline">\(k \in (0, \infty)\)</span>, <span class="math inline">\(\lambda \in (0, \infty)\)</span></td>
+<td align="center"><span class="math inline">\(x \in (0, \infty)\)</span></td>
+<td align="center"><span class="math inline">\(\frac{1}{\Gamma(k)\lambda^k}x^{k-1}\exp(-\frac{x}{\theta})\)</span></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>The Gamma is <strong>additive</strong>: If $X_i(k, ) $, then <span class="math inline">\(\sum_{i=1}^n X_i \sim \text{Gamma}(nk, \lambda)\)</span>.</li>
+</ul>
+</div>
+<div id="beta" class="section level3 hasAnchor" number="4.4.9">
+<h3><span class="header-section-number">4.4.9</span> Beta<a href="known-distributions.html#beta" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The Beta distribution models proportions. It is mathematically denoted <span class="math inline">\(\text{Beta}(\alpha, \beta)\)</span> where <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> are two shape parameters. It is known as “Beta” because its pdf contains the beta function: <span class="math inline">\(B(\alpha, \beta) = \frac{\Gamma(\alpha)\Gamma(\beta)}{\Gamma(\alpha + \beta)}\)</span></p>
+<table>
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Description</th>
+<th align="center">Parameters</th>
+<th align="center">Support</th>
+<th align="center">pdf</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Model of a proportion</td>
+<td align="center"><span class="math inline">\(\lambda \in (0, \infty)\)</span></td>
+<td align="center"><span class="math inline">\(x \in (0, 1)\)</span></td>
+<td align="center"><span class="math inline">\(\frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)}x^{\alpha-1}(1-x)^{\beta-1}\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="chi-squared" class="section level3 hasAnchor" number="4.4.10">
+<h3><span class="header-section-number">4.4.10</span> Chi-squared<a href="known-distributions.html#chi-squared" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The Chi-squared distribution describes the distribution of the sum of squared standard Normal (<span class="math inline">\(N(0,1)\)</span>) random variables. As a result, it is useful in asymptotics, especially <a href="hypothesis-tests-asymptotics.html#hypothesis-tests-asymptotics">asymptotic hypothesis testing</a>, since if an estimator is asymptotically normal, its square is asymptotically <span class="math inline">\(\chi^2\)</span>.</p>
+<p>It is represented mathematically as <span class="math inline">\(\chi^2(\nu)\)</span> or <span class="math inline">\(\chi^2_\nu\)</span> where <span class="math inline">\(\nu\)</span> is the “degrees of freedom” - the number of squared normal random variables in the sum.</p>
+<table>
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Description</th>
+<th align="center">Parameters</th>
+<th align="center">Support</th>
+<th align="center">pdf</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Squared standard normals</td>
+<td align="center"><span class="math inline">\(\nu \in \mathbb{N}\)</span></td>
+<td align="center"><span class="math inline">\(x \in (0, \infty)\)</span></td>
+<td align="center"><span class="math inline">\(\frac{1}{\Gamma(\nu/2)2^{\nu / 2}}x^{\nu/2 - 1}\exp(-\nu/2)\)</span></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>If <span class="math inline">\(X_i \sim N(0,1)\)</span>, then <span class="math inline">\(\sum_{i=1}^nX_i^2\sim \chi^2(n)\)</span></li>
+<li>The Chi-squared distribution is a special case of the Gamma. That is, if <span class="math inline">\(X \sim \chi^2(\nu)\)</span>, then <span class="math inline">\(X \sim \text{Gamma}(\frac{\nu}{2}, \frac{1}{2})\)</span>. This can be observed directly from the pdf.</li>
+</ul>
+</div>
+</div>
+<div id="exponential-families-with-certain-parameters-fixed" class="section level2 hasAnchor" number="4.5">
+<h2><span class="header-section-number">4.5</span> Exponential families with certain parameters fixed<a href="known-distributions.html#exponential-families-with-certain-parameters-fixed" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Some families are exponential, but only when one or more parameters are fixed.</p>
+<div id="weibull" class="section level3 hasAnchor" number="4.5.1">
+<h3><span class="header-section-number">4.5.1</span> Weibull<a href="known-distributions.html#weibull" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The Weibull is a generalization of the exponential distribution. The extra parameter <span class="math inline">\(k\)</span> describes how the failure rate changes over time. It is an exponential family when <span class="math inline">\(k\)</span> is fixed.</p>
+<p>Like the exponential, <span class="math inline">\(\lambda\)</span> is a scale parameter, meaning that the Weibull is a <strong>scale family</strong>.</p>
+<table>
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Description</th>
+<th align="center">Parameters</th>
+<th align="center">Support</th>
+<th align="center">pdf</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Models time-to-event variables</td>
+<td align="center"><span class="math inline">\(\lambda \in (0, \infty)\)</span>, <span class="math inline">\(k \in (0, \infty)\)</span></td>
+<td align="center"><span class="math inline">\(x \in [0, \infty)\)</span></td>
+<td align="center"><span class="math inline">\(\frac{k}{\lambda}\Big(\frac{x}{\lambda}\Big)^{k-1}\exp(-(x/\lambda)^k)\)</span></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>When <span class="math inline">\(k = 1\)</span>, the Weibull is equal to an <span class="math inline">\(\text{Exponential}(\frac{1}{\lambda})\)</span>, which can be observed directly from its pdf.</li>
+</ul>
+</div>
+<div id="pareto" class="section level3 hasAnchor" number="4.5.2">
+<h3><span class="header-section-number">4.5.2</span> Pareto<a href="known-distributions.html#pareto" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The Pareto distribution, written <span class="math inline">\(\text{Pareto}(x_m, \alpha)\)</span>, models variables involving power-law relationships. <span class="math inline">\(\alpha \in (0, \infty)\)</span> is a shape parameter, while <span class="math inline">\(x_m\)</span> is a scale parameter. This means that the Pareto is a <strong>scale family</strong>. It is an exponential family when <span class="math inline">\(x_m\)</span> is fixed.</p>
+<table>
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Description</th>
+<th align="center">Parameters</th>
+<th align="center">Support</th>
+<th align="center">pdf</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Power-law models</td>
+<td align="center"><span class="math inline">\(\alpha \in (0, \infty)\)</span>, <span class="math inline">\(x_m \in (0, \infty)\)</span></td>
+<td align="center"><span class="math inline">\(x \in [0, \infty)\)</span></td>
+<td align="center"><span class="math inline">\(\frac{\alpha x_m^\alpha}{x^{\alpha+1}}\)</span></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>The Pareto is related to the Exponential. If <span class="math inline">\(X\sim \text{Pareto}(x_m, \alpha)\)</span>, then <span class="math inline">\(Y = \log(\frac{X}{x_m}) \sim \text{Exp}(\alpha)\)</span></li>
+</ul>
+</div>
+</div>
+<div id="non-exponential-families" class="section level2 hasAnchor" number="4.6">
+<h2><span class="header-section-number">4.6</span> Non-exponential families<a href="known-distributions.html#non-exponential-families" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The following families are not exponential, but still commonly arise.</p>
+<div id="uniform" class="section level3 hasAnchor" number="4.6.1">
+<h3><span class="header-section-number">4.6.1</span> Uniform<a href="known-distributions.html#uniform" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The Uniform distribution is parametrized by its minimum <span class="math inline">\(a\)</span> and maximum <span class="math inline">\(b\)</span>. Denoted <span class="math inline">\(U(a,b)\)</span>, it describes a scenario where every possible value of <span class="math inline">\(x\)</span> has the same probability.</p>
+<table>
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Description</th>
+<th align="center">Parameters</th>
+<th align="center">Support</th>
+<th align="center">pdf</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Every <span class="math inline">\(x\)</span> has same probability</td>
+<td align="center"><span class="math inline">\(-\infty &lt; a &lt; b &lt; \infty\)</span></td>
+<td align="center"><span class="math inline">\(x \in [a, b]\)</span></td>
+<td align="center"><span class="math inline">\(\frac{1}{b-a}\)</span></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>If <span class="math inline">\(X \sim \text{Beta}(1,1)\)</span>, then <span class="math inline">\(X \sim U(0,1)\)</span></li>
+<li>If <span class="math inline">\(X \sim U(0,1)\)</span>, then <span class="math inline">\(-\lambda \log(X) \sim \text{Exp}(\lambda)\)</span>.</li>
+<li>If <span class="math inline">\(X_i \overset{iid}{\sim} U(0,1)\)</span>, then <span class="math inline">\(X_{(k)} - X_{(j)} \sim \text{Beta}(k - j, n - (k - j) + 1)\)</span></li>
+<li>By the Probability Integral Transform, inverse cdfs always follow a standard uniform distribution. That is, if <span class="math inline">\(X = F_X^{-1}(Y)\)</span>, then <span class="math inline">\(Y \sim U(0,1)\)</span>. This can be used to <a href="generating-random-variables.html#generating-random-variables">generate any random variable with a known cdf</a>.</li>
+</ul>
+</div>
+<div id="cauchy" class="section level3 hasAnchor" number="4.6.2">
+<h3><span class="header-section-number">4.6.2</span> Cauchy<a href="known-distributions.html#cauchy" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The Cauchy arises in situations involving ratios of standard normal variables, as well as rotations. It is <span class="math inline">\(\text{Cauchy}(x_0, \gamma)\)</span>, where <span class="math inline">\(x_0\)</span> is a location parameter and <span class="math inline">\(\gamma\)</span> is a scale parameter, making it a <strong>location-scale family</strong>.</p>
+<table>
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Description</th>
+<th align="center">Parameters</th>
+<th align="center">Support</th>
+<th align="center">pdf</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Rotations and ratios of normals</td>
+<td align="center"><span class="math inline">\(x_0 \in \mathbb{R}\)</span>, <span class="math inline">\(\gamma \in (0, \infty)\)</span></td>
+<td align="center"><span class="math inline">\(x \in \mathbb{R}\)</span></td>
+<td align="center"><span class="math inline">\(\frac{1}{\pi \gamma\Big(1 + \Big(\frac{x - x_0}{\gamma}\Big)^2\Big)}\)</span></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>If <span class="math inline">\(U, V \sim N(0,1)\)</span> independently, then <span class="math inline">\(U/V \sim Cauchy(0,1)\)</span></li>
+<li>The Cauchy is often used as a pathological example in statistical problems, since it famously has no mean or variance (<span class="math inline">\(E(X) = Var(X) = \infty\)</span>)</li>
+<li>If <span class="math inline">\(X\sim t(1)\)</span>, then <span class="math inline">\(X\sim \text{Cauchy}(0,1)\)</span></li>
+</ul>
+</div>
+<div id="t-distribution" class="section level3 hasAnchor" number="4.6.3">
+<h3><span class="header-section-number">4.6.3</span> t-distribution<a href="known-distributions.html#t-distribution" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The t-distribution describes the distribution of the t-statistic for <span class="math inline">\(X_1, ... X_n \overset{iid}{\sim}N(\mu, \sigma^2)\)</span></p>
+<p><span class="math display">\[t = \frac{\bar{X} - \mu}{\sqrt{S^2/n}}\]</span></p>
+<p>As a result, it is commonly used in <a href="hypothesis-tests-finite-samples.html#hypothesis-tests-finite-samples">hypothesis testing</a>. Denoted <span class="math inline">\(t(\nu)\)</span>, the parameter <span class="math inline">\(\nu\)</span> represents the degrees of freedom - the number of <span class="math inline">\(X_i\)</span> in the sample that are being summed in the computation of <span class="math inline">\(\bar{X}\)</span> and <span class="math inline">\(S^2\)</span>.</p>
+<table>
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Description</th>
+<th align="center">Parameters</th>
+<th align="center">Support</th>
+<th align="center">pdf</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Distribution of the t-statistic</td>
+<td align="center"><span class="math inline">\(\nu \in \mathbb{N}\)</span></td>
+<td align="center"><span class="math inline">\(x \in \mathbb{R}\)</span></td>
+<td align="center"><span class="math inline">\(\frac{\Gamma((\nu + 1) / 2)}{\sqrt{\nu\pi}\Gamma(\nu/2)}\Big(1 + \frac{x^2}{\nu}\Big)^{-(\nu+1)/2}\)</span></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>As <span class="math inline">\(\nu \rightarrow \infty\)</span>, the t-distribution converges to a <span class="math inline">\(N(0,1)\)</span>.</li>
+<li>If <span class="math inline">\(X \sim t(1)\)</span> then <span class="math inline">\(X \sim \text{Cauchy}(0,1)\)</span>.</li>
+</ul>
+</div>
+<div id="f-distribution" class="section level3 hasAnchor" number="4.6.4">
+<h3><span class="header-section-number">4.6.4</span> F-distribution<a href="known-distributions.html#f-distribution" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Also useful for [hypothesis testing]](#hypothesis-tests-finite-samples), the F-distribution, denoted <span class="math inline">\(F(n, m)\)</span>, describes the distribution of the F-statistic:</p>
+<p><span class="math display">\[X = \frac{S_1 / n}{S_2 / m}\]</span>
+where <span class="math inline">\(S_1\)</span> and <span class="math inline">\(S_2\)</span> are the sums of independent standard normal random variables with degrees of freedom <span class="math inline">\(n\)</span> and <span class="math inline">\(m\)</span>, respectively - that is, <span class="math inline">\(S_1 \sim \chi^2(n)\)</span> and <span class="math inline">\(S_2 \sim \chi^2(m)\)</span>.</p>
+<table>
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Description</th>
+<th align="center">Parameters</th>
+<th align="center">Support</th>
+<th align="center">pdf</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Distribution of the <span class="math inline">\(F\)</span>-statistic</td>
+<td align="center"><span class="math inline">\(n \in \mathbb{N}\)</span>, <span class="math inline">\(m \in \mathbb{N}\)</span></td>
+<td align="center"><span class="math inline">\(x \in (0, \infty)\)</span></td>
+<td align="center"><span class="math inline">\(\sqrt{\frac{(nx)^nm^m}{(nx + m)^{n + m}}}\frac{\Gamma(n + m)}{x\Gamma(n)\Gamma(m)}\)</span></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>If <span class="math inline">\(X \ F(n, m)\)</span>, then <span class="math inline">\(\frac{1}{X} \sim F(m, n)\)</span></li>
+<li>If <span class="math inline">\(X \sim t(n)\)</span>, then <span class="math inline">\(X^2 \sim F(1, n)\)</span></li>
+<li>If <span class="math inline">\(X \sim \chi^2(n)\)</span> and <span class="math inline">\(Y \sim \chi^2(m)\)</span>, then <span class="math inline">\(\frac{X / n}{Y / m} \sim F(n, m)\)</span></li>
+<li>If <span class="math inline">\(X_i \overset{iid}{\sim} \text{Gamma}(\alpha_i, \beta_i)\)</span>, then <span class="math inline">\(\frac{\alpha_2\beta1X_1}{\alpha_1\beta_2X_2} \sim F(2\alpha_1, 2\alpha_2)\)</span></li>
+<li>If <span class="math inline">\(X \sim \text{Beta}(n/2, m/2)\)</span>, then <span class="math inline">\(\frac{mX}{n(1-X)}\sim F(n, m)\)</span></li>
+</ul>
+</div>
+<div id="hypergeometric" class="section level3 hasAnchor" number="4.6.5">
+<h3><span class="header-section-number">4.6.5</span> Hypergeometric<a href="known-distributions.html#hypergeometric" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Imagine drawing <span class="math inline">\(n\)</span> samples <em>without</em> replacement from a finite population of size <span class="math inline">\(N\)</span>. Suppose <span class="math inline">\(K\)</span> of the units in the population are considered “successes” if drawn. The Hypergeometric distribution, denoted <span class="math inline">\(\text{HGeo}(N, K, n)\)</span>, describes the probability that you will draw <span class="math inline">\(x\)</span> “successes” under these circumstances.</p>
+<table>
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Description</th>
+<th align="center">Parameters</th>
+<th align="center">Support</th>
+<th align="center">pmf</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Sampling without replacement</td>
+<td align="center"><span class="math inline">\(N \in \mathbb{N}_0\)</span>, <span class="math inline">\(K \in \{0, 1, ..., N\}\)</span>, <span class="math inline">\(n \in \{0,1,...,N\}\)</span></td>
+<td align="center"><span class="math inline">\(x \in \{\max(0, n+K-N),..., \min(n,K)\}\)</span></td>
+<td align="center"><span class="math inline">\(\frac{{K\choose x}{N - K \choose n - x -1}}{N \choose n}\)</span></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Fisher’s Exact Test is based on the Hypergeometric distribution.</li>
+<li>If <span class="math inline">\(X \sim \text{HGeo}(N, K, n)\)</span>, and <span class="math inline">\(N\)</span> and <span class="math inline">\(K\)</span> are sufficiently large compared to <span class="math inline">\(n\)</span>, then <span class="math inline">\(X \approx \text{Binom}(n, p)\)</span></li>
+</ul>
+</div>
+</div>
+<div id="multivariate-distributions" class="section level2 hasAnchor" number="4.7">
+<h2><span class="header-section-number">4.7</span> Multivariate Distributions<a href="known-distributions.html#multivariate-distributions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="bivariate-normal" class="section level3 hasAnchor" number="4.7.1">
+<h3><span class="header-section-number">4.7.1</span> Bivariate Normal<a href="known-distributions.html#bivariate-normal" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The bivariate normal describes a situation where two random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are normally distributed, and their sum is also normally distributed.</p>
+<table>
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Description</th>
+<th align="center">Parameters</th>
+<th align="center">Support</th>
+<th align="center">pmf</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Two-dimensional normal</td>
+<td align="center"><span class="math inline">\(\mu_x, \mu_y \in \mathbb{R}\)</span>, <span class="math inline">\(\sigma_x, \sigma_y \in \mathbb{R} &gt; 0\)</span>, <span class="math inline">\(\rho \in [-1, 1]\)</span></td>
+<td align="center"><span class="math inline">\(x\in\mathbb{R}^2\)</span></td>
+<td align="center"><span class="math inline">\(\frac{1}{2\pi\sigma_x\sigma_y\sqrt{1-\rho^2}}\exp\Big(-\frac{1}{2(1-\rho^2)}\Big((\frac{x-\mu_x}{\sigma_x})^2 - 2\rho(\frac{x - \mu_x}{\sigma_x})(\frac{y - \mu_y}{\sigma_y}) + (\frac{y-\mu_y}{\sigma_y})^2\Big)\Big)\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Suppose that <span class="math inline">\((X, Y)\)</span> follows the bivariate normal distribution above. Then,</p>
+<ul>
+<li>The marginal distributions are <span class="math inline">\(X \sim N(\mu_x, \sigma_x^2)\)</span> and <span class="math inline">\(Y \sim N(\mu_y, \sigma_y^2)\)</span></li>
+<li><span class="math inline">\(Corr(X, Y) = \rho\)</span></li>
+<li>Any linear combination of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> is univariate normal. That is, <span class="math inline">\(aX + bY \sim N(a\mu_x + b\mu_y, a^2\sigma_x^2 + b^2\sigma_y^2 +2ab\rho\sigma_x\sigma_y\)</span>.</li>
+</ul>
+<div id="multivariate-normal" class="section level4 hasAnchor" number="4.7.1.1">
+<h4><span class="header-section-number">4.7.1.1</span> Multivariate Normal<a href="known-distributions.html#multivariate-normal" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>The Multivariate Normal, often denoted <span class="math inline">\(MVN(\mu, \Sigma)\)</span>, generalizes the normal to a random vector <span class="math inline">\(X\)</span> where all linear combinations of its components have a univariate normal distribution.</p>
+<table>
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Description</th>
+<th align="center">Parameters</th>
+<th align="center">Support</th>
+<th align="center">pmf</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><span class="math inline">\(k\)</span>-dimension normal</td>
+<td align="center"><span class="math inline">\(\mu \in \mathbb{R}^k\)</span>, <span class="math inline">\(\Sigma \in \mathbb{R}^{k \times k}\)</span></td>
+<td align="center"><span class="math inline">\(x\in\mathbb{R}^k\)</span></td>
+<td align="center"><span class="math inline">\(\frac{1}{\sqrt{(2\pi)^{k}\det(\Sigma)}}\exp\Big(-\frac{1}{2}(x - \mu)^\top\Sigma^{-1}(x-\mu)\Big)\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>If a vector <span class="math inline">\(X\sim MVN(\mu, \Sigma)\)</span>, then</p>
+<ul>
+<li>All marginal distributions of <span class="math inline">\(X\)</span> follow a multivariate normal with the marginalized means and rows/columns in the covariance matrix dropped. For example, <span class="math inline">\(X_1 \sim N(\mu_1, \sigma_1)\)</span></li>
+<li>If <span class="math inline">\(Y = c + BX\)</span>, then <span class="math inline">\(Y \sim MVN(c + B\mu, B\Sigma B^\top)\)</span></li>
+</ul>
+<p>Note that two normally distributed random variables may not be jointly bivariate normal!</p>
+</div>
+</div>
+<div id="multinomial" class="section level3 hasAnchor" number="4.7.2">
+<h3><span class="header-section-number">4.7.2</span> Multinomial<a href="known-distributions.html#multinomial" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Consider an event in which one of <span class="math inline">\(k\)</span> discrete outcomes is guaranteed to occur - for instance, rolling a 6-sided die, where there are <span class="math inline">\(k = 6\)</span> possible outcomes. Repeat this event <span class="math inline">\(n\)</span> times. If outcome <span class="math inline">\(i\)</span> occurs with probability <span class="math inline">\(p_i\)</span> (not necessarily equal), then the number of times <span class="math inline">\(X_i\)</span> that each outcome <span class="math inline">\(i = 1,...,k\)</span> occurs after <span class="math inline">\(n\)</span> trials is modeled by the Multinomial distribution. <span class="math inline">\(X\)</span> is a vector representing the number of successes of each event.</p>
+<table>
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Description</th>
+<th align="center">Parameters</th>
+<th align="center">Support</th>
+<th align="center">pmf</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><span class="math inline">\(k\)</span> joint binomials</td>
+<td align="center"><span class="math inline">\(n \in \mathbb{N}\)</span>, <span class="math inline">\(k \in \mathbb{N}\)</span>, <span class="math inline">\(p_1,...,p_k\in (0,1)\)</span>, <span class="math inline">\(\sum_{i=1}^kp_i = 1\)</span></td>
+<td align="center"><span class="math inline">\(x_i\in \mathbb{N}\)</span>, <span class="math inline">\(\sum_{i=1}^kx_i = n\)</span></td>
+<td align="center"><span class="math inline">\(\frac{n!}{\prod_{i=1}^kx_i!}\prod_{i=1}^kp_i^{x_i}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>If the vector <span class="math inline">\(X\)</span> is multinomial, then</p>
+<ul>
+<li>All marginal distributions of <span class="math inline">\(X\)</span> are multinomial</li>
+<li>All conditional distributions are multinomial</li>
+<li><span class="math inline">\(X_i \sim \text{Binomial}(n, p_i)\)</span></li>
+<li><span class="math inline">\(Cov(X_i, X_j) = E((X_i - mp_i)(X_j - mp_j)) = -mp_ip_j, \forall i\neq j\)</span></li>
+</ul>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="probability.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="new-distributions.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/04-known-distributions.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["Solving-Statistical-Problems.pdf", "Solving-Statistical-Problems.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

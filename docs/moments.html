@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 6 Moments | Solving Statistical Problems</title>
+  <meta name="description" content="Chapter 6 Moments | Solving Statistical Problems" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 6 Moments | Solving Statistical Problems" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Chapter 6 Moments | Solving Statistical Problems" />
+  <meta name="github-repo" content="salbalkus/Solving-Statistical-Problems" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 6 Moments | Solving Statistical Problems" />
+  
+  <meta name="twitter:description" content="Chapter 6 Moments | Solving Statistical Problems" />
+  
+
+<meta name="author" content="Salvador Balkus, Kimberly Greco, and Mónica Robles Fontán" />
+
+
+<meta name="date" content="2023-06-20" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="new-distributions.html"/>
+<link rel="next" href="statistics.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Solving Statistical Problems</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="math-tricks.html"><a href="math-tricks.html"><i class="fa fa-check"></i><b>2</b> Math Tricks</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="math-tricks.html"><a href="math-tricks.html#combinatorics"><i class="fa fa-check"></i><b>2.1</b> Combinatorics</a></li>
+<li class="chapter" data-level="2.2" data-path="math-tricks.html"><a href="math-tricks.html#geometric-series"><i class="fa fa-check"></i><b>2.2</b> Geometric Series</a></li>
+<li class="chapter" data-level="2.3" data-path="math-tricks.html"><a href="math-tricks.html#exponential-taylor"><i class="fa fa-check"></i><b>2.3</b> Exponential Taylor Series</a></li>
+<li class="chapter" data-level="2.4" data-path="math-tricks.html"><a href="math-tricks.html#exponential-limit"><i class="fa fa-check"></i><b>2.4</b> Exponential Limit</a></li>
+<li class="chapter" data-level="2.5" data-path="math-tricks.html"><a href="math-tricks.html#ibp"><i class="fa fa-check"></i><b>2.5</b> Integration by Parts</a></li>
+<li class="chapter" data-level="2.6" data-path="math-tricks.html"><a href="math-tricks.html#leibniz-rule"><i class="fa fa-check"></i><b>2.6</b> Leibniz’s Rule</a></li>
+<li class="chapter" data-level="2.7" data-path="math-tricks.html"><a href="math-tricks.html#gamma-function"><i class="fa fa-check"></i><b>2.7</b> Gamma Function</a></li>
+<li class="chapter" data-level="2.8" data-path="math-tricks.html"><a href="math-tricks.html#triangle-inequality"><i class="fa fa-check"></i><b>2.8</b> Triangle Inequality</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="probability.html"><a href="probability.html"><i class="fa fa-check"></i><b>3</b> Probability</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="probability.html"><a href="probability.html#conditional-probability"><i class="fa fa-check"></i><b>3.1</b> Conditional Probability</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="probability.html"><a href="probability.html#conditional-probability-in-practice"><i class="fa fa-check"></i><b>3.1.1</b> Conditional Probability in practice</a></li>
+<li class="chapter" data-level="3.4.3" data-path="probability.html"><a href="probability.html#important-theorems"><i class="fa fa-check"></i><b>3.4.3</b> Important Theorems</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="known-distributions.html"><a href="known-distributions.html"><i class="fa fa-check"></i><b>4</b> Known Distributions</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="known-distributions.html"><a href="known-distributions.html#families-of-distributions"><i class="fa fa-check"></i><b>4.1</b> Families of Distributions</a></li>
+<li class="chapter" data-level="4.2" data-path="known-distributions.html"><a href="known-distributions.html#location-and-scale-families-location-scale"><i class="fa fa-check"></i><b>4.2</b> Location and Scale Families (#location-scale)</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="known-distributions.html"><a href="known-distributions.html#location-families"><i class="fa fa-check"></i><b>4.2.1</b> Location Families</a></li>
+<li class="chapter" data-level="4.2.2" data-path="known-distributions.html"><a href="known-distributions.html#scale-families"><i class="fa fa-check"></i><b>4.2.2</b> Scale Families</a></li>
+<li class="chapter" data-level="4.2.3" data-path="known-distributions.html"><a href="known-distributions.html#properties-of-location-scale-families"><i class="fa fa-check"></i><b>4.2.3</b> Properties of Location-Scale Families</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="known-distributions.html"><a href="known-distributions.html#exponential-family"><i class="fa fa-check"></i><b>4.3</b> Exponential Families</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="known-distributions.html"><a href="known-distributions.html#properties"><i class="fa fa-check"></i><b>4.3.1</b> Properties</a></li>
+<li class="chapter" data-level="4.3.2" data-path="known-distributions.html"><a href="known-distributions.html#natural-exponential-family"><i class="fa fa-check"></i><b>4.3.2</b> Natural Exponential Families</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="known-distributions.html"><a href="known-distributions.html#known-univariate-exponential-families"><i class="fa fa-check"></i><b>4.4</b> Known Univariate Exponential Families</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="known-distributions.html"><a href="known-distributions.html#bernoulli"><i class="fa fa-check"></i><b>4.4.1</b> Bernoulli</a></li>
+<li class="chapter" data-level="4.4.2" data-path="known-distributions.html"><a href="known-distributions.html#binomial"><i class="fa fa-check"></i><b>4.4.2</b> Binomial</a></li>
+<li class="chapter" data-level="4.4.3" data-path="known-distributions.html"><a href="known-distributions.html#geometric-distribution"><i class="fa fa-check"></i><b>4.4.3</b> Geometric</a></li>
+<li class="chapter" data-level="4.4.4" data-path="known-distributions.html"><a href="known-distributions.html#negative-binomial"><i class="fa fa-check"></i><b>4.4.4</b> Negative Binomial</a></li>
+<li class="chapter" data-level="4.4.5" data-path="known-distributions.html"><a href="known-distributions.html#poisson"><i class="fa fa-check"></i><b>4.4.5</b> Poisson</a></li>
+<li class="chapter" data-level="4.4.6" data-path="known-distributions.html"><a href="known-distributions.html#normal"><i class="fa fa-check"></i><b>4.4.6</b> Normal</a></li>
+<li class="chapter" data-level="4.4.7" data-path="known-distributions.html"><a href="known-distributions.html#exponential"><i class="fa fa-check"></i><b>4.4.7</b> Exponential</a></li>
+<li class="chapter" data-level="4.4.8" data-path="known-distributions.html"><a href="known-distributions.html#gamma"><i class="fa fa-check"></i><b>4.4.8</b> Gamma</a></li>
+<li class="chapter" data-level="4.4.9" data-path="known-distributions.html"><a href="known-distributions.html#beta"><i class="fa fa-check"></i><b>4.4.9</b> Beta</a></li>
+<li class="chapter" data-level="4.4.10" data-path="known-distributions.html"><a href="known-distributions.html#chi-squared"><i class="fa fa-check"></i><b>4.4.10</b> Chi-squared</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="known-distributions.html"><a href="known-distributions.html#exponential-families-with-certain-parameters-fixed"><i class="fa fa-check"></i><b>4.5</b> Exponential families with certain parameters fixed</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="known-distributions.html"><a href="known-distributions.html#weibull"><i class="fa fa-check"></i><b>4.5.1</b> Weibull</a></li>
+<li class="chapter" data-level="4.5.2" data-path="known-distributions.html"><a href="known-distributions.html#pareto"><i class="fa fa-check"></i><b>4.5.2</b> Pareto</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="known-distributions.html"><a href="known-distributions.html#non-exponential-families"><i class="fa fa-check"></i><b>4.6</b> Non-exponential families</a>
+<ul>
+<li class="chapter" data-level="4.6.1" data-path="known-distributions.html"><a href="known-distributions.html#uniform"><i class="fa fa-check"></i><b>4.6.1</b> Uniform</a></li>
+<li class="chapter" data-level="4.6.2" data-path="known-distributions.html"><a href="known-distributions.html#cauchy"><i class="fa fa-check"></i><b>4.6.2</b> Cauchy</a></li>
+<li class="chapter" data-level="4.6.3" data-path="known-distributions.html"><a href="known-distributions.html#t-distribution"><i class="fa fa-check"></i><b>4.6.3</b> t-distribution</a></li>
+<li class="chapter" data-level="4.6.4" data-path="known-distributions.html"><a href="known-distributions.html#f-distribution"><i class="fa fa-check"></i><b>4.6.4</b> F-distribution</a></li>
+<li class="chapter" data-level="4.6.5" data-path="known-distributions.html"><a href="known-distributions.html#hypergeometric"><i class="fa fa-check"></i><b>4.6.5</b> Hypergeometric</a></li>
+</ul></li>
+<li class="chapter" data-level="4.7" data-path="known-distributions.html"><a href="known-distributions.html#multivariate-distributions"><i class="fa fa-check"></i><b>4.7</b> Multivariate Distributions</a>
+<ul>
+<li class="chapter" data-level="4.7.1" data-path="known-distributions.html"><a href="known-distributions.html#bivariate-normal"><i class="fa fa-check"></i><b>4.7.1</b> Bivariate Normal</a></li>
+<li class="chapter" data-level="4.7.2" data-path="known-distributions.html"><a href="known-distributions.html#multinomial"><i class="fa fa-check"></i><b>4.7.2</b> Multinomial</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="new-distributions.html"><a href="new-distributions.html"><i class="fa fa-check"></i><b>5</b> New Distributions</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="new-distributions.html"><a href="new-distributions.html#transformations"><i class="fa fa-check"></i><b>5.1</b> Transformations</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="new-distributions.html"><a href="new-distributions.html#theorems"><i class="fa fa-check"></i><b>5.1.1</b> Theorems</a></li>
+<li class="chapter" data-level="5.1.2" data-path="new-distributions.html"><a href="new-distributions.html#practical-strategy"><i class="fa fa-check"></i><b>5.1.2</b> Practical Strategy</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="new-distributions.html"><a href="new-distributions.html#probability-integral-transform"><i class="fa fa-check"></i><b>5.2</b> Probability Integral Transform</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="new-distributions.html"><a href="new-distributions.html#hiearchical-models-iterated-moments"><i class="fa fa-check"></i><b>5.2.1</b> Hiearchical Models (Iterated Moments)</a></li>
+<li class="chapter" data-level="5.2.2" data-path="new-distributions.html"><a href="new-distributions.html#convolutions"><i class="fa fa-check"></i><b>5.2.2</b> Convolutions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="moments.html"><a href="moments.html"><i class="fa fa-check"></i><b>6</b> Moments</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="moments.html"><a href="moments.html#basic-definitions"><i class="fa fa-check"></i><b>6.1</b> Basic Definitions</a></li>
+<li class="chapter" data-level="6.2" data-path="moments.html"><a href="moments.html#expected-value"><i class="fa fa-check"></i><b>6.2</b> <span class="math inline">\(E(X)\)</span> Properties</a></li>
+<li class="chapter" data-level="6.3" data-path="moments.html"><a href="moments.html#varx-properties"><i class="fa fa-check"></i><b>6.3</b> <span class="math inline">\(Var(X)\)</span> Properties</a></li>
+<li class="chapter" data-level="6.4" data-path="moments.html"><a href="moments.html#covariance-and-correlation"><i class="fa fa-check"></i><b>6.4</b> Covariance and Correlation</a></li>
+<li class="chapter" data-level="6.5" data-path="moments.html"><a href="moments.html#conditional-expectation"><i class="fa fa-check"></i><b>6.5</b> Conditional Expectation</a></li>
+<li class="chapter" data-level="6.6" data-path="moments.html"><a href="moments.html#moment-generating-functions"><i class="fa fa-check"></i><b>6.6</b> Moment Generating Functions</a></li>
+<li class="chapter" data-level="6.7" data-path="moments.html"><a href="moments.html#moment-bounds"><i class="fa fa-check"></i><b>6.7</b> Moment Inequalities</a></li>
+<li class="chapter" data-level="6.8" data-path="moments.html"><a href="moments.html#techniques-for-deriving-moments"><i class="fa fa-check"></i><b>6.8</b> Techniques for Deriving Moments</a>
+<ul>
+<li class="chapter" data-level="6.8.1" data-path="moments.html"><a href="moments.html#bernoulli-direct-summation"><i class="fa fa-check"></i><b>6.8.1</b> Bernoulli: Direct Summation</a></li>
+<li class="chapter" data-level="6.8.2" data-path="moments.html"><a href="moments.html#uniform-direct-integration"><i class="fa fa-check"></i><b>6.8.2</b> Uniform: Direct Integration</a></li>
+<li class="chapter" data-level="6.8.3" data-path="moments.html"><a href="moments.html#geometric-series-convergence"><i class="fa fa-check"></i><b>6.8.3</b> Geometric: Series Convergence</a></li>
+<li class="chapter" data-level="6.8.4" data-path="moments.html"><a href="moments.html#binomial-kernel-technique-series-version"><i class="fa fa-check"></i><b>6.8.4</b> Binomial: Kernel Technique, Series Version</a></li>
+<li class="chapter" data-level="6.8.5" data-path="moments.html"><a href="moments.html#negative-binomial-and-hypergeometric-computing-exx-1"><i class="fa fa-check"></i><b>6.8.5</b> Negative Binomial and Hypergeometric: Computing <span class="math inline">\(E(X(X-1))\)</span></a></li>
+<li class="chapter" data-level="6.8.6" data-path="moments.html"><a href="moments.html#poisson-exponential-taylor-series"><i class="fa fa-check"></i><b>6.8.6</b> Poisson: Exponential Taylor Series</a></li>
+<li class="chapter" data-level="6.8.7" data-path="moments.html"><a href="moments.html#exponential-integration-by-parts"><i class="fa fa-check"></i><b>6.8.7</b> Exponential: Integration By Parts</a></li>
+<li class="chapter" data-level="6.8.8" data-path="moments.html"><a href="moments.html#gamma-and-beta-kernel-technique-integration-version"><i class="fa fa-check"></i><b>6.8.8</b> Gamma and Beta: Kernel Technique, Integration Version</a></li>
+<li class="chapter" data-level="6.8.9" data-path="moments.html"><a href="moments.html#normal-location-scale-trick-and-polar-integration"><i class="fa fa-check"></i><b>6.8.9</b> Normal: Location-Scale Trick and Polar Integration</a></li>
+</ul></li>
+<li class="chapter" data-level="6.9" data-path="moments.html"><a href="moments.html#other-moments-for-reference"><i class="fa fa-check"></i><b>6.9</b> Other Moments (for reference)</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="statistics.html"><a href="statistics.html"><i class="fa fa-check"></i><b>7</b> Statistics</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="statistics.html"><a href="statistics.html#table-of-sufficient-statistics"><i class="fa fa-check"></i><b>7.1</b> Table of Sufficient Statistics</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="statistics.html"><a href="statistics.html#a-note-on-distributions-of-sufficient-statistics"><i class="fa fa-check"></i><b>7.1.1</b> A Note on Distributions of Sufficient Statistics</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="statistics.html"><a href="statistics.html#moments-of-the-sufficient-statistic"><i class="fa fa-check"></i><b>7.2</b> Moments of the Sufficient Statistic</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="point-estimators-finite-samples.html"><a href="point-estimators-finite-samples.html"><i class="fa fa-check"></i><b>8</b> Point Estimators: Finite Samples</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="point-estimators-finite-samples.html"><a href="point-estimators-finite-samples.html#method-of-moments"><i class="fa fa-check"></i><b>8.1</b> Method of Moments</a></li>
+<li class="chapter" data-level="8.2" data-path="point-estimators-finite-samples.html"><a href="point-estimators-finite-samples.html#mle-theory"><i class="fa fa-check"></i><b>8.2</b> MLE Theory</a></li>
+<li class="chapter" data-level="8.3" data-path="point-estimators-finite-samples.html"><a href="point-estimators-finite-samples.html#unbiasedness"><i class="fa fa-check"></i><b>8.3</b> Unbiasedness</a></li>
+<li class="chapter" data-level="8.4" data-path="point-estimators-finite-samples.html"><a href="point-estimators-finite-samples.html#minimum-variance-cramer-rao-lower-bound"><i class="fa fa-check"></i><b>8.4</b> Minimum Variance (Cramer-Rao Lower Bound)</a></li>
+<li class="chapter" data-level="8.5" data-path="point-estimators-finite-samples.html"><a href="point-estimators-finite-samples.html#uniform-minimum-variance-unbiased-estimators-umvues"><i class="fa fa-check"></i><b>8.5</b> Uniform Minimum Variance Unbiased Estimators (UMVUEs)</a></li>
+<li class="chapter" data-level="8.6" data-path="point-estimators-finite-samples.html"><a href="point-estimators-finite-samples.html#inferential-properties-of-exponential-families-distributions"><i class="fa fa-check"></i><b>8.6</b> Inferential Properties of Exponential Families Distributions</a>
+<ul>
+<li class="chapter" data-level="8.6.1" data-path="point-estimators-finite-samples.html"><a href="point-estimators-finite-samples.html#bernoulli-1"><i class="fa fa-check"></i><b>8.6.1</b> Bernoulli</a></li>
+<li class="chapter" data-level="8.6.2" data-path="point-estimators-finite-samples.html"><a href="point-estimators-finite-samples.html#binomial-1"><i class="fa fa-check"></i><b>8.6.2</b> Binomial</a></li>
+<li class="chapter" data-level="8.6.3" data-path="point-estimators-finite-samples.html"><a href="point-estimators-finite-samples.html#geometric"><i class="fa fa-check"></i><b>8.6.3</b> Geometric</a></li>
+<li class="chapter" data-level="8.6.4" data-path="point-estimators-finite-samples.html"><a href="point-estimators-finite-samples.html#negative-binomial-1"><i class="fa fa-check"></i><b>8.6.4</b> Negative Binomial</a></li>
+<li class="chapter" data-level="8.6.5" data-path="point-estimators-finite-samples.html"><a href="point-estimators-finite-samples.html#poisson-1"><i class="fa fa-check"></i><b>8.6.5</b> Poisson</a></li>
+<li class="chapter" data-level="8.6.6" data-path="point-estimators-finite-samples.html"><a href="point-estimators-finite-samples.html#normal-1"><i class="fa fa-check"></i><b>8.6.6</b> Normal</a></li>
+<li class="chapter" data-level="8.6.7" data-path="point-estimators-finite-samples.html"><a href="point-estimators-finite-samples.html#exponential-1"><i class="fa fa-check"></i><b>8.6.7</b> Exponential</a></li>
+<li class="chapter" data-level="8.6.8" data-path="point-estimators-finite-samples.html"><a href="point-estimators-finite-samples.html#gamma-1"><i class="fa fa-check"></i><b>8.6.8</b> Gamma</a></li>
+<li class="chapter" data-level="8.6.9" data-path="point-estimators-finite-samples.html"><a href="point-estimators-finite-samples.html#pareto-1"><i class="fa fa-check"></i><b>8.6.9</b> Pareto</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="point-estimators-asymptotics.html"><a href="point-estimators-asymptotics.html"><i class="fa fa-check"></i><b>9</b> Point Estimators: Asymptotics</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="point-estimators-asymptotics.html"><a href="point-estimators-asymptotics.html#consistency"><i class="fa fa-check"></i><b>9.1</b> Consistency</a></li>
+<li class="chapter" data-level="9.2" data-path="point-estimators-asymptotics.html"><a href="point-estimators-asymptotics.html#asymptotic-efficiency"><i class="fa fa-check"></i><b>9.2</b> Asymptotic Efficiency</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="point-estimators-asymptotics.html"><a href="point-estimators-asymptotics.html#central-limit-theorems"><i class="fa fa-check"></i><b>9.2.1</b> Central Limit Theorems</a></li>
+<li class="chapter" data-level="9.2.2" data-path="point-estimators-asymptotics.html"><a href="point-estimators-asymptotics.html#the-delta-method"><i class="fa fa-check"></i><b>9.2.2</b> The Delta Method</a></li>
+<li class="chapter" data-level="9.2.3" data-path="point-estimators-asymptotics.html"><a href="point-estimators-asymptotics.html#cramer-wold-device"><i class="fa fa-check"></i><b>9.2.3</b> Cramer-Wold Device</a></li>
+<li class="chapter" data-level="9.2.4" data-path="point-estimators-asymptotics.html"><a href="point-estimators-asymptotics.html#asymptotic-distribution-in-practice."><i class="fa fa-check"></i><b>9.2.4</b> Asymptotic Distribution in Practice.</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="point-estimators-asymptotics.html"><a href="point-estimators-asymptotics.html#asymptotic-properties-of-mles"><i class="fa fa-check"></i><b>9.3</b> Asymptotic Properties of MLEs</a></li>
+<li class="chapter" data-level="9.4" data-path="point-estimators-asymptotics.html"><a href="point-estimators-asymptotics.html#variance-stabilizing-transformations"><i class="fa fa-check"></i><b>9.4</b> Variance Stabilizing Transformations</a></li>
+<li class="chapter" data-level="9.5" data-path="point-estimators-asymptotics.html"><a href="point-estimators-asymptotics.html#asymptotic-confidence-intervals"><i class="fa fa-check"></i><b>9.5</b> Asymptotic Confidence Intervals</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="hypothesis-tests-finite-samples.html"><a href="hypothesis-tests-finite-samples.html"><i class="fa fa-check"></i><b>10</b> Hypothesis Tests: Finite Samples</a></li>
+<li class="chapter" data-level="11" data-path="hypothesis-tests-asymptotics.html"><a href="hypothesis-tests-asymptotics.html"><i class="fa fa-check"></i><b>11</b> Hypothesis Tests: Asymptotics</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="hypothesis-tests-asymptotics.html"><a href="hypothesis-tests-asymptotics.html#wald-test"><i class="fa fa-check"></i><b>11.1</b> Wald Test</a></li>
+<li class="chapter" data-level="11.2" data-path="hypothesis-tests-asymptotics.html"><a href="hypothesis-tests-asymptotics.html#score-test"><i class="fa fa-check"></i><b>11.2</b> Score Test</a></li>
+<li class="chapter" data-level="11.3" data-path="hypothesis-tests-asymptotics.html"><a href="hypothesis-tests-asymptotics.html#likelihood-ratio-test"><i class="fa fa-check"></i><b>11.3</b> Likelihood Ratio Test</a></li>
+<li class="chapter" data-level="11.4" data-path="hypothesis-tests-asymptotics.html"><a href="hypothesis-tests-asymptotics.html#composite-null-hypotheses"><i class="fa fa-check"></i><b>11.4</b> Composite Null Hypotheses</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="generating-random-variables.html"><a href="generating-random-variables.html"><i class="fa fa-check"></i><b>12</b> Generating Random Variables</a></li>
+<li class="chapter" data-level="13" data-path="random-processes.html"><a href="random-processes.html"><i class="fa fa-check"></i><b>13</b> Random Processes</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="random-processes.html"><a href="random-processes.html#poisson-processes"><i class="fa fa-check"></i><b>13.1</b> Poisson Processes</a>
+<ul>
+<li class="chapter" data-level="13.1.1" data-path="random-processes.html"><a href="random-processes.html#memorylessness-of-the-exponential"><i class="fa fa-check"></i><b>13.1.1</b> Memorylessness of the Exponential</a></li>
+<li class="chapter" data-level="13.1.2" data-path="random-processes.html"><a href="random-processes.html#count-time-duality"><i class="fa fa-check"></i><b>13.1.2</b> Count-Time Duality</a></li>
+<li class="chapter" data-level="13.1.3" data-path="random-processes.html"><a href="random-processes.html#poisson-distribution"><i class="fa fa-check"></i><b>13.1.3</b> Poisson Distribution</a></li>
+<li class="chapter" data-level="13.1.4" data-path="random-processes.html"><a href="random-processes.html#exponential-distribution"><i class="fa fa-check"></i><b>13.1.4</b> Exponential Distribution</a></li>
+<li class="chapter" data-level="13.1.5" data-path="random-processes.html"><a href="random-processes.html#example"><i class="fa fa-check"></i><b>13.1.5</b> Example</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="random-processes.html"><a href="random-processes.html#branching-processes"><i class="fa fa-check"></i><b>13.2</b> Branching Processes</a>
+<ul>
+<li class="chapter" data-level="13.2.1" data-path="random-processes.html"><a href="random-processes.html#random-variables"><i class="fa fa-check"></i><b>13.2.1</b> Random Variables</a></li>
+<li class="chapter" data-level="13.2.2" data-path="random-processes.html"><a href="random-processes.html#probability-generating-function"><i class="fa fa-check"></i><b>13.2.2</b> Probability Generating Function</a></li>
+<li class="chapter" data-level="13.2.3" data-path="random-processes.html"><a href="random-processes.html#criticality-theorem"><i class="fa fa-check"></i><b>13.2.3</b> Criticality Theorem</a></li>
+<li class="chapter" data-level="13.2.4" data-path="random-processes.html"><a href="random-processes.html#example-1"><i class="fa fa-check"></i><b>13.2.4</b> Example</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Solving Statistical Problems</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="moments" class="section level1 hasAnchor" number="6">
+<h1><span class="header-section-number">Chapter 6</span> Moments<a href="moments.html#moments" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Finding the moments of a random variable is a chief problem in
+statistics. This is because moments characterize important properties
+about a distribution - for example, the <strong>mean</strong> measures the central
+tendency of a random variable, while the <strong>variance</strong> measures its
+dispersion. This chapter will define expected value and moments,
+summarize their useful properties, and discuss strategies for finding
+moments, especially for common distributions.</p>
+<div id="basic-definitions" class="section level2 hasAnchor" number="6.1">
+<h2><span class="header-section-number">6.1</span> Basic Definitions<a href="moments.html#basic-definitions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="definition">
+<p><span id="def:unlabeled-div-27" class="definition"><strong>Definition 6.1  (Expected Value) </strong></span>The <strong>expected value</strong> <span class="math inline">\(E(g(X))\)</span> is the average value of a random
+variable <span class="math inline">\(g(X)\)</span> across its support <span class="math inline">\(\mathcal{X}\)</span>, weighted by their
+probability.</p>
+<p>If <span class="math inline">\(X\)</span> is discrete, then this is defined</p>
+<p><span class="math display">\[E(g(X)) = \sum_{x \in \mathcal{X}}g(x)P(X = x)\]</span></p>
+<p>If <span class="math inline">\(X\)</span> is continuous, then the expected value is</p>
+<p><span class="math display">\[E(g(x)) = \int_{\mathcal{X}}g(x)f_X(x)dx\]</span></p>
+</div>
+<div class="definition">
+<p><span id="def:unlabeled-div-28" class="definition"><strong>Definition 6.2  (Moments) </strong></span>The <span class="math inline">\(n\)</span>th <strong>moment</strong> of a random variable <span class="math inline">\(X\)</span> is defined as <span class="math inline">\(E(X^n)\)</span>.
+Similarly, the <span class="math inline">\(n\)</span>th <strong>central moment</strong> is defined as <span class="math inline">\(E((X - E(X))^n)\)</span>.</p>
+<p>The <strong>first moment</strong> <span class="math inline">\(E(X)\)</span> is also known as the <strong>mean</strong>.</p>
+<p>The <strong>second central moment</strong> is the variance, denoted
+<span class="math inline">\(Var(X) = E((X - E(X))^2)\)</span></p>
+</div>
+</div>
+<div id="expected-value" class="section level2 hasAnchor" number="6.2">
+<h2><span class="header-section-number">6.2</span> <span class="math inline">\(E(X)\)</span> Properties<a href="moments.html#expected-value" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The <strong>linearity of expectation</strong> is defined as <span class="math inline">\(E(aX + b) = aE(X) + b\)</span>.
+If multiple random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are involved, then</p>
+<p><span class="math display">\[E(ag_1(X) + bg_2(Y) + c) = aE(g_1(X)) + bE(g_2(Y)) + c\]</span></p>
+<p>This follows from the linearity of the integral operator. Since sums of
+random variables are so common, this property is incredibly useful,
+especially for proving the unbiasedness of estimators (see <a href="point-estimators-finite-samples.html#point-estimators-finite-samples">Chapter
+8</a>). For example, we can use the
+linearity of expectation to prove that the sample mean
+<span class="math inline">\(\bar{X} = \frac{1}{n}\sum_{i=1}^nX_i\)</span> is unbiased for a set of iid
+<span class="math inline">\(X_i\)</span> by noting, by linearity of expectation,</p>
+<p><span class="math display">\[E(\bar{X}) = E\Big(\frac{1}{n}\sum_{i=1}^nX_i\Big) = \frac{1}{n}\sum_{i=1}^nE(X_i) = \frac{n}{n}E(X_i) = E(X_i)\]</span></p>
+<p>When <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent,</p>
+<p><span class="math display">\[E(XY) = E(X)E(Y)\]</span></p>
+<p>This property can also be useful for computing the expectation of iid
+random variables in statistical inference problems.</p>
+</div>
+<div id="varx-properties" class="section level2 hasAnchor" number="6.3">
+<h2><span class="header-section-number">6.3</span> <span class="math inline">\(Var(X)\)</span> Properties<a href="moments.html#varx-properties" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The most important variance property is its alternative definition:</p>
+<p><span class="math display">\[Var(X) = E(X^2) - E(X)^2\]</span></p>
+<p>Often, we are interested in both the mean and the variance. By
+simplifying <span class="math inline">\(Var(X)\)</span> into a function of the first and second moments, we
+can compute <span class="math inline">\(E(X^2)\)</span> (which is often much easier) and use what we know
+about <span class="math inline">\(E(X)\)</span> to more easily compute <span class="math inline">\(Var(X)\)</span>.</p>
+<p>While variance is not exactly linear, the variance of a linear
+transformation of a random variable is</p>
+<p><span class="math display">\[Var(aX + b) = a^2Var(X)\]</span></p>
+<p>When multiple random variables are involved in a linear expression, then</p>
+<p><span class="math display">\[Var(aX + bY) = a^2Var(X) + b^2Var(Y) + 2ab\cdot Cov(X, Y)\]</span></p>
+<p>where <span class="math inline">\(Cov(X,Y)\)</span> is described in the next subsection. If <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are
+<a href="#independent">independent</a> then <span class="math inline">\(Cov(X,Y) = 0\)</span> and
+<span class="math inline">\(Var(aX + bY) = a^2Var(X) + b^2Var(X)\)</span></p>
+</div>
+<div id="covariance-and-correlation" class="section level2 hasAnchor" number="6.4">
+<h2><span class="header-section-number">6.4</span> Covariance and Correlation<a href="moments.html#covariance-and-correlation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>From the expected value function and moments, we can also define the
+covariance and correlation</p>
+<div class="definition">
+<p><span id="def:unlabeled-div-29" class="definition"><strong>Definition 6.3  (Covariance) </strong></span><strong>Covariance</strong> measures the joint dispersion of two random variables.
+Mathematically,</p>
+<p><span class="math display">\[Cov(X,Y) = E((X - E(X))(Y - E(Y)))\]</span></p>
+<p>Equivalently,</p>
+<p><span class="math display">\[Cov(X,Y) = E(XY) - E(X)E(Y)\]</span></p>
+<p>which is usually the more convenient definition.</p>
+</div>
+<p>Note that if <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are <a href="probability.html#independence">independent</a>, then
+<span class="math inline">\(Cov(X,Y) = 0\)</span>, which simplifies calculations. <em>However</em>, make no
+mistake, this implication is not bidirectional: <span class="math inline">\(Cov(X,Y) = 0\)</span> does NOT
+imply X, Y$ independent!!!</p>
+<p>Occasionally, we might want to work with a measure of joint dispersion
+that is normalized. This is called the <strong>correlation</strong>.</p>
+<div class="definition">
+<p><span id="def:unlabeled-div-30" class="definition"><strong>Definition 6.4  (Covariance) </strong></span><strong>Correlation</strong> is a measure of the joint dispersion of two random
+variables normalized to [0,1], with <span class="math inline">\(Corr(X,Y) = 0\)</span> indicating that the
+variables are independent and <span class="math inline">\(Corr(X,Y) = 1\)</span> indicating perfect
+collinearity. Mathematically,</p>
+<p><span class="math display">\[Cov(X,Y) = E\Big(\frac{X - E(X)}{\sqrt{Var(X)}}\cdot \frac{Y - E(Y)}{\sqrt{Var(Y)}}\Big) = \frac{Cov(X,Y)}{\sqrt{Var(X)Var(Y)}}\]</span></p>
+</div>
+</div>
+<div id="conditional-expectation" class="section level2 hasAnchor" number="6.5">
+<h2><span class="header-section-number">6.5</span> Conditional Expectation<a href="moments.html#conditional-expectation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>When an expectation is computed using a conditional probability, it is
+known as a <strong>conditonal expectation</strong>. For discrete random variables (or
+when <span class="math inline">\(Y\)</span> is simply an event), it is denoted</p>
+<p><span class="math display">\[E(g(X)|Y) = \sum_{\mathcal{X}}g(x)P(X = x | Y)\]</span></p>
+<p>and for continuous,</p>
+<p><span class="math display">\[E(g(X) | Y) = \int_{\mathcal{X}}g(x)f_{X|Y}(x|y)\]</span></p>
+<p>Two fundamental properties regarding conditional expectations exist that
+simply the computation of its unconditional counterpart.</p>
+<div class="definition">
+<p><span id="def:unlabeled-div-31" class="definition"><strong>Definition 6.5  (Law of Iterated Expectation (Adam's Law)) </strong></span><span class="math inline">\(E(X) = E(E(X|Y))\)</span></p>
+</div>
+<div class="definition">
+<p><span id="def:unlabeled-div-32" class="definition"><strong>Definition 6.6  (Law of Total Variance (EVVE's Law)) </strong></span><span class="math inline">\(Var(X) = E(Var(X|Y)) + Var(E(X|Y))\)</span></p>
+</div>
+<p>These two properties can be used to compute <span class="math inline">\(E(X)\)</span> when only <span class="math inline">\(E(X|Y)\)</span> is
+known. For example, this occurs in <a href="point-estimators-finite-samples.html#point-estimators-finite-samples">Chapter
+8</a> when finding UMVUEs.</p>
+</div>
+<div id="moment-generating-functions" class="section level2 hasAnchor" number="6.6">
+<h2><span class="header-section-number">6.6</span> Moment Generating Functions<a href="moments.html#moment-generating-functions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="definition">
+<p><span id="def:unlabeled-div-33" class="definition"><strong>Definition 6.7  (MGF) </strong></span>The <strong>moment generating function</strong> (MGF) is defined as</p>
+<p><span class="math display">\[\mathcal{M}_X(t) = E(e^{tx})\]</span> This function has three important
+properties:</p>
+<ol style="list-style-type: decimal">
+<li>The MGF fully characterizes a distribution. That is, if
+<span class="math inline">\(\mathcal{M}_X(t) = \mathcal{M}_Y(t)\)</span>, then <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are
+identically distributed.</li>
+<li><span class="math inline">\(E(X^n) = \frac{d^n}{dt^n}\mathcal{M}_X(t)\Big|_{t=0}\)</span>. This means
+the MGF can also be used to compute any given moment simply by
+taking a derivative!</li>
+<li><strong>Convolution</strong>: If <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> and independent, then the mgf of
+<span class="math inline">\(X+Y\)</span> is
+<span class="math inline">\(\mathcal{M}_{X+Y}(t) = \mathcal{M}_{X}(t)\mathcal{M}_{Y}(t)\)</span>. This
+is useful for finding the distribution of sums of random variables.</li>
+</ol>
+<p>Do note, however, that the MGF may not exist for some distributions. In
+this case it may be preferable to work with the <a href="https://en.wikipedia.org/wiki/Characteristic_function_(probability_theory)">characteristic
+function</a>.</p>
+</div>
+</div>
+<div id="moment-bounds" class="section level2 hasAnchor" number="6.7">
+<h2><span class="header-section-number">6.7</span> Moment Inequalities<a href="moments.html#moment-bounds" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Several inequalities exist that can bound moments. A general bound is
+that <span class="math inline">\(a &lt; g(X) &lt; b \implies a &lt; E(g(X)) &lt; b\)</span>. This, coupled with the
+<a href="math-tricks.html#triangle-inequality">triangle inequality</a> can be used to prove the
+following inequalities.</p>
+<p>The next two inequalities bound probabilities based on moments. They are
+named the student-teacher pair that developed them.</p>
+<div class="definition">
+<p><span id="def:unlabeled-div-34" class="definition"><strong>Definition 6.8  (Markov's Inequality) </strong></span><span class="math display">\[P(X \geq t) \leq \frac{E(X)}{t}\]</span></p>
+</div>
+<div class="{.proof&quot;}">
+<p>To prove Markov’s inequality,</p>
+</div>
+<div class="definition">
+<p><span id="def:unlabeled-div-35" class="definition"><strong>Definition 6.9  (Chebychev's Inequality) </strong></span>This inequality can be stated in several ways:</p>
+</div>
+<p>Chebychev’s inequality is instrumental in proving the Weak Law of Large
+Numbers</p>
+<p>Next, we present an equality regarding functions of moments.</p>
+<div class="definition">
+<p><span id="def:unlabeled-div-36" class="definition"><strong>Definition 6.10  (Jensen's Inequality) </strong></span>For a convex function <span class="math inline">\(f\)</span>,</p>
+<p><span class="math display">\[E(f(X)) \geq f(E(X))\]</span></p>
+<p>If <span class="math inline">\(f\)</span> is instead concave,</p>
+<p><span class="math display">\[E(f(x)) \leq f(E(X))\]</span></p>
+</div>
+<p>Jensen’s inequality is useful for showing that an <a href="#biasedness">estimator is
+biased</a></p>
+<p>The next three inequalities are less commonly used, but are still useful
+is certain situations <em>(where?)</em></p>
+<div class="definition">
+<p><span id="def:unlabeled-div-37" class="definition"><strong>Definition 6.11  (Cauchy-Schwarz Inequality) </strong></span><span class="math display">\[E(XY)^2 \leq E(X)^2E(Y)^2\]</span></p>
+</div>
+<p>This equality can be generalized as follows</p>
+<div class="definition">
+<p><span id="def:unlabeled-div-38" class="definition"><strong>Definition 6.12  (Holder's Inequality) </strong></span>For <span class="math inline">\(p, q \geq 1\)</span> such that <span class="math inline">\(\frac{1}{p} + \frac{1}{q} = 1\)</span>,</p>
+<p><span class="math display">\[E(|XY|) \leq E(|X|^p)^\frac{1}{p}E(|Y|^q)^\frac{1}{q}\]</span></p>
+</div>
+<p>While the above inequalities deal with products of moments, the
+following handles sums:</p>
+<div class="definition">
+<p><span id="def:unlabeled-div-39" class="definition"><strong>Definition 6.13  (Minkowski's Inequality) </strong></span><span class="math display">\[E(|X + Y|^p)^\frac{1}{p} \leq E(|X|^p)^\frac{1}{p} + E(|Y|^p)^\frac{1}{p}\]</span></p>
+</div>
+</div>
+<div id="techniques-for-deriving-moments" class="section level2 hasAnchor" number="6.8">
+<h2><span class="header-section-number">6.8</span> Techniques for Deriving Moments<a href="moments.html#techniques-for-deriving-moments" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Below, we’ve listed the important moments of each distribution that can
+be reasonably derived by hand. In this section, we discuss a myriad of
+techniques to derive these moments, each of which can be applied in
+general for their respective distributions.</p>
+<table>
+<colgroup>
+<col width="21%" />
+<col width="21%" />
+<col width="21%" />
+<col width="34%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Distribution</th>
+<th align="center"><span class="math inline">\(E(Y)\)</span></th>
+<th align="center"><span class="math inline">\(Var(Y)\)</span></th>
+<th align="center">mgf</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><span class="math inline">\(\text{Bernoulli}(p)\)</span></td>
+<td align="center"><span class="math inline">\(p\)</span></td>
+<td align="center"><span class="math inline">\(p(1-p)\)</span></td>
+<td align="center"><span class="math inline">\((1-p) + pe^t\)</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span class="math inline">\(\text{Binom}(n, p)\)</span></td>
+<td align="center"><span class="math inline">\(np\)</span></td>
+<td align="center"><span class="math inline">\(np(1-p)\)</span></td>
+<td align="center"><span class="math inline">\(((1-p) + pe^t)^n\)</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><span class="math inline">\(\text{Geo}(p)\)</span></td>
+<td align="center"><span class="math inline">\(\frac{1-p}{p}\)</span></td>
+<td align="center"><span class="math inline">\(\frac{1-p}{p^2}\)</span></td>
+<td align="center"><span class="math inline">\(\frac{p}{1 - (1 - p)e^t}\)</span> for <span class="math inline">\(t &lt; -\log(1-p)\)</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span class="math inline">\(\text{NegBinom(r, p)}\)</span></td>
+<td align="center"><span class="math inline">\(\frac{r(1-p)}{p}\)</span></td>
+<td align="center"><span class="math inline">\(\frac{r(1-p)}{p^2}\)</span></td>
+<td align="center"><span class="math inline">\(\Big(\frac{p}{1 - (1 - p)e^t}\Big)^r\)</span> for <span class="math inline">\(t &lt; -\log(p)\)</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><span class="math inline">\(\text{Pois}(\lambda)\)</span></td>
+<td align="center"><span class="math inline">\(\lambda\)</span></td>
+<td align="center"><span class="math inline">\(\lambda\)</span></td>
+<td align="center"><span class="math inline">\(\exp(\lambda(e^t - 1))\)</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span class="math inline">\(\text{Normal}(\mu, \sigma^2)\)</span></td>
+<td align="center"><span class="math inline">\(\mu\)</span></td>
+<td align="center"><span class="math inline">\(\sigma^2\)</span></td>
+<td align="center"><span class="math inline">\(\exp(\mu t + \sigma^2 t^2 / 2)\)</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><span class="math inline">\(\text{Exp}(\lambda)\)</span></td>
+<td align="center"><span class="math inline">\(\lambda\)</span></td>
+<td align="center"><span class="math inline">\(\lambda^2\)</span></td>
+<td align="center"><span class="math inline">\(\frac{1}{1-\lambda t}\)</span> for <span class="math inline">\(t &gt; \lambda\)</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span class="math inline">\(\text{Gamma}(k, \lambda)\)</span></td>
+<td align="center"><span class="math inline">\(k\lambda\)</span></td>
+<td align="center"><span class="math inline">\(k\lambda^2\)</span></td>
+<td align="center"><span class="math inline">\((1 - \lambda t)^{-k}\)</span> for <span class="math inline">\(t &lt; \frac{1}{\lambda}\)</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><span class="math inline">\(\text{Beta}(\alpha, \beta)\)</span></td>
+<td align="center"><span class="math inline">\(\frac{\alpha}{\alpha + \beta}\)</span></td>
+<td align="center"><span class="math inline">\(\frac{\alpha\beta}{(\alpha + \beta)^2(\alpha + \beta + 1)}\)</span></td>
+<td align="center"><span class="math inline">\(1 + \sum_{k=1}^\infty\Big(\prod_{r=0}^{k-1}\frac{\alpha + r}{\alpha + \beta + r}\Big)\frac{t^k}{k!}\)</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span class="math inline">\(\chi^2(\nu)\)</span></td>
+<td align="center"><span class="math inline">\(\nu\)</span></td>
+<td align="center"><span class="math inline">\(2\nu\)</span></td>
+<td align="center"><span class="math inline">\((1 - 2t)^{-\nu/2}\)</span> for <span class="math inline">\(t &lt; \frac{1}{2}\)</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><span class="math inline">\(\text{Uniform}(a, b)\)</span></td>
+<td align="center"><span class="math inline">\(\frac{1}{2}(a+b)\)</span></td>
+<td align="center"><span class="math inline">\(\frac{1}{12}(b-a)^2\)</span></td>
+<td align="center"><span class="math inline">\(\begin{cases}\frac{e^{tb}-e^{ta}}{t(b-a)} &amp; t \neq 0 \\ 1 &amp; t = 0 \\\end{cases}\)</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span class="math inline">\(F(n, m)\)</span></td>
+<td align="center"><span class="math inline">\(\frac{m}{m - 2}\)</span> for <span class="math inline">\(m &gt; 2\)</span></td>
+<td align="center"><span class="math inline">\(\frac{2m^2(n + m - 2)}{n(m - 2)^2(m - 4)}\)</span> for <span class="math inline">\(m &gt; 4\)</span></td>
+<td align="center">Does Not Exist</td>
+</tr>
+<tr class="odd">
+<td align="center"><span class="math inline">\(\text{HyperGeo}(N, K, n)\)</span></td>
+<td align="center"><span class="math inline">\(\frac{nK}{N}\)</span></td>
+<td align="center"><span class="math inline">\(\frac{nK(N-K)(N-n)}{N^2(N-1)}\)</span></td>
+<td align="center">Too complicated to reproduce here!</td>
+</tr>
+</tbody>
+</table>
+<div id="bernoulli-direct-summation" class="section level3 hasAnchor" number="6.8.1">
+<h3><span class="header-section-number">6.8.1</span> Bernoulli: Direct Summation<a href="moments.html#bernoulli-direct-summation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The moments of a Bernoulli distribution are simple to compute, because
+<span class="math inline">\(x\)</span> is only 0 or 1. When <span class="math inline">\(x = 0\)</span>, <span class="math inline">\(0 * P(X = 0) = 0\)</span>. Hence,
+<span class="math inline">\(E(X) = 1 * P(X = 1) = p^1(1 - p)^{1 - 1} = p\)</span>. Since <span class="math inline">\(1^k = 1\)</span>, a
+convenient property follows:</p>
+<p><span class="math display">\[X \sim \text{Bernoulli}(p) \implies E(X^k) = p\]</span> This also suggests
+that <span class="math inline">\(E(X^k) = P(X = 1)\)</span>, which can be exceptionally useful in many
+statistical problems, including <a href="point-estimators-finite-samples.html#point-estimators-finite-samples">finding
+UMVUEs</a>.</p>
+<p>Similarly, we can compute the variance using the property
+<span class="math inline">\(Var(X) = E(X^2) - E(X^2) = p - p^2 = p(1-p)\)</span>.</p>
+<p>Finally, the moment generating function follows directly by noting</p>
+<p><span class="math display">\[E(e^{tx}) = e^{t*0}p^0(1-p)^{1-0} + e^{t*1}p^1(1-p)^{1-1} = (1-p) + pe^t\]</span></p>
+</div>
+<div id="uniform-direct-integration" class="section level3 hasAnchor" number="6.8.2">
+<h3><span class="header-section-number">6.8.2</span> Uniform: Direct Integration<a href="moments.html#uniform-direct-integration" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Moments of distributions with simple pdfs bounded at both ends such as
+the Uniform can be solved directly by integrating their pdf. The Uniform
+has pdf <span class="math inline">\(f_X(x) = \frac{1}{b-a}\)</span>, so its moments are as follows:</p>
+<span class="math display">\[\begin{align}
+E(X) = \int_{a}^b \frac{x}{b-a} dx = \frac{x^2}{2(b-a)}\Big|_{a}^b\\
+= \frac{b^2 - a^2}{2(b-a)} = \frac{(b+a)(b-a)}{2(b-a)} = \frac{1}{2}(b+a)\\
+\end{align}\]</span>
+<p>Generalizing this, <span class="math inline">\(E(X^k) = \frac{b^k - a^k}{2(b-a)}\)</span>. As a result,
+solving the variance is easier to do directly:</p>
+<span class="math display">\[\begin{align}
+Var(X) = \int_{a}^b \frac{(x - \frac{1}{2}(b-a))^2}{b-a} dx \\
+= \frac{(x - \frac{1}{2}(b-a))^3}{3(b-a)}\Big|_{a}^b \\
+= \frac{(b - \frac{1}{2}b - \frac{1}{2}a)^3 - (a - \frac{1}{2}b - \frac{1}{2}a)^3}{3(b-a)}\Big|_{a}^b\\
+= \frac{2(b-a)^3}{24(b-a)} = \frac{1}{12}(b-a)^2\\
+\end{align}\]</span>
+</div>
+<div id="geometric-series-convergence" class="section level3 hasAnchor" number="6.8.3">
+<h3><span class="header-section-number">6.8.3</span> Geometric: Series Convergence<a href="moments.html#geometric-series-convergence" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Deriving the moments of the Geometric distribution requires the use of
+the <a href="math-tricks.html#geometric-series">Geometric Series</a> (from where we can speculate
+its name originates). Note <span class="math inline">\(E(X) = \sum_{x=0}^\infty xp(1-p)^x\)</span>, which
+does not quite match the geometric series; first, we need to take the
+derivative, and then interchange differentiation and summation like so:</p>
+<span class="math display">\[\begin{align}
+\sum_{x=0}^\infty xp(1-p)^x = p(1-p)\sum_{x=0}^\infty x(1-p)^{x-1} &amp;&amp; \text{factor out for correct form}\\
+= p(1-p)\sum_{x=0}^\infty \frac{d}{dx}-(1-p)^{x} &amp;&amp; \text{notice derivative}\\
+= -p(1-p) \frac{d}{dx}\sum_{x=0}^\infty (1-p)^{x} &amp;&amp; \text{interchange derivative}\\
+= -p(1-p) \frac{d}{dx}\frac{1}{1 - (1 - p)} &amp;&amp; \text{geometric series}\\
+= \frac{p(1-p)}{p^2} = \frac{1-p}{p} &amp;&amp; \\
+\end{align}\]</span>
+<p>This can also be performed to compute <span class="math inline">\(E(X)\)</span> for the variance, though
+the computation is relatively long to be reproduced here. A quicker way
+might be to employ the moment generating function from which all moments
+can be computed, which can easily be found by substituting the geometric
+series:</p>
+<span class="math display">\[\begin{align}
+E(e^{tx}) = \sum_{x=0}^\infty e^{tx}(p(1-p)^x) \\
+= p\sum_{x=0}^\infty ((1-p)e^t)^x) \\
+= \frac{p}{1 - (1-p)e^t}
+\end{align}\]</span>
+</div>
+<div id="binomial-kernel-technique-series-version" class="section level3 hasAnchor" number="6.8.4">
+<h3><span class="header-section-number">6.8.4</span> Binomial: Kernel Technique, Series Version<a href="moments.html#binomial-kernel-technique-series-version" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Moments of the Binomial are trickier since they involve an infinite sum.
+Since the Binomial is a discrete distribution, we can compute its
+moments using the discrete moment formula
+<span class="math inline">\(E(X) = \sum_{i=1}^\infty xP(X = x)\)</span>. This introduces one technique for
+moment calculations: the Kernel Technique</p>
+<div class="example">
+<p><span id="exm:kernel-technique" class="example"><strong>Example 6.1  (Kernel Technique with Infinite Series) </strong></span>Fact: pmfs integrate to 1. That is, <span class="math inline">\(\sum_{x=0}^\infty f_X(x) = 1\)</span>. We
+can use this fact to compute moments by:</p>
+<ol style="list-style-type: decimal">
+<li>Recognizing the kernel of the distribution within the moment formula</li>
+<li>Factoring out appropriate constants to turn the kernel into the full
+pmf, and simplifying the infinite series to
+<span class="math inline">\(\sum_{x=0}^\infty f_X(x) = 1\)</span>. The left-over components then, are
+the value of the moment.</li>
+</ol>
+</div>
+<p><em>Binomial Distribution</em>: We can use this technique to compute moments of
+the Binomial distribution like so:</p>
+<span class="math display">\[\begin{align}
+E(X) = \sum_{x=0}^\infty xP(X = x) = \sum_{x=0}^\infty x{n\choose x}p^x(1-p)^{n-x} &amp;&amp; \\
+= \sum_{x=0}^\infty \frac{x\cdot n!}{x!(n-x)!}p^x(1-p)^{n-x} &amp;&amp; \text{(kernel)} \\
+= 0 + \sum_{x=1}^\infty \frac{n \cdot (n-1)!}{(x-1)!((n-1) - (x - 1)!}\cdot p \cdot p^{x-1}(1-p)^{(n - 1) - (x - 1)} &amp;&amp; \text{(form pmf)}\\
+= np\sum_{x=0}^\infty \cdot {n - 1 \choose x}p^x(1-p)^{(n-1) - x} &amp;&amp; \text{(sum pmf to 1)}\\
+= np
+\end{align}\]</span>
+<p>To compute the <span class="math inline">\(E(X^2)\)</span> component of the variance, this process needs to
+be repeated twice:</p>
+<span class="math display">\[\begin{align}
+E(X^2) = \sum_{x=0}^\infty x^2P(X = x) = \sum_{x=0}^\infty x^2{n\choose x}p^x(1-p)^{n-x} &amp;&amp; \\
+= np \sum_{x=0}^\infty(x+1) \frac{(n-1)!}{x!(n-1-x)!}p^x (1-p)^{n-x-1} &amp;&amp; \text{(from E(X))}\\
+= np(0 + (n-1)p\sum_{x=1}^\infty \frac{(n-2)!}{(x-1)!((n-2)-(x-1))!}p^{x-1}(1-p)^{(n-2)-(x-1)} + 1 &amp;&amp; \\
+= np((n-1)p + 1) = (np)^2 + np(1-p) &amp;&amp; \text{(pmf sums to 1)}&amp;&amp; \\
+\end{align}\]</span>
+<p>Then, <span class="math inline">\(Var(X) = E(X^2) - E(X)^2 = (np)^2 + np(1-p) - (np)^2 = np(1-p)\)</span></p>
+<p>Alternatively, we could have computed this using the fact that the
+Binomial is equal to a sum of Bernoulli random variables. By the
+linearity of expectation, if <span class="math inline">\(X_i \sim \text{Bernoulli}(p)\)</span>, then
+<span class="math inline">\(E(\sum_{i=1}^n X_i) = n\cdot E(X_i) = np\)</span>. <span class="math inline">\(Var(X)\)</span> follows similarly.</p>
+</div>
+<div id="negative-binomial-and-hypergeometric-computing-exx-1" class="section level3 hasAnchor" number="6.8.5">
+<h3><span class="header-section-number">6.8.5</span> Negative Binomial and Hypergeometric: Computing <span class="math inline">\(E(X(X-1))\)</span><a href="moments.html#negative-binomial-and-hypergeometric-computing-exx-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The second moment of distributions with pmfs/pdfs involving factorials
+can often be computing more easily by finding <span class="math inline">\(E(X(X-1))\)</span> instead of
+<span class="math inline">\(E(X^2)\)</span> directly. The <strong>Negative Binomial</strong> is one such distribution.
+Its mean can be computed by the same Kernel Technique used for the
+Binomial:</p>
+<span class="math display">\[\begin{align}
+E(X) = \sum_{x=0}^\infty x{x + r - 1 \choose x} \cdot (1-p)^x p^r &amp;&amp; \\
+= (1-p)\sum_{x=1}^\infty \frac{((x-1) + r)!}{(x-1)!(r-1)!}\cdot (1-p)^{x-1}p^{r} &amp;&amp; \\
+= \frac{r(1-p)}{p}\sum_{x=1}^\infty \frac{((x-1) + r)!}{(x-1)!(r-1)!}\cdot (1-p)^{x-1}p^{r} &amp;&amp; \\
+= \frac{r(1-p)}{p}\sum_{x=0}^\infty \frac{((x-1) + r)!}{(x-1)!r!}\cdot (1-p)^{x-1}p^{r+1} &amp;&amp; \\
+= \frac{r(1-p)}{p} &amp;&amp; \text{pmf sums to 1}
+\end{align}\]</span>
+<p>With <span class="math inline">\(E(X)\)</span> known, we can now take advantage of the factorial to compute
+<span class="math inline">\(E(X(X-1))\)</span>, using the same technique of simplifying the combinatorial
+fraction and “pulling out” components to reform a pdf:</p>
+<span class="math display">\[\begin{align}
+E(X(X-1)) = \sum_{x=0}^\infty x(x-1){x + r - 1 \choose x}(1-p)^x p^r \\
+= \frac{r(r+1)}{1-p)^2}{p^2}\sum_{x=0}^\infty \frac{((x-2) + (r+1))!}{(x-2)!(r+1)!}(1-p)^{x-2}p^{r+2}\\
+= \frac{r(r+1)}{1-p)^2}{p^2}\Big(0 + 0 + \sum_{x=2}^\infty {(x-2) + r + 1\choose x-2}(1-p)^{x-2}p^{r+2}\\
+= \frac{r(r + 1)(1-p)^2}{p^2} \text{  pmf sums to 1}\\
+\end{align}\]</span>
+<p>Since, by <a href="moments.html#expected-value">linearity of expectation</a>,
+<span class="math inline">\(E(X(X-1)) = E(X^2) - E(X)\)</span>, we can write</p>
+<span class="math display">\[\begin{align}
+Var(X) = E(X^2) - E(X) + E(X) - E(X)^2 \\
+= E(X(X-1)) + E(X) - E(X)^2 \\
+= \frac{r(r+1)(1-p)^2}{p^2} + \frac{r(1-p)}{p} - \frac{r^2(1-p)^2}{p^2}\\
+= \frac{r(1-p)^2}{p^2} + \frac{r(1-p)}{p} \\
+= \frac{r(1-p)(1 - p + p)}{p^2} = \frac{r(1-p)}{p^2}
+\end{align}\]</span>
+<p>Note: The moments of a Negative Binomial can also be computed simply by
+relying on its additive property in relation to the geometric, and then
+using the linearity expectation. That is, if
+<span class="math inline">\(Y \sim \text{NegBin}(r, p)\)</span>, then <span class="math inline">\(Y = \sum_{i=1}^r X_i\)</span> where
+<span class="math inline">\(X_i \sim \text{Geo}(p)\)</span>. Then,
+<span class="math inline">\(E(Y) = E(\sum_{i=1}^r X_i) = \frac{r(1-p)}{p}\)</span>.</p>
+<p><em>Hypergeometric Distribution</em>: The above technique can also be used to
+find the variance of a <span class="math inline">\(\text{HGeo}(N, K, n)\)</span> random variable. First,
+let us use the <a href="#kernel-technique">Kernel Technique</a> to compute its
+first moment. Writing the combinatorial functions in their full form,
+noting in general <span class="math inline">\(y - x = (y - 1) - (x - 1)\)</span>, we can rewrite this as
+the pmf of a <span class="math inline">\(\text{HGeo}(N-1, K-1, n-1)\)</span>:</p>
+<span class="math display">\[\begin{align}
+E(X) = \sum_{x=0}^n x \cdot \frac{K!}{x!(K-x)}\cdot\frac{(N-K)!}{(n-x)!(N-K-n+x)!} \cdot \frac{n!(N-n)!}{N!}\\
+= \sum_{x=1}^n \frac{K(K-1)!}{(x-1)!((K-1) - (x-1))!} \\ \cdot \frac{((N-1) - (K - 1))!}{((n-1) - (x-1))!((N-1) - (k-1) - (n-1) + (x-1))!}\cdot\frac{n(n-1)!((N-1) - (n-1))!}{N(N-1)!}\\
+= \frac{NK}{n}\sum_{x=0}^{n-1} \frac{{K-1\choose x}{(N-1) - (K-1)\choose (n-1) - x}}{{N-1\choose n-1}}\\
+= \frac{NK}{n}
+\end{align}\]</span>
+<p>For the variance, we first compute <span class="math inline">\(E(X(X-1))\)</span> in the same fashion. For
+brevity, we exclude writing down <span class="math inline">\(y - x = (x - 2) - (y-2)\)</span> expansion,
+but the calculations below do rely on this principle.</p>
+<span class="math display">\[\begin{align}
+E(X(X-1)) = \sum_{x=0}^n x(x-1) \cdot \frac{K!}{x!(K-x)}\cdot\frac{(N-K)!}{(n-x)!(N-K-n+x)!} \cdot \frac{n!(N-n)!}{N!}\\
+= \sum_{x=2}^n \frac{K(K-1)!}{(x-1)!(K - X)!} \\ \cdot \frac{(N - K)!}{((n-2) - x-2))!(N - k - (n-2) + (x-2))!}\cdot\frac{n(n-1)(n-2)!((N-2) - (n-2))!}{N(N-1)(N-2)!}\\
+= \frac{N(N-1)K(K-1)}{n(n-1)}\sum_{x=0}^{n-2} \frac{{K-2\choose x}{(N-2) - (K-2)\choose (n-2) - x}}{{N-2\choose n-2}}\\
+= \frac{N(N-1)K(K-1)}{n(n-1)}
+\end{align}\]</span>
+<p>Then,</p>
+<span class="math display">\[\begin{align}
+Var(X) = E(X(X-1)) + E(X) - E(X)^2\\
+= \frac{K(K-1)N(N-1)}{n(n-1)} + \frac{KN}{n} - \frac{KN}{n^2}\\
+= n\frac{K}{N} \cdot \frac{N - K}{N}\cdot \frac{N - n}{N-1}
+\end{align}\]</span>
+<p>after lengthy algebra.</p>
+</div>
+<div id="poisson-exponential-taylor-series" class="section level3 hasAnchor" number="6.8.6">
+<h3><span class="header-section-number">6.8.6</span> Poisson: Exponential Taylor Series<a href="moments.html#poisson-exponential-taylor-series" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Like the Geometric, we can also derive the moments of the Poisson by
+relying the convergence of an infinite series. This time, we rely on the
+<a href="math-tricks.html#exponential-taylor">Taylor Series for the exponential distribution</a>,
+which is <span class="math inline">\(\sum_{x=0}^\infty \frac{\lambda^x}{x!} = e^\lambda\)</span>. Proceed
+as follows:</p>
+<span class="math display">\[\begin{align}
+E(X) = \sum_{x=0}^\infty x\frac{e^{-\lambda}\lambda^x}{x!} &amp;&amp; \\
+= \lambda e^{-\lambda}\sum_{x=1}^\infty \frac{\lambda^{x-1}}{(x-1)!} &amp;&amp; \text{when }x = 0, \text{ the series term is 0}\\
+= \lambda e^{-\lambda}e^{\lambda} = \lambda &amp;&amp; \text{exponential series}
+\end{align}\]</span>
+</div>
+<div id="exponential-integration-by-parts" class="section level3 hasAnchor" number="6.8.7">
+<h3><span class="header-section-number">6.8.7</span> Exponential: Integration By Parts<a href="moments.html#exponential-integration-by-parts" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Sometimes, a pdf can be integrated directly using more advanced
+integration techniques. The Exponential is one such distribution - its
+moments can be computed using <a href="math-tricks.html#ibp">integration by parts</a></p>
+<p>For the mean, note <span class="math inline">\(E(X) = \int_0^\infty \lambda e^{-\lambda x}dx\)</span>. Let
+<span class="math inline">\(u = x \implies du = 1\)</span> and
+<span class="math inline">\(du = \lambda e^{-\lambda x} \implies v = -e^{-\lambda x}\)</span>. Then,</p>
+<span class="math display">\[\begin{align}
+E(X) = uv - \int_{0}^\infty vdu = -xe^{-\lambda x}\Big|_{0}^\infty + \int_0^\infty e^{-\lambda x}dx\\
+= 0 + 0 - \frac{1}{\lambda}e^{-\lambda x} \Big|_0^\infty = \frac{1}{\lambda}
+\end{align}\]</span>
+<p>noting that
+<span class="math inline">\(\lim_{x\rightarrow\infty}xe^{-\lambda x} = \lim_{x\rightarrow\infty}-\lambda e^{-\lambda x} = 0\)</span>
+by applying L’Hopital’s rule. Hence <span class="math inline">\(E(X) = \frac{1}{\lambda}\)</span></p>
+<p>For the variance, start by computing <span class="math inline">\(E(X^2)\)</span>. Applying integration by
+parts with <span class="math inline">\(u = x^2 \implies du = 2x\)</span> and
+<span class="math inline">\(dv = \lambda e^{-\lambda x} \implies -e^{-\lambda x}\)</span>,</p>
+<p><span class="math display">\[E(X^2) = uv - \int_{0}^\infty vdu = -x^2e^{-\lambda x} \Big|_0^\infty + \int_{0}^\infty 2xe^{-\lambda x}\]</span></p>
+<p>Now, we could apply integration by parts again, but a faster way to
+solve this is by <strong>moment recognization</strong>: noting that the second term
+can be transformed to equal <span class="math inline">\(E(X)\)</span> like so:
+<span class="math inline">\(\int_{0}^\infty 2xe^{-\lambda x} = \frac{2}{\lambda}\int_{0}^\infty x\lambda e^{-\lambda x} = E(X) = \lambda\)</span>
+as we’ve already solved.</p>
+<p>As before, the first term is
+<span class="math inline">\(\lim_{x\rightarrow \infty}-x^2e^{-\lambda x} \Big|_0^\infty = \lim_{x\rightarrow\infty}\lambda^2e^{-\lambda x} = 0\)</span>
+by applying L’Hopital’s rule twice. Plugging in
+<span class="math inline">\(E(X) = \frac{1}{\lambda}\)</span>, we get <span class="math inline">\(E(X^2)\)</span> = <span class="math inline">\(\frac{2}{\lambda^2}\)</span> and</p>
+<p><span class="math display">\[Var(X) = E(X^2) - E(X)^2 = \frac{2}{\lambda^2} - \frac{1}{\lambda^2} = \frac{1}{\lambda^2}\]</span></p>
+</div>
+<div id="gamma-and-beta-kernel-technique-integration-version" class="section level3 hasAnchor" number="6.8.8">
+<h3><span class="header-section-number">6.8.8</span> Gamma and Beta: Kernel Technique, Integration Version<a href="moments.html#gamma-and-beta-kernel-technique-integration-version" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Similar to discrete distributions, we can also use the <a href="#kernel-technique">Kernel
+Technique</a> to more easily integrate continuous
+distributions as well. For example, noting <a href="math-tricks.html#gamma-function">Gamma
+function</a> property $(k) = ,</p>
+<span class="math display">\[\begin{align}
+E(X) = \int_{0}^\infty \frac{x}{\Gamma(k)\lambda^k}x^{k-1}e^{-\frac{1}{\lambda}x}dx &amp;&amp;\\
+= \int_{0}^\infty \frac{\lambda}{(\Gamma(k+1) / k)\lambda^{k+1}}x^k e^{-\frac{1}{\lambda}x}dx &amp;&amp; \text{recognize Gamma kernel}\\
+= \lambda k \int_{0}^\infty \frac{1}{\Gamma(k+1)\lambda^{k+1}}x^k e^{-\frac{1}{\lambda}x}dx &amp;&amp; \text{pull out excess terms}\\
+= \lambda k &amp;&amp; \text{ integrate } Gamma(k+1, \lambda) \text{ to 1}
+\end{align}\]</span>
+<p>Similarly, the variance of the Gamma can be calculated like so:</p>
+<ol style="list-style-type: decimal">
+<li>Solve for <span class="math inline">\(E(X^2)\)</span></li>
+</ol>
+<span class="math display">\[\begin{align}
+E(X^2) = \int_{0}^\infty \frac{x^2}{\Gamma(k)\lambda^k}x^{k-1}e^{-\frac{1}{\lambda}x}dx
+= \int_{0}^\infty \frac{\lambda^2}{(\Gamma(k+2) / (k(k+1)))\lambda^{k+2}}x^{k+1} e^{-\frac{1}{\lambda}x}dx\\
+= \lambda^2k(k+1) \text{  Pull out excess terms from } Gamma(k+1, \lambda) \text{ kernel, integrate to 1}
+\end{align}\]</span>
+<ol start="2" style="list-style-type: decimal">
+<li>Compute variance using <span class="math inline">\(Var(X) = E(X^2) - E(X)^2\)</span> using the
+components solved previously.</li>
+</ol>
+<p><span class="math display">\[Var(X) = \lambda^2k(k+1) - \lambda^2k^2 = \lambda^2k\]</span></p>
+<p>Since the Beta distribution also involves Gamma function, we can compute
+the moments in a similar fashion. Let’s start with the mean:</p>
+<span class="math display">\[\begin{align}
+E(X) = \int_{0}^\infty x \cdot\frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)}x^{\alpha-1}(1-x)^{\beta-1}dx &amp;&amp; \\
+= \frac{\alpha}{\alpha + \beta}\int_{0}^{1} \frac{\Gamma(\alpha + 1 + \beta)}{\Gamma(\alpha + 1)\Gamma(\beta)}x^\alpha (1-x)^{\beta-1}dx &amp;&amp; \text{form kernel of } Beta(\alpha+1, \beta)\\
+= \frac{\alpha}{\alpha + \beta} &amp;&amp; \text{ integrate Beta pdf to 1}\\
+\end{align}\]</span>
+<p>Now, we apply this same principle twice to compute the variance:</p>
+<ol style="list-style-type: decimal">
+<li>Compute <span class="math inline">\(E(X^2)\)</span> by using
+<span class="math inline">\(\Gamma(\alpha) = \alpha(\alpha+1)\Gamma(\alpha+2)\)</span> and
+<span class="math inline">\(\Gamma(\alpha + \beta) = (\alpha + \beta)(\alpha + \beta + 2)\)</span> to
+form the Beta kernel:</li>
+</ol>
+<span class="math display">\[\begin{align}
+E(X^2) = \int_{0}^1 x^2 \cdot \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)}x^{\alpha-1}(1 - x)^{\beta-1}dx &amp;&amp; \\
+= \frac{\alpha(\alpha+1)}{(\alpha + \beta)(\alpha + \beta + 1)}\int_{0}^1x^{\alpha-1}(1-x)^{\beta-1}dx &amp;&amp; \text{form kernel of } Beta(\alpha + 2, \beta)\\
+= \frac{\alpha(\alpha+1)}{(\alpha + \beta)(\alpha + \beta + 1)} \text{integrate Beta pdf to 1}
+\end{align}\]</span>
+<ol start="2" style="list-style-type: decimal">
+<li>Compute the variance using <span class="math inline">\(Var(X) = E(X^2) - E(X)^2\)</span></li>
+</ol>
+<span class="math display">\[\begin{align}
+Var(X) = E(X^2)\frac{\alpha^2 + \alpha}{(\alpha + \beta)(\alpha + \beta + 1)} - \frac{\alpha^2}{(\alpha + \beta)^2}\\
+= \frac{\alpha^2(\alpha + \beta) + \alpha(\alpha + \beta) - \alpha^2(\alpha + \beta + 1)}{(\alpha + \beta)^2(\alpha + \beta + 1)}\\
+= \frac{\alpha\beta}{(\alpha + \beta)^2(\alpha + \beta + 1)}
+\end{align}\]</span>
+<p>Virtually identical steps are used to compute the moments of the
+<strong>Chi-squared</strong> (which is a special case of the Gamma) and <strong>F</strong>
+distributions as well.</p>
+</div>
+<div id="normal-location-scale-trick-and-polar-integration" class="section level3 hasAnchor" number="6.8.9">
+<h3><span class="header-section-number">6.8.9</span> Normal: Location-Scale Trick and Polar Integration<a href="moments.html#normal-location-scale-trick-and-polar-integration" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Proving that the moments of the <span class="math inline">\(\text{Normal}(\mu, \sigma^2)\)</span> can be a bit
+tricky. However, if we use the fact that it is a <a href="#location-scale">location-scale
+family</a>, it becomes much easier. Letting
+<span class="math inline">\(X = \sigma Z + \mu\)</span>, then</p>
+<p><span class="math display">\[E(X) = \sigma E(Z) + \mu\]</span></p>
+<p>by linearity of expectation. Since <span class="math inline">\(Z \sim N(0,1)\)</span>, noting that the
+antiderivative of <span class="math inline">\(z\exp(-\frac{1}{2}z^2)\)</span> is <span class="math inline">\(-\exp(-\frac{1}{2}z^2)\)</span>,
+we get</p>
+<p><span class="math display">\[\begin{align}
+E(Z) = \int_{\infty}^\infty \frac{z}{\sqrt{2\pi}}\exp(-\frac{1}{2}z^2)dx\\
+= -\exp(-\frac{1}{2}z^2)\Big|_{-\infty}^\infty = 0
+\end{align}\]</span></p>
+<p>since <span class="math inline">\(\lim_{z^2\rightarrow\infty} \exp(-\frac{1}{2}z^2) = 0\)</span>. Therefore, <span class="math inline">\(E(X) = E(\sigma Z + \mu) = \sigma E(Z) +\mu = \mu\)</span>.</p>
+<p>Computing the variance necessitates a more advanced integration technique: Polar Coordinates. Proceed with <a href="math-tricks.html#ibp">Integration by Parts</a>, letting <span class="math inline">\(u = \frac{z}{\sqrt{2\pi}} \implies du = \frac{1}{\sqrt{2\pi}}\)</span> and <span class="math inline">\(dv = z\exp(-\frac{1}{2}z^2)\implies v = -\exp(-\frac{1}{2}z^2)\)</span> as used previously. Then,</p>
+<p><span class="math display">\[\begin{align}
+E(Z^2) = \int_{\infty}^\infty \frac{z^2}{\sqrt{2\pi}}\exp(-\frac{1}{2}z^2)dx\\
+= \frac{z}{\sqrt{2\pi}}\exp(-\frac{1}{2}z^2)\Big|_{-\infty}^\infty + \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty \exp(-\frac{1}{2}z^2)dz
+\end{align}\]</span></p>
+<p>By L’Hopital’s rule,</p>
+<p><span class="math display">\[\lim_{z\rightarrow\infty} \frac{z}{\sqrt{2\pi}}\exp(-\frac{1}{2}z^2) = \lim_{z\rightarrow\infty}\frac{1}{\sqrt{2\pi}z\exp(\frac{1}{2}z^2)} = 0\]</span></p>
+<p>so <span class="math inline">\(\frac{z}{\sqrt{2\pi}}\exp(\frac{1}{2}z^2)\Big|_{-\infty}^\infty = 0\)</span>. But how do we solve the second integral? This is where polar coordinates come into play. From <span class="citation">Strang (<a href="#ref-Strang2010">2010</a>)</span>, if <span class="math inline">\(A = \int_{-\infty}^\infty \exp(-\frac{1}{2}x^2)dx\)</span>, then we can solve the integral by converting into polar like so:</p>
+<p><span class="math display">\[\begin{align}
+A^2 = \int_{-\infty}^\infty \exp(-\frac{1}{2}x^2)dx \cdot \int_{-\infty}^\infty \exp(-\frac{1}{2}xy^2)dy\\
+= \int_{-\infty}^\infty\int_{-\infty}^\infty \exp(-\frac{1}{2}(x^2 + y^2))dxdy \\
+= \int_{0}^{2\pi}\int_{0}^\infty r\exp(-\frac{1}{2}r^2(\cos^2(\theta) + \sin^2(\theta)))drd\theta\\
+= \int_{0}^{2\pi}\int_{0}^\infty r\exp(-\frac{1}{2}r^2)drd\theta\\
+= 2\pi \implies A = \sqrt{2\pi}
+\end{align}\]</span></p>
+<p>Hence, <span class="math inline">\(E(Z^2) = 0 + \frac{\sqrt{2\pi}}{\sqrt{2\pi}} = 1\)</span> and therefore,</p>
+<p><span class="math display">\[\begin{align}
+Var(X) = E((\sigma Z + \mu - E(Z))^2) \\
+= E((\sigma Z + \mu - \mu)^2) = \sigma^2E(Z^2) \\
+= \sigma^2
+\end{align}\]</span></p>
+<p>Hence, we have proven that, for <span class="math inline">\(X \sim \text{Normal}(\mu, \sigma^2)\)</span>, that the mean is <span class="math inline">\(\mu\)</span> and variance is <span class="math inline">\(\sigma^2\)</span> - as we <em>expected</em> (ba-dum tss).</p>
+</div>
+</div>
+<div id="other-moments-for-reference" class="section level2 hasAnchor" number="6.9">
+<h2><span class="header-section-number">6.9</span> Other Moments (for reference)<a href="moments.html#other-moments-for-reference" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<table>
+<colgroup>
+<col width="21%" />
+<col width="21%" />
+<col width="21%" />
+<col width="34%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Distribution</th>
+<th align="center"><span class="math inline">\(E(Y)\)</span></th>
+<th align="center"><span class="math inline">\(Var(Y)\)</span></th>
+<th align="center">mgf</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><span class="math inline">\(\text{Weibull}(k, \lambda)\)</span></td>
+<td align="center"><span class="math inline">\(\lambda\Gamma(1 + \frac{1}{k})\)</span></td>
+<td align="center"><span class="math inline">\(\lambda^2\Big(\Gamma(1 + \frac{2}{k}) - (\Gamma(1 + \frac{1}{k}))^2\Big)\)</span></td>
+<td align="center"><span class="math inline">\(\sum_{n=0}^\infty\frac{t^n \lambda^n}{n!}\Gamma(1 + \frac{n}{k})\)</span>, <span class="math inline">\(k \geq 1\)</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span class="math inline">\(\text{Pareto}(x_m, \alpha)\)</span></td>
+<td align="center"><span class="math inline">\(\begin{cases}\infty &amp; \alpha \leq 1 \\ \frac{\alpha x_m}{a - 1} &amp; \alpha &gt; 1\end{cases}\)</span></td>
+<td align="center"><span class="math inline">\(\begin{cases}\infty &amp; \alpha \leq 2 \\ \frac{x_m^2 \alpha}{(a-1)^2(\alpha - 2)} &amp; \alpha &gt; 2\end{cases}\)</span></td>
+<td align="center">Does not exist</td>
+</tr>
+<tr class="odd">
+<td align="center"><span class="math inline">\(\text{Cauchy}(x_0, \gamma)\)</span></td>
+<td align="center">Does Not Exist</td>
+<td align="center">Does Not Exist</td>
+<td align="center"><span class="math inline">\(\exp(x_0it - \gamma|t|\)</span> (cf)</td>
+</tr>
+<tr class="even">
+<td align="center"><span class="math inline">\(t(\nu)\)</span></td>
+<td align="center">0</td>
+<td align="center"><span class="math inline">\(\begin{cases}\frac{\nu}{\nu-2} &amp; \nu &gt; 2\\ \infty &amp; 1 &lt; \nu \leq 2 \\ \text{undefined} &amp; \text{otherwise}\end{cases}\)</span></td>
+<td align="center">Does Not Exist</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-Strang2010" class="csl-entry">
+Strang, Gilbert. 2010. <em>Calculus</em>. 2nd ed. Wellesley, MA: Wellesley-Cambridge Press.
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="new-distributions.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="statistics.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/06-moments.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["Solving-Statistical-Problems.pdf", "Solving-Statistical-Problems.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

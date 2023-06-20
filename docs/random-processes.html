@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 13 Random Processes | Solving Statistical Problems</title>
+  <meta name="description" content="Chapter 13 Random Processes | Solving Statistical Problems" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 13 Random Processes | Solving Statistical Problems" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Chapter 13 Random Processes | Solving Statistical Problems" />
+  <meta name="github-repo" content="salbalkus/Solving-Statistical-Problems" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 13 Random Processes | Solving Statistical Problems" />
+  
+  <meta name="twitter:description" content="Chapter 13 Random Processes | Solving Statistical Problems" />
+  
+
+<meta name="author" content="Salvador Balkus, Kimberly Greco, and Mónica Robles Fontán" />
+
+
+<meta name="date" content="2023-06-20" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="generating-random-variables.html"/>
+<link rel="next" href="references.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Solving Statistical Problems</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="math-tricks.html"><a href="math-tricks.html"><i class="fa fa-check"></i><b>2</b> Math Tricks</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="math-tricks.html"><a href="math-tricks.html#combinatorics"><i class="fa fa-check"></i><b>2.1</b> Combinatorics</a></li>
+<li class="chapter" data-level="2.2" data-path="math-tricks.html"><a href="math-tricks.html#geometric-series"><i class="fa fa-check"></i><b>2.2</b> Geometric Series</a></li>
+<li class="chapter" data-level="2.3" data-path="math-tricks.html"><a href="math-tricks.html#exponential-taylor"><i class="fa fa-check"></i><b>2.3</b> Exponential Taylor Series</a></li>
+<li class="chapter" data-level="2.4" data-path="math-tricks.html"><a href="math-tricks.html#exponential-limit"><i class="fa fa-check"></i><b>2.4</b> Exponential Limit</a></li>
+<li class="chapter" data-level="2.5" data-path="math-tricks.html"><a href="math-tricks.html#ibp"><i class="fa fa-check"></i><b>2.5</b> Integration by Parts</a></li>
+<li class="chapter" data-level="2.6" data-path="math-tricks.html"><a href="math-tricks.html#leibniz-rule"><i class="fa fa-check"></i><b>2.6</b> Leibniz’s Rule</a></li>
+<li class="chapter" data-level="2.7" data-path="math-tricks.html"><a href="math-tricks.html#gamma-function"><i class="fa fa-check"></i><b>2.7</b> Gamma Function</a></li>
+<li class="chapter" data-level="2.8" data-path="math-tricks.html"><a href="math-tricks.html#triangle-inequality"><i class="fa fa-check"></i><b>2.8</b> Triangle Inequality</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="probability.html"><a href="probability.html"><i class="fa fa-check"></i><b>3</b> Probability</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="probability.html"><a href="probability.html#conditional-probability"><i class="fa fa-check"></i><b>3.1</b> Conditional Probability</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="probability.html"><a href="probability.html#conditional-probability-in-practice"><i class="fa fa-check"></i><b>3.1.1</b> Conditional Probability in practice</a></li>
+<li class="chapter" data-level="3.4.3" data-path="probability.html"><a href="probability.html#important-theorems"><i class="fa fa-check"></i><b>3.4.3</b> Important Theorems</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="known-distributions.html"><a href="known-distributions.html"><i class="fa fa-check"></i><b>4</b> Known Distributions</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="known-distributions.html"><a href="known-distributions.html#families-of-distributions"><i class="fa fa-check"></i><b>4.1</b> Families of Distributions</a></li>
+<li class="chapter" data-level="4.2" data-path="known-distributions.html"><a href="known-distributions.html#location-and-scale-families-location-scale"><i class="fa fa-check"></i><b>4.2</b> Location and Scale Families (#location-scale)</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="known-distributions.html"><a href="known-distributions.html#location-families"><i class="fa fa-check"></i><b>4.2.1</b> Location Families</a></li>
+<li class="chapter" data-level="4.2.2" data-path="known-distributions.html"><a href="known-distributions.html#scale-families"><i class="fa fa-check"></i><b>4.2.2</b> Scale Families</a></li>
+<li class="chapter" data-level="4.2.3" data-path="known-distributions.html"><a href="known-distributions.html#properties-of-location-scale-families"><i class="fa fa-check"></i><b>4.2.3</b> Properties of Location-Scale Families</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="known-distributions.html"><a href="known-distributions.html#exponential-family"><i class="fa fa-check"></i><b>4.3</b> Exponential Families</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="known-distributions.html"><a href="known-distributions.html#properties"><i class="fa fa-check"></i><b>4.3.1</b> Properties</a></li>
+<li class="chapter" data-level="4.3.2" data-path="known-distributions.html"><a href="known-distributions.html#natural-exponential-family"><i class="fa fa-check"></i><b>4.3.2</b> Natural Exponential Families</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="known-distributions.html"><a href="known-distributions.html#known-univariate-exponential-families"><i class="fa fa-check"></i><b>4.4</b> Known Univariate Exponential Families</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="known-distributions.html"><a href="known-distributions.html#bernoulli"><i class="fa fa-check"></i><b>4.4.1</b> Bernoulli</a></li>
+<li class="chapter" data-level="4.4.2" data-path="known-distributions.html"><a href="known-distributions.html#binomial"><i class="fa fa-check"></i><b>4.4.2</b> Binomial</a></li>
+<li class="chapter" data-level="4.4.3" data-path="known-distributions.html"><a href="known-distributions.html#geometric-distribution"><i class="fa fa-check"></i><b>4.4.3</b> Geometric</a></li>
+<li class="chapter" data-level="4.4.4" data-path="known-distributions.html"><a href="known-distributions.html#negative-binomial"><i class="fa fa-check"></i><b>4.4.4</b> Negative Binomial</a></li>
+<li class="chapter" data-level="4.4.5" data-path="known-distributions.html"><a href="known-distributions.html#poisson"><i class="fa fa-check"></i><b>4.4.5</b> Poisson</a></li>
+<li class="chapter" data-level="4.4.6" data-path="known-distributions.html"><a href="known-distributions.html#normal"><i class="fa fa-check"></i><b>4.4.6</b> Normal</a></li>
+<li class="chapter" data-level="4.4.7" data-path="known-distributions.html"><a href="known-distributions.html#exponential"><i class="fa fa-check"></i><b>4.4.7</b> Exponential</a></li>
+<li class="chapter" data-level="4.4.8" data-path="known-distributions.html"><a href="known-distributions.html#gamma"><i class="fa fa-check"></i><b>4.4.8</b> Gamma</a></li>
+<li class="chapter" data-level="4.4.9" data-path="known-distributions.html"><a href="known-distributions.html#beta"><i class="fa fa-check"></i><b>4.4.9</b> Beta</a></li>
+<li class="chapter" data-level="4.4.10" data-path="known-distributions.html"><a href="known-distributions.html#chi-squared"><i class="fa fa-check"></i><b>4.4.10</b> Chi-squared</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="known-distributions.html"><a href="known-distributions.html#exponential-families-with-certain-parameters-fixed"><i class="fa fa-check"></i><b>4.5</b> Exponential families with certain parameters fixed</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="known-distributions.html"><a href="known-distributions.html#weibull"><i class="fa fa-check"></i><b>4.5.1</b> Weibull</a></li>
+<li class="chapter" data-level="4.5.2" data-path="known-distributions.html"><a href="known-distributions.html#pareto"><i class="fa fa-check"></i><b>4.5.2</b> Pareto</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="known-distributions.html"><a href="known-distributions.html#non-exponential-families"><i class="fa fa-check"></i><b>4.6</b> Non-exponential families</a>
+<ul>
+<li class="chapter" data-level="4.6.1" data-path="known-distributions.html"><a href="known-distributions.html#uniform"><i class="fa fa-check"></i><b>4.6.1</b> Uniform</a></li>
+<li class="chapter" data-level="4.6.2" data-path="known-distributions.html"><a href="known-distributions.html#cauchy"><i class="fa fa-check"></i><b>4.6.2</b> Cauchy</a></li>
+<li class="chapter" data-level="4.6.3" data-path="known-distributions.html"><a href="known-distributions.html#t-distribution"><i class="fa fa-check"></i><b>4.6.3</b> t-distribution</a></li>
+<li class="chapter" data-level="4.6.4" data-path="known-distributions.html"><a href="known-distributions.html#f-distribution"><i class="fa fa-check"></i><b>4.6.4</b> F-distribution</a></li>
+<li class="chapter" data-level="4.6.5" data-path="known-distributions.html"><a href="known-distributions.html#hypergeometric"><i class="fa fa-check"></i><b>4.6.5</b> Hypergeometric</a></li>
+</ul></li>
+<li class="chapter" data-level="4.7" data-path="known-distributions.html"><a href="known-distributions.html#multivariate-distributions"><i class="fa fa-check"></i><b>4.7</b> Multivariate Distributions</a>
+<ul>
+<li class="chapter" data-level="4.7.1" data-path="known-distributions.html"><a href="known-distributions.html#bivariate-normal"><i class="fa fa-check"></i><b>4.7.1</b> Bivariate Normal</a></li>
+<li class="chapter" data-level="4.7.2" data-path="known-distributions.html"><a href="known-distributions.html#multinomial"><i class="fa fa-check"></i><b>4.7.2</b> Multinomial</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="new-distributions.html"><a href="new-distributions.html"><i class="fa fa-check"></i><b>5</b> New Distributions</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="new-distributions.html"><a href="new-distributions.html#transformations"><i class="fa fa-check"></i><b>5.1</b> Transformations</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="new-distributions.html"><a href="new-distributions.html#theorems"><i class="fa fa-check"></i><b>5.1.1</b> Theorems</a></li>
+<li class="chapter" data-level="5.1.2" data-path="new-distributions.html"><a href="new-distributions.html#practical-strategy"><i class="fa fa-check"></i><b>5.1.2</b> Practical Strategy</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="new-distributions.html"><a href="new-distributions.html#probability-integral-transform"><i class="fa fa-check"></i><b>5.2</b> Probability Integral Transform</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="new-distributions.html"><a href="new-distributions.html#hiearchical-models-iterated-moments"><i class="fa fa-check"></i><b>5.2.1</b> Hiearchical Models (Iterated Moments)</a></li>
+<li class="chapter" data-level="5.2.2" data-path="new-distributions.html"><a href="new-distributions.html#convolutions"><i class="fa fa-check"></i><b>5.2.2</b> Convolutions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="moments.html"><a href="moments.html"><i class="fa fa-check"></i><b>6</b> Moments</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="moments.html"><a href="moments.html#basic-definitions"><i class="fa fa-check"></i><b>6.1</b> Basic Definitions</a></li>
+<li class="chapter" data-level="6.2" data-path="moments.html"><a href="moments.html#expected-value"><i class="fa fa-check"></i><b>6.2</b> <span class="math inline">\(E(X)\)</span> Properties</a></li>
+<li class="chapter" data-level="6.3" data-path="moments.html"><a href="moments.html#varx-properties"><i class="fa fa-check"></i><b>6.3</b> <span class="math inline">\(Var(X)\)</span> Properties</a></li>
+<li class="chapter" data-level="6.4" data-path="moments.html"><a href="moments.html#covariance-and-correlation"><i class="fa fa-check"></i><b>6.4</b> Covariance and Correlation</a></li>
+<li class="chapter" data-level="6.5" data-path="moments.html"><a href="moments.html#conditional-expectation"><i class="fa fa-check"></i><b>6.5</b> Conditional Expectation</a></li>
+<li class="chapter" data-level="6.6" data-path="moments.html"><a href="moments.html#moment-generating-functions"><i class="fa fa-check"></i><b>6.6</b> Moment Generating Functions</a></li>
+<li class="chapter" data-level="6.7" data-path="moments.html"><a href="moments.html#moment-bounds"><i class="fa fa-check"></i><b>6.7</b> Moment Inequalities</a></li>
+<li class="chapter" data-level="6.8" data-path="moments.html"><a href="moments.html#techniques-for-deriving-moments"><i class="fa fa-check"></i><b>6.8</b> Techniques for Deriving Moments</a>
+<ul>
+<li class="chapter" data-level="6.8.1" data-path="moments.html"><a href="moments.html#bernoulli-direct-summation"><i class="fa fa-check"></i><b>6.8.1</b> Bernoulli: Direct Summation</a></li>
+<li class="chapter" data-level="6.8.2" data-path="moments.html"><a href="moments.html#uniform-direct-integration"><i class="fa fa-check"></i><b>6.8.2</b> Uniform: Direct Integration</a></li>
+<li class="chapter" data-level="6.8.3" data-path="moments.html"><a href="moments.html#geometric-series-convergence"><i class="fa fa-check"></i><b>6.8.3</b> Geometric: Series Convergence</a></li>
+<li class="chapter" data-level="6.8.4" data-path="moments.html"><a href="moments.html#binomial-kernel-technique-series-version"><i class="fa fa-check"></i><b>6.8.4</b> Binomial: Kernel Technique, Series Version</a></li>
+<li class="chapter" data-level="6.8.5" data-path="moments.html"><a href="moments.html#negative-binomial-and-hypergeometric-computing-exx-1"><i class="fa fa-check"></i><b>6.8.5</b> Negative Binomial and Hypergeometric: Computing <span class="math inline">\(E(X(X-1))\)</span></a></li>
+<li class="chapter" data-level="6.8.6" data-path="moments.html"><a href="moments.html#poisson-exponential-taylor-series"><i class="fa fa-check"></i><b>6.8.6</b> Poisson: Exponential Taylor Series</a></li>
+<li class="chapter" data-level="6.8.7" data-path="moments.html"><a href="moments.html#exponential-integration-by-parts"><i class="fa fa-check"></i><b>6.8.7</b> Exponential: Integration By Parts</a></li>
+<li class="chapter" data-level="6.8.8" data-path="moments.html"><a href="moments.html#gamma-and-beta-kernel-technique-integration-version"><i class="fa fa-check"></i><b>6.8.8</b> Gamma and Beta: Kernel Technique, Integration Version</a></li>
+<li class="chapter" data-level="6.8.9" data-path="moments.html"><a href="moments.html#normal-location-scale-trick-and-polar-integration"><i class="fa fa-check"></i><b>6.8.9</b> Normal: Location-Scale Trick and Polar Integration</a></li>
+</ul></li>
+<li class="chapter" data-level="6.9" data-path="moments.html"><a href="moments.html#other-moments-for-reference"><i class="fa fa-check"></i><b>6.9</b> Other Moments (for reference)</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="statistics.html"><a href="statistics.html"><i class="fa fa-check"></i><b>7</b> Statistics</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="statistics.html"><a href="statistics.html#table-of-sufficient-statistics"><i class="fa fa-check"></i><b>7.1</b> Table of Sufficient Statistics</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="statistics.html"><a href="statistics.html#a-note-on-distributions-of-sufficient-statistics"><i class="fa fa-check"></i><b>7.1.1</b> A Note on Distributions of Sufficient Statistics</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="statistics.html"><a href="statistics.html#moments-of-the-sufficient-statistic"><i class="fa fa-check"></i><b>7.2</b> Moments of the Sufficient Statistic</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="point-estimators-finite-samples.html"><a href="point-estimators-finite-samples.html"><i class="fa fa-check"></i><b>8</b> Point Estimators: Finite Samples</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="point-estimators-finite-samples.html"><a href="point-estimators-finite-samples.html#method-of-moments"><i class="fa fa-check"></i><b>8.1</b> Method of Moments</a></li>
+<li class="chapter" data-level="8.2" data-path="point-estimators-finite-samples.html"><a href="point-estimators-finite-samples.html#mle-theory"><i class="fa fa-check"></i><b>8.2</b> MLE Theory</a></li>
+<li class="chapter" data-level="8.3" data-path="point-estimators-finite-samples.html"><a href="point-estimators-finite-samples.html#unbiasedness"><i class="fa fa-check"></i><b>8.3</b> Unbiasedness</a></li>
+<li class="chapter" data-level="8.4" data-path="point-estimators-finite-samples.html"><a href="point-estimators-finite-samples.html#minimum-variance-cramer-rao-lower-bound"><i class="fa fa-check"></i><b>8.4</b> Minimum Variance (Cramer-Rao Lower Bound)</a></li>
+<li class="chapter" data-level="8.5" data-path="point-estimators-finite-samples.html"><a href="point-estimators-finite-samples.html#uniform-minimum-variance-unbiased-estimators-umvues"><i class="fa fa-check"></i><b>8.5</b> Uniform Minimum Variance Unbiased Estimators (UMVUEs)</a></li>
+<li class="chapter" data-level="8.6" data-path="point-estimators-finite-samples.html"><a href="point-estimators-finite-samples.html#inferential-properties-of-exponential-families-distributions"><i class="fa fa-check"></i><b>8.6</b> Inferential Properties of Exponential Families Distributions</a>
+<ul>
+<li class="chapter" data-level="8.6.1" data-path="point-estimators-finite-samples.html"><a href="point-estimators-finite-samples.html#bernoulli-1"><i class="fa fa-check"></i><b>8.6.1</b> Bernoulli</a></li>
+<li class="chapter" data-level="8.6.2" data-path="point-estimators-finite-samples.html"><a href="point-estimators-finite-samples.html#binomial-1"><i class="fa fa-check"></i><b>8.6.2</b> Binomial</a></li>
+<li class="chapter" data-level="8.6.3" data-path="point-estimators-finite-samples.html"><a href="point-estimators-finite-samples.html#geometric"><i class="fa fa-check"></i><b>8.6.3</b> Geometric</a></li>
+<li class="chapter" data-level="8.6.4" data-path="point-estimators-finite-samples.html"><a href="point-estimators-finite-samples.html#negative-binomial-1"><i class="fa fa-check"></i><b>8.6.4</b> Negative Binomial</a></li>
+<li class="chapter" data-level="8.6.5" data-path="point-estimators-finite-samples.html"><a href="point-estimators-finite-samples.html#poisson-1"><i class="fa fa-check"></i><b>8.6.5</b> Poisson</a></li>
+<li class="chapter" data-level="8.6.6" data-path="point-estimators-finite-samples.html"><a href="point-estimators-finite-samples.html#normal-1"><i class="fa fa-check"></i><b>8.6.6</b> Normal</a></li>
+<li class="chapter" data-level="8.6.7" data-path="point-estimators-finite-samples.html"><a href="point-estimators-finite-samples.html#exponential-1"><i class="fa fa-check"></i><b>8.6.7</b> Exponential</a></li>
+<li class="chapter" data-level="8.6.8" data-path="point-estimators-finite-samples.html"><a href="point-estimators-finite-samples.html#gamma-1"><i class="fa fa-check"></i><b>8.6.8</b> Gamma</a></li>
+<li class="chapter" data-level="8.6.9" data-path="point-estimators-finite-samples.html"><a href="point-estimators-finite-samples.html#pareto-1"><i class="fa fa-check"></i><b>8.6.9</b> Pareto</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="point-estimators-asymptotics.html"><a href="point-estimators-asymptotics.html"><i class="fa fa-check"></i><b>9</b> Point Estimators: Asymptotics</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="point-estimators-asymptotics.html"><a href="point-estimators-asymptotics.html#consistency"><i class="fa fa-check"></i><b>9.1</b> Consistency</a></li>
+<li class="chapter" data-level="9.2" data-path="point-estimators-asymptotics.html"><a href="point-estimators-asymptotics.html#asymptotic-efficiency"><i class="fa fa-check"></i><b>9.2</b> Asymptotic Efficiency</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="point-estimators-asymptotics.html"><a href="point-estimators-asymptotics.html#central-limit-theorems"><i class="fa fa-check"></i><b>9.2.1</b> Central Limit Theorems</a></li>
+<li class="chapter" data-level="9.2.2" data-path="point-estimators-asymptotics.html"><a href="point-estimators-asymptotics.html#the-delta-method"><i class="fa fa-check"></i><b>9.2.2</b> The Delta Method</a></li>
+<li class="chapter" data-level="9.2.3" data-path="point-estimators-asymptotics.html"><a href="point-estimators-asymptotics.html#cramer-wold-device"><i class="fa fa-check"></i><b>9.2.3</b> Cramer-Wold Device</a></li>
+<li class="chapter" data-level="9.2.4" data-path="point-estimators-asymptotics.html"><a href="point-estimators-asymptotics.html#asymptotic-distribution-in-practice."><i class="fa fa-check"></i><b>9.2.4</b> Asymptotic Distribution in Practice.</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="point-estimators-asymptotics.html"><a href="point-estimators-asymptotics.html#asymptotic-properties-of-mles"><i class="fa fa-check"></i><b>9.3</b> Asymptotic Properties of MLEs</a></li>
+<li class="chapter" data-level="9.4" data-path="point-estimators-asymptotics.html"><a href="point-estimators-asymptotics.html#variance-stabilizing-transformations"><i class="fa fa-check"></i><b>9.4</b> Variance Stabilizing Transformations</a></li>
+<li class="chapter" data-level="9.5" data-path="point-estimators-asymptotics.html"><a href="point-estimators-asymptotics.html#asymptotic-confidence-intervals"><i class="fa fa-check"></i><b>9.5</b> Asymptotic Confidence Intervals</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="hypothesis-tests-finite-samples.html"><a href="hypothesis-tests-finite-samples.html"><i class="fa fa-check"></i><b>10</b> Hypothesis Tests: Finite Samples</a></li>
+<li class="chapter" data-level="11" data-path="hypothesis-tests-asymptotics.html"><a href="hypothesis-tests-asymptotics.html"><i class="fa fa-check"></i><b>11</b> Hypothesis Tests: Asymptotics</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="hypothesis-tests-asymptotics.html"><a href="hypothesis-tests-asymptotics.html#wald-test"><i class="fa fa-check"></i><b>11.1</b> Wald Test</a></li>
+<li class="chapter" data-level="11.2" data-path="hypothesis-tests-asymptotics.html"><a href="hypothesis-tests-asymptotics.html#score-test"><i class="fa fa-check"></i><b>11.2</b> Score Test</a></li>
+<li class="chapter" data-level="11.3" data-path="hypothesis-tests-asymptotics.html"><a href="hypothesis-tests-asymptotics.html#likelihood-ratio-test"><i class="fa fa-check"></i><b>11.3</b> Likelihood Ratio Test</a></li>
+<li class="chapter" data-level="11.4" data-path="hypothesis-tests-asymptotics.html"><a href="hypothesis-tests-asymptotics.html#composite-null-hypotheses"><i class="fa fa-check"></i><b>11.4</b> Composite Null Hypotheses</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="generating-random-variables.html"><a href="generating-random-variables.html"><i class="fa fa-check"></i><b>12</b> Generating Random Variables</a></li>
+<li class="chapter" data-level="13" data-path="random-processes.html"><a href="random-processes.html"><i class="fa fa-check"></i><b>13</b> Random Processes</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="random-processes.html"><a href="random-processes.html#poisson-processes"><i class="fa fa-check"></i><b>13.1</b> Poisson Processes</a>
+<ul>
+<li class="chapter" data-level="13.1.1" data-path="random-processes.html"><a href="random-processes.html#memorylessness-of-the-exponential"><i class="fa fa-check"></i><b>13.1.1</b> Memorylessness of the Exponential</a></li>
+<li class="chapter" data-level="13.1.2" data-path="random-processes.html"><a href="random-processes.html#count-time-duality"><i class="fa fa-check"></i><b>13.1.2</b> Count-Time Duality</a></li>
+<li class="chapter" data-level="13.1.3" data-path="random-processes.html"><a href="random-processes.html#poisson-distribution"><i class="fa fa-check"></i><b>13.1.3</b> Poisson Distribution</a></li>
+<li class="chapter" data-level="13.1.4" data-path="random-processes.html"><a href="random-processes.html#exponential-distribution"><i class="fa fa-check"></i><b>13.1.4</b> Exponential Distribution</a></li>
+<li class="chapter" data-level="13.1.5" data-path="random-processes.html"><a href="random-processes.html#example"><i class="fa fa-check"></i><b>13.1.5</b> Example</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="random-processes.html"><a href="random-processes.html#branching-processes"><i class="fa fa-check"></i><b>13.2</b> Branching Processes</a>
+<ul>
+<li class="chapter" data-level="13.2.1" data-path="random-processes.html"><a href="random-processes.html#random-variables"><i class="fa fa-check"></i><b>13.2.1</b> Random Variables</a></li>
+<li class="chapter" data-level="13.2.2" data-path="random-processes.html"><a href="random-processes.html#probability-generating-function"><i class="fa fa-check"></i><b>13.2.2</b> Probability Generating Function</a></li>
+<li class="chapter" data-level="13.2.3" data-path="random-processes.html"><a href="random-processes.html#criticality-theorem"><i class="fa fa-check"></i><b>13.2.3</b> Criticality Theorem</a></li>
+<li class="chapter" data-level="13.2.4" data-path="random-processes.html"><a href="random-processes.html#example-1"><i class="fa fa-check"></i><b>13.2.4</b> Example</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Solving Statistical Problems</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="random-processes" class="section level1 hasAnchor" number="13">
+<h1><span class="header-section-number">Chapter 13</span> Random Processes<a href="random-processes.html#random-processes" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>This section elaborates on two types of random processes: poisson processes and branching processes.</p>
+<div id="poisson-processes" class="section level2 hasAnchor" number="13.1">
+<h2><span class="header-section-number">13.1</span> Poisson Processes<a href="random-processes.html#poisson-processes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>A <strong>Poisson Process</strong> is a model for a series of discrete events where the average time between events is known, but the exact timing of events is random. A poisson process has the following properties:</p>
+<ul>
+<li>Events are independent of each other.</li>
+<li>The average rate (events per time period) is constant.</li>
+<li>Two events cannot occur at the same time.</li>
+</ul>
+<div id="memorylessness-of-the-exponential" class="section level3 hasAnchor" number="13.1.1">
+<h3><span class="header-section-number">13.1.1</span> Memorylessness of the Exponential<a href="random-processes.html#memorylessness-of-the-exponential" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Recall that the exponential distribution is <strong>memoryless</strong>, meaning <span class="math inline">\(P(X&gt;x+a \mid X&gt;a)=P(X&gt;x)\)</span>. The memoryless property of the exponential distribution applies to waiting times in a Poisson process. It means that the time between events remains independent of past events, allowing us to predict future waiting times solely based on the average rate of event occurrences (i.e., the interarrival times between events are i.i.d.).</p>
+</div>
+<div id="count-time-duality" class="section level3 hasAnchor" number="13.1.2">
+<h3><span class="header-section-number">13.1.2</span> Count-Time Duality<a href="random-processes.html#count-time-duality" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><span class="math display">\[
+\{T_n&gt;t\}=\{N_t&lt;n\}
+\]</span></p>
+<p>In words, the following 2 statements are equivalent:</p>
+<ul>
+<li><span class="math inline">\(T_n\)</span> (time to the <span class="math inline">\(n^{th}\)</span> event) is greater than some fixed time <span class="math inline">\(t\)</span></li>
+<li><span class="math inline">\(N_t\)</span> (number of events up to time <span class="math inline">\(t\)</span>) is less than some fixed number <span class="math inline">\(n\)</span></li>
+</ul>
+<p><span class="math display">\[
+\int_t^{\infty} \underbrace{\frac{1}{\Gamma(n)\lambda^{-n}}  x^{n-1} e^{-\lambda x}}_{T_n \sim \text{Gamma}(n,\lambda)} d x
+\quad = \quad \sum_{x=0}^{n-1} \underbrace{\frac{e^{-\lambda t} (\lambda t)^x}{x!}}_{N_t \sim \text{Poisson}(\lambda t)}
+\]</span></p>
+</div>
+<div id="poisson-distribution" class="section level3 hasAnchor" number="13.1.3">
+<h3><span class="header-section-number">13.1.3</span> Poisson Distribution<a href="random-processes.html#poisson-distribution" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Suppose that we are interested in the expected <strong>number of events</strong> that will occur over a particular interval. The probability of observing a particular number of events can be modeled using the (discrete) poisson distribution:</p>
+<ul>
+<li><span class="math inline">\(X=\)</span> Discrete number of events occurring over a finite interval</li>
+<li>Moments: <span class="math inline">\(\mathbb{E}[X]=\lambda\)</span>, <span class="math inline">\(\operatorname{Var}(X)=\lambda\)</span></li>
+<li><span class="math inline">\(\lambda=\)</span> Expected number of events over interval <span class="math inline">\(=\underbrace{\frac{Events}{Time}}_{Rate}\times Time\)</span></li>
+</ul>
+<p> </p>
+<p><img src="Solving-Statistical-Problems_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+</div>
+<div id="exponential-distribution" class="section level3 hasAnchor" number="13.1.4">
+<h3><span class="header-section-number">13.1.4</span> Exponential Distribution<a href="random-processes.html#exponential-distribution" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Suppose that we are interested in the expected <strong>time before the next event</strong>. The probability of observing a particular time before the next event can be modeled using the (continuous) exponential distribution:</p>
+<ul>
+<li><span class="math inline">\(X=\)</span> Continuous time between events</li>
+<li>Moments: <span class="math inline">\(\mathbb{E}[X]=\frac{1}{\lambda}\)</span>, <span class="math inline">\(\operatorname{Var}(X)=\frac{1}{\lambda^2}\)</span></li>
+<li><span class="math inline">\(\lambda=\)</span> Rate of events <span class="math inline">\(=\underbrace{\frac{Events}{Time}}_{Rate}\)</span></li>
+</ul>
+<p><em>Note: There is an inverse relationship between the rate of events (<span class="math inline">\(\lambda\)</span>) and expected time before the next event (<span class="math inline">\(x\)</span>). As the rate of events (<span class="math inline">\(\lambda\)</span>) increases, the time before the next event (<span class="math inline">\(x\)</span>) decreases.</em></p>
+<p> </p>
+<p><img src="Solving-Statistical-Problems_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p> </p>
+</div>
+<div id="example" class="section level3 hasAnchor" number="13.1.5">
+<h3><span class="header-section-number">13.1.5</span> Example<a href="random-processes.html#example" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Consider a Poisson process <span class="math inline">\((\lambda)\)</span> with a twist: After every event there is a guaranteed period of length <span class="math inline">\(\nu\)</span> during which no event can occur.</p>
+<p>Typical Poisson process:</p>
+<ul>
+<li>Distribution of time between events: <span class="math inline">\(T_n-T_{n-1} \sim \operatorname{Exp}(\lambda)\)</span></li>
+<li>Distribution of time to the <span class="math inline">\(n^{th}\)</span> event: <span class="math inline">\(\sum_{i=1}^n T_i \sim \operatorname{Gamma}(n, \lambda)\)</span></li>
+</ul>
+<p>Poisson process with a twist:</p>
+<ul>
+<li>Distribution of time between events: <span class="math inline">\(T_n-T_{n-1} \sim \operatorname{Exp}(\lambda)+\nu\)</span></li>
+</ul>
+<p><span class="math display">\[
+f_{T_n-T_{n-1}}(x)=\lambda e^{-\lambda(x-\nu)}
+\]</span></p>
+<ul>
+<li>Distribution of time to the <span class="math inline">\(n^{th}\)</span> event: <span class="math inline">\(\sum_{i=1}^n T_i \sim \operatorname{Gamma}(n, \lambda)+n \nu\)</span></li>
+</ul>
+<p><span class="math display">\[
+f_{T_n}(x)=\frac{1}{\Gamma(n) \lambda^{-n}}(x-n \nu)^{n-1} e^{-\lambda(x-n \nu)}
+\]</span></p>
+<p>Further, by count time duality, we can write:</p>
+<p><span class="math display">\[
+P(T_n&gt;t)=P(N_t&lt;n)
+\]</span></p>
+<p><span class="math display">\[
+\int_t^{\infty} \frac{1}{\Gamma(n)\lambda^{-n}}  (x-n \nu)^{n-1} e^{-\lambda (x-n \nu)} d x
+\quad = \quad \sum_{x=0}^{n-1} \frac{e^{-\lambda (t-n \nu)} (\lambda (t-n \nu))^x}{x!}
+\]</span></p>
+</div>
+</div>
+<div id="branching-processes" class="section level2 hasAnchor" number="13.2">
+<h2><span class="header-section-number">13.2</span> Branching Processes<a href="random-processes.html#branching-processes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="random-variables" class="section level3 hasAnchor" number="13.2.1">
+<h3><span class="header-section-number">13.2.1</span> Random Variables<a href="random-processes.html#random-variables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We’ll start by defining the random variables that characterize a branching process.</p>
+<ul>
+<li><span class="math inline">\(X_n\)</span> = size of the population at time (or generation) <span class="math inline">\(n\)</span></li>
+<li><span class="math inline">\(Y_{i,n-1}\)</span> = number of offspring produced by the <span class="math inline">\(i^{th}\)</span> individual in generation <span class="math inline">\(n-1\)</span></li>
+</ul>
+<p> </p>
+<p>How are random variables <span class="math inline">\(X_n\)</span> and <span class="math inline">\(Y_{i,n-1}\)</span> related? Intuitively, we can think of the population size of the current generation (<span class="math inline">\(n\)</span>) as the sum of the offspring produced by each individual in the previous generation (<span class="math inline">\(n-1\)</span>):</p>
+<p><span class="math display">\[
+\begin{aligned}
+X_n &amp;= \sum_{i=1}^{X_{n-1}} Y_{i,n-1}\\
+&amp;= Y_{1,n-1} + Y_{2,n-1} +...+Y_{X_{n-1},n-1}
+\end{aligned}
+\]</span></p>
+</div>
+<div id="probability-generating-function" class="section level3 hasAnchor" number="13.2.2">
+<h3><span class="header-section-number">13.2.2</span> Probability Generating Function<a href="random-processes.html#probability-generating-function" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Now we’ll define the <strong>Probability Generating Function</strong> (PGF), which allows us to compute probabilities from branching processes.</p>
+<p><span class="math display">\[
+g_X(t)=\mathbb{E}_X\left(t^X\right)=\sum_{n=0}^{\infty} t^n P(X=n)
+\]</span></p>
+<p>Similar to MGFs, independent random variables can be convoluted by multiplying their PGFs. For i.i.d. <span class="math inline">\(Y_{i,j}\)</span>, the PGF gives the first two moments:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\mathbb{E}\left(X_n\right) &amp; =[\mathbb{E}(Y)]^n \\
+\operatorname{Var}\left(X_n\right) &amp; =\operatorname{Var}(Y)\left(\sum_{i=n-1}^{2(n-1)}[\mathbb{E}(Y)]^i\right)
+\end{aligned}
+\]</span>
+ </p>
+<p>Asymptotics exists for Branching Processes on i.i.d. <span class="math inline">\(\left\{Y_{i,j}\right\}\)</span> with finite variance:
+<span class="math display">\[
+\begin{gathered}
+\text{Population-Level} \quad \quad \text{Individual-Level} \\
+\\
+\mathrm{E}\left(X_n\right) \rightarrow \begin{cases}0 &amp; \mathrm{E}(Y)&lt;1 \\
+1 &amp; \mathrm{E}(Y)=1 \\
+\infty &amp; \mathrm{E}(Y)&gt;1\end{cases} \\
+\\
+\operatorname{Var}\left(X_n\right) \rightarrow \begin{cases}0 &amp; \mathrm{E}(Y)&lt;1 \\
+\infty &amp; \mathrm{E}(Y) \geq 1\end{cases}
+\end{gathered}
+\]</span></p>
+</div>
+<div id="criticality-theorem" class="section level3 hasAnchor" number="13.2.3">
+<h3><span class="header-section-number">13.2.3</span> Criticality Theorem<a href="random-processes.html#criticality-theorem" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Criticality Theorem states that the probability of ultimate extinction of a branching process is the smallest solution to <span class="math inline">\(\eta=g_Y(\eta)\)</span>. In general, we can solve for <span class="math inline">\(\eta\)</span> using the quadratic equation:</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp;0=a\eta^2+b\eta+c\\
+\\
+&amp;\eta=\frac{-b \pm \sqrt{b^2-4 a c}}{2 a}
+\end{aligned}
+\]</span></p>
+</div>
+<div id="example-1" class="section level3 hasAnchor" number="13.2.4">
+<h3><span class="header-section-number">13.2.4</span> Example<a href="random-processes.html#example-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Consider a Branching Process where individuals duplicate with probability <span class="math inline">\(p\)</span> and die with probability <span class="math inline">\(q\)</span>.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Describe the mean and variance over time for this branching process. For what values of <span class="math inline">\(p\)</span> will the process go extinct with probability 1?</li>
+<li>Establish the probability of eventual extinction for arbitrary <span class="math inline">\(p\)</span>.</li>
+</ol>
+<p> </p>
+<p><strong>Step 1</strong>: Define the pmf of <span class="math inline">\(Y\)</span> based on the given reproduction probabilities. Does <span class="math inline">\(Y\)</span> follow a known distribution?</p>
+<p><span class="math inline">\(f_y(y)=\left\{\begin{array}{ll}y=0 &amp; \text { w.p. } q=1-p \\ y=2 &amp; \text { w.p. } p\end{array} \quad \Rightarrow \quad y \sim 2\right.\)</span> Bernoulli<span class="math inline">\((p)\)</span></p>
+<p> </p>
+<p><strong>Step 2</strong>: Calculate the moments of <span class="math inline">\(Y\)</span>, which can be used to calculate the moments of <span class="math inline">\(X_n\)</span>.</p>
+<p><span class="math display">\[
+\begin{aligned}
+\mathbb{E}[Y]=2 p \quad \quad \quad \quad \mathbb{E}\left[X_n\right] &amp; =(2 p)^n \\
+\operatorname{Var}(Y)=4 p q \quad \quad \operatorname{Var}\left(X_n\right) &amp; =\operatorname{Var}(y) \sum_{i=n-1}^{2(n-1)} \mathbb{E}[Y]^i \\
+&amp; =4 p q \sum_{i=n-1}^{2(n-1)}(2 p)^i
+\end{aligned}
+\]</span></p>
+<p>Based on our asymptotic results, we know that the process <span class="math inline">\(X_n\)</span> will go extinct with probability 1 if <span class="math inline">\(\mathbb{E}[Y]&lt;1\)</span></p>
+<p><span class="math display">\[
+\mathbb{E}[Y]=2 p \Rightarrow \text { process will go extinct with probability 1 if } p&lt; \frac{1}{2}
+\]</span></p>
+<p> </p>
+<p><strong>Step 3</strong>: Find the probability of ultimate extinction using Criticality Theorem.</p>
+<p>First, find the PGF of <span class="math inline">\(Y\)</span>:
+<span class="math display">\[
+\begin{aligned}
+g_Y(\eta) =\mathbb{E}\left[\eta^Y\right]&amp;=\sum_Y \eta^Y f_Y(y) \\
+&amp; =\eta^2 P(Y=2)+\eta^0 P(Y=0) \\
+&amp; =\eta^2 p+q
+\end{aligned}
+\]</span></p>
+<p>Second, find the probability of ultimate extinction, which is the smallest solution to <span class="math inline">\(\eta=g_Y(\eta)\)</span>:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\eta&amp;=\eta^2 p+q \\
+0&amp;=\eta^2 p-\eta+q\\
+\\
+a&amp;=p, b=-1, c=q\\
+\\
+\eta&amp;= \frac{1 \pm \sqrt{1-4pq}}{2p} \\&amp;= \frac{1 \pm \sqrt{1-4p(1-p)}}{2p} \\&amp;= \frac{1 \pm \sqrt{1-4p+4p^2}}{2p} \\&amp;= \frac{1 \pm \sqrt{(2p-1)^2}}{2p} \\&amp;= \frac{1 \pm (2p-1)}{2p}\\
+&amp;=\text{min}\left(1 \quad \text{or} \quad \frac{1}{p}-1\right)
+\end{aligned}
+\]</span></p>
+<p>For <span class="math inline">\(p \leq \frac{1}{2}, 1\)</span> is the minimum. Thus, <span class="math inline">\(\eta=P(\text{Extinction})=1.\)</span></p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="generating-random-variables.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/13-random-processes.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["Solving-Statistical-Problems.pdf", "Solving-Statistical-Problems.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

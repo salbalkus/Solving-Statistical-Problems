@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 Probability | Solving Statistical Problems</title>
+  <meta name="description" content="Chapter 3 Probability | Solving Statistical Problems" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 3 Probability | Solving Statistical Problems" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Chapter 3 Probability | Solving Statistical Problems" />
+  <meta name="github-repo" content="salbalkus/Solving-Statistical-Problems" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 Probability | Solving Statistical Problems" />
+  
+  <meta name="twitter:description" content="Chapter 3 Probability | Solving Statistical Problems" />
+  
+
+<meta name="author" content="Salvador Balkus, Kimberly Greco, and Mónica Robles Fontán" />
+
+
+<meta name="date" content="2023-06-20" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="math-tricks.html"/>
+<link rel="next" href="known-distributions.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Solving Statistical Problems</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="math-tricks.html"><a href="math-tricks.html"><i class="fa fa-check"></i><b>2</b> Math Tricks</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="math-tricks.html"><a href="math-tricks.html#combinatorics"><i class="fa fa-check"></i><b>2.1</b> Combinatorics</a></li>
+<li class="chapter" data-level="2.2" data-path="math-tricks.html"><a href="math-tricks.html#geometric-series"><i class="fa fa-check"></i><b>2.2</b> Geometric Series</a></li>
+<li class="chapter" data-level="2.3" data-path="math-tricks.html"><a href="math-tricks.html#exponential-taylor"><i class="fa fa-check"></i><b>2.3</b> Exponential Taylor Series</a></li>
+<li class="chapter" data-level="2.4" data-path="math-tricks.html"><a href="math-tricks.html#exponential-limit"><i class="fa fa-check"></i><b>2.4</b> Exponential Limit</a></li>
+<li class="chapter" data-level="2.5" data-path="math-tricks.html"><a href="math-tricks.html#ibp"><i class="fa fa-check"></i><b>2.5</b> Integration by Parts</a></li>
+<li class="chapter" data-level="2.6" data-path="math-tricks.html"><a href="math-tricks.html#leibniz-rule"><i class="fa fa-check"></i><b>2.6</b> Leibniz’s Rule</a></li>
+<li class="chapter" data-level="2.7" data-path="math-tricks.html"><a href="math-tricks.html#gamma-function"><i class="fa fa-check"></i><b>2.7</b> Gamma Function</a></li>
+<li class="chapter" data-level="2.8" data-path="math-tricks.html"><a href="math-tricks.html#triangle-inequality"><i class="fa fa-check"></i><b>2.8</b> Triangle Inequality</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="probability.html"><a href="probability.html"><i class="fa fa-check"></i><b>3</b> Probability</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="probability.html"><a href="probability.html#conditional-probability"><i class="fa fa-check"></i><b>3.1</b> Conditional Probability</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="probability.html"><a href="probability.html#conditional-probability-in-practice"><i class="fa fa-check"></i><b>3.1.1</b> Conditional Probability in practice</a></li>
+<li class="chapter" data-level="3.4.3" data-path="probability.html"><a href="probability.html#important-theorems"><i class="fa fa-check"></i><b>3.4.3</b> Important Theorems</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="known-distributions.html"><a href="known-distributions.html"><i class="fa fa-check"></i><b>4</b> Known Distributions</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="known-distributions.html"><a href="known-distributions.html#families-of-distributions"><i class="fa fa-check"></i><b>4.1</b> Families of Distributions</a></li>
+<li class="chapter" data-level="4.2" data-path="known-distributions.html"><a href="known-distributions.html#location-and-scale-families-location-scale"><i class="fa fa-check"></i><b>4.2</b> Location and Scale Families (#location-scale)</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="known-distributions.html"><a href="known-distributions.html#location-families"><i class="fa fa-check"></i><b>4.2.1</b> Location Families</a></li>
+<li class="chapter" data-level="4.2.2" data-path="known-distributions.html"><a href="known-distributions.html#scale-families"><i class="fa fa-check"></i><b>4.2.2</b> Scale Families</a></li>
+<li class="chapter" data-level="4.2.3" data-path="known-distributions.html"><a href="known-distributions.html#properties-of-location-scale-families"><i class="fa fa-check"></i><b>4.2.3</b> Properties of Location-Scale Families</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="known-distributions.html"><a href="known-distributions.html#exponential-family"><i class="fa fa-check"></i><b>4.3</b> Exponential Families</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="known-distributions.html"><a href="known-distributions.html#properties"><i class="fa fa-check"></i><b>4.3.1</b> Properties</a></li>
+<li class="chapter" data-level="4.3.2" data-path="known-distributions.html"><a href="known-distributions.html#natural-exponential-family"><i class="fa fa-check"></i><b>4.3.2</b> Natural Exponential Families</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="known-distributions.html"><a href="known-distributions.html#known-univariate-exponential-families"><i class="fa fa-check"></i><b>4.4</b> Known Univariate Exponential Families</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="known-distributions.html"><a href="known-distributions.html#bernoulli"><i class="fa fa-check"></i><b>4.4.1</b> Bernoulli</a></li>
+<li class="chapter" data-level="4.4.2" data-path="known-distributions.html"><a href="known-distributions.html#binomial"><i class="fa fa-check"></i><b>4.4.2</b> Binomial</a></li>
+<li class="chapter" data-level="4.4.3" data-path="known-distributions.html"><a href="known-distributions.html#geometric-distribution"><i class="fa fa-check"></i><b>4.4.3</b> Geometric</a></li>
+<li class="chapter" data-level="4.4.4" data-path="known-distributions.html"><a href="known-distributions.html#negative-binomial"><i class="fa fa-check"></i><b>4.4.4</b> Negative Binomial</a></li>
+<li class="chapter" data-level="4.4.5" data-path="known-distributions.html"><a href="known-distributions.html#poisson"><i class="fa fa-check"></i><b>4.4.5</b> Poisson</a></li>
+<li class="chapter" data-level="4.4.6" data-path="known-distributions.html"><a href="known-distributions.html#normal"><i class="fa fa-check"></i><b>4.4.6</b> Normal</a></li>
+<li class="chapter" data-level="4.4.7" data-path="known-distributions.html"><a href="known-distributions.html#exponential"><i class="fa fa-check"></i><b>4.4.7</b> Exponential</a></li>
+<li class="chapter" data-level="4.4.8" data-path="known-distributions.html"><a href="known-distributions.html#gamma"><i class="fa fa-check"></i><b>4.4.8</b> Gamma</a></li>
+<li class="chapter" data-level="4.4.9" data-path="known-distributions.html"><a href="known-distributions.html#beta"><i class="fa fa-check"></i><b>4.4.9</b> Beta</a></li>
+<li class="chapter" data-level="4.4.10" data-path="known-distributions.html"><a href="known-distributions.html#chi-squared"><i class="fa fa-check"></i><b>4.4.10</b> Chi-squared</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="known-distributions.html"><a href="known-distributions.html#exponential-families-with-certain-parameters-fixed"><i class="fa fa-check"></i><b>4.5</b> Exponential families with certain parameters fixed</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="known-distributions.html"><a href="known-distributions.html#weibull"><i class="fa fa-check"></i><b>4.5.1</b> Weibull</a></li>
+<li class="chapter" data-level="4.5.2" data-path="known-distributions.html"><a href="known-distributions.html#pareto"><i class="fa fa-check"></i><b>4.5.2</b> Pareto</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="known-distributions.html"><a href="known-distributions.html#non-exponential-families"><i class="fa fa-check"></i><b>4.6</b> Non-exponential families</a>
+<ul>
+<li class="chapter" data-level="4.6.1" data-path="known-distributions.html"><a href="known-distributions.html#uniform"><i class="fa fa-check"></i><b>4.6.1</b> Uniform</a></li>
+<li class="chapter" data-level="4.6.2" data-path="known-distributions.html"><a href="known-distributions.html#cauchy"><i class="fa fa-check"></i><b>4.6.2</b> Cauchy</a></li>
+<li class="chapter" data-level="4.6.3" data-path="known-distributions.html"><a href="known-distributions.html#t-distribution"><i class="fa fa-check"></i><b>4.6.3</b> t-distribution</a></li>
+<li class="chapter" data-level="4.6.4" data-path="known-distributions.html"><a href="known-distributions.html#f-distribution"><i class="fa fa-check"></i><b>4.6.4</b> F-distribution</a></li>
+<li class="chapter" data-level="4.6.5" data-path="known-distributions.html"><a href="known-distributions.html#hypergeometric"><i class="fa fa-check"></i><b>4.6.5</b> Hypergeometric</a></li>
+</ul></li>
+<li class="chapter" data-level="4.7" data-path="known-distributions.html"><a href="known-distributions.html#multivariate-distributions"><i class="fa fa-check"></i><b>4.7</b> Multivariate Distributions</a>
+<ul>
+<li class="chapter" data-level="4.7.1" data-path="known-distributions.html"><a href="known-distributions.html#bivariate-normal"><i class="fa fa-check"></i><b>4.7.1</b> Bivariate Normal</a></li>
+<li class="chapter" data-level="4.7.2" data-path="known-distributions.html"><a href="known-distributions.html#multinomial"><i class="fa fa-check"></i><b>4.7.2</b> Multinomial</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="new-distributions.html"><a href="new-distributions.html"><i class="fa fa-check"></i><b>5</b> New Distributions</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="new-distributions.html"><a href="new-distributions.html#transformations"><i class="fa fa-check"></i><b>5.1</b> Transformations</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="new-distributions.html"><a href="new-distributions.html#theorems"><i class="fa fa-check"></i><b>5.1.1</b> Theorems</a></li>
+<li class="chapter" data-level="5.1.2" data-path="new-distributions.html"><a href="new-distributions.html#practical-strategy"><i class="fa fa-check"></i><b>5.1.2</b> Practical Strategy</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="new-distributions.html"><a href="new-distributions.html#probability-integral-transform"><i class="fa fa-check"></i><b>5.2</b> Probability Integral Transform</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="new-distributions.html"><a href="new-distributions.html#hiearchical-models-iterated-moments"><i class="fa fa-check"></i><b>5.2.1</b> Hiearchical Models (Iterated Moments)</a></li>
+<li class="chapter" data-level="5.2.2" data-path="new-distributions.html"><a href="new-distributions.html#convolutions"><i class="fa fa-check"></i><b>5.2.2</b> Convolutions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="moments.html"><a href="moments.html"><i class="fa fa-check"></i><b>6</b> Moments</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="moments.html"><a href="moments.html#basic-definitions"><i class="fa fa-check"></i><b>6.1</b> Basic Definitions</a></li>
+<li class="chapter" data-level="6.2" data-path="moments.html"><a href="moments.html#expected-value"><i class="fa fa-check"></i><b>6.2</b> <span class="math inline">\(E(X)\)</span> Properties</a></li>
+<li class="chapter" data-level="6.3" data-path="moments.html"><a href="moments.html#varx-properties"><i class="fa fa-check"></i><b>6.3</b> <span class="math inline">\(Var(X)\)</span> Properties</a></li>
+<li class="chapter" data-level="6.4" data-path="moments.html"><a href="moments.html#covariance-and-correlation"><i class="fa fa-check"></i><b>6.4</b> Covariance and Correlation</a></li>
+<li class="chapter" data-level="6.5" data-path="moments.html"><a href="moments.html#conditional-expectation"><i class="fa fa-check"></i><b>6.5</b> Conditional Expectation</a></li>
+<li class="chapter" data-level="6.6" data-path="moments.html"><a href="moments.html#moment-generating-functions"><i class="fa fa-check"></i><b>6.6</b> Moment Generating Functions</a></li>
+<li class="chapter" data-level="6.7" data-path="moments.html"><a href="moments.html#moment-bounds"><i class="fa fa-check"></i><b>6.7</b> Moment Inequalities</a></li>
+<li class="chapter" data-level="6.8" data-path="moments.html"><a href="moments.html#techniques-for-deriving-moments"><i class="fa fa-check"></i><b>6.8</b> Techniques for Deriving Moments</a>
+<ul>
+<li class="chapter" data-level="6.8.1" data-path="moments.html"><a href="moments.html#bernoulli-direct-summation"><i class="fa fa-check"></i><b>6.8.1</b> Bernoulli: Direct Summation</a></li>
+<li class="chapter" data-level="6.8.2" data-path="moments.html"><a href="moments.html#uniform-direct-integration"><i class="fa fa-check"></i><b>6.8.2</b> Uniform: Direct Integration</a></li>
+<li class="chapter" data-level="6.8.3" data-path="moments.html"><a href="moments.html#geometric-series-convergence"><i class="fa fa-check"></i><b>6.8.3</b> Geometric: Series Convergence</a></li>
+<li class="chapter" data-level="6.8.4" data-path="moments.html"><a href="moments.html#binomial-kernel-technique-series-version"><i class="fa fa-check"></i><b>6.8.4</b> Binomial: Kernel Technique, Series Version</a></li>
+<li class="chapter" data-level="6.8.5" data-path="moments.html"><a href="moments.html#negative-binomial-and-hypergeometric-computing-exx-1"><i class="fa fa-check"></i><b>6.8.5</b> Negative Binomial and Hypergeometric: Computing <span class="math inline">\(E(X(X-1))\)</span></a></li>
+<li class="chapter" data-level="6.8.6" data-path="moments.html"><a href="moments.html#poisson-exponential-taylor-series"><i class="fa fa-check"></i><b>6.8.6</b> Poisson: Exponential Taylor Series</a></li>
+<li class="chapter" data-level="6.8.7" data-path="moments.html"><a href="moments.html#exponential-integration-by-parts"><i class="fa fa-check"></i><b>6.8.7</b> Exponential: Integration By Parts</a></li>
+<li class="chapter" data-level="6.8.8" data-path="moments.html"><a href="moments.html#gamma-and-beta-kernel-technique-integration-version"><i class="fa fa-check"></i><b>6.8.8</b> Gamma and Beta: Kernel Technique, Integration Version</a></li>
+<li class="chapter" data-level="6.8.9" data-path="moments.html"><a href="moments.html#normal-location-scale-trick-and-polar-integration"><i class="fa fa-check"></i><b>6.8.9</b> Normal: Location-Scale Trick and Polar Integration</a></li>
+</ul></li>
+<li class="chapter" data-level="6.9" data-path="moments.html"><a href="moments.html#other-moments-for-reference"><i class="fa fa-check"></i><b>6.9</b> Other Moments (for reference)</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="statistics.html"><a href="statistics.html"><i class="fa fa-check"></i><b>7</b> Statistics</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="statistics.html"><a href="statistics.html#table-of-sufficient-statistics"><i class="fa fa-check"></i><b>7.1</b> Table of Sufficient Statistics</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="statistics.html"><a href="statistics.html#a-note-on-distributions-of-sufficient-statistics"><i class="fa fa-check"></i><b>7.1.1</b> A Note on Distributions of Sufficient Statistics</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="statistics.html"><a href="statistics.html#moments-of-the-sufficient-statistic"><i class="fa fa-check"></i><b>7.2</b> Moments of the Sufficient Statistic</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="point-estimators-finite-samples.html"><a href="point-estimators-finite-samples.html"><i class="fa fa-check"></i><b>8</b> Point Estimators: Finite Samples</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="point-estimators-finite-samples.html"><a href="point-estimators-finite-samples.html#method-of-moments"><i class="fa fa-check"></i><b>8.1</b> Method of Moments</a></li>
+<li class="chapter" data-level="8.2" data-path="point-estimators-finite-samples.html"><a href="point-estimators-finite-samples.html#mle-theory"><i class="fa fa-check"></i><b>8.2</b> MLE Theory</a></li>
+<li class="chapter" data-level="8.3" data-path="point-estimators-finite-samples.html"><a href="point-estimators-finite-samples.html#unbiasedness"><i class="fa fa-check"></i><b>8.3</b> Unbiasedness</a></li>
+<li class="chapter" data-level="8.4" data-path="point-estimators-finite-samples.html"><a href="point-estimators-finite-samples.html#minimum-variance-cramer-rao-lower-bound"><i class="fa fa-check"></i><b>8.4</b> Minimum Variance (Cramer-Rao Lower Bound)</a></li>
+<li class="chapter" data-level="8.5" data-path="point-estimators-finite-samples.html"><a href="point-estimators-finite-samples.html#uniform-minimum-variance-unbiased-estimators-umvues"><i class="fa fa-check"></i><b>8.5</b> Uniform Minimum Variance Unbiased Estimators (UMVUEs)</a></li>
+<li class="chapter" data-level="8.6" data-path="point-estimators-finite-samples.html"><a href="point-estimators-finite-samples.html#inferential-properties-of-exponential-families-distributions"><i class="fa fa-check"></i><b>8.6</b> Inferential Properties of Exponential Families Distributions</a>
+<ul>
+<li class="chapter" data-level="8.6.1" data-path="point-estimators-finite-samples.html"><a href="point-estimators-finite-samples.html#bernoulli-1"><i class="fa fa-check"></i><b>8.6.1</b> Bernoulli</a></li>
+<li class="chapter" data-level="8.6.2" data-path="point-estimators-finite-samples.html"><a href="point-estimators-finite-samples.html#binomial-1"><i class="fa fa-check"></i><b>8.6.2</b> Binomial</a></li>
+<li class="chapter" data-level="8.6.3" data-path="point-estimators-finite-samples.html"><a href="point-estimators-finite-samples.html#geometric"><i class="fa fa-check"></i><b>8.6.3</b> Geometric</a></li>
+<li class="chapter" data-level="8.6.4" data-path="point-estimators-finite-samples.html"><a href="point-estimators-finite-samples.html#negative-binomial-1"><i class="fa fa-check"></i><b>8.6.4</b> Negative Binomial</a></li>
+<li class="chapter" data-level="8.6.5" data-path="point-estimators-finite-samples.html"><a href="point-estimators-finite-samples.html#poisson-1"><i class="fa fa-check"></i><b>8.6.5</b> Poisson</a></li>
+<li class="chapter" data-level="8.6.6" data-path="point-estimators-finite-samples.html"><a href="point-estimators-finite-samples.html#normal-1"><i class="fa fa-check"></i><b>8.6.6</b> Normal</a></li>
+<li class="chapter" data-level="8.6.7" data-path="point-estimators-finite-samples.html"><a href="point-estimators-finite-samples.html#exponential-1"><i class="fa fa-check"></i><b>8.6.7</b> Exponential</a></li>
+<li class="chapter" data-level="8.6.8" data-path="point-estimators-finite-samples.html"><a href="point-estimators-finite-samples.html#gamma-1"><i class="fa fa-check"></i><b>8.6.8</b> Gamma</a></li>
+<li class="chapter" data-level="8.6.9" data-path="point-estimators-finite-samples.html"><a href="point-estimators-finite-samples.html#pareto-1"><i class="fa fa-check"></i><b>8.6.9</b> Pareto</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="point-estimators-asymptotics.html"><a href="point-estimators-asymptotics.html"><i class="fa fa-check"></i><b>9</b> Point Estimators: Asymptotics</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="point-estimators-asymptotics.html"><a href="point-estimators-asymptotics.html#consistency"><i class="fa fa-check"></i><b>9.1</b> Consistency</a></li>
+<li class="chapter" data-level="9.2" data-path="point-estimators-asymptotics.html"><a href="point-estimators-asymptotics.html#asymptotic-efficiency"><i class="fa fa-check"></i><b>9.2</b> Asymptotic Efficiency</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="point-estimators-asymptotics.html"><a href="point-estimators-asymptotics.html#central-limit-theorems"><i class="fa fa-check"></i><b>9.2.1</b> Central Limit Theorems</a></li>
+<li class="chapter" data-level="9.2.2" data-path="point-estimators-asymptotics.html"><a href="point-estimators-asymptotics.html#the-delta-method"><i class="fa fa-check"></i><b>9.2.2</b> The Delta Method</a></li>
+<li class="chapter" data-level="9.2.3" data-path="point-estimators-asymptotics.html"><a href="point-estimators-asymptotics.html#cramer-wold-device"><i class="fa fa-check"></i><b>9.2.3</b> Cramer-Wold Device</a></li>
+<li class="chapter" data-level="9.2.4" data-path="point-estimators-asymptotics.html"><a href="point-estimators-asymptotics.html#asymptotic-distribution-in-practice."><i class="fa fa-check"></i><b>9.2.4</b> Asymptotic Distribution in Practice.</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="point-estimators-asymptotics.html"><a href="point-estimators-asymptotics.html#asymptotic-properties-of-mles"><i class="fa fa-check"></i><b>9.3</b> Asymptotic Properties of MLEs</a></li>
+<li class="chapter" data-level="9.4" data-path="point-estimators-asymptotics.html"><a href="point-estimators-asymptotics.html#variance-stabilizing-transformations"><i class="fa fa-check"></i><b>9.4</b> Variance Stabilizing Transformations</a></li>
+<li class="chapter" data-level="9.5" data-path="point-estimators-asymptotics.html"><a href="point-estimators-asymptotics.html#asymptotic-confidence-intervals"><i class="fa fa-check"></i><b>9.5</b> Asymptotic Confidence Intervals</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="hypothesis-tests-finite-samples.html"><a href="hypothesis-tests-finite-samples.html"><i class="fa fa-check"></i><b>10</b> Hypothesis Tests: Finite Samples</a></li>
+<li class="chapter" data-level="11" data-path="hypothesis-tests-asymptotics.html"><a href="hypothesis-tests-asymptotics.html"><i class="fa fa-check"></i><b>11</b> Hypothesis Tests: Asymptotics</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="hypothesis-tests-asymptotics.html"><a href="hypothesis-tests-asymptotics.html#wald-test"><i class="fa fa-check"></i><b>11.1</b> Wald Test</a></li>
+<li class="chapter" data-level="11.2" data-path="hypothesis-tests-asymptotics.html"><a href="hypothesis-tests-asymptotics.html#score-test"><i class="fa fa-check"></i><b>11.2</b> Score Test</a></li>
+<li class="chapter" data-level="11.3" data-path="hypothesis-tests-asymptotics.html"><a href="hypothesis-tests-asymptotics.html#likelihood-ratio-test"><i class="fa fa-check"></i><b>11.3</b> Likelihood Ratio Test</a></li>
+<li class="chapter" data-level="11.4" data-path="hypothesis-tests-asymptotics.html"><a href="hypothesis-tests-asymptotics.html#composite-null-hypotheses"><i class="fa fa-check"></i><b>11.4</b> Composite Null Hypotheses</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="generating-random-variables.html"><a href="generating-random-variables.html"><i class="fa fa-check"></i><b>12</b> Generating Random Variables</a></li>
+<li class="chapter" data-level="13" data-path="random-processes.html"><a href="random-processes.html"><i class="fa fa-check"></i><b>13</b> Random Processes</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="random-processes.html"><a href="random-processes.html#poisson-processes"><i class="fa fa-check"></i><b>13.1</b> Poisson Processes</a>
+<ul>
+<li class="chapter" data-level="13.1.1" data-path="random-processes.html"><a href="random-processes.html#memorylessness-of-the-exponential"><i class="fa fa-check"></i><b>13.1.1</b> Memorylessness of the Exponential</a></li>
+<li class="chapter" data-level="13.1.2" data-path="random-processes.html"><a href="random-processes.html#count-time-duality"><i class="fa fa-check"></i><b>13.1.2</b> Count-Time Duality</a></li>
+<li class="chapter" data-level="13.1.3" data-path="random-processes.html"><a href="random-processes.html#poisson-distribution"><i class="fa fa-check"></i><b>13.1.3</b> Poisson Distribution</a></li>
+<li class="chapter" data-level="13.1.4" data-path="random-processes.html"><a href="random-processes.html#exponential-distribution"><i class="fa fa-check"></i><b>13.1.4</b> Exponential Distribution</a></li>
+<li class="chapter" data-level="13.1.5" data-path="random-processes.html"><a href="random-processes.html#example"><i class="fa fa-check"></i><b>13.1.5</b> Example</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="random-processes.html"><a href="random-processes.html#branching-processes"><i class="fa fa-check"></i><b>13.2</b> Branching Processes</a>
+<ul>
+<li class="chapter" data-level="13.2.1" data-path="random-processes.html"><a href="random-processes.html#random-variables"><i class="fa fa-check"></i><b>13.2.1</b> Random Variables</a></li>
+<li class="chapter" data-level="13.2.2" data-path="random-processes.html"><a href="random-processes.html#probability-generating-function"><i class="fa fa-check"></i><b>13.2.2</b> Probability Generating Function</a></li>
+<li class="chapter" data-level="13.2.3" data-path="random-processes.html"><a href="random-processes.html#criticality-theorem"><i class="fa fa-check"></i><b>13.2.3</b> Criticality Theorem</a></li>
+<li class="chapter" data-level="13.2.4" data-path="random-processes.html"><a href="random-processes.html#example-1"><i class="fa fa-check"></i><b>13.2.4</b> Example</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Solving Statistical Problems</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="probability" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">Chapter 3</span> Probability<a href="probability.html#probability" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>This chapter is about how to manipulate probability functions directly</p>
+<div id="conditional-probability" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Conditional Probability<a href="probability.html#conditional-probability" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="definition">
+<p><span id="def:unlabeled-div-3" class="definition"><strong>Definition 3.1  (Conditional Probability) </strong></span>The probability of event <span class="math inline">\(A\)</span> occurring given that we know event <span class="math inline">\(B\)</span> has occurred is given by</p>
+<p><span class="math display">\[P(A|B) = \frac{P(A\cap B)}{P(B)}\]</span></p>
+</div>
+<div class="definition">
+<p><span id="def:unlabeled-div-4" class="definition"><strong>Definition 3.2  (Bayes' Theorem) </strong></span>If we need to invert the order of <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> in a conditional probability express, we can use the property</p>
+<p><span class="math display">\[P(A|B) = \frac{P(B|A)P(A)}{P(B)}\]</span>
+More generally, let <span class="math inline">\(A_1, A_2, ...\)</span> be a partition of the sample space and let <span class="math inline">\(B\)</span> be any set</p>
+<p><span class="math display">\[P(A_i|B) = \frac{P(B|A_i)P(A_i)}{\sum_{j=1}^{\infty} P(B|A_j)P(A_j)}\]</span></p>
+</div>
+<div class="definition">
+<p><span id="def:unlabeled-div-5" class="definition"><strong>Definition 3.3  (Law of Total Probability) </strong></span>Let <span class="math inline">\(A_1, A_2, ..., A_n\)</span> be a partition of the sample space and let <span class="math inline">\(B\)</span> be any set.</p>
+<p><span class="math display">\[P(B) = \sum_{i=1}^{n} P(B \cap A_i) = \sum_{i=1}^{n} P(B|A_i) P(A_i)\]</span></p>
+</div>
+<div id="conditional-probability-in-practice" class="section level3 hasAnchor" number="3.1.1">
+<h3><span class="header-section-number">3.1.1</span> Conditional Probability in practice<a href="probability.html#conditional-probability-in-practice" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Public health research often relies on the task of comparison. There are several standard measures of association that are widely used in public health research. Here we present two of them.</p>
+<div class="definition">
+<p><span id="def:unlabeled-div-6" class="definition"><strong>Definition 3.4  (Relative Risk, RR) </strong></span>Let <span class="math inline">\(D\)</span> be an outcome event and <span class="math inline">\(S\)</span> be an exposure event. The relative risk (or risk ratio), denoted by <span class="math inline">\(RR\)</span> is given by</p>
+<p><span class="math display">\[RR = \frac{P(D|S)}{P(D|\bar{S})}\]</span>
+where <span class="math inline">\(\bar{S}\)</span> is the complement of <span class="math inline">\(S\)</span>.</p>
+</div>
+<div class="definition">
+<p><span id="def:unlabeled-div-15" class="definition"><strong>Definition 3.5  (Odds Ratio, OR) </strong></span>Let <span class="math inline">\(D\)</span> be an outcome event and <span class="math inline">\(S\)</span> be an exposure event. The odds ratio, denoted by <span class="math inline">\(OR\)</span>, is given by</p>
+<p><span class="math display">\[OR = \frac{P(D|S)/P(\bar{D}|S)}{P(D|\bar{S})/P(\bar{D}|\bar{S})}\]</span>
+Note that <span class="math inline">\(P(\bar{D}|S) = 1 - P(D|S)\)</span>.</p>
+<ul>
+<li>The odds ratio is invariant to switching <span class="math inline">\(D\)</span> and <span class="math inline">\(S\)</span>, ie.
+<span class="math display">\[\frac{P(D|S)/P(\bar{D}|S)}{P(D|\bar{S})/P(\bar{D}|\bar{S})} = \frac{P(S|D)/P(\bar{S}|D)}{P(S|\bar{D})/P(\bar{S}|\bar{D})}.\]</span>
+<em>Proof.</em></li>
+</ul>
+<p><span class="math display">\[
+\begin{aligned}
+\frac{P(D|S)/P(\bar{D}|S)}{P(D|\bar{S})/P(\bar{D}|\bar{S})} &amp;= P(D|S) \cdot \frac{1}{P(\bar{D}|S)} \cdot \frac{1}{P(D|\bar{S})} \cdot P(\bar{D}|\bar{S})\\
+&amp;= \frac{P(S|D) P(D)}{P(S)} \cdot \frac{P(S)}{P(S|\bar{D})P(\bar{D})} \cdot \frac{P(\bar{S})}{P(\bar{S}|D)P(D)} \cdot \frac{P(\bar{S}|\bar{D})P(\bar{D})}{P(\bar{S})} \\
+&amp;= \frac{P(S|D)/P(\bar{S}|D)}{P(S|\bar{D})/P(\bar{S}|\bar{D})}
+\end{aligned}
+\]</span>
+The second step plugs in the following equalities which follow from Bayes’ Rule</p>
+<p><span class="math display">\[P(D|S) = \frac{P(S|D) P(D)}{P(S)}, P(\bar{D}|S) = \frac{P(S|\bar{D})P(\bar{D})}{P(S)},\]</span>
+<span class="math display">\[P(D|\bar{S}) = \frac{P(\bar{S}|D)P(D)}{P(\bar{S})}, \text{and } P(\bar{D}|\bar{S}) = \frac{P(\bar{S}|\bar{D})P(\bar{D})}{P(\bar{S})}\]</span></p>
+<div id="independence" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Independence<a href="probability.html#independence" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="definition">
+<p><span id="def:unlabeled-div-7" class="definition"><strong>Definition 3.6  (Independence) </strong></span>Two events are <strong>statistically independent</strong> if the occurrence of one has no impact on the other. Mathematically,</p>
+<p><span class="math display">\[P(A | B) = P(A)\]</span></p>
+<p>By Bayes’ Theorem,</p>
+<p><span class="math display">\[P(A \cap B) = P(A)P(B)\]</span></p>
+</div>
+<p>Often, we prefer to use the second definition because it is independent and easier to generalize to multiple events or random variables. For example, if we know that the random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent, then</p>
+<p><span class="math display">\[f_{X,Y}(x, y) = f_X(x)f_Y(y)\]</span></p>
+<p>This property is the foundation of statistical inference for iid random variables discussed in Chapters 8 and 10.</p>
+</div>
+<div id="order-statistics" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> Order Statistics<a href="probability.html#order-statistics" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="definition">
+<p><span id="def:unlabeled-div-8" class="definition"><strong>Definition 3.7  (Order statistic) </strong></span>The <span class="math inline">\(k\)</span>th order statistic of a random sample from a random variable <span class="math inline">\(X\)</span> is the <span class="math inline">\(k\)</span>th smallest value. We denote the <span class="math inline">\(k\)</span>th order statistic as <span class="math inline">\(X_{(k)}\)</span>.</p>
+<p>Let <span class="math inline">\(X_1, X_2, ..., X_n\)</span> be a random sample from <span class="math inline">\(X \sim f_X(x)\)</span> with cumulative distribution <span class="math inline">\(F_X(x)\)</span>. The order statistics are random variables themselves that satisfy <span class="math inline">\(X_{(1)} \leq X_{(2)}\leq ... \leq X_{(n)}\)</span>. In particular, <span class="math inline">\(X_{(1)} = min(X_1, X_2, ..., X_n)\)</span> and <span class="math inline">\(X_{(n)} = max(X_1, X_2, ..., X_n)\)</span>.</p>
+<ul>
+<li>The <strong>sample range</strong>, <span class="math inline">\(R = X_{(n)} - X_{(1)}\)</span>, is the distance between the smallest and the largest order statistics of the sample.</li>
+<li>The <strong>sample median</strong> is a number <span class="math inline">\(M\)</span> such that approximately half of the observations in the sample are less than <span class="math inline">\(M\)</span> and the other half are greater.</li>
+</ul>
+<p><span class="math display">\[M = \begin{cases}
+      X_{((n+1)/2)}&amp; \text{if } n  \text{ is odd} \\
+      (X_{(n/2)} + X_{(n/2 + 1)})/2 &amp; \text{if } n  \text{ is even.}
+   \end{cases}\]</span></p>
+</div>
+<div class="theorem">
+<p><span id="thm:unlabeled-div-9" class="theorem"><strong>Theorem 3.1  </strong></span>Let <span class="math inline">\(X_1, X_2, ..., X_n\)</span> be a random sample from a discrete distribution with pmf <span class="math inline">\(f_X(x_i) = p_i\)</span>, where <span class="math inline">\(x_1&lt;x_2&lt; \cdots\)</span> are the possible values of <span class="math inline">\(X\)</span> in ascending order. Define <span class="math inline">\(P_i = p_1 + p_2 + \cdots p_i\)</span>. Let <span class="math inline">\(X_{(1)}, X_{(2)}, ... ,X_{(n)}\)</span> denote the order statistics from the sample. Then</p>
+<p><span class="math display">\[P(X_{(j)}\leq x_i) = \sum_{k=j}^{n} {n \choose k} P_i^k(1-P_i)^{n-k}\]</span>
+and</p>
+<p><span class="math display">\[P(X_{(j)}= x_i) = \sum_{k=j}^{n} {n \choose k} [P_i^k(1-P_i)^{n-k} - P_{i-1}^k(1-P_{i-1})^{n-k}].\]</span></p>
+</div>
+<div class="theorem">
+<p><span id="thm:unlabeled-div-10" class="theorem"><strong>Theorem 3.2  </strong></span>Let <span class="math inline">\(X_1, X_2, ..., X_n\)</span> be a random sample from a continuous distribution with pdf <span class="math inline">\(f_X(x_i)\)</span> and cdf <span class="math inline">\(F_X(x)\)</span>. Then the pdf of <span class="math inline">\(X_{(j)}\)</span> is</p>
+<p><span class="math display">\[f_{X_{(j)}}(x) = \frac{n!}{(j-1)!(n-j)!} f_X(x)[F_X(x)]^{j-1}[1-F_X(x)]^{n-j}.\]</span></p>
+</div>
+<div class="theorem">
+<p><span id="thm:unlabeled-div-11" class="theorem"><strong>Theorem 3.3  </strong></span>Let <span class="math inline">\(X_1, X_2, ..., X_n\)</span> be a random sample from a continuous distribution with pdf <span class="math inline">\(f_X(x_i)\)</span> and cdf <span class="math inline">\(F_X(x)\)</span>. Then the joint pdf of <span class="math inline">\(X_{(i)}\)</span> and <span class="math inline">\(X_{(j)}, 1\leq i \leq j \leq n\)</span>, is</p>
+<p><span class="math display">\[f_{X_{(i)}, X_{(j)}} (u,v) = \frac{n!}{(i-1)!(j-1-i)!(n-j)!}f_X(u)f_X(v)[F_X(u)]^{i-1} [F_X(v)-F_X(u)]^{j-1-i}[1-F_X(v)]^{n-j}.\]</span></p>
+<p>The joint pdf of all order statistics is</p>
+<p><span class="math display">\[f_{X_{(1)}, X_{(2)}, ..., X_{(n)}} (x_1,x_2, ..., x_n) = \begin{cases}
+n!f_X(x_1)f_X(x_2) \cdots f_X(x_n) &amp; -\infty&lt; x_1&lt;x_2&lt;\cdots&lt;x_n&lt;\infty\\
+0 &amp; otherwise
+\end{cases}\]</span></p>
+</div>
+</div>
+<div id="convergence" class="section level2 hasAnchor" number="3.4">
+<h2><span class="header-section-number">3.4</span> Convergence<a href="probability.html#convergence" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>What happens when, instead of a set of events or random variables, we observe a <em>sequence</em> of <span class="math inline">\(n\)</span> random variables? There exist two major types of <strong>convergence</strong> of random variables with which we are typically concerned: <strong>convergence in probability</strong> and <strong>convergence in distribution</strong></p>
+<div id="convergence-in-probability" class="section level3 hasAnchor" number="3.4.1">
+<h3><span class="header-section-number">3.4.1</span> Convergence in Probability<a href="probability.html#convergence-in-probability" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="definition">
+<p><span id="def:unlabeled-div-12" class="definition"><strong>Definition 3.8  (Convergence in Probability) </strong></span>If <span class="math inline">\(Z\)</span> is a random variable and <span class="math inline">\(Z_n\)</span> is a sequence of random variables, then</p>
+<p><span class="math display">\[Z_n \overset{p}{\rightarrow} Z \iff\lim_{n\rightarrow\infty}P(|Z_n - Z| &gt; \epsilon) = 0\]</span></p>
+</div>
+<p>Convergence in probability has several properties. If <span class="math inline">\(A_n \overset{p}{\rightarrow} a\)</span> and <span class="math inline">\(B_n\overset{p}{\rightarrow}b\)</span>, then</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(A_n + B_n \overset{p}{\rightarrow} a + b\)</span></li>
+<li><span class="math inline">\(A_n - B_n \overset{p}{\rightarrow} a - b\)</span></li>
+<li><span class="math inline">\(A_n \cdot B_n \overset{p}{\rightarrow} a \cdot b\)</span></li>
+<li><span class="math inline">\(A_n / B_n \overset{p}{\rightarrow} a / b\)</span></li>
+</ol>
+<p>Convergence in probability can also be extended to the multivariate setting, where it takes on a slightly different meaning.</p>
+<div class="definition">
+<p><span id="def:unlabeled-div-13" class="definition"><strong>Definition 3.9  (Multivariate Convergence in Probability) </strong></span>If <span class="math inline">\(X\)</span> is random vector and <span class="math inline">\(X_n\)</span> is a sequence of random vectors, then</p>
+<p><span class="math display">\[\begin{align}
+X_n \overset{p}{\rightarrow} X \iff\lim_{n\rightarrow\infty}P(||X_n - X|| &gt; \epsilon) = 0 \\
+\iff X_{jn} \overset{p}{\rightarrow}X_j, \forall j \in 1,...,k
+\end{align}\]</span></p>
+</div>
+</div>
+<div id="convergence-in-distribution" class="section level3 hasAnchor" number="3.4.2">
+<h3><span class="header-section-number">3.4.2</span> Convergence in Distribution<a href="probability.html#convergence-in-distribution" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="definition">
+<p><span id="def:unlabeled-div-14" class="definition"><strong>Definition 3.10  (Convergence in Probability) </strong></span><span class="math display">\[Z_n \overset{\mathcal{D}}{\rightarrow} Z \iff\lim_{n\rightarrow\infty}F_n(Z) = F(z), \forall\text{ continuity points of }F\]</span></p>
+</div>
+<p>Note that convergence in probability implies convergence in distribution, but not the converse. That is,</p>
+<p><span class="math display">\[Z_n \overset{p}{\rightarrow} Z \implies Z_n \overset{\mathcal{D}}{\rightarrow} Z\]</span>
+Unless, that is, the random variable converges in distribution to a <em>constant</em> - then, convergence in distribution <em>does</em> imply convergence in probability! That is,</p>
+<p><span class="math display">\[Z_n \overset{\mathcal{D}}{\rightarrow} c \implies Z_n \overset{p}{\rightarrow} c \]</span>
+:::{.definition name=“Multivariate Convergence in Distribution”}
+If <span class="math inline">\(X\)</span> is random vector and <span class="math inline">\(X_n\)</span> is a sequence of random vectors, then</p>
+<p><span class="math display">\[X_n \overset{\mathcal{D}}{\rightarrow} X \iff \lim_{n\rightarrow\infty}F_n(X_1, ..., X_k) = F(X_1,...,X_k), \forall\text{ continuity points of }F\]</span></p>
+</div>
+</div>
+</div>
+</div>
+<div id="important-theorems" class="section level3 hasAnchor" number="3.4.3">
+<h3><span class="header-section-number">3.4.3</span> Important Theorems<a href="probability.html#important-theorems" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="theorem">
+<p><span id="thm:unlabeled-div-16" class="theorem"><strong>Theorem 3.4  (Slutsky's Theorem) </strong></span>If <span class="math inline">\(Z_n \overset{\mathcal{D}}{\rightarrow} Z\)</span> and <span class="math inline">\(Y_n \overset{p}{\rightarrow} c\)</span>, then</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(Z_n + Y_n \overset{\mathcal{D}}{\rightarrow} Z + c\)</span></li>
+<li><span class="math inline">\(Z_nY_n \overset{\mathcal{D}}{\rightarrow} cZ\)</span></li>
+<li><span class="math inline">\(\frac{Z_n}{Y_n}\overset{\mathcal{D}}{\rightarrow}\frac{Z}{c}\)</span>.</li>
+</ol>
+</div>
+<p>For problem-solving, Slutsky’s theorem is generally applied whenever we deal with both convergence in probability and convergence in distribution together.</p>
+<div class="theorem">
+<p><span id="thm:unlabeled-div-17" class="theorem"><strong>Theorem 3.5  (Continuous Mapping Theorem) </strong></span>Suppose <span class="math inline">\(Y_n\)</span> is a sequence of random variables (possibly vectors), <span class="math inline">\(Y\)</span> is a random variable (or vector the same length as <span class="math inline">\(Y_n\)</span>), <span class="math inline">\(c\)</span> is a constant, and <span class="math inline">\(g\)</span> is a function. Then,</p>
+<ol style="list-style-type: decimal">
+<li><p>If <span class="math inline">\(Y_n \overset{p}{\rightarrow} c\)</span>, and <span class="math inline">\(g\)</span> is continuous at <span class="math inline">\(c\)</span>, then <span class="math inline">\(g(Y_n) \overset{p}{\rightarrow} g(c)\)</span></p></li>
+<li><p>If <span class="math inline">\(Y_n \overset{\mathcal{D}}{\rightarrow} Y\)</span>, and <span class="math inline">\(g\)</span> is continuous (with <span class="math inline">\(g: \mathbb{R}^k \mapsto \mathbb{R}^m\)</span> for vectors), then <span class="math inline">\(g(Y_n) \overset{\mathcal{D}}{\rightarrow} g(Y)\)</span> (in <span class="math inline">\(\mathbb{R}^m\)</span> for vectors)</p></li>
+</ol>
+</div>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="math-tricks.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="known-distributions.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/03-probability.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["Solving-Statistical-Problems.pdf", "Solving-Statistical-Problems.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
