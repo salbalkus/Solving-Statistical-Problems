@@ -27,7 +27,9 @@ $$P(\cup_{i=1}^\infty A_i) = \sum_{i=1}^\infty P(A_i)$$
 
 :::
 
-Two sets $A$ and $B$ are *pairwise disjoint* if $A$ does not share any elements in common with $B$. This means $A \cup B = \emptyset$. Consequently, to find a probability involving multiple events, you can use any knowledge of set theory you might have in conjunction with these axioms. Here's one example:
+Two sets $A$ and $B$ are *pairwise disjoint* if $A$ does not share any elements in common with $B$. This means $A \cup B = \emptyset$.  
+
+Consequently, to find a probability involving multiple events, you can use any knowledge of set theory you might have in conjunction with these axioms. Here's one example:
 
 ::: {.example name=Probability of a Set Complement"}
 
@@ -37,11 +39,11 @@ $P(A^c) = 1 - P(A)$. Why?
   
 :::
 
-These axioms are the foundation of all probability. Keep them in mind when working directly with probability functions $P(\cdot)$.
+These axioms are the foundation of all probability. Learn to recognize them when working directly with probability functions $P(\cdot)$. For instance, any time you see a sum, you should think "Aha! Kolmogorov Axiom 3!"
 
 ## Basic Probability Solving Techniques
 
-### Disjointification
+### Disjointification {#disjointify}
   
 Kolmogorov's Axiom 3 is by far the most useful, but to use it requires a trick called *disjointification*, or "partitioning into disjoint subsets". In this technique, we rewrite a set into a union of disjoint subsets:
 
@@ -78,7 +80,7 @@ $$A \subset B \implies P(A) \leq P(B)$$
 
 Of course, these examples are famous properties that you can simply memorize and apply directly on an example. But, in case you forget, now you know how to derive it!
 
-### DeMorgan's Laws
+### DeMorgan's Laws {#demorgan}
 
 If you ever need to turn a union into an intersection or vice versa, first take the complement $P(A) = 1 - P(A^c)$. Then, apply DeMorgan's Laws from set theory:
 
@@ -102,7 +104,56 @@ $$P(A \cup B) = P(A) + P(B) - P(A \cap B)$$
 
 ### Proving Inequalities: Subsetting
 
+The [Subset Inequality](#subset-inequality) proven above - $A \subset B \implies P(A) \leq P(B)$ can be applied to prove other, more famous inequalities in probability as well. We'll look at two.
 
+::: {.theorem name="Boole's Inequality"}
+
+Boole's Inequality is a general inequality for *unions* of events. For a set of events $A_1,...,A_n$,
+
+$$P(\cup_{i=1}^n A_i) \leq \sum_{i=1}^n P(A_i)$$
+*Proof*:
+
+We want to use the subset inequality, so we need to construct a set of subsets $\{B_i\}$. This subset must have the properties:
+
+- $\cup_{i=1}^n A_i = \cup_{i=1}^n B_i$, so we can replace this on the LHS of Boole's inequality above
+- $B_i \subset A_i \subset B_i$, so we can use the subset inequality.
+- $\{B_i\}$ is disjoint, so we can construct the sum on the RHS using Kolmogorov's Axiom 3.
+
+
+We can accomplish this by [disjointifying](#disjointify). Let
+
+\begin{align}
+B_1 = A_1 \\
+B_2 = A_2 \cap A_1^c \\
+B_3 = A_3 \cap A_2^c \cap A_1^c \\
+... \\
+B_n = A_n \cap A_{n-1}^c \cap ... \cap A_1^c
+\end{align}
+
+Since $\{B_i\}$ are all disjoint, by Kolmogorov Axiom 3, $P(\cup_{i=1}^n A_i) = \sum_{i=1}^nP(B_i)$.
+
+Finally, use the [subset inequality](#subset-inequality) to note that $B_i \subseteq A_i \implies P(B_i) \leq P(A_i)$ and therefore $P(\cup_{i=1}^n A_i) \leq \sum_{i=1}^n P(B_i) = \sum_{i=1}^n P(A_i)$
+
+
+:::
+
+::: {.theorem name="Bonferroni's Inequality"}
+Bonferroni's Inequality is the *set intersection* counterpart of Boole's Inequality. In general, it states
+
+$$P(\cap_{i=1}^n A_i) \geq \sum_{i=1}^n P(A_i) - (n-1)$$
+*Proof*:
+1. We need the LHS. Start by taking the complement $P(\cap_{i=1}^n A_i) = 1 - P((\cap_{i=1}^n)^c)$.
+2. Apply [DeMorgan's Laws](#demorgan): $1 - P((\cap_{i=1}^n)^c) = 1 - P(\cup_{i=1}^nA_i^c)$.
+3. This is Boole's Inequality which we already proved. $1 - P(\cup_{i=1}^nA_i^c) \geq 1 - \sum_{i=1}^n P(A_i^c)$
+4. Undo the complement: 
+
+$$
+1 - \sum_{i=1}^n P(A_i^c) = 1 - \sum_{i=1}^n (1 - P(A_i)) \\
+= \sum_{i=1}^n P(A_i) - (n-1)
+$$
+:::
+
+Next, we'll discuss conditional probability, where computing set intersections and their bounds is critical for problem-solving.
 
 
 ## Conditional Probability
