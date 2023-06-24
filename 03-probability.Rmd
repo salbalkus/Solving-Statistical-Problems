@@ -13,7 +13,7 @@ Now suppose we could repeat this experiment infinitely. The *probability* of an 
 
 $$P(A) = \lim_{n\rightarrow\infty}\frac{\text{# of times A is drawn}}{n}$$
 
-In the simplest case, we can compute this proportion directly as $P(A) = \frac{\text{# of outcomes in }A}{\text{total number of outcomes}}$ - a typical grade-school exercise. Furthermore, from this definition, three properties (called Kolmogorov's axioms) arise:
+In the simplest case, we can compute this proportion directly as $P(A) = \frac{\text{# of outcomes in }A}{\text{# of outcomes in }\Omega}$ - a typical grade-school exercise. Furthermore, from this definition, three properties (called Kolmogorov's axioms) arise:
 
 :::{.definition name="Kolmogorov's Axioms of Probability"}
 
@@ -220,11 +220,95 @@ The second step plugs in the following equalities which follow from Bayes' Rule
 
 $$P(D|S) = \frac{P(S|D) P(D)}{P(S)}, P(\bar{D}|S) = \frac{P(S|\bar{D})P(\bar{D})}{P(S)},$$
 $$P(D|\bar{S}) = \frac{P(\bar{S}|D)P(D)}{P(\bar{S})}, \text{and } P(\bar{D}|\bar{S}) = \frac{P(\bar{S}|\bar{D})P(\bar{D})}{P(\bar{S})}$$
+## Random Variables
+
+### Definition
+
+Statisticians study data, which typically comes not in the form of "events", but rather, *random variables*. A random variable is a real-valued function which maps an event $A$ to some numeric quantity - that is, for an event $A$, the random variable $X(A) \mapsto x \in \mathbb{R}$. Even though $X$ is a function, the $A$ is usually omitted, and probability texts usually refer to it as one would a number (i.e. saying it "takes on" a particular value).
+
+Suppose $A$ represents the event where a person contracts heart disease. Then, we can "turn this into a number" by defining a random variable:
+
+$X = \begin{cases}1 \text{ if }A\text{ occurs}\\0 \text{ if }A\text{ does not occur}\end{cases}$.
+
+Since the output of a random variable is real, we can describe the probability of a given numerical output from a random variable in many ways. Here are the most common:
+
+
+### Functions Describing the Distribution
+
+::: {.definition name="Probability Mass Function"}
+
+If $X$ is countable, then the probability mass function (pmf) is
+
+$$f_X(x) = P(X = x)$$.
+
+Properties arising from Kolmogorov's Axioms:
+- $0 \leq f_X(x) \leq 1$ (by Axiom 1)
+- $\sum_{x} f_X(x) = 1$ (by Axiom 3)
+
+:::
+
+
+:::{.definition name="Cumulative Distribution Function"}
+
+The cumulative distribution function (cdf) of $X$ is $F_X(x) = P(X \leq x)$.
+
+- For discrete RVs with $x \geq 0$, $F_X(x) = \sum_{k = 0}^xP(X = x)$
+- For continuous RVs, $F_X(x) = \int_{-\infty}^xf(t)dt$
+
+A function $F(x)$ is a cdf iff the following all hold:
+
+1. $\lim_{x\rightarrow -\infty}F(x) = 0$ and $\lim_{x\rightarrow \infty}F(x) = 1$.
+2. $F(x)$ is nondecreasing.
+3. $F(x)$ is right continuous: $\lim_{x\rightarrow c^+}F(x) = F(c)$.
+
+:::
+
+We can prove a particular function is a cdf by proving each necessary property. Prove...
+- (1) by taking the limit directly
+- (2) by taking the derivative of $F_X(x)$ and showing it is positive
+- (3) by arguing that $F_X(x)$ is continuous, showing it has no undefined points (continuity implies right-continuity).
+
+In general, we can show two random variables have the same distribution by showing they have the same cdf (*example*?)
+
+
+:::{.definition name="Probability Density Function"}
+
+The probability density function (pdf) is the continuous analogue of a pmf. One way to define the pdf of $X$ is as the derivative of the cdf:
+
+$$f_X(x) = \frac{d}{dx}F_X(x)$$
+
+Therefore, $F_X(x) = \int_{-\infty}^xf_X(t)dt$
+
+(It is **not** P(X = x); $X$ is uncountable, so this is technically 0).
+
+
+It satisfies two properties from Kolmogorov's Axiom's:
+- $0 \leq f_X(x) \leq 1$ (by Axiom 1)
+- $\sum_{x} f_X(x) = 1$ (by Axiom 3)
+
+:::
+
+
+### Technique: Direct Probability Manipulation {#direct-manipulation}
+
+Functions of random variables are also random variables. Suppose $Y$ and $X$ are both random variables, and $Y = g(X)$. We often want to find $P(Y\in A)$ where $A$ is some set such as an interval or even a single value. If we know the distribution of $X$, we can find the distribution of $Y$ like so:
+
+$$
+P(Y \in A) = P(g(X) \in A) = P(X \in g^{-1}(A))
+$$
+where $g^{-1}(A) = \{x \in \mathcal{X}: g(X) \in A\}$ (note $\mathcal{X}$ is the sample space of $X$)
+
+
+Since this is such a fundamental technique arising throughout statistics, in lieu of an example, we will point out where this technique is used in future chapters. We can, however, note that if $X$ and $Y$ are both discrete, then
+
+$$f_Y(y) = P(Y = y) = \sum_{x \in g^{-1}(y)}P(X=x) = \sum_{x \in g^{-1}(y)}f_X(x)$$
+
+meaning the pmf of $Y$ is just the sum of the probabilities of $X$ over all $y \in \mathcal{Y}$ (where $\mathcal{Y}$ is the sample space of $Y$). For more information, see Chapter 2 of @Casella1990.
 
 ## Independence {#independence}
 
 :::{.definition name="Independence"}
-Two events are **statistically independent** if the occurrence of one has no impact on the other. Mathematically,
+Two events or random variables are **statistically independent** if the occurrence of one has no impact on the other. Mathematically,
 
 $$P(A | B) = P(A)$$
 
