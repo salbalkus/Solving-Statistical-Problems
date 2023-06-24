@@ -158,7 +158,7 @@ Next, we'll discuss conditional probability, where computing set intersections a
 
 ## Conditional Probability
 
-Sometimes in a problem, we are given additional information about an event. For example, we might wish to compute the probability of $A$ given that we know another event $B$ has already occurred. In this case, must compute conditional probabilities.
+Sometimes in a problem, we are given additional information about an event. For example, we might wish to compute the probability of $A$ given that we know another event $B$ has already occurred. In this case, we must compute conditional probabilities.
 
 :::{.definition name="Conditional Probability"}
 The probability of event $A$ occurring given that we know event $B$ has occurred is given by
@@ -166,6 +166,8 @@ The probability of event $A$ occurring given that we know event $B$ has occurred
 $$P(A|B) = \frac{P(A\cap B)}{P(B)}$$
 
 :::
+
+When solving problems involving conditional probabilities, we often convert them via the above definition, and then manipulate the intersection $A\cap B$ using set theory to rewrite into the given form.
 
 :::{.definition name="Bayes' Theorem"}
 
@@ -176,6 +178,8 @@ More generally, let $A_1, A_2, ...$ be a partition of the sample space and let $
 
 $$P(A_i|B) = \frac{P(B|A_i)P(A_i)}{\sum_{j=1}^{\infty} P(B|A_j)P(A_j)}$$
 :::
+
+Bayes Theorem often arises in word problems involving given probabilities
 
 :::{.definition name="Law of Total Probability"}
 

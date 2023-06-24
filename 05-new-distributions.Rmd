@@ -11,11 +11,21 @@ We'll start by introducing two useful theorems for finding the PDF of a transfor
 &nbsp;
 
 ::: {.definition name="Theorem 2.1.5"}
-Let $X$ have $p d f f_X(x)$ and let $Y=g(X)$, where $g$ is a monotone function. Let $\mathcal{X}$ and $\mathcal{Y}$ be defined by (2.1.7). Suppose that $f_X(x)$ is continuous on $\mathcal{X}$ and that $g^{-1}(y)$ has a continuous derivative on $\mathcal{Y}$. Then the PDF of $Y$ is given by
+Let $X$ have pdf $f_X(x)$ and let $Y=g(X)$, where $g$ is a monotone function. Let $\mathcal{X}$ and $\mathcal{Y}$ be defined by (2.1.7). Suppose that $f_X(x)$ is continuous on $\mathcal{X}$ and that $g^{-1}(y)$ has a continuous derivative on $\mathcal{Y}$. Then the PDF of $Y$ is given by
 $$
 f_Y(y)= \begin{cases}f_X\left(g^{-1}(y)\right)\left|\frac{d}{d y} g^{-1}(y)\right| & y \in \mathcal{Y} \\ 0 & \text { otherwise}\end{cases}
 $$
 :::
+
+A non-rigorous sketch of the proof of this follows from the [Direction Probability Manipulation](#direct-manipulation) of the CDF described in Chapter 2. Note
+
+$$
+F(Y < y) = P(Y < y) = P(g(X) < y) \\
+= P(X < g^{-1}(y)) = F_x(g^{-1}(y))
+$$
+Then, $f(y) = \frac{d}{dy}F_Y(y) = f_X(g^{-1}(y)\cdot|\frac{d}{dy}g^{-1}(y)|$ by the chain rule (the absolute value is necessary to handle the case where $g$ is decreasing)
+
+---
 
 In some cases, $g(X)$ will only be a monotone, one-to-one function over subsets of the domain of interest. Below, **Theorem 2.1.8** provides a generalization of **Theorem 2.1.5** that can be applied in these situations. 
 
@@ -71,6 +81,9 @@ f_{U,V}(u,v)= f_{X,Y}\left(g^{-1}(u,v)\right) \left|\begin{array}{ll}
 \end{array}\right|
 $$
 
+### Overlapping Domains
+
+In rare cases, the pdf
 
 ## Probability Integral Transform
 
