@@ -109,7 +109,7 @@ which is usually the more convenient definition.
 Note that if $X$ and $Y$ are [independent](#independence), then
 $Cov(X,Y) = 0$, which simplifies calculations. *However*, make no
 mistake, this implication is not bidirectional: $Cov(X,Y) = 0$ does NOT
-imply X, Y\$ independent!!!
+imply X, Y\$ are independent!
 
 Occasionally, we might want to work with a measure of joint dispersion
 that is normalized. This is called the **correlation**.
@@ -150,7 +150,7 @@ These two properties can be used to compute $E(X)$ when only $E(X|Y)$ is
 known. For example, this occurs in [Chapter
 8](#point-estimators-finite-samples) when finding UMVUEs.
 
-## Moment Generating Functions
+## Moment Generating Functions {#mgf}
 
 ::: {.definition name="MGF"}
 The **moment generating function** (MGF) is defined as
@@ -168,6 +168,9 @@ properties:
     $X+Y$ is
     $\mathcal{M}_{X+Y}(t) = \mathcal{M}_{X}(t)\mathcal{M}_{Y}(t)$. This
     is useful for finding the distribution of sums of random variables.
+    
+    
+
 
 Do note, however, that the MGF may not exist for some distributions. In
 this case it may be preferable to work with the [characteristic
@@ -378,7 +381,9 @@ Then, $Var(X) = E(X^2) - E(X)^2 = (np)^2 + np(1-p) - (np)^2 = np(1-p)$
 Alternatively, we could have computed this using the fact that the
 Binomial is equal to a sum of Bernoulli random variables. By the
 linearity of expectation, if $X_i \sim \text{Bernoulli}(p)$, then
-$E(\sum_{i=1}^n X_i) = n\cdot E(X_i) = np$. $Var(X)$ follows similarly.
+$E(\sum_{i=1}^n X_i) = n\cdot E(X_i) = np$. $Var(X)$ follows similarly.  
+
+Even the MGF can be found easily this way - the MGF of a Bernoulli is $1 - p + pe^t$, so by [convolution](#mgf) $\mathcal{M}_{X} = (1 - p + pe^t)^n$ for $X\sim\text{Binomial(n,p)}$.
 
 ### Negative Binomial and Hypergeometric: Computing $E(X(X-1))$
 
@@ -481,6 +486,26 @@ E(X) = \sum_{x=0}^\infty x\frac{e^{-\lambda}\lambda^x}{x!} && \\
 = \lambda e^{-\lambda}e^{\lambda} = \lambda && \text{exponential series}
 \end{align}
 ```
+
+The variance follows similarly:
+
+\begin{align}
+E(X^2) = \sum_{x=0}^\infty x^2\frac{e^{-\lambda}\lambda^x}{x!} \\
+= \lambda e^{-\lambda}\sum_{x=1}^\infty x\frac{\lambda^{x-1}}{(x-1)!} \\
+= \lambda e^{-\lambda}\sum_{x=1}^\infty x\frac{\lambda^{x-1}}{(x-1)!} \\
+= \lambda e^{-\lambda}\sum_{x=0}^\infty (x + 1)\frac{\lambda^{x}}{x!} \\
+= e^{-\lambda} \cdot \lambda \cdot \lambda \cdot e^{\lambda} + e^{-\lambda} \cdot \lambda \cdot e^{\lambda} = \lambda^2 + \lambda \\
+\implies Var(X) = E(^2) - E(X)^2 = \lambda^2 + \lambda - \lambda^2 = \lambda
+\end{align}
+
+The MGF can also be found using an exponential Taylor series:
+
+\begin{align}
+\mathcal{M}_X(t) = \sum_{x=0}^\infty e^{tx} \cdot e^{-\lambda} \cdot \frac{\lambda^x}{x!} = e^{-\lambda}\sum_{x=0}^\infty \frac{(\lambda e^{tx})^x}{x!} \\
+= e^{-\lambda}\cdot e^{\lambda e^{t}} = e^{\lambda(e^t - 1)}
+\end{align}
+
+
 ### Exponential: Integration By Parts
 
 Sometimes, a pdf can be integrated directly using more advanced

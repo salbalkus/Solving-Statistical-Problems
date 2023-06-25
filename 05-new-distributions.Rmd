@@ -81,9 +81,51 @@ f_{U,V}(u,v)= f_{X,Y}\left(g^{-1}(u,v)\right) \left|\begin{array}{ll}
 \end{array}\right|
 $$
 
-### Overlapping Domains
 
-In rare cases, the pdf
+::: {.example name="Chi-squared density"}
+
+Suppose $Z \sim N(0,1)$. What is the distribution of $Y = Z^2$?  
+
+Here, $g$ is not monotone. If we want to proceed using the Transformation Theorem, we need split up the domain into areas where $g$ is monotone. This, trivially, is $z < 0$ and $z > 0$. Then,
+
+$$g(z) = z^2 \implies z = g^{-1}(y) = \begin{cases}-\sqrt{y} & z < 0\\\sqrt{y} & z>0\end{cases}$$.
+
+An intuition for why we need to sum the pdfs for non-monotone functions is that $Y = Z^2$ maps multiple values of $Z$ to the same value of $Y$. For example, $g(z)$ maps both $Z = -1$ and $Z = 1$ to $Y = 1$. Therefore, $f_Y(1)$ needs to include both the probability of $Z = -1$ and $Z = 1$.
+
+Hence, we apply the Non-Monotone Transformation Theorem to obtain
+
+$$
+f_Y(y) = f_Z(\sqrt{y})\Big|\frac{d}{dy}\sqrt{y}\Big| + f_Z(-\sqrt{y})\Big|\frac{d}{dy}-\sqrt{y}\Big|\\
+= \frac{1}{\sqrt{2\pi}}\cdot \exp(-\frac{1}{2}(\sqrt{y})^2\cdot\frac{1}{2\sqrt{y}} + \frac{1}{\sqrt{2\pi}}\cdot \exp(-\frac{1}{2}(-\sqrt{y})^2\cdot\frac{1}{2\sqrt{y}}\\
+= \frac{1}{\sqrt{2\pi}y^\frac{1}{2}}\exp(-\frac{y}{2})
+$$
+which is a $\chi^2(1)$ distribution.
+
+Alternatively, we could have proceeded directly using [Direct Probability Manipulation](#direct-manipulation) like so:
+
+$$
+F(y) = P(Y \leq y) = P(Z^2 \leq y)\\
+= P(-\sqrt{y}< Z < \sqrt{y}) = \Phi(\sqrt{y}) - \Phi(-\sqrt{y})
+$$
+where $\Phi(z)$ is the normal cdf. Then,
+
+$$
+f_Y(y) = \frac{d}{dy}F_Y(y) = f_y(\sqrt{y})\cdot\frac{d}{dy}{\sqrt{y}} - f_y(\sqrt{y})\cdot(\frac{d}{dy}{-\sqrt{y}})\\
+= \frac{1}{\sqrt{2\pi}y^\frac{1}{2}}\exp\Big(-\frac{y}{2}\Big)
+$$
+the same result as the theorem.
+
+:::
+
+### Proving Independence From a Joint Transformation
+
+Some problems may involve proving that two transformations $U = g_1(x,y)$ and $V = g_2(x,y)$ are independent. To do this, we can first compute the joint distribution using the Transformation Theorem, and then factorize the joint distribution into components containing only $u$ and $v$ respectively.
+
+::: {.example name="Independence From a Transformation"}
+
+test
+
+:::
 
 ## Probability Integral Transform
 
