@@ -395,6 +395,16 @@ $E(\sum_{i=1}^n X_i) = n\cdot E(X_i) = np$. $Var(X)$ follows similarly.
 
 Even the MGF can be found easily this way - the MGF of a Bernoulli is $1 - p + pe^t$, so by [convolution](#mgf) $\mathcal{M}_{X} = (1 - p + pe^t)^n$ for $X\sim\text{Binomial(n,p)}$.
 
+*Multinomial Distribution*: We can use the same technique to compute $Cov(X_i, X_j)$ for a multivariate distribution as well. Suppose $(X_1, ..., X_n)\sim \text{Multinomial}(m, p1_,...,p_n$. Then, $Cov(X_i, X_j) = E(X_iX_j) - E(X_i)E(X_j)$. Since the marginals are binomial, $E(X_i)E(X_j) = (mp_i)(mp_j)$ based on the moments computed earlier. Then,
+
+$$
+E(X_iX_j) = \sum_{x_i=0}^m\sum_{x_j=0}^m x_ix_jf_{X_i, X_j}(x_i, x_j)\\
+= \sum_{x_i=0}^m\sum_{x_j=0}^m\frac{m!}{(x_i - 1)!(x_j - 1)!}p_i^{x_i}p_j^{x_j} \\
+= m(m-1)p_ip_j\sum_{x_i=0}^m\sum_{x_j=0}^m\frac{(m-2)!}{(x_i - 1)!(x_j - 1)!}p_i^{x_i-1}p_j^{x_j-1}\\
+= m^2p_ip_j - mp_ip_j
+$$
+by recognizing the $\text{Multinomial}$ kernel in the second-to-last line. Then, $Cov(X_i, X_j) = m^2p_ip_j - mp_ip_j - (mp_i)(mp_j) = -mp_ip_j$, completing the proof.
+
 ### Negative Binomial and Hypergeometric: Computing $E(X(X-1))$
 
 The second moment of distributions with pmfs/pdfs involving factorials
