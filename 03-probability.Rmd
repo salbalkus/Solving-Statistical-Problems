@@ -328,7 +328,7 @@ $$f_{X,Y}(x, y) = f_X(x)f_Y(y)$$
 This property is the foundation of statistical inference for iid random variables discussed in Chapters 8 and 10.
 
 
-## Order Statistics
+## Order Statistics {#order-statistics}
 
 ::: {.definition name="Order statistic"} 
 
@@ -394,7 +394,7 @@ and so on. By induction, $X_{(i)} = \sum_{j=1}^{i-1}X_{(j)}$. Therefore, we can 
 
 What happens when, instead of a set of events or random variables, we observe a *sequence* of $n$ random variables? There exist two major types of **convergence** of random variables with which we are typically concerned: **convergence in probability** and **convergence in distribution**
 
-### Convergence in Probability
+### Convergence in Probability {#convergence-in-probability}
 
 :::{.definition name="Convergence in Probability"}
 
@@ -403,7 +403,16 @@ If $Z$ is a random variable and $Z_n$ is a sequence of random variables, then
 $$Z_n \overset{p}{\rightarrow} Z \iff\lim_{n\rightarrow\infty}P(|Z_n - Z| > \epsilon) = 0$$
 :::
 
-Convergence in probability has several properties. If $A_n \overset{p}{\rightarrow} a$ and $B_n\overset{p}{\rightarrow}b$, then
+If $Z$ is degenerate (meaning it equals a constant value, or $Z = c$), we can show convergence in probability by [disjointifying](#disjointify) the absolute value into two disjoint events, and using Kolmogorov Axiom 3. For example, 
+
+$$
+P(|Z_n - c| > \epsilon) = P(( Z_n - c > \varepsilon) \cup (Z_n - c <-\varepsilon)) \text{ with } ( Z_n - c > \varepsilon), (Z_n - c <-\varepsilon) \text{ disjoint} \\
+= P(Z_n > c + \epsilon) + P(Z_n < c - \epsilon) = 1 - P(Z_n < c + \epsilon) + P(Z_n < c - \epsilon)
+
+$$
+From here, we can use the CDF of $Z_n$ to compute the necessary probability. But be careful - this method may not work if the convergence of the CDF cannot be evaluated easily.
+
+Convergence in probability has several properties - if we *know* $Z_n$ convergence in probability, we can use these for solving other problems, especially in [Chapter 9 - Point Estimator Asymptotic](#point-estimators-asymptotics)  If $A_n \overset{p}{\rightarrow} a$ and $B_n\overset{p}{\rightarrow}b$, then
 
 1. $A_n + B_n \overset{p}{\rightarrow} a + b$
 2. $A_n - B_n \overset{p}{\rightarrow} a - b$
@@ -422,8 +431,6 @@ X_n \overset{p}{\rightarrow} X \iff\lim_{n\rightarrow\infty}P(||X_n - X|| > \eps
 
 :::
 
-
-
 ### Convergence in Distribution
 
 :::{.definition name="Convergence in Probability"}
@@ -441,9 +448,14 @@ $$Z_n \overset{\mathcal{D}}{\rightarrow} c \implies Z_n \overset{p}{\rightarrow}
 If $X$ is random vector and $X_n$ is a sequence of random vectors, then
 
 $$X_n \overset{\mathcal{D}}{\rightarrow} X \iff \lim_{n\rightarrow\infty}F_n(X_1, ..., X_k) = F(X_1,...,X_k), \forall\text{ continuity points of }F$$
-
-
 :::
+
+How do we prove $X_n$ converges in distribution to $X$? There are three chief strategies:
+
+1. Derive the limiting CDF of $X_n$ and show its limit as $n\rightarrow \infty$ equals the $F_X(x)$. 
+2. Derive the MGF or CF of $X_n$ and show its limit as $n\rightarrow \infty$ equals the $\mathcal{M}_X(t)$.
+3. Use the CLT with Slutsky's Theorem or the CMT (will be discussed later in [Chapter 9 - Point Estimator Asymptotics](#point-estimators-asymptotics))
+
 
 
 ### Important Theorems

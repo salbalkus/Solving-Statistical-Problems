@@ -30,6 +30,17 @@ If $X$ is continuous, then the expected value is
 $$E(g(x)) = \int_{\mathcal{X}}g(x)f_X(x)dx$$
 :::
 
+::: {.definition name="Multivariate Expected Value"}
+If $X_1, X_2,...X_n$ are discrete, the expected value over a function of multiple random variables is defined as
+
+$$E(g(X_1, X_2,...X_n)) = \sum_{x_1}\sum_{x_2}...\sum_{x_n}g(x_1, x_2, ..., x_n)P(X_1 = x_1, X_2 = x_2, ...X_n = x_n)$$
+If $X_1, X_2,...X_n$ are continuous, the expected value is instead
+
+$$E(g(X_1, X_2,...X_n)) = \int_{x_1\in \mathcal{X}_1}\int_{x_2\in \mathcal{X}_2}...\int_{x_n\in \mathcal{X}_n}g(x_1, x_2, ..., x_n)f_{X_1, X_2,...,X_n}(x_1, x_2, ..., x_n)$$
+
+
+:::
+
 ::: {.definition name="Moments"}
 The $n$th **moment** of a random variable $X$ is defined as $E(X^n)$.
 Similarly, the $n$th **central moment** is defined as $E((X - E(X))^n)$.

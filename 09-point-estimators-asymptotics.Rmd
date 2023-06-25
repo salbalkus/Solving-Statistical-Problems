@@ -6,6 +6,7 @@ Evaluating the asymptotic properties of point estimators.
 
 An important asymptotic property of an estimator is that it converges in probability to the true value being estimated as $n \rightarrow \infty$. This is called **consistency**. 
 
+### Weak Law of Large Numbers
 The most common strategy for proving consistency is to use the Weak Law of Large Numbers.
  
 ::: {.theorem name="Weak Law of Large Numbers" #wlln}
@@ -19,7 +20,21 @@ $$\bar{X} = \frac{1}{n}\sum_{i=1}^nX_i\overset{p}{\rightarrow}E(X_i)$$
 $$\frac{1}{n}\sum_{i=1}^nX_i - \frac{1}{n}\sum_{i=1}^nE(X_i) \overset{\mathcal{p}}{\rightarrow} 0$$
 :::
 
-The WLLN can be combined with the Continuous Mapping Theorem to show a variety of estimators are consistent.
+If a statistic can be rewritten in the form of a sample mean, the WLLN can be combined with the Continuous Mapping Theorem to show a variety of estimators are consistent. One hint that the WLLN (or later, the Central Limit Theorem) may be employed is that the expression to be proven contains a sum.
+
+### Direct Proof via Convergence in Probability
+Sometimes, a statistic may not consistent of a sum of random variables. This often arises in the case of [order statistics](#order-statistics). In this case, the definition of convergence in probability must be used directly. To do this, a variety of arguments may be employed.
+
+::: {.example name="How To Prove Convergence of a Sample Maximum"}
+Let $X_i \overset{iid}{\sim} U(a, b)$. We can prove that $X_{(n)}\overset{p}{\rightarrow}b$ via a [direct probability](#direct-manipulation) argument using [disjointification](#disjointify). By the definition of the order statistic cdf,
+
+$$
+P(|X_{(n)} - b| > \varepsilon) = P(X_{(n)} > \varepsilon + b) + P(X_{(n)} < b - \varepsilon) \\
+= 0 + (F_{X_i}(x))^n = (\frac{b - \varepsilon - a}{b - a})^n = (1 -\frac{\varepsilon}{b - a})^n
+$$
+The 0 arises because $X_{(n)} < b$ by the definition of the Uniform. As $\varepsilon$ is taken to be small, $\lim_{n\rightarrow \infty}(1 -\frac{\varepsilon}{b - a})^n = 0$. Therefore, since $P(|X_{(n)} - b| > \varepsilon) = 0$, we have proven $X_{(n)}\overset{p}{\rightarrow}b$
+
+:::
 
 ## Asymptotic Efficiency
 
