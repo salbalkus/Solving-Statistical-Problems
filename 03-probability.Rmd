@@ -156,7 +156,7 @@ $$
 Next, we'll discuss conditional probability, where computing set intersections and their bounds is critical for problem-solving.
 
 
-## Conditional Probability
+## Conditional Probability {#conditional-probability}
 
 Sometimes in a problem, we are given additional information about an event. For example, we might wish to compute the probability of $A$ given that we know another event $B$ has already occurred. In this case, we must compute conditional probabilities.
 

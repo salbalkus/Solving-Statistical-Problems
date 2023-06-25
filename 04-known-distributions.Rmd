@@ -210,6 +210,14 @@ Note that the parametrization below describes the distribution in terms of the s
 - By extension, the exponential has an additive property: If $X_i\sim Exp(\lambda) $, then $\sum_{i=1}^n X_i \sim \text{Gamma}(n, \lambda)$.
 - The Exponential is the only continuous *memoryless* distribution; that is, for $k > i$, $P(X \geq k | X > i) = P(X \geq k - i)$.
 
+We can prove the memorylessness of the Exponential using [conditional probability](#conditional-probability):
+
+$$
+P(X > s | X > t) = \frac{P(X > s, X > t)}{P(X > t)} = \frac{P(X > s)}{P(X > t)}
+$$
+since $s > t$. This equals $\frac{e^{-\lambda s + 1}}{e^{-\lambda t + 1}} = e^{\lambda(s - t)} = P(X > s - t)$
+
+
 ### Gamma
 
 Similar to how the Negative Binomial generalizes the Geometric to multiple successes, the Gamma generalizes the Exponential to multiple events. The Gamma is useful for modeling random variables that are known to be greater than 0. 
