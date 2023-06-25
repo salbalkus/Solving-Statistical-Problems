@@ -382,6 +382,7 @@ Suppose that $(X, Y)$ follows the bivariate normal distribution above. Then,
 - The marginal distributions are $X \sim N(\mu_x, \sigma_x^2)$ and $Y \sim N(\mu_y, \sigma_y^2)$
 - $Corr(X, Y) = \rho$
 - Any linear combination of $X$ and $Y$ is univariate normal. That is, $aX + bY \sim N(a\mu_x + b\mu_y, a^2\sigma_x^2 + b^2\sigma_y^2 +2ab\rho\sigma_x\sigma_y$.
+- The conditional distribution $Y|X = x \sim N\Big(\mu_Y + \frac{\sigma_Y}{\sigma_X}\rho(x - \mu_X), \sigma_Y^2(1-\rho^2)\Big)$
 
 #### Multivariate Normal
 

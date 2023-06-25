@@ -377,6 +377,19 @@ n!f_X(x_1)f_X(x_2) \cdots f_X(x_n) & -\infty< x_1<x_2<\cdots<x_n<\infty\\
 \end{cases}$$
 ::: 
 
+::: {.example name="Joint Density of Order Statistic Differences"}
+A useful trick for finding the joint of $D_i = X_{(i)} - X_{(i-1)}$ and proving that they are independent for a given distribution is by rewriting the random variable as
+
+$$
+X_{(1)} = D_1 + 0\\
+X_{(2)} = D_2 + X_{(1)} = D_2 + D_1\\
+X_{(3)} = D_3 + X_{(2)} = D3 + D2 + D1\\
+
+$$
+and so on. By induction, $X_{(i)} = \sum_{j=1}^{i-1}X_{(j)}$. Therefore, we can rewrite the joint density of all order statistics as $n!f(d_1)f(d_2 + d_1)\cdot...\cdot f(d_1 + ... + d_n)I(d_i \geq 0, \forall i)$, which we can then compute and factorize to show independence.
+:::
+
+
 ## Convergence
 
 What happens when, instead of a set of events or random variables, we observe a *sequence* of $n$ random variables? There exist two major types of **convergence** of random variables with which we are typically concerned: **convergence in probability** and **convergence in distribution**

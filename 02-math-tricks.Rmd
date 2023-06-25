@@ -81,7 +81,21 @@ As a corollary, when $n$ is an integer, $\Gamma(n) = (n-1)!$.
 The triangle inequality is defined as 
 
 $$|x + y| \leq |x| + |y|$$
-with $|x + y| \leq |x| + |y|$ unless $x, y \geq 0$. This inequality is useful for proving [moment bounds](#moment-bounds) as well as asymptotic convergence in [Chapter 9](point-estimators-asymptotics) and [Chapter 11](hypothesis-tests-asymptotics)
+with $|x + y| \leq |x| + |y|$ unless $x, y \geq 0$. This inequality is useful for proving [moment bounds](#moment-bounds) as well as asymptotic convergence in [Chapter 9](point-estimators-asymptotics) and [Chapter 11](hypothesis-tests-asymptotics).
+
+A general trick for proving the triangular inequality that may be useful in other problems involving absolute value can be termed the "square trick" - noting $x^2 = |x|^2$, we can first show the equality of a square, then take the square root to obtain $|x|$. Here is a proof of the triangle inequality using this trick:
+
+1. Note $(a + b)^2 = |a + b|^2 \leq 0$
+
+2. Rearrange $(a + b)^2$ and 
+
+$$
+(a + b)^2 = a^2 + 2ab + b^2 = |a|^2 + 2ab + |b|^2\\
+\leq |a|^2 + 2|a||b| + |b|^2 = (|a| + |b|)^2\\
+\implies |a + b|^2 \leq (|a| + |b|)^2\\
+$$
+3. Take the square root of the final implication to get $|a + b| \leq |a| + |b|$
+
 
 ## Fubini's Theorem
 

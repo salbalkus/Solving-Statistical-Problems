@@ -177,6 +177,7 @@ $$\mathcal{M}_X(t) = \mathcal{M}_{Y_1}(t) \cdot \mathcal{M}_{Y_2}(-t)$$
 Do note, however, that the MGF may not exist for some distributions. In
 this case it may be preferable to work with the [characteristic
 function](https://en.wikipedia.org/wiki/Characteristic_function_(probability_theory)), which follows fundamentally the same principles, except one solves for $\phi_X(t) = E(e^{itx})$, where $i = \sqrt{-1}$.
+
 :::
 
 ## Moment Inequalities {#moment-bounds}
@@ -193,16 +194,11 @@ named the student-teacher pair that developed them.
 $$P(X \geq t) \leq \frac{E(X)}{t}$$
 :::
 
-::: {.proof"}
-To prove Markov's inequality,
-:::
-
 ::: {.definition name="Chebychev's Inequality"}
 This inequality can be stated in several ways:
 :::
 
-Chebychev's inequality is instrumental in proving the Weak Law of Large
-Numbers
+Chebychev's inequality is instrumental in proving the Weak Law of Large Numbers.
 
 Next, we present an equality regarding functions of moments.
 
@@ -214,10 +210,11 @@ $$E(f(X)) \geq f(E(X))$$
 If $f$ is instead concave,
 
 $$E(f(x)) \leq f(E(X))$$
+For both definitions, equality only holds if $f(x)$ is a linear function of $x$.
+
 :::
 
-Jensen's inequality is useful for showing that an [estimator is
-biased](#biasedness)
+Jensen's inequality is useful for showing that an [estimator is biased](#biasedness). 
 
 The next three inequalities are less commonly used, but are still useful
 is certain situations *(where?)*
