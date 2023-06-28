@@ -1,40 +1,117 @@
 # Statistics {#statistics}
 
-Proving sufficient, complete, and ancillary statistics
+One of the most important tasks we will be performing as statisticians is inference. Inference is the area of statistics which uses sample data to estimate a population parameter. For this it is necessary to *reduce* or *summarize* the recollected data into a measurement that we will refer to as **statistic**. 
 
-Pitman-Koopman-Darmois Theorem
+::: {.definition name="Statistic"} 
+Let $X \sim f(x|\theta)$, where both $X, \theta$ can be vectors. A statistic is a function $T=T(\textbf{X})$ of the sample $\textbf{X}$ from $X$. 
+:::
+
+For example, the $T= T(\textbf{X}) = \frac{1}{n} \sum_{i=1}^{n} X_i$ reduces the sample $\textbf{X}$ to a single measurement. 
+
+In general, we would like to choose statistics that satisfy principles that will make inference about the population parameter *easier*. One of these principles is **sufficiency**. The idea behind **sufficiency** is to retain information about the population parameter, say $\theta$, while reducing the data. 
+
+## Sufficient Statistics {#sufficient-stats}
+
+**Sufficiency Principle**. If $T$ is sufficient, then any information about the parameter $\theta$ should depend on $X$ only through $T$. 
+
+::: {.definition name="Sufficient Statistic"} 
+Let $X \sim f(x|\theta)$. We say $T=T(X)$ is a sufficient statistic (SS) for $\theta$ if $\mathcal{L}(\theta|X)$ is independent of $\theta$, i.e. $f(x|T;\theta) = g(x)$. 
+:::
+
+Let's see some examples. 
+
+::: {.example}
+Let $X = (X_1, ..., X_n), X_i$ iid N($\theta$, 1) and $T = \bar{X}$. Recall that $\bar{X} \sim N(\theta, 1/n)$. 
+$$
+\begin{aligned}
+f(x|T, \theta) = n^{-1/2}(2\pi)^{-(\frac{n-1}{2})} exp\{-\sum_{i=1}^{n}(x_i - \bar{x})^2\}
+\end{aligned}
+$$
+Observe that the conditional density is independent of $\theta$. By definition, $T = \bar{X}$ is a sufficient statistic for $\theta$. 
+:::
 
 
-## Table of Sufficient Statistics
+::: {.example} 
 
-Translated from https://en.wikipedia.org/wiki/Exponential_family
+Let $X_1, X_2$ iid Poisson($\lambda$). The joint distribution of $X_1, X_2$ is $P(X_1=x_1, X_2 = x_2) = \frac{\lambda^{x_1+x_2}exp(-2\lambda)}{x_1! x_2!}$. Let $T(X_1, X_2) = X_1+X_2$. Observe that $X_1+X_2 \sim$ Poisson(2$\lambda$). Thus, 
 
-| Distribution | Parameter | Sufficient Statistic | S.S. Distribution |
-| :---: | :---: | :---: | :---: |
-| Bernoulli | p | $\sum_{i=1}^n x_i$ | $Binomial(n, p)$ | 
-| Binomial | p | $\sum_{i=1}^n x_i$ | $Binomial(nm, p)$ | 
-| Poisson | $\lambda$ | $\sum_{i=1}^n x_i$ | $Poisson(n\lambda)$ | 
-| Negative Binomial | p | $\sum_{i=1}^n x_i$ | | 
-| Exponential | $\lambda$ | $\sum_{i=1}^n x_i$ | $Gamma(n, \lambda)$ | 
-| Normal (known $\sigma^2$) | $\mu$ | $\frac{1}{\sigma}\sum_{i=1}^n x_i$ | | 
-| Normal | $\mu$, $\sigma^2$ | $(\sum_{i=1}^n x_i, \sum_{i=1}^n x_i^2)$ | |
-| Chi-Squared | $\nu$ | $\sum_{i=1}^n \log(x_i)$ | |
-| Pareto (known min $x_m$) | $\alpha$ | $\sum_{i=1}^n \log(x_i)$ | | 
-| Gamma | $\alpha, \beta$ | $(\sum_{i=1}^n\log(x_i), \sum_{i=1}^n x_i)$ | | 
-| Beta | $\alpha, \beta$ | $(\sum_{i=1}^n\log(x_i), \sum_{i=1}^n\log(1 - x_i))$ |  |
-| Weibull (known shape $k$) | $\lambda$ | $\sum_{i=1}^n x^k$ |  |
+$$
+\begin{aligned}
+P(X_1=x_1, X_2 = x_2|X_1+X_2=t) &= \frac{P(X_1=x_1, X_2 = t - x_1)}{P(X_1 + X_2 = t)} \\
+&=\frac{exp(-\lambda)\lambda^{x_1} exp(-\lambda)\lambda^{t -x_1}t!}{x_1!(t-x_1)! exp(-2\lambda)(2\lambda)^t}\\
+&= { t \choose x_1} \bigg(\frac{1}{2}\bigg)^t
+\end{aligned}
+$$
+which is independent of $\lambda$ and $X_1+X_2$ is sufficient for $\lambda$. 
+:::
+
+As can be seen from the example, we need a candidate statistic to prove sufficiency using the definition. Furthermore, checking sufficiency of a statistics is difficult because we need to compute the conditional distribution. 
+
+::: {.theorem name="Factorization Theorem"}
+$T(X)$ is sufficient for $\theta \Longleftrightarrow \exists g(t|\theta)$ and $h(x)$, such that 
+
+$$f(x|\theta)=g(t|\theta)h(x)$$
+$\forall x, \theta$.
+:::
+
+Note that the factorization theorem tells us that if we can manipulate $f(x|\theta)$ as above, we have a sufficient statistic. 
+
+::: {.example} 
+Let $\textbf{X}= (X_1, ..., X_n), X_i$ iid $Poisson(\lambda)$. 
+$$
+\begin{aligned}
+P(X_1=x_1,..., X_n = x_n) &= \frac{exp(-n\lambda)\lambda^{\sum x_i}}{\prod x_i!}\\
+&= h(x)g(\sum x_i|\lambda)
+\end{aligned}
+$$
+$\Rightarrow T(X) = \sum X_i$ sufficient for $\lambda$.
+:::
+
+::: {.example} 
+Let $\textbf{X}= (X_1, ..., X_n), X_i$ iid $Uniform(0,\theta)$.
+
+$$
+\begin{aligned}
+P_{\theta}(x_1, ..., x_n) &= \frac{1}{\theta^n} \prod_{i=1}^{n}I(0<x_i<\theta)\\
+& = \frac{1}{\theta^n} I(x_{(1)}>0) I(x_{(n)}<\theta)
+\end{aligned}
+$$
+$\Rightarrow T(X) = X_{(n)}$ sufficient for $\theta$.
+:::
+
+#### Important facts about SS
+
+- Sufficient statistics may or may not reduce the data. 
+  - Original data are always sufficient. 
+  - In iid sample, the order statistics are sufficient. 
+- Sufficient statistics are never unique. 
+  - Suppose $X \sim N(0,\sigma^2)$. Then by the factorization theorem $T(X)=X^2, |X|, X^4, exp(X^2)$ are all sufficient. 
+  - Any 1-1 function $g$ of a sufficient statistic is also sufficient. 
+  
+    **Proof**. Let $T^*(X)= g(T(X))$. By assumption $g^{-1}$ exists since g is 1-1. 
+    
+  $$
+  \begin{aligned}
+  f(x|\theta) &= g(T(X)|\theta)\\
+      &=g(r^{-1}(T^*(x))|\theta)h(x)\\
+  \end{aligned}
+  $$
+    By the factorization theorem, $T^*(X)$ is sufficient for $\theta$. 
+  
+### Important exponential family result
+
+Consider a sample $X=(X_1,...,X_n)$ from $f_X(x|\theta)= h(x)c(\theta)\exp\Big(\sum_{i=1}^k w_i(\theta)t_i(x)\Big)$. Then $T(X) = \Big(\sum_{i=1}^n t_1(x), ..., \sum_{i=1}^n t_k(x)\Big)$ is a [sufficient statistic](#statistics). Note that this result follows directly from the [factorization theorem](# sufficient-stats). 
+
 
 ### A Note on Distributions of Sufficient Statistics
 
-Recall a convenient property of [exponential families](#exponential-family): that their maximum likelihood estimate is a function of their sufficient statistic. Because of this, in order to prove [Finite Sample Properties](#point-estimators-finite-samples) of an estimator or construct [Hypothesis Tests](#hypothesis-tests-finite-samples), it is often useful to understand their distributions. This is why the distributions of each of the sufficient statistics are included in the fourth column of the table above. These distributions are mostly derived from additive, location-scale, and other properties in [Chapter 4 - Known Distributions](#known-distributions)
+Recall a convenient property of [exponential families](#exponential-family): that their maximum likelihood estimate is a function of their sufficient statistic. Because of this, in order to prove [Finite Sample Properties](#point-estimators-finite-samples) of an estimator or construct [Hypothesis Tests](#hypothesis-tests-finite-samples), it is often useful to understand their distributions. This is why the distributions of each of the sufficient statistics are included in the fourth column of the table below These distributions are mostly derived from additive, location-scale, and other properties in [Chapter 4 - Known Distributions](#known-distributions)
 
-## Moments of the Sufficient Statistic
-
-
+### Moments of the Sufficient Statistic
 
 As stated by @Casella1990, if $X$ is an exponential family, the moments of its exponential family can be easily computed using certain properties.
 
-::: {.theorem name = "I Don't Know What To Call This"}
+::: {.theorem name="I Don't Know What To Call This"}
 If $X$ is an [exponential family](#exponential-family), then
 
 $$E\Big(\sum_{i=1}^k \frac{\partial w_i(\theta)}{\partial \theta_j}t_i(X)\Big) = -\frac{\partial}{\partial\theta_j} \log c(\theta)$$
@@ -46,7 +123,7 @@ $$Var\Big(\sum_{i=1}^k \frac{\partial w_i(\theta)}{\partial \theta_j}t_i(X)\Big)
 
 If $X$ is a [natural exponential family](#natural-exponential-family), then these identities simplify even further.
 
-::: {.theorem name = "I Don't Know What To Call This 2"}
+::: {.theorem name="I Don't Know What To Call This 2"}
 If $X$ is a natural exponential family, then$
 
 $$E(t_j(X)) = -\frac{\partial}{\partial\eta_j}\log(c^*(\eta))$$
@@ -60,4 +137,133 @@ Using these theorems, we can calculate the moments of the sufficient statistics 
 
 $$E(T(X)) = E\Big(\sum_{i=1}^nt(X_i)\Big) = nE(t(X_i)) = n\cdot-\frac{\partial}{\partial \eta}\log(c^*(\eta))$$
 In fact, letting $A(\eta) = -\log(c^*(\eta))$, we can obtain all of the moments of $T(X)$ by simply differentiating $A(\eta)$
+
+### Table of Sufficient Statistics
+
+Translated from https://en.wikipedia.org/wiki/Exponential_family
+
+| Distribution | Parameter | Sufficient Statistic | S.S. Distribution |
+| :---: | :---: | :---: | :---: |
+| Bernoulli | p | $\sum_{i=1}^n x_i$ | $Binomial(n, p)$ | 
+| Binomial | p | $\sum_{i=1}^n x_i$ | $Binomial(nm, p)$ | 
+| Poisson | $\lambda$ | $\sum_{i=1}^n x_i$ | $Poisson(n\lambda)$ | 
+| Negative Binomial | p | $\sum_{i=1}^n x_i$ | | 
+| Exponential | $\lambda$ | $\sum_{i=1}^n x_i$ | $Gamma(n, \lambda)$ | 
+| Normal (known $\sigma^2$) | $\mu$ | $\frac{1}{n}\sum_{i=1}^n x_i$ | $Normal(\mu, \sigma^2/n)$ | 
+| Normal | $\mu$, $\sigma^2$ | $(\sum_{i=1}^n x_i, \sum_{i=1}^n x_i^2)$ | |
+| Chi-Squared | $\nu$ | $\sum_{i=1}^n \log(x_i)$ | |
+| Pareto (known min $x_m$) | $\alpha$ | $\sum_{i=1}^n \log(x_i)$ | | 
+| Gamma | $\alpha, \beta$ | $(\sum_{i=1}^n\log(x_i), \sum_{i=1}^n x_i)$ | | 
+| Beta | $\alpha, \beta$ | $(\sum_{i=1}^n\log(x_i), \sum_{i=1}^n\log(1 - x_i))$ |  |
+| Weibull (known shape $k$) | $\lambda$ | $\sum_{i=1}^n x^k$ |  |
+
+
+## Minimal Sufficiency {#minimal-sufficiency}
+
+In any setting there are many sufficient statistics. However, we should aim at dealing with the statistic that summarizes the data as concisely as possible. Let $S$ be any a sufficient statistic for $\theta$. In principle, $W=(S,T)$ is also a sufficient statistic, but we rather deal with $S$ reduces the data to one-dimension. When no further reduction from a sufficient statistic is possible, then that statistic is **minimal sufficient**. 
+
+::: {.definition name="Minimal Sufficient Statistic"} 
+If $T$ is sufficient for $\theta$, then it is a **minimal sufficient statistic** (MSS) if for any other sufficient statistic $T^*, T$ is a function of $T^*$. 
+:::
+
+**Remark:** Of all sufficient statistics, a minimal sufficient statistic offers the maximal reduction of the data. 
+
+Some "intuition" behind this definition goes as follows. A minimal sufficient statistic $T(X)$ creates a partition of the sample space, $\Omega$ into sets $A_t$, where $t \in \mathcal(T) = \{t : t = T(x) \text{ for some } x\in \Omega\}$.  Now consider another sufficient statistic $T^*(X)$ that creates another partition of the sample space such that $A^*_s = \{x: T^*(x)=s\}$. Then for ever $s$ there is a $t$ such that $A^*_s \subset A_t$. Thus the partition associated with the minimal sufficient statistic is the coarsest possible partition for a sufficient statistic. 
+
+As before, the definition for MSS is conceptually useful but it does not help us find a MSS, or how to prove a statistic is a MSS. For this task, we invoke Casella-Berger's Theorem 6.2.13. 
+
+::: {.theorem name="Casella-Berger's Theorem 6.2.13"}
+Let $X \sim f(x|\theta)$. Suppose the exists a statistic $T=T(X)$ such that for every $x,y$ in the support of $X$
+
+$$(*) \frac{f(x|\theta)}{f(y|\theta)} = g(x,y) \Longleftrightarrow T(x)=T(y)$$
+then $T$ is a MSS. 
+:::
+
+In practice this theorem is used both to find a MSS and to prove that a given statistic is a MSS. Let us see some examples of applications of this theorem.
+
+::: {.example}
+Let $\textbf{X} = (X_1,..., X_n), X_i$ iid $N(\mu, \sigma^2), \theta = (\mu, \sigma^2)$. Consider $T=(\bar{X}, S^2)$ where $S^2$ is the sample variance. Let $\textbf{x} = (x_1, ..., x_n), \textbf{y} = (y_1, ..., y_n)$. Then, 
+
+$$\frac{f(\textbf{x}|\theta)}{f(\textbf{y}|\theta)} = ... = exp\{-\frac{1}{2\sigma^2}[n(\bar{x}-\bar{y})^2 + 2 n\mu(\bar{x}-\bar{y}) -(n-1)(s^2_x - s^2_y)]\}.$$
+$\Rightarrow$ Suppose the ratio is independent of $\theta = (\mu, \sigma^2)$. Then we must have that $\bar{x} = \bar{y}, s^2_x = s^2_y$. 
+
+$\Leftarrow$ Suppose that $T(x)=T(y)$. Then  $\bar{x} = \bar{y}, s^2_x = s^2_y$ and the ratio is 1. 
+
+By the previous theorem we have that $T$ is a MSS.
+:::
+
+::: {.example}
+Let $\textbf{X} = (X_1,..., X_n), X_i$ iid $U(\theta -1, \theta + 1)$. 
+$$f(\textbf{x}|\theta) = \frac{1}{2^n} I(X_{(1)} > \theta -1) I(X_{(n)} < \theta + 1)$$
+Then, 
+
+$$\frac{f(\textbf{x}|\theta)}{f(\textbf{y}|\theta)} = \frac{I(x_{(1)} > \theta -1) I(x_{(n)} < \theta + 1)}{I(y_{(1)} > \theta -1) I(y_{(n)} < \theta + 1)}$$
+and the ratio is independent of $\theta$ if and only if $(x_{(1)}, x_{(n)}) = (y_{(1)}, y_{(n)})$. Thus $T = (X_{(1)}, X_{(n)})$ is MSS. 
+:::
+
+Note that in the previous example, $dim(T(X))>dim(\theta)$. This means that there is no estimator of $\theta$ that is sufficient. 
+
+::: {.theorem} 
+If $X_1,..., X_n (n\ge 1)$ are iid with $X_i \sim k$-parameter exponential family, then $T(X) = \Big(\sum_{i=1}^n t_1(x), ..., \sum_{i=1}^n t_k(x)\Big)$ is a MSS. 
+:::
+
+**Fact**: Like sufficient statistics, MSSs are not unique. Any 1-1 function of a MSS is also a MSS. 
+
+## Ancillary Statistics {#ancillary-stats}
+
+Sufficiency describes where all the information in the data is contained. Ancillarity is the dual of sufficiency, describing where there is no information. 
+
+::: {.definition name="Ancillary Statistic"}
+Let $X \sim f(x|\theta)$. The statistic $S(X)$ is **ancillary** for $\theta$ if $\mathcal{L}(S), g(s|\theta)$ are independent of $\theta$, i.e. for any $\theta_1, \theta_2 \in \Theta$, 
+$$g(s|\theta_1)=g(s|\theta_2) \text{ for all } s.$$ 
+:::
+
+::: {.example}
+Let $\textbf{X} = (X_1,..., X_n), X_i$ iid $U(\theta, \theta + 1)$. Consider the order statistics of the sample $\textbf{X}$. The range statistic $R = X_{(n)} - X_{(1)}$ is ancillary for $\theta$ by showing that the pdf of $R$ is independent of $\theta$. Intuitive, the range does not tell anything about the location of $\theta$ in the real line. In this case the ancillarity of $R$ does not depend on the uniformity of the observations, but on the parameter of the distribution being a location parameter. 
+:::
+
+::: {.theorem name="Location family ancillary statistic"}
+Let $\textbf{X} = (X_1,..., X_n), X_i$ iid $f_{\mathcal{L}}(x|\theta)$, a [location family](#location-scale), then $R = X_{(n)} - X_{(1)}$ is ancillary for $\theta$. 
+:::
+
+::: {.theorem name="Scale family ancillary statistic"}
+Let $\textbf{X} = (X_1,..., X_n), X_i$ iid $f_{\mathcal{S}}(x|\sigma)$, a [scale family](#location-scale), and let $S_j = X_j/X_n$. Then $S=(S_1, S_2,..., S_n)$ is ancillary for $\sigma$. 
+:::
+
+**Note:** Since $S$ is ancillary, any function of $S=(S_1, S_2,..., S_n)$ is also ancillary. For example, $S_1 + ... + S_n$ is also ancillary. 
+
+
+::: {.theorem name="Location-Scale family ancillary statistic"}
+Let $\textbf{X} = (X_1,..., X_n), X_i$ iid $f_{\mathcal{L,S}}(x|\mu,\sigma)$, a [location-scale family](#location-scale) where $\theta = (\mu, \sigma)$. Let $T_1= T_1(\textbf{X})$ and $T_2= T_2(\textbf{X})$ be any two statistics such that
+
+$$ (*) \quad T_j(aX_1 + b, ..., aX_n+b) = aT_j(X_1,..., X_n) \quad j = 1,2.$$
+
+Then, $T_1/T_2$ is ancillary for $\theta$
+:::
+
+::: {.example}
+Consider the range $R = X_{(n)} - X_{(1)}$ and $S = \sqrt{\frac{1}{n-1}\sum(X_1 -\bar{X})^2}$ satisfy (*) so $R/S$ is ancillary for $\theta = (\mu, \sigma)$. 
+:::
+
+### Why are we interested in ancillary statistics?
+
+There is some relationship between ancillarity and minimal sufficiency. Suppose there is a statistic $c=C(\textbf{X})$ and an ancillary statistic $S=S(\textbf{X})$ such that $T=(S,C)$ is minimal sufficient. The **ancillarity principle** states that inference on the parameter should be based on the conditional distribution of $C$ given the ancillary statistic $S$. Furthermore, we will see later that ancillary statistics are independent of complete and sufficient statistics. 
+
+
+**Remark:** Recall the $U(\theta, \theta + 1)$ example in which we found that the MSS, T, is two dimensional, and therefore no sufficient estimator for $\theta$ exists. We can write $T = (S,C)$ where $C$ has a marginal distribution that is ancillary (independent of the parameter), and then $S$ is conditionally sufficient, i.e. sufficient conditional on $C$. 
+
+::: {.example}
+Let $N$ be a random variable with known distribution, $P(N=n) = p_n$, and let $X_1, ..., X_N$ be iid with exponential family density. Then the likelihood of the data, $(N, X_1,..., X_N)$ is
+
+$$p_n (\prod_{i=1}^{n}h(x_i))c(\theta)^{n} exp\bigg\{\sum_{j=1}^{k} w_k(\theta) \sum_{i=1}^{n}t_j(x_i)\bigg\} $$
+and thus $\bigg\{N, \{\sum_{i=1}^{N}t_j(x_i)\}_{j=1}^{k}\bigg\}$ is sufficient for $\theta$. Observe that $N$ is ancillary (independent of $\theta$) and $\{\sum_{i=1}^{N}t_j(x_i)\}_{j=1}^{k}$ is sufficient for $\theta$ conditional on $N$. 
+:::
+
+
+
+
+
+<!-- Pitman-Koopman-Darmois Theorem -->
+
+
 
