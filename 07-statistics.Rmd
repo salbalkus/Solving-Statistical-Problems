@@ -259,9 +259,112 @@ $$p_n (\prod_{i=1}^{n}h(x_i))c(\theta)^{n} exp\bigg\{\sum_{j=1}^{k} w_k(\theta) 
 and thus $\bigg\{N, \{\sum_{i=1}^{N}t_j(x_i)\}_{j=1}^{k}\bigg\}$ is sufficient for $\theta$. Observe that $N$ is ancillary (independent of $\theta$) and $\{\sum_{i=1}^{N}t_j(x_i)\}_{j=1}^{k}$ is sufficient for $\theta$ conditional on $N$. 
 :::
 
+**Remark:** Ancillary statistics may not be unique, and there is no general method for constructing them.
 
+::: {.example name="Bivariate normal with unknown correlation"}
+Suppose that $(X_1, Y_1), ..., (X_n, Y_n)$ are iid bivariate normal with zero means and unit variances, and unknown correlations $\rho$. Thus their joint pdf is
 
+$$\frac{1}{(2\pi)^{n}(1-\rho^2)^{n/2}} exp \bigg\{ -\frac{\sum(x_i^2+y_i^2)}{2(1-\rho^2)} + \frac{\rho \sum x_iy_i}{(1-\rho^2)}\bigg\}.$$
+Since this is an exponential family distribution,it is easy to see that the MSS is $T(X,Y) = (\sum(x_i^2+y_i^2), \sum x_iy_i )$. Observe that there is no ancillary statistic that is a function of $T$. However, if we allow ancillary statistics that are not functions of $T$, then both $\sum x_i^2$ and $\sum y_i^2$ are ancillary for $\rho$. But which one do we choose? Any one of them!
+:::
 
+## Complete Statistics {#complete-stats}
+
+One of the most important properties for a statistic to have is completeness. Let $X\sim f(x|\theta), \theta \in \Theta$. 
+
+::: {.example name="Complete statistics"}
+A statistic $T=T(X)$ (not necessarily sufficient) is **complete** if for any function $g(\cdot)$, 
+$$E_{\theta}(g(T)) = 0 \quad \forall \theta \Rightarrow P_{\theta}(g(T) = 0) = 1 \quad \forall \theta.$$
+:::
+
+**Note:** The family of pdfs of $T$ is called complete. 
+
+**Remark:** The definition says that of $T$ is complete, then only function of $T$ that can have zero expectation on $\theta$ is the zero function, i.e. there can't be any non-zero unbiased estimates of 0 based on $T$. 
+
+::: {.example name="Polynomial technique"}
+Let $\textbf{X}=(X_1,..., X_n), X_i$ iid $Bern(p)$. Consider $T = \sum_{i=1}^{n}X_i$. Note that $T\sim Bin(n,p)$ as it is the sum of idd Bernoulli random variables. Suppose we have a $g(\cdot)$ function that satisfies the definition of complete statistic. Then $T$ would be complete. 
+
+Now what does $E_{\theta}(g(T)) = 0 \quad \forall p$ mean?
+
+$$ 0 = \sum_{t=0}^{n} g(t) {n \choose t} p^t (1-p)^{n-t} = (1-p)^n \sum_{t=0}^{n} g(t) {n \choose t} \bigg(\frac{p}{1-p}\bigg)^t$$
+Observe that for any $t, {n \choose t} \bigg(\frac{p}{1-p}\bigg)^t > 0$. Furthermore $(1-p)^n>0$ for all $n, p, t$. Observe that $g(t)$ is a polynomial of degree $n$ and the only option to satisfy the definition for T to be complete is for $g(t) = 0 \forall t$. Now $P(g(T) = 0)=1 \Rightarrow T$ is complete.
+:::
+
+::: {.example}
+Let $\textbf{X}=(X_1,..., X_n), X_i$ iid $N(\theta, 1)$. Let $T(X)=(X_1,X_2)$ be a statistic. Observe that if $g(T) = X_1 - X_2$ then $E(g(T)) = E(X_1 - X_2) = 0$ but $P(X_1 - X_2=0)\ne 1$ for all $\theta$. Thus $T$ is not a complete statistic. 
+:::
+
+::: {.example }
+Let $\textbf{X}=(X_1,..., X_n), X_i$ iid $U(\theta, \theta + 1)$. Recall that $T=T(X) = (X_{(1)}, X_{(n)})$ is MSS for $\theta$. Consider the ancillary statistic $ X_{(n)} -  X_{(1)}$ and $E(X_{(n)} -  X_{(1)}) = c$ for some $c$ independent of $\theta$. Thus, $E(X_{(n)} -  X_{(1)}-c) = 0$ but $P(X_{(n)} -  X_{(1)}-c=0) \ne 1$ for all $\theta$. Therefore $T$ is not a complete statistic. 
+:::
+
+**Remark:** If $T$ is sufficient, then it contains all the information regarding $\theta$. If $T$ is also [complete](#complete-stats), then $T$ contains no *irrelevant* information about $\theta$. Intuitively, suppose that $T$ is sufficient and let $T = (T_1, S_1)$ where $S_1$ is ancillary. Then $T$ cannot be complete because it contains irrelevant information about the parameter (recall that ancillary statistics describe where there is no information about $\theta$). 
+
+::: {.theorem}
+If $T$ is complete and sufficient and a MSS exists, then $T$ is MSS. 
+:::
+
+::: {.example}
+Let $\textbf{X}=(X_1,..., X_n), X_i$ iid $U(0, \theta ), \theta >0$. Consider $T = T(X)= X_{(n)}$. Is $T$ complete? Yes. To prove this we will employ the *polynomial technique*. By definition of expectation,
+$$ E(g(X_{(n)})) = \int_{0}^{\theta}g(x)f_{X_{(n)}}(x)dx.$$
+Recall [order statistics](#order-stats) results, specifically the pdf formula for a given order statistic. 
+
+$$f_{X_{(n)}}(x) = n x^{n-1}\theta^{-n} I(0\le x \le \theta)$$
+Now, we have that $E(g(X_{(n)})) = \int_{0}^{\theta}g(x)n x^{n-1}\theta^{-n}dx =n\theta^{-n} \int_{0}^{\theta}g(x)x^{n-1} = 0 \Rightarrow \int_{0}^{\theta}g(x)x^{n-1} = 0$. By applying [Leibnitz' Rule](#math-tricks) wrt $\theta$ we obtain that $g(\theta)\theta^{n-1}=0$, which implies that $g(\cdot)$ must be identically zero because we assumed that $\theta >0$. Therefore $T$ is a complete statistic. 
+:::
+
+**Remark:** If the density of $T$ satisfies 
+$$f(t|\theta)=h(t)c(\theta)I(0 \le t \le \theta)$$
+then $T$ is complete. 
+
+Certainly, the previous remark provides a useful and fast strategy to prove that a statistic is complete. However, as we have mentioned before, exponential family distributions provide what some people would call "easy and fast" strategies. 
+
+::: {.theorem name="Complete statistics in exponential family distributions"}
+If $X_1,..., X_n, iid, X_i\sim$ exponential family with pdf/pmf of the form 
+
+$$h(x)c(\theta)\exp\Big(\sum_{i=1}^k w_i(\theta)t_i(x)\Big)$$
+
+and $\mathcal{H}=\{(w_1(\theta), ..., w_n(\theta))|\theta \in \Theta\}$ contains an open set (or open rectangle) in $\mathbb{R}^{k}$, then $T=(T_1,..., T_k)$ is a complete and sufficient statistic, where $T_j = \sum_{i=1}^{n}t_j(x_i)$. 
+:::
+
+At a glance, this exponential family theorem on complete and sufficient statistics is great. However, there's a catch: for most of us it is hard to grasp the concept of open set. In this part we will try to provide intuition behind the open set concept. 
+
+- An open $k-$ dimensional ball of radius $r>0$ (also called epsilon-balls) centered at a point $x \in \mathbb{R}^k$ is defined as the set $B(x,r) = \{y| d(x,y) < r\}$, where $d(x,y)$ is a distance function.
+    - Observe that what makes the ball *open* is the fact that those points $y$ whose distance to $x$ is exactly $r$ are not in the set.  
+    
+However, we are interested in a set that contains an open set, like an open ball. Let $A \subset \mathbb{R}^{k}$. We say that the set $A$ contains an open set in $\mathbb{R}^{k}$ if and only is $A$ contains a $k-$dimensional ball B(x,r), i.e. there exists $x \in \mathbb{R}^{k}$ and $r>0$ such that $B(x,r) \subset A$. 
+
+Observe that we do not need our set $A$ to be open, we just need $A$ to *contain* at least one open set in the relevant space. 
+
+For example, in the real line any open interval contains an open set, i.e. $(a,b)$ contains an open subset of $\mathbb{R}$ because for at least point between $a$ and $b$ we can fit an infinitesimally small open ball centered at the point. 
+
+Let us see an example. 
+
+::: {.example}
+Recall that the Bernoulli pmf is an exponential family distribution:
+
+$$f(x|\theta) = \theta^x (1-\theta)^{1-x} = (1-\theta)exp\bigg\{ x\text{ }  log\bigg(\frac{p}{1-p}\bigg)\bigg\}, p \in (0,1), x \in \{0,1\}$$
+For an iid $Bern(p)$ sample, previous theorems say that $T = \sum_{i=1}^{n} x_i$ is a MSS for $p$. Furthermore, $\mathcal{H} = \{log(p/(1-p))|p \in (0,1)\}$. Does $\mathcal{H}$ contain an open set? Yes. Think about the range of $log(p/(1-p))$ for $p \in (0,1)$. First observe that $p/(1-p) \in (0, \infty)$ which implies that $log(p/(1-p)) \in (-\infty, \infty) = \mathbb{R}$, which certainly contains an open set, $(-1,1)$ for example. Therefore $\mathcal{H}$ contains an open set in $\mathbb{R}$ and we conclude that $T = \sum_{i=1}^{n} x_i$ is a complete statistic.
+:::
+
+Most of the time when the statistic T is in fact complete, we can think about the range of the $w_i(\theta)$ functions. If we can find any open set within the range, then we are good to go. However, the task becomes more difficult when the set $\mathcal{H}$ does not contain an open set, because this does **not** necesarily mean that the statistic is not complete. 
+
+::: {.example}
+Consider the following pdf
+
+$$f(x|\theta) = \frac{2 exp \{-(x-\theta)^4\}}{\Gamma(1/4)}, -\infty < x < \infty, -\infty < \theta< \infty.$$
+Observe that this distribution belongs to the exponential family as we can express the pdf in exponential family form, 
+
+$$f(x|\theta) = \frac{2 exp \{-x^4\}}{\Gamma(1/4)} exp(\theta^4) exp\{(4\theta)x^3 - (6\theta^2) x^2 + (4\theta^3)x\}$$
+where $t_1(x) = x^3, t_2(x) = x^2, t_3(x) = x$ and $w_1(\theta) = 4\theta, w_2(\theta)= 6\theta^2, w_3(\theta)=4\theta^3$. Therefore, this is a 3-parameter exponential family, with $dim(\theta)=1$. Now 
+$$
+\begin{aligned}
+\mathcal{H}&=\{(w_1(\theta), w_2(\theta), w_3(\theta)) | w_1(\theta)  = 4\theta, w_2(\theta)= 6\theta^2, w_3(\theta)=4\theta^3, -\infty < \theta< \infty \}\\
+& = \{(w_1(\theta), w_2(\theta), w_3(\theta)) | w_1(\theta) \in \mathbb{R}, w_2(\theta)= -(6/16)w_1(\theta)^2, w_3(\theta)=w_1(\theta)^3/16 \}
+\end{aligned}
+$$
+where in the last equality we have that $w_2(\theta), w_3(\theta)$ can be expressed in terms of $w_1(\theta)$. This implies that the set $\mathcal{H}$ is a curve in $\mathbb{R}^3$ and a sphere (open set in $\mathbb{R}^3$) cannot fit in a curve and $\mathcal{H}$ does not contain an open set in $\mathbb{R}^3$. This means that we cannot use the theorem to prove that $T$ is complete (or not complete). In this case we would have to use the definition of [complete statistic](#complete-stat) to verify completeness. 
+:::
 
 <!-- Pitman-Koopman-Darmois Theorem -->
 
