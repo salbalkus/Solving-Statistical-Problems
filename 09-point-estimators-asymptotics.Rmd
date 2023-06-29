@@ -49,7 +49,7 @@ $$AE(\theta, T_n) = \frac{d'\mathcal{I}(\theta)^{-1}d}{\sigma^2}$$
 
 We can also compare estimators via their **asymptotic relative efficiency (ARE)**, which for estimators $S_n$ and $T_n$ is 
 
-$$AE(\theta, S_n, T_n) = \frac{\sigma_T^2}{\sigma_S^2}$$
+$$ARE(\theta, S_n, T_n) = \frac{\sigma_T^2}{\sigma_S^2}$$
 
 Let's explore first how we might prove that an estimator converges asymptotically to a normal distribution to show this directly.
 
