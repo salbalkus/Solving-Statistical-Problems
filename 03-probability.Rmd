@@ -309,6 +309,24 @@ $$f_Y(y) = P(Y = y) = \sum_{x \in g^{-1}(y)}P(X=x) = \sum_{x \in g^{-1}(y)}f_X(x
 
 meaning the pmf of $Y$ is just the sum of the probabilities of $X$ over all $y \in \mathcal{Y}$ (where $\mathcal{Y}$ is the sample space of $Y$). For more information, see Chapter 2 of @Casella1990.
 
+### Technique: Medians and other Functionals
+
+In statistics, a *functional* is a simply a function that maps a distribution (CDF) to a real number. For example, expected value is a type of functional treated in-depth in [Chapter 6: Moments](#moments). Another type of functional that arises in first-year statistical inference courses is the *median*, which is defined as follows:
+
+::: {.definition name="Median"}
+
+The median $m$ of a random variable $X$ is a value satisfying
+
+$$P(X \leq m) = P(X \geq m) = \frac{1}{2}$$
+Intuitively, it is a value that splits the distribution such that half of the probability mass lies on one side and half lies on the other. For continuous random variables, $m$ satisfies
+
+$$\int_{-\infty}^m f(x)dx = \int_{m}^\infty f(x)dx = \frac{1}{2}$$
+
+:::
+
+Working with the median requires knowledge from future chapters. We might be interested in *computing* a median for a given distribution, a topic we touch upon in Chapter [4](#known-distributions). Or, we may also be interested in *estimating* a median, techniques for which are discussed in Chapters [8](#point-estimators-finite-samples) and [9](#point-estimators-asymptotics).
+
+
 ## Independence {#independence}
 
 :::{.definition name="Independence"}
