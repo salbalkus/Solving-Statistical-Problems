@@ -193,11 +193,11 @@ By the previous theorem we have that $T$ is a MSS.
 :::
 
 ::: {.example}
-Let $\textbf{X} = (X_1,..., X_n), X_i$ iid $U(\theta -1, \theta + 1)$. 
-$$f(\textbf{x}|\theta) = \frac{1}{2^n} I(X_{(1)} > \theta -1) I(X_{(n)} < \theta + 1)$$
+Let $\textbf{X} = (X_1,..., X_n), X_i$ iid $U(\theta, \theta + 1)$. 
+$$f(\textbf{x}|\theta) = \frac{1}{2^n} I(X_{(1)} > \theta) I(X_{(n)} < \theta + 1)$$
 Then, 
 
-$$\frac{f(\textbf{x}|\theta)}{f(\textbf{y}|\theta)} = \frac{I(x_{(1)} > \theta -1) I(x_{(n)} < \theta + 1)}{I(y_{(1)} > \theta -1) I(y_{(n)} < \theta + 1)}$$
+$$\frac{f(\textbf{x}|\theta)}{f(\textbf{y}|\theta)} = \frac{I(x_{(1)} > \theta ) I(x_{(n)} < \theta + 1)}{I(y_{(1)} > \theta) I(y_{(n)} < \theta + 1)}$$
 and the ratio is independent of $\theta$ if and only if $(x_{(1)}, x_{(n)}) = (y_{(1)}, y_{(n)})$. Thus $T = (X_{(1)}, X_{(n)})$ is MSS. 
 :::
 
@@ -366,7 +366,51 @@ $$
 where in the last equality we have that $w_2(\theta), w_3(\theta)$ can be expressed in terms of $w_1(\theta)$. This implies that the set $\mathcal{H}$ is a curve in $\mathbb{R}^3$ and a sphere (open set in $\mathbb{R}^3$) cannot fit in a curve and $\mathcal{H}$ does not contain an open set in $\mathbb{R}^3$. This means that we cannot use the theorem to prove that $T$ is complete (or not complete). In this case we would have to use the definition of [complete statistic](#complete-stat) to verify completeness. 
 :::
 
-<!-- Pitman-Koopman-Darmois Theorem -->
+::: {.example}
+Consider the $N(\mu, \sigma^2)$ family with $\theta = (\mu, \sigma^2) \in \Theta$. This family has pdf that can be expressed as an exponential family with $w_1(\theta) = \mu/\sigma^2, w_2(\theta) = -1/2\sigma^2, t_1(x)= x, t_2(x)=x^2$. Let $\textbf{X} = (X_1,...,X_n)$ be iid $N(\mu, \sigma^2)$. By theorem, $T(\textbf{X}) = \sum X_i, \sum X_i^2)$ is a sufficient statistic regardless of the parameter set $\Theta$. Furthermore, observe that $U(\textbf{X}) = (\bar{x}, s^2)$ is a 1-1 function of $T(\textbf{X})$. Let us explore if $T$ (or $U$) is complete. We will see that the application of the CSS for exponential family theorem will depend on the parameter set $\Theta$ and on $\mathcal{H}$.
+
+1. $\Theta_1=\{(\mu, \sigma^2)|\sigma^2>0\} \Rightarrow  \mathcal{H}= \{(\mu/\sigma^2, -1/2\sigma^2) | \sigma^2>0 \}$. Observe that in this case there are no constraints on $\mu$. Thus $\mathcal{H} = \mathbb{R}^2$ which trivially contains an open set of  $\mathbb{R}^2$. In this case we can use the theorem and conclude that $T$ is complete.
+
+2. $\Theta_2=\{(\mu, \sigma^2)|\sigma^2=\sigma_0^2\} \Rightarrow  \mathcal{H}= \{(\mu/\sigma_0^2, -1/2\sigma_0^2)\} = \{(x,-1/2\sigma_0^2)|x\in \mathbb{R}\}$. Now $\sigma^2$ can only take one value, which implies that $\mathcal{H}$ is a line in $\mathbb{R}^2$. Can a disk fit in a line? No, thus we can't use the theorem to assess completeness of $T$. Using the definition of complete statistic one can prove that, in fact, $T$ is not complete in this case.
+
+3. $\Theta_3 = [1,3] \times [4,6]$ implies that $\mu, \sigma^2$ can take values within the closed square that is $\Theta_3$. Does a disk fit into a square? Yes. Thus we can conclude that $T$ is complete.
+:::
+
+Hopefully that discussion clarifies when and how to use the theorem on complete statistics in exponential family distributions. Now, let us step back a bit and summarize what we have discussed until now as we present Basu's Lemma, one of the most important theorems in statistical inference.
+
+Let $X \sim f(x|\theta), \theta \in \Theta$.
+
+::: {.theorem name="Basu's Lemma"}
+If $T(X)$ is a complete and sufficient statistic (for $\theta \in \Theta$), and $S(X)$ is ancillary, then $T(X)$ and $S(X)$ are independent for all $\theta \in \Theta$. 
+:::
+
+**Remark:** This result plainly says that CSSs are independent of ancillary statistics. 
+
+::: {.example}
+Let $X_1, ..., X_n$ iid $N(\mu, \sigma^2)$. Suppose that $\sigma^2$ is known. We want to show that $\bar{X}$ and $S^2$ are independent using Basu's Lemma. 
+- First, let us show that $\bar{X}$ is a CSS for $\mu$. Observe that the pdf for a $N(\mu, \sigma^2)$ random variable where $\sigma^2$ is known is an exponential family distribution where $t_1(x) = x, w_1(\theta)= \mu/\sigma^2$. Here $\mathcal{H} = \{\mu/\sigma^2 | \mu \in \mathbb{R}\} = \mathbb{R}$ which trially contains an open set. Thus $T(X) = \{\sum X_i\}$ is a CSS. Furthermore consider $S(X) = T(X)/n = \bar{X}$ is a 1-1 function of a CSS and thus is also a CSS. 
+- Second, we must prove that $S^2$ is ancillary for $\mu$. By definition, 
+$$S^2 = \frac{1}{n-1}\sum_{i=1}^{n}(X_i - \bar{X})^2$$. 
+Let $X_i = Z_i + \mu$ where $Z \sim N(0,1)$. Now,
+
+$$
+\begin{aligned}
+S^2 &= \frac{1}{n-1}\sum_{i=1}^{n}(X_i - \bar{X})^2\\
+& = \frac{1}{n-1}\sum_{i=1}^{n}(Z_i + \mu - \frac{\sum(Z_i + \mu)}{n})^2\\
+&= \frac{1}{n-1}\sum_{i=1}^{n}(Z_i + \mu - \frac{\sum Z_i}{n} - \mu)^2\\
+&= \frac{1}{n-1}\sum_{i=1}^{n}(Z_i - \bar{Z} )^2
+\end{aligned}
+$$
+which is independent of $\mu$. Therefore, $S^2$ is ancillary for $\mu$.
+
+By Basu's theorem we conclude that $\bar{X}$ is independent of $S^2$. Now what happens when $\sigma^2$ is also unknown? Observe that the previous work assumed that $\sigma ^2$ as known, fixed, and *arbitrary*. Thus $\bar{X}$ is independent of $S^2$ even in the case where both $\mu, \sigma^2$ are unknown. 
+:::
+
+::: {.example}
+In this example we will use Basu's theorem to prove that a statistic is *not* complete. 
+Let $\textbf{X} = (X_1,..., X_n), X_i$ iid $U(\theta, \theta + 1)$. In a previous example we saw that $T(X) = (X_{(1)}, X_{(n)})$ is a MSS for $\theta$. Furthermore, we also saw that $R=X_{(n)} - X_{(1)}$ is an ancillary statistic for $\theta$. Observe that $R$ is a function of $T$ and cannot be independent. Thus, by the contrapositive of Basu's Lemma, $T$ cannot be complete. 
+:::
+
 
 
 
