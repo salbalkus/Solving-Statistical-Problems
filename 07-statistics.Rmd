@@ -1,6 +1,19 @@
 # Statistics {#statistics}
 
-One of the most important tasks we will be performing as statisticians is inference. Inference is the area of statistics which uses sample data to estimate a population parameter. For this it is necessary to *reduce* or *summarize* the recollected data into a measurement that we will refer to as **statistic**. 
+One of the most important tasks we will be performing as statisticians is inference. Inference is the area of statistics which uses  data from a random sample to estimate a population parameter. 
+
+::: {#random-sample .definition name="Random Sample"}
+
+$X = (X_1, X_2, ... X_n)$ constitutes a **random sample** of size $n$ provided each $X_i$ is mutually independent.
+
+The term **iid** stands for "independently and identically distributed." A random sample is iid if all $X_i$ are independent *and* follows the same distribution. In this case,
+
+$$f_X(x_1, ..., x_n) = f(x_1)\cdot f(x_2)\cdot,..., \cdot f(x_n) = \prod_{i=1}^nf(x_i)$$
+
+:::
+
+
+To perform inference, it is usually necessary to *reduce* or *summarize* the recollected data into some measurement that we will refer to as **statistic**. 
 
 ::: {.definition name="Statistic"} 
 Let $X \sim f(x|\theta)$, where both $X, \theta$ can be vectors. A statistic is a function $T=T(\textbf{X})$ of the sample $\textbf{X}$ from $X$. 
