@@ -34,10 +34,24 @@ Non-identifiability usually arises when a distribution is parameterized by some 
 Generally, we can assume parameters are identifiable. But how might we show a parameter is not identifiable? One clue to look for is linear dependence.
 
 ::: {.example name="Non-Identifiability Via Linear Dependence"}
-FORTHCOMING
+
+Non-identifiability can arise in a natural exponential family. Suppose we've parametrized a [natural exponential family](#exponential-family) into the form
+
+$$f(x | \eta) = h(x)c(\theta)\exp(\sum_{i=1}^k \eta_it_i)$$
+where the vector $t = (t_1, ..., t_k)$ is linearly dependent. Linear dependence implies that there exists $\alpha = (\alpha_1, ..., \alpha_k)$ not equal to the 0-vector such that $\alpha t = 0$. Then, $\eta$ is not identified?
+
+How do we know? Since $\alpha t = \sum_{i=1}^k \alpha_it_i = 0$, we can add it on the interior of the exponential function:
+
+$$
+f(x | \eta) = h(x)c(\theta)\exp(\sum_{i=1}^k \eta_it_i + \sum_{i=1}^k \alpha_it_i)\\
+= h(x)c(\theta)\exp(\sum_{i=1}^k (\eta_i + \alpha_i)t_i)
+
+$$
+Letting $\eta = (\eta_1 + \alpha_1,..., \eta_k + \alpha_k)$, clearly $f(x|\eta) = f(x|\eta')$ and $\nu$ is not identified.
+
 :::
 
-Non-identifiability can arise in common situations like the following:
+Non-identifiability can also arise in more practical situations, such as the following:
 
 ::: {.example name="Non-Identifiability with Measurement Error"}
 
@@ -47,6 +61,7 @@ $$
 Y^* = Y + \epsilon_1\\
 X^* = X + \epsilon_2
 $$
+
 If we try to fit this linear regression on $Y^*$ and $X^*$ instead, we get
 
 $$
