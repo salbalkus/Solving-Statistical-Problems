@@ -56,11 +56,33 @@ $X \sim f_X(x|\theta)$ is an exponential family if its pdf can be written in the
 $$f_X(x|\theta) = h(x)c(\theta)\exp\Big(\sum_{i=1}^k w_i(\theta)t_i(x)\Big)$$
 :::
 
-How do we prove that a pdf *can* be written in the above form? Often, the easiest way is to use a simple trick to get the necessary $\exp$ function: $f(x) = \exp(\log(f(x)))$. Then, we algebraically manipulate to obtain this form.
+How do we prove that a pdf **can** be written in the above form? Often, the easiest way is to use a simple trick to get the necessary $\exp$ function: $f(x) = \exp(\log(f(x)))$. Then, we algebraically manipulate to obtain this form.  Here's an example for a distribution which will be presented imminently.
 
-How do we prove that a pdf *cannot* be written in the above form?
+::: {.example name="Simple Technique: Proving Exponential Families"}
+
+From @Casella1990, $X \sim \text{Binomial}(n, p)$ is an exponential family given fixed $n$ and $p \in (0,1)$. *Proof*: By the properties of the logarithm,
+
+$$
+f_X(x|p) = {n\choose x}p^x(1-p)^{n-x} = {n\choose x}\exp(x\log(p) + (n-x)\log(1-p))\\
+= {n\choose x}\cdot\exp(n\log(1-p))\cdot\exp(x\log(\frac{p}{1-p}))
+$$
+Letting $h(x) = {n\choose x}$, $c(\theta) = \exp(n\log(1-p))$, $w(\theta) = \log(\frac{p}{1-p})$ and $t(x) = x$, the Binomial is an exponential family. We require $p \in (0,1)$ to guarantee $w(\theta)$ is not undefined.
+
+
+:::
+
+How do we prove that a pdf **cannot** be written in the above form? Generally, we want to prove that the pdf cannot be factorized into separate functions of $x$ and $\theta$. 
+
+One example of this is *when the support depends on the parameter*. Consider $f_X(x|\theta) = \frac{1}{\theta}\cdot I(x < \theta)$, the pdf of a $\text{Uniform}(0, \theta)$. Here the indicator function $I(x < \theta)$ cannot be decomposed in any way. Since it is mathematically impossible to factorize $I(x < \theta)$ into $x$ and $\theta$, we know that any function containing an indicator involving $X$ and $\theta$ cannot be an exponential family.
+
+
+Also note that, by this definition of the exponential family, in order to guarantee that $f_x(x|\theta)$ integrates to 1, it must be true that 
+
+$$\frac{1}{c(\theta)} = \int_{-\infty}^{\infty}h(x)\exp\Big(\sum_{i=1}^k w_i(\theta)t_i(x)\Big)$$
+a fact which can be used to prove certain properties of exponential families. For example,
 
 FORTHCOMING
+
 
 ### Properties
 
@@ -259,10 +281,6 @@ It is represented mathematically as $\chi^2(\nu)$ or $\chi^2_\nu$ where $\nu$ is
 - The Chi-squared distribution is a special case of the Gamma. That is, if $X \sim \chi^2(\nu)$, then $X \sim \text{Gamma}(\frac{\nu}{2}, \frac{1}{2})$. This can be observed directly from the pdf. 
 
 
-## Exponential families with certain parameters fixed
-
-Some families are exponential, but only when one or more parameters are fixed.
-
 ### Weibull
 
 The Weibull is a generalization of the exponential distribution. The extra parameter $k$ describes how the failure rate changes over time. It is an exponential family when $k$ is fixed.  
@@ -415,7 +433,7 @@ If the vector $X$ is multinomial, then
 - $X_i \sim \text{Binomial}(n, p_i)$
 - $Cov(X_i, X_j) = E((X_i - mp_i)(X_j - mp_j)) = -mp_ip_j, \forall i\neq j$
 
-### Medians, Modes, and Other Functionals of a Distribution
+## Medians and Other Functionals of a Distribution
 
 In statistics, a *functional* is a function that maps a distribution (CDF) to a real number. For example, expected value is a type of functional treated in-depth in [Chapter 6: Moments](#moments). Another type of functional that arises in first-year statistical inference courses is the *median*, which is defined as follows:
 
@@ -440,7 +458,20 @@ and its mean $E(X)$ exists, then $a = m = E(X)$. We define $E(X)$ and techniques
 - [Uniform](#uniform)
 - [Student's t](#studentst)
 
-as well as any other symmetric distribution.
+as well as any other symmetric distribution. Here's how to prove such a fact.
+
+::: {.example name="Proving a median is a mean"}
+
+Suppose $X$ is a symmetric location family with location parameter $\mu = E(X)$. We can show $\mu$ must be the median as follows. Since $X$ is symmetric, we can expand directly from the definition of a [pdf](#pdf), using the property that it must integrate to 1:
+
+$$
+\int_{-\infty}^\infty f_X(x)dx = \int_{-\infty}^\mu f_X(x)dx + \int_{\mu}^\infty f_X(x)dx = 1 \\
+\iff 2\int_{-\infty}^\mu f_X(x) = 1 \iff \int_{-\infty}^\mu f_X(x) = \frac{1}{2}
+$$
+by definition of symmetry, showing that $\mu$ is a median by definition.
+
+
+:::
 
 If $X$ is not symmetric, we can calculate a median using the *cumulative distribution function (CDF)* of the given distribution. Here are two examples:
 
@@ -495,7 +526,6 @@ F(q) = \frac{1}{\pi}\arctan\Big(\frac{q}{\gamma}\Big) + \frac{1}{2} = \frac{3}{4
 
 $$
 The same process can be repeated for the 25th percentile, since $\tan(\frac{3\pi}{4}) = -1$, so the 25th percentile is $-\gamma$. 
-
 
 :::
 
