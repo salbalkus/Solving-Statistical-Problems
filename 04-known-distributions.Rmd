@@ -8,7 +8,7 @@ Many so-called "distributions" are actually *families* of distributions, meaning
 
 For example, the $\text{Normal}(\mu, \sigma^2)$ distribution contains two parameters, $\mu$ (the mean), and $\sigma^2$ (the variance). These are also examples of two types of parameters with special properties - called *location* and *scale* parameters, respectively - that can be used to simply calculations.
 
-## Location and Scale Families (#location-scale)
+## Location and Scale Families {#location-scale}
 
 ### Location Families
 
@@ -174,7 +174,7 @@ The Poisson distribution describes one possible behavior of a **count** random v
 - Like the Binomial, the Poisson is formulated by counting the number of successes within a set of Bernoulli trials. The distribution describes the asymptotic behavior of the Binomial distribution as $n \rightarrow \infty$ and $np \rightarrow \lambda$, a fixed *rate* parameter.
 - The Poisson is **additive**. If $X_i \sim \text{Poisson}(\lambda)$, then $\sum_{i=1}^n X_i \sim \text{Poisson}(n\lambda)$
 
-### Normal
+### Normal {#normal}
 
 Often denoted $N(\mu, \sigma^2)$, the Normal distribution is especially common in asymptotics - by the [Central Limit Theorem](clt), the sample mean converges in distribution to a normal. Many other variables also converge to a normal.
 
@@ -292,7 +292,7 @@ The Pareto distribution, written $\text{Pareto}(x_m, \alpha)$, models variables 
 
 The following families are not exponential, but still commonly arise.  
 
-### Uniform
+### Uniform {#uniform}
 
 The Uniform distribution is parametrized by its minimum $a$ and maximum $b$. Denoted $U(a,b)$, it describes a scenario where every possible value of $x$ has the same probability.
 
@@ -306,7 +306,7 @@ The Uniform distribution is parametrized by its minimum $a$ and maximum $b$. Den
 - By the Probability Integral Transform, inverse cdfs always follow a standard uniform distribution. That is, if $X = F_X^{-1}(Y)$, then $Y \sim U(0,1)$. This can be used to [generate any random variable with a known cdf](#generating-random-variables).
 
 
-### Cauchy
+### Cauchy {#cauchy}
 
 The Cauchy arises in situations involving ratios of standard normal variables, as well as rotations. It is $\text{Cauchy}(x_0, \gamma)$, where $x_0$ is a location parameter and $\gamma$ is a scale parameter, making it a **location-scale family**. 
 
@@ -319,7 +319,7 @@ The Cauchy arises in situations involving ratios of standard normal variables, a
 - If $X\sim t(1)$, then $X\sim \text{Cauchy}(0,1)$
 
 
-### t-distribution
+### t-distribution {#studentst}
 
 The t-distribution describes the distribution of the t-statistic for $X_1, ... X_n \overset{iid}{\sim}N(\mu, \sigma^2)$
 
@@ -384,7 +384,7 @@ Suppose that $(X, Y)$ follows the bivariate normal distribution above. Then,
 - Any linear combination of $X$ and $Y$ is univariate normal. That is, $aX + bY \sim N(a\mu_x + b\mu_y, a^2\sigma_x^2 + b^2\sigma_y^2 +2ab\rho\sigma_x\sigma_y$.
 - The conditional distribution $Y|X = x \sim N\Big(\mu_Y + \frac{\sigma_Y}{\sigma_X}\rho(x - \mu_X), \sigma_Y^2(1-\rho^2)\Big)$
 
-#### Multivariate Normal
+### Multivariate Normal
 
 The Multivariate Normal, often denoted $MVN(\mu, \Sigma)$, generalizes the normal to a random vector $X$ where all linear combinations of its components have a univariate normal distribution.
 
@@ -414,3 +414,90 @@ If the vector $X$ is multinomial, then
 - All conditional distributions are multinomial
 - $X_i \sim \text{Binomial}(n, p_i)$
 - $Cov(X_i, X_j) = E((X_i - mp_i)(X_j - mp_j)) = -mp_ip_j, \forall i\neq j$
+
+### Medians, Modes, and Other Functionals of a Distribution
+
+In statistics, a *functional* is a function that maps a distribution (CDF) to a real number. For example, expected value is a type of functional treated in-depth in [Chapter 6: Moments](#moments). Another type of functional that arises in first-year statistical inference courses is the *median*, which is defined as follows:
+
+::: {#median .definition name="Median"}
+
+[The median](https://en.wikipedia.org/wiki/Median) $m$ of a random variable $X$ is a value satisfying
+
+$$P(X \leq m) = P(X \geq m) = \frac{1}{2}$$
+Intuitively, it is a value that splits the distribution such that half of the probability mass lies on one side and half lies on the other. For continuous random variables, $m$ satisfies
+
+$$\int_{-\infty}^m f(x)dx = \int_{m}^\infty f(x)dx = \frac{1}{2}$$
+
+:::
+
+If $X$ has a symmetric distribution - that is, there exists some $a$ such that
+
+$$\int_{-\infty}^a f_X(x)dx = \int_{a}^\infty f_X(x)dx$$
+
+and its mean $E(X)$ exists, then $a = m = E(X)$. We define $E(X)$ and techniques for computing it in [Chapter 6](#moments)). Therefore, the median is equal to the mean for the following distributions: 
+
+- [Normal](#normal)
+- [Uniform](#uniform)
+- [Student's t](#studentst)
+
+as well as any other symmetric distribution.
+
+If $X$ is not symmetric, we can calculate a median using the *cumulative distribution function (CDF)* of the given distribution. Here are two examples:
+
+::: {.example name="Calculating a Median: Exponential"}
+
+This proof comes from @Soch2022. Suppose we want to find the median $m$ of a $X\sim \text{Exp}(\lambda)$ distribution. By the definition of a median,
+
+$F_X(m) = \frac{1}{2}$
+
+Since the CDF of an exponential distribution is
+
+$$\int_0^x\lambda\exp(-\lambda t)dt = 1 - \exp(-\lambda x)$$
+
+So, $1 - \exp(-\lambda m) = \frac{1}{2} \implies \log(\frac{1}{2}) = -\lambda m \implies m = \frac{\log(2)}{\lambda}$
+
+Hence, we've calculated the median of the exponential distribution.
+
+:::
+
+::: {.example name="Calculating a Median: Cauchy"}
+
+Suppose $X \sim \text{Cauchy}(x_0, \gamma)$. Again, we use the CDF:
+
+$$
+F_X(x) = \frac{1}{\pi}\arctan\Big(\frac{m-x_0}{\gamma}\Big) + \frac{1}{2} = \frac{1}{2}\\
+\iff \frac{m- x_0}{\gamma} = \tan(0)\\
+\iff m = x_0
+
+$$
+proving the median of the Cauchy is its scale parameter.
+
+:::
+
+Often, we may be interested in *estimating* a median as well. Techniques for this are discussed in Chapters [8](#point-estimators-finite-samples) and [9](#point-estimators-asymptotics).
+
+
+What about other functionals? [Quantiles](https://en.wikipedia.org/wiki/Quantile) are functionals that define points on a distribution such that a certain probability mass lies among those values less than the quantile. An example is the 75th percentile - values less than this percentile make up 75 percent of the probability mass. We also just discussed the median, which is the 50th percentile.
+
+Mathematically, we can write a quantile $q_p$ as 
+
+$$F(q_p) = p$$
+So for example, the 75th percentile would be a value $q$ satisfying $F(q) = 0.75. We can solve for quantiles the same way we did the median - here's an example:
+
+::: {.example name="Percentiles of the Cauchy"}
+
+For $X\sim \text{Cauchy}(0, \gamma)$, the parameter $\gamma$ characterizes the 25th and 75th percentiles. Let's prove it using the same technique as the median - using the CDF of the Cauchy.
+
+$$
+F(q) = \frac{1}{\pi}\arctan\Big(\frac{q}{\gamma}\Big) + \frac{1}{2} = \frac{3}{4} \\
+\iff \frac{q}{\gamma} = \tan(\frac{\pi}{4}) = 1\\
+\iff q = \gamma
+
+$$
+The same process can be repeated for the 25th percentile, since $\tan(\frac{3\pi}{4}) = -1$, so the 25th percentile is $-\gamma$. 
+
+
+:::
+
+
+
