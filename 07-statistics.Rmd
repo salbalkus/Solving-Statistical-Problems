@@ -403,7 +403,7 @@ S^2 &= \frac{1}{n-1}\sum_{i=1}^{n}(X_i - \bar{X})^2\\
 $$
 which is independent of $\mu$. Therefore, $S^2$ is ancillary for $\mu$.
 
-By Basu's theorem we conclude that $\bar{X}$ is independent of $S^2$. Now what happens is $\sigma^2$ is also unknown. Observe that the previous work assumed that $\sigma ^2$ as known, fixed, and *arbitrary*. Thus $\bar{X}$ is independent of $S^2$ even in the case where both $\mu, \sigma^2$ are unknown. 
+By Basu's theorem we conclude that $\bar{X}$ is independent of $S^2$. Now what happens when $\sigma^2$ is also unknown? Observe that the previous work assumed that $\sigma ^2$ as known, fixed, and *arbitrary*. Thus $\bar{X}$ is independent of $S^2$ even in the case where both $\mu, \sigma^2$ are unknown. 
 :::
 
 ::: {.example}
