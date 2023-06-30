@@ -15,6 +15,6 @@ description: "Solving Statistical Problems"
 
 # Introduction
 
-Welcome to "Solving Statistical Problems", a compilation of problem-solving tools and tricks for graduate-level Probability and Statistical Inference courses. This site is currently under construction in preparation for the 2023 Harvard Biostatistics PhD Qualifying Exam. 
+Welcome to "Solving Statistical Problems", a compilation of problem-solving tools and tricks for graduate-level Probability and Statistical Inference courses. 
 
-Many of our examples originate from or are inspired by Casella and Berger's *Statistical Inference*, [The Book of Statistical Proofs](https://statproofbook.github.io/), lectures slides and notes from *BIOSTAT 230: Probability I* and *BIOSTAT 231: Statistical Inference I* at the Harvard Department of Biostatistics, and other online resources. The authors' hope is that students in the aforementioned courses (and similar courses at other universities) can use this book as a supplement to aid in their understanding of graduate-level statistics material.
+Many of our examples originate from or are inspired by Casella and Berger's *Statistical Inference*, [The Book of Statistical Proofs](https://statproofbook.github.io/), lectures slides and notes from *BIOSTAT 230: Probability I* and *BIOSTAT 231: Statistical Inference I* at the Harvard Department of Biostatistics, and other online resources. The goal of this site is to provide a supplement to the aforementioned works providing a better explanation of how to actually solve problems using the material presented.
