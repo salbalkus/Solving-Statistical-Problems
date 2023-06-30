@@ -407,7 +407,7 @@ By Basu's theorem we conclude that $\bar{X}$ is independent of $S^2$. Now what h
 :::
 
 ::: {.example}
-In this example we will use Basu's theorem to prove that a statistic is *not* complete. 
+In this [example](https://ani.stat.fsu.edu/~debdeep/complete.pdf) we will use Basu's theorem to prove that a statistic is *not* complete. 
 Let $\textbf{X} = (X_1,..., X_n), X_i$ iid $U(\theta, \theta + 1)$. In a previous example we saw that $T(X) = (X_{(1)}, X_{(n)})$ is a MSS for $\theta$. Furthermore, we also saw that $R=X_{(n)} - X_{(1)}$ is an ancillary statistic for $\theta$. Observe that $R$ is a function of $T$ and cannot be independent. Thus, by the contrapositive of Basu's Lemma, $T$ cannot be complete. 
 :::
 
