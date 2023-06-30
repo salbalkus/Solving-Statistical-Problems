@@ -1,8 +1,67 @@
 # Point Estimators: Finite Samples {#point-estimators-finite-samples}
 
-Finding point estimators and evaluating their finite sample properties.
+The goal of parametric statistical inference is to estimate a parameter - or a function of said parameter - of a given distribution using a random sample. To do this, we must construct an [estimator](https://en.wikipedia.org/wiki/Estimator):
 
+::: {.definition name="Estimator"}
 
+An **estimator** is a [statistic](#statistics) $T(X)$ - a function of data - used to obtain an estimate of a parameter $\theta$ or function of a parameter $\tau(\theta)$ in a distribution. 
+
+- An **estimate** is the value of an estimator when computed on a set of data - that is, $T(X)$ for a particular realization of $X$.
+- An **estimand** is the parameter $\theta$ or function $\tau(\theta)$ needed to be estimated.
+
+:::
+
+Point estimators estimate scalar or vector real values - as opposed to interval estimators, which estimate intervals. Estimators have various qualities - some are good, and some are bad. This chapter will discuss how to construct and evaluate the quality of estimators.
+
+## Identifiability
+
+First of all, how do we know if it even possible to estimate a given parameter in a distribution? Such a question gives rise to the concept of [identifiability](https://en.wikipedia.org/wiki/Identifiability):
+
+::: {.definition name="Identifiability"}
+
+For a random variable $X$, a parameter $\theta$ in a parameter space $\Theta$ is said to be **identifiable** if, for all $\theta, \theta' \in \Theta$,
+
+$$\theta \neq \theta' \implies F_X(x|\theta) \neq F_X(x|\theta')$$
+Alternatively, $\theta$ is *not* identifiable if there *exists* $\theta, \theta' \in \Theta$ such that, for all $x$, 
+
+$$F_X(x|\theta) = F_X(x|\theta')$$
+:::
+
+If $\theta$ is non-identifiable, that means two distributions from the same family will be identical under different $\theta$ values. Hence, even if we knew the true underlying distribution of $X$, it would be impossible to know its parameters. Given a random sample, it would be impossible to estimate the parameter accurately.
+
+Non-identifiability usually arises when a distribution is parameterized by some function of multiple parameters. For instance, if $\lambda = (\lambda_1, \lambda_2)$, and $X \sim \text{Exp}(\lambda_1 + \lambda_2)$, it would be impossible to estimate $\lambda_1$ or $\lambda_2$ given $X$ alone since $\lambda_1 + \lambda_2$ can take on the same value for different individual values of $\lambda_1$ and $\lambda_2$. 
+
+Generally, we can assume parameters are identifiable. But how might we show a parameter is not identifiable? One clue to look for is linear dependence.
+
+::: {.example name="Non-Identifiability Via Linear Dependence"}
+FORTHCOMING
+:::
+
+Non-identifiability can arise in common situations like the following:
+
+::: {.example name="Non-Identifiability with Measurement Error"}
+
+Suppose we want to construct a simple linear regression model $Y = \beta X + \varepsilon$ - but there's a twist. Both $Y$ and $X$ are measured with unknown error, so we only observe
+
+$$
+Y^* = Y + \epsilon_1\\
+X^* = X + \epsilon_2
+$$
+If we try to fit this linear regression on $Y^*$ and $X^*$ instead, we get
+
+$$
+Y + \epsilon_1 = \beta(X + \epsilon_2) + \varepsilon\\
+\implies Y = \beta X + (\beta\epsilon_2 - \varepsilon_1 + \varepsilon)
+$$
+
+Now, since $\epsilon_1$ and $\epsilon_2$ are unknown, $\beta$ has become unidentifiable. Consider $(\beta', \epsilon_2') \neq (\beta, \epsilon_2)$. Subtracting $Y = \beta' X + (\beta'\epsilon_2' - \varepsilon_1 + \varepsilon)$ from $Y = \beta X + (\beta\epsilon_2 - \varepsilon_1 + \varepsilon)$, we get
+
+$$0 = (\beta - \beta')X + (\beta\epsilon_2 - \beta'\epsilon_2')$$
+Multiple values of $\beta$ and $\beta'$ can be chosen to satisfy this equation (since $\epsilon \neq \epsilon'$) meaning that $F_X(x|\beta) = F_X(x|\beta')$ for $\beta \neq \beta'$, proving $\beta$ is not identifiable.
+
+:::
+
+(can we use the MGF to show this as well?)
 
 ## Method of Moments
 

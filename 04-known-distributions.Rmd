@@ -104,6 +104,7 @@ $X \sim f_X(x|\theta)$ is a natural exponential family if its pdf can be written
 $$f_X(x|\theta) = h(x)c^*(\boldsymbol{\eta})\exp\Big(\sum_{i=1}^k \eta_i t_i(x)\Big)$$
 :::
 
+This is also sometimes called the "canonical parametrization." 
 
 
 
