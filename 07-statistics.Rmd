@@ -31,9 +31,13 @@ In general, we would like to choose statistics that satisfy principles that will
 Let $X \sim f(x|\theta)$. We say $T=T(X)$ is a sufficient statistic (SS) for $\theta$ if $\mathcal{L}(\theta|X)$ is independent of $\theta$, i.e. $f(x|T;\theta) = g(x)$. 
 :::
 
-Let's see some examples. 
+### Techniques for Finding Sufficient Statistics
+There are several ways to find a sufficient statistic - this section will outline several methods.  
 
-::: {.example}
+Firstly, if you are given a statistic and you wish to check whether it is sufficient, you can do so directly.
+
+
+::: {.example name="Checking Whether a Sample Mean is Sufficient}
 Let $X = (X_1, ..., X_n), X_i$ iid N($\theta$, 1) and $T = \bar{X}$. Recall that $\bar{X} \sim N(\theta, 1/n)$. 
 $$
 \begin{aligned}
@@ -43,8 +47,9 @@ $$
 Observe that the conditional density is independent of $\theta$. By definition, $T = \bar{X}$ is a sufficient statistic for $\theta$. 
 :::
 
+As you can see, given a particular statistic, you can check whether it is sufficient directly. However, this requires knowing its distribution. If you are given the joint distribution of random variables (or can compute it) involved in the statistic, the definition of sufficiency can be checked. 
 
-::: {.example} 
+::: {.example name="Finding a Sufficient Statistic Directly"} 
 
 Let $X_1, X_2$ iid Poisson($\lambda$). The joint distribution of $X_1, X_2$ is $P(X_1=x_1, X_2 = x_2) = \frac{\lambda^{x_1+x_2}exp(-2\lambda)}{x_1! x_2!}$. Let $T(X_1, X_2) = X_1+X_2$. Observe that $X_1+X_2 \sim$ Poisson(2$\lambda$). Thus, 
 
@@ -58,7 +63,9 @@ $$
 which is independent of $\lambda$ and $X_1+X_2$ is sufficient for $\lambda$. 
 :::
 
-As can be seen from the example, we need a candidate statistic to prove sufficiency using the definition. Furthermore, checking sufficiency of a statistics is difficult because we need to compute the conditional distribution. 
+As can be seen from the example, we need a candidate statistic to prove sufficiency using the definition. Furthermore, checking sufficiency of a statistics is difficult because we need to compute the conditional distribution.  
+
+Even if you are not given a statistic, a sufficient statistic can still be identified using the *factorization theorem*:
 
 ::: {.theorem name="Factorization Theorem"}
 $T(X)$ is sufficient for $\theta \Longleftrightarrow \exists g(t|\theta)$ and $h(x)$, such that 
@@ -67,21 +74,27 @@ $$f(x|\theta)=g(t|\theta)h(x)$$
 $\forall x, \theta$.
 :::
 
-Note that the factorization theorem tells us that if we can manipulate $f(x|\theta)$ as above, we have a sufficient statistic. 
+Note that the factorization theorem tells us that if we can manipulate $f(x|\theta)$ as above, we have a sufficient statistic. Here is an example.
 
-::: {.example} 
+::: {.example name="Using the Factorization Theorem} 
 Let $\textbf{X}= (X_1, ..., X_n), X_i$ iid $Poisson(\lambda)$. 
 $$
 \begin{aligned}
 P(X_1=x_1,..., X_n = x_n) &= \frac{exp(-n\lambda)\lambda^{\sum x_i}}{\prod x_i!}\\
-&= h(x)g(\sum x_i|\lambda)
+&= h(x)g\Big(\sum x_i|\lambda\Big)
 \end{aligned}
 $$
 $\Rightarrow T(X) = \sum X_i$ sufficient for $\lambda$.
 :::
 
-::: {.example} 
-Let $\textbf{X}= (X_1, ..., X_n), X_i$ iid $Uniform(0,\theta)$.
+Some distributions involve indicator functions. If an indicator function involves both $X_i$ and $\theta$, such as $I(X_i < \theta)$, chances are that an order statistic like $X_{(1)}$ (the minimum) or $X_{(n)}$ (the maximum) will be involved in the sufficient statistic. 
+
+Why is this? Take $I(X_i < \theta)$ as an example. For iid $X_i$, $\prod_{i=1}^nI(X_i < \theta) = I(X_{(n)} < \theta)$. For this product to be nonzero, every $X_i$ must be less than $\theta$, which is equivalent to saying that the largest value ($X_{(n)}$) is less than $\theta$.  
+
+This trick is useful for finding sufficient statistics. Here's an example involving the Uniform distribution.
+
+::: {.example name="Indicator Functions in the Factorization Theorem} 
+Let $\textbf{X}= (X_1, ..., X_n), X_i$ iid $Uniform(0,\theta)$. Then,
 
 $$
 \begin{aligned}
@@ -111,9 +124,11 @@ $\Rightarrow T(X) = X_{(n)}$ sufficient for $\theta$.
   $$
     By the factorization theorem, $T^*(X)$ is sufficient for $\theta$. 
   
-### Important exponential family result
+### Exponential Family Sufficient Statistics {#exp-fam-ss}
 
-Consider a sample $X=(X_1,...,X_n)$ from $f_X(x|\theta)= h(x)c(\theta)\exp\Big(\sum_{i=1}^k w_i(\theta)t_i(x)\Big)$. Then $T(X) = \Big(\sum_{i=1}^n t_1(x), ..., \sum_{i=1}^n t_k(x)\Big)$ is a [sufficient statistic](#statistics). Note that this result follows directly from the [factorization theorem](# sufficient-stats). 
+If $X_i$ is an exponential family, we automatically know its sufficient statistic. Consider a sample $X=(X_1,...,X_n)$ from $f_X(x|\theta)= h(x)c(\theta)\exp\Big(\sum_{i=1}^k w_i(\theta)t_i(x)\Big)$. Then $T(X) = \Big(\sum_{i=1}^n t_1(x), ..., \sum_{i=1}^n t_k(x)\Big)$ is a [sufficient statistic](#statistics). Note that this result follows directly from the [factorization theorem](# sufficient-stats).  
+
+**Problem-Solving Tip:** Whenever possible, use exponential families to quickly find sufficient statistics! It is often easier to prove that a distribution is an exponential family than to otherwise find a sufficient statistic. In addition, showing a distribution is an exponential provides [many other useful results](#exponential-family).
 
 
 ### A Note on Distributions of Sufficient Statistics
