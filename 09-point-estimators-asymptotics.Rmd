@@ -51,13 +51,14 @@ We can also compare estimators via their **asymptotic relative efficiency (ARE)*
 
 $$ARE(\theta, S_n, T_n) = \frac{\sigma_T^2}{\sigma_S^2}$$
 
+Finally, $T_n(X)$ is said to be *asymptotically normal* if $\sqrt{n}(\hat{\theta}_n - \theta_0) \overset{\mathcal{D}}{\rightarrow} N(0, I(\theta_0))$.
+
 Let's explore first how we might prove that an estimator converges asymptotically to a normal distribution to show this directly.
 
 
 ### Central Limit Theorems
 
 These theorems are used to show asymptotic normality. There are many different types; let us focus on the three most common.
-
 
 ::: {#clt .theorem name="Central Limit Theorem (iid)"}
 
@@ -120,20 +121,43 @@ where $u = \begin{bmatrix}\frac{\partial}{\partial \theta_1}g(\theta),...,\frac{
 
 One final technique for proving convergence in distribution is to use the Cramer-Wold Device.
 
-:::{#cramer-wold-device .theorem name="Cramer Wold Device"}
+:::{#cramer-wold-device .theorem name="Cramer-Wold Device"}
 
 For a sequence of random vectors $X_n$, a random vector $X$, and a vector $a$ of constants,
 
-$$X_n \overset{\mathcal{D}}{\rightarrow} \iff a'X_n \overset{\mathcal{D}}{\rightarrow}a'X, \forall a$$
+$$X_n \overset{\mathcal{D}}{\rightarrow} X \iff a'X_n \overset{\mathcal{D}}{\rightarrow}a'X, \forall a$$
 In other words, we can show convergence in distribution of a random vector by showing that every linear combination of that random vector converges in distribution to the same linear combination of $X$.
 
 :::
 
 The Cramer-Wold Device allows us to convert a problem involving convergence of random vectors into a problem involving convergence of a single random variable.
 
+::: {.example name="Using the Cramer-Wold Device}
+Suppose $X_{1n} \overset{\mathcal{D}}{\rightarrow} X_1 \sim N(\mu_1, \sigma^2_1)$ and $X_{2n} \overset{\mathcal{D}}{\rightarrow} X_2 \sim N(\mu_2, \sigma^2_2)$. Then, by the Cramer-Wold Device, $(X_{1n}, X_{2n}) \overset{\mathcal{D}}{\rightarrow} MVN(\begin{bmatrix}\mu_1 \\ \mu_2\end{bmatrix}, \Sigma)$ where
+
+$$\Sigma = \begin{bmatrix}\sigma_1^2 & \rho\\\rho & \sigma_2^2\end{bmatrix}$$
+where $\rho = Cov(X_1, X_2)$.  
+
+*Proof*: To use the Cramer-Wold Device, we need to hypothesize a distribution to which the vector $(X_{1n}, X_{2n})$ will converge. Fortunately, we're given one - $MVN(\begin{bmatrix}\mu_1 \\ \mu_2\end{bmatrix}, \Sigma)$. Now, we show what happens when we apply an arbitrary linear transformation.  
+
+By [additivity of the normal](#normal), 
+
+$$
+a_1X_1 + a_2X_2 = N(a_1\mu_1 + a_2\mu_2, a_1^2\sigma_1^2 + a_2^2\sigma_2^2 + 2\rho a_1a_2\sigma_1\sigma_2)\\
+= \begin{bmatrix}a_1 \\ a_2\end{bmatrix}\cdot MVN(\begin{bmatrix}\mu_1 \\ \mu_2\end{bmatrix}, \Sigma)
+$$
+
+By the Cramer-Wold Device, this implies that $(X_{1n}, X_{2n}) \overset{\mathcal{D}}{\rightarrow} MVN(\begin{bmatrix}\mu_1 \\ \mu_2\end{bmatrix}, \Sigma)$
+
+:::
+
+The above example can be generalized to a $k$-vector of random variables $X_i$ which converge in distribution to a normal. 
+
 ### Asymptotic Distribution in Practice.
 
-Statistical problems are often more complicated than simply applying the CLT or Delta Method. Often, we may need to consider the convergences of other random variables. To do this, we can combine the CLT/Delta Method with Slutsky's Theorem or the Continuous Mapping Theorem to prove desired results.
+Statistical problems are often more complicated than simply applying the CLT or Delta Method. Often, we may need to consider the convergences of other random variables. To do this, we can combine the CLT/Delta Method with Slutsky's Theorem or the Continuous Mapping Theorem to prove desired results. Or, we may need to employ a more direct proof. Here are some examples.
+
+
 
 
 ## Asymptotic Properties of MLEs
