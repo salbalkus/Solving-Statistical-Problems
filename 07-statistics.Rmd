@@ -298,16 +298,21 @@ Since this is an exponential family distribution,it is easy to see that the MSS 
 
 ## Complete Statistics {#complete-stats}
 
-One of the most important properties for a statistic to have is completeness. Let $X\sim f(x|\theta), \theta \in \Theta$. 
+An important technical property for a statistic to have is completeness. . 
 
 ::: {.example name="Complete Statistics"}
-A statistic $T=T(X)$ (not necessarily sufficient) is **complete** if for any function $g(\cdot)$, 
+Let $X\sim f(x|\theta), \theta \in \Theta$. A statistic $T=T(X)$ (not necessarily sufficient) is **complete** if for any function $g(\cdot)$, 
+
 $$E_{\theta}(g(T)) = 0 \quad \forall \theta \Rightarrow P_{\theta}(g(T) = 0) = 1 \quad \forall \theta.$$
 :::
 
 **Note:** The family of pdfs of $T$ is called complete. 
 
-**Remark:** The definition says that if $T$ is complete, then only function of $T$ that can have zero expectation on $\theta$ is the zero function, i.e. there can't be any non-zero unbiased estimates of 0 based on $T$. 
+**Remark:** Why do we care about completeness? The definition says that if $T$ is complete, then only function of $T$ that can have zero expectation on $\theta$ is the zero function. In other words, there cannot be any non-zero unbiased estimates of 0 based on $T$. 
+
+If $T$ is not complete, then it is possible for the statistic to have mean 0, but also involve a distribution around 0 containing nonzero values of $T(X)$. This means that there could be another $\theta$ that yields a different expectation than 0.
+
+Conversely, if $T$ *is* complete, then a $T$ that estimates 0 must have a "trivial" distribution (a point mass at 0). This "trivial" distribution is important because it means that we can actually use it for inference. Completeness is used in the [Lehmann-Scheffe Theorem](#lehmann-scheffe) to prove optimality results for estimators.
 
 ### Techniques for Finding CSS
 
@@ -416,7 +421,7 @@ How do we know if two statistics $T$ and $S$ are **independent**? Determining wh
 Let $X \sim f(x|\theta), \theta \in \Theta$. If $T(X)$ is a complete and sufficient statistic (for $\theta \in \Theta$), and $S(X)$ is ancillary, then $T(X)$ and $S(X)$ are independent for all $\theta \in \Theta$. 
 :::
 
-**Remark:** This result plainly says that CSSs are independent of ancillary statistics. 
+**Remark:** This result plainly says that CSSs are independent of ancillary statistics. Note, however, that the converse is not true; just because $T$ is independent of all ancillary statistics does not imply that $T$ is complete.
 
 ::: {.example}
 Let $X_1, ..., X_n$ iid $N(\mu, \sigma^2)$. Suppose that $\sigma^2$ is known. We want to show that $\bar{X}$ and $S^2$ are independent using Basu's Lemma. 
