@@ -473,7 +473,7 @@ If $Z_n \overset{\mathcal{D}}{\rightarrow} Z$ and $Y_n \overset{p}{\rightarrow} 
 
 For problem-solving, Slutsky's theorem is generally applied whenever we deal with both convergence in probability and convergence in distribution together.
 
-:::{.theorem name="Continuous Mapping Theorem"}
+:::{#cmt .theorem name="Continuous Mapping Theorem"}
 
 Suppose $Y_n$ is a sequence of random variables (possibly vectors), $Y$ is a random variable (or vector the same length as $Y_n$), $c$ is a constant, and $g$ is a function. Then,
 

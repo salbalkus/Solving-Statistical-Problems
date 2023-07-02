@@ -4,9 +4,9 @@ Evaluating the asymptotic properties of point estimators.
 
 ## Consistency
 
-An important asymptotic property of an estimator is that it converges in probability to the true value being estimated as $n \rightarrow \infty$. This is called **consistency**. 
+An important asymptotic property of an estimator is that it converges in probability to the true value being estimated as $n \rightarrow \infty$. This is called **consistency**. It is generally the most basic asymptotic property that an estimator can have.
 
-### Weak Law of Large Numbers
+### Technique: Weak Law of Large Numbers
 The most common strategy for proving consistency is to use the Weak Law of Large Numbers.
  
 ::: {.theorem name="Weak Law of Large Numbers" #wlln}
@@ -18,11 +18,13 @@ $$\bar{X} = \frac{1}{n}\sum_{i=1}^nX_i\overset{p}{\rightarrow}E(X_i)$$
 **Non-iid version**: Alternatively, we can drop the iid assumption; if $X_i$ have finite mean and variance, $Cov(X_i, X_j) = 0$, and $\lim_{n\rightarrow\infty}\sum_{i=1}^n\frac{\sigma_i^2}{n^2} = 0$, then
 
 $$\frac{1}{n}\sum_{i=1}^nX_i - \frac{1}{n}\sum_{i=1}^nE(X_i) \overset{\mathcal{p}}{\rightarrow} 0$$
+This theorem guarantees that Method of Moments estimators are consistent.
+
 :::
 
-If a statistic can be rewritten in the form of a sample mean, the WLLN can be combined with the Continuous Mapping Theorem to show a variety of estimators are consistent. One hint that the WLLN (or later, the Central Limit Theorem) may be employed is that the expression to be proven contains a sum.
+One hint that the WLLN (or later, the Central Limit Theorem) may be employed is that the expression to be proven contains a sum. If this is true, you can multiply and divide by $n$ to form a 
 
-### Direct Proof via Convergence in Probability
+### Technique: Direct Proof via Convergence in Probability
 Sometimes, a statistic may not consistent of a sum of random variables. This often arises in the case of [order statistics](#order-statistics). In this case, the definition of convergence in probability must be used directly. To do this, a variety of arguments may be employed.
 
 ::: {.example name="How To Prove Convergence of a Sample Maximum"}
@@ -35,6 +37,12 @@ $$
 The 0 arises because $X_{(n)} < b$ by the definition of the Uniform. As $\varepsilon$ is taken to be small, $\lim_{n\rightarrow \infty}(1 -\frac{\varepsilon}{b - a})^n = 0$. Therefore, since $P(|X_{(n)} - b| > \varepsilon) = 0$, we have proven $X_{(n)}\overset{p}{\rightarrow}b$
 
 :::
+
+### Technique: Continuous Mapping Theorem.
+
+If you can prove that a particular estimator $T$ converges in probability to some value not equal to $\theta$, chances are that some transformation can be applied to make it consistent by the [Continuous Mapping Theorem](#cmt). In fact, any continuous function of a consistent estimator is also consistent; that is $T_n(X) \overset{p}{\rightarrow} \theta$, then $g(T_n(X)) \overset{p}{\rightarrow} g(\theta)$
+
+For example, if $T_n(X) \overset{p}{\rightarrow} \frac{\theta + \zeta_1}{\zeta_2}$, then by the Continuous Mapping Theorem, $W_n(X) = \zeta_2T(X) - \zeta_1\overset{p}{\rightarrow}\theta$. As such, one strategy to finding a consistent estimator is to start with  a sample mean, which is consistent by the WLLN, then transform it to obtain the desired result.
 
 ## Asymptotic Efficiency
 
@@ -156,7 +164,6 @@ The above example can be generalized to a $k$-vector of random variables $X_i$ w
 ### Asymptotic Distribution in Practice.
 
 Statistical problems are often more complicated than simply applying the CLT or Delta Method. Often, we may need to consider the convergences of other random variables. To do this, we can combine the CLT/Delta Method with Slutsky's Theorem or the Continuous Mapping Theorem to prove desired results. Or, we may need to employ a more direct proof. Here are some examples.
-
 
 
 

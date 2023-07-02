@@ -300,14 +300,16 @@ Since this is an exponential family distribution,it is easy to see that the MSS 
 
 One of the most important properties for a statistic to have is completeness. Let $X\sim f(x|\theta), \theta \in \Theta$. 
 
-::: {.example name="Complete statistics"}
+::: {.example name="Complete Statistics"}
 A statistic $T=T(X)$ (not necessarily sufficient) is **complete** if for any function $g(\cdot)$, 
 $$E_{\theta}(g(T)) = 0 \quad \forall \theta \Rightarrow P_{\theta}(g(T) = 0) = 1 \quad \forall \theta.$$
 :::
 
 **Note:** The family of pdfs of $T$ is called complete. 
 
-**Remark:** The definition says that of $T$ is complete, then only function of $T$ that can have zero expectation on $\theta$ is the zero function, i.e. there can't be any non-zero unbiased estimates of 0 based on $T$. 
+**Remark:** The definition says that if $T$ is complete, then only function of $T$ that can have zero expectation on $\theta$ is the zero function, i.e. there can't be any non-zero unbiased estimates of 0 based on $T$. 
+
+### Techniques for Finding CSS
 
 ::: {.example name="Polynomial technique"}
 Let $\textbf{X}=(X_1,..., X_n), X_i$ iid $Bern(p)$. Consider $T = \sum_{i=1}^{n}X_i$. Note that $T\sim Bin(n,p)$ as it is the sum of idd Bernoulli random variables. Suppose we have a $g(\cdot)$ function that satisfies the definition of complete statistic. Then $T$ would be complete. 
@@ -404,12 +406,14 @@ Consider the $N(\mu, \sigma^2)$ family with $\theta = (\mu, \sigma^2) \in \Theta
 3. $\Theta_3 = [1,3] \times [4,6]$ implies that $\mu, \sigma^2$ can take values within the closed square that is $\Theta_3$. Does a disk fit into a square? Yes. Thus we can conclude that $T$ is complete.
 :::
 
-Hopefully that discussion clarifies when and how to use the theorem on complete statistics in exponential family distributions. Now, let us step back a bit and summarize what we have discussed until now as we present Basu's Lemma, one of the most important theorems in statistical inference.
+Hopefully that discussion clarifies when and how to use the theorem on complete statistics in exponential family distributions. Now, let us step back a bit and summarize what we have discussed until now as we present Basu's Theorem, one of the most important theorems in statistical inference.
 
-Let $X \sim f(x|\theta), \theta \in \Theta$.
+### Basu's Theorem
 
-::: {.theorem name="Basu's Lemma"}
-If $T(X)$ is a complete and sufficient statistic (for $\theta \in \Theta$), and $S(X)$ is ancillary, then $T(X)$ and $S(X)$ are independent for all $\theta \in \Theta$. 
+How do we know if two statistics $T$ and $S$ are **independent**? Determining whether two statistics are independent directly can be difficult, since it requires finding their joint distribution, which may be infeasible. Basu's theorem provides a more efficient technique for evaluating the independence of two statistics.
+
+::: {.theorem name="Basu's Theorem"}
+Let $X \sim f(x|\theta), \theta \in \Theta$. If $T(X)$ is a complete and sufficient statistic (for $\theta \in \Theta$), and $S(X)$ is ancillary, then $T(X)$ and $S(X)$ are independent for all $\theta \in \Theta$. 
 :::
 
 **Remark:** This result plainly says that CSSs are independent of ancillary statistics. 
