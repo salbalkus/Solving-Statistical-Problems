@@ -146,6 +146,13 @@ and for continuous,
 
 $$E(g(X) | Y) = \int_{\mathcal{X}}g(x)f_{X|Y}(x|y)$$
 
+Conditional expectation has the same linear properties as discussed previously in the non-conditional case. In addition,
+
+- $E(g(X,Y) | X = x) = E(g(x, Y) | X = x)$
+- If $X$ and $Y$ are independent, then $E(Y | X = x) = E(Y)$
+- $E(g(X)Y | X) = g(X) \cdot E(Y | X)$
+
+
 Two fundamental properties regarding conditional expectations exist that
 simply the computation of its unconditional counterpart.
 
@@ -160,6 +167,9 @@ $Var(X) = E(Var(X|Y)) + Var(E(X|Y))$
 These two properties can be used to compute $E(X)$ when only $E(X|Y)$ is
 known. For example, this occurs in [Chapter
 8](#point-estimators-finite-samples) when finding UMVUEs.
+
+**Note on Regression Functions**: Given covariates $X = X_1, X_2, ..., X_n$, finding a model for $E(Y | X)$ is also known as "regression." Functions of $X$ are "linear" if $d(X) = \beta_0 + \beta_1X_1 +...+\beta_n X_n$. See @Gut2009 for more information on regression problems.
+
 
 ## Moment Generating Functions {#mgf}
 
