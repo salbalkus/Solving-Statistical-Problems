@@ -42,11 +42,9 @@ where the vector $t = (t_1, ..., t_k)$ is linearly dependent. Linear dependence 
 
 How do we know? Since $\alpha t = \sum_{i=1}^k \alpha_it_i = 0$, we can add it on the interior of the exponential function:
 
-$$
-f(x | \eta) = h(x)c(\theta)\exp(\sum_{i=1}^k \eta_it_i + \sum_{i=1}^k \alpha_it_i)\\
-= h(x)c(\theta)\exp(\sum_{i=1}^k (\eta_i + \alpha_i)t_i)
+$$f(x | \eta) = h(x)c(\theta)\exp(\sum_{i=1}^k \eta_it_i + \sum_{i=1}^k \alpha_it_i)\\
+= h(x)c(\theta)\exp(\sum_{i=1}^k (\eta_i + \alpha_i)t_i)$$
 
-$$
 Letting $\eta = (\eta_1 + \alpha_1,..., \eta_k + \alpha_k)$, clearly $f(x|\eta) = f(x|\eta')$ and $\nu$ is not identified.
 
 :::
@@ -78,9 +76,38 @@ Multiple values of $\beta$ and $\beta'$ can be chosen to satisfy this equation (
 
 (can we use the MGF to show this as well?)
 
-## Method of Moments
+## Finding estimators
 
-## MLE Theory
+There are several methods used to find parameter estimators. In this chapter we will discuss two very popular methods, the method of moments and the maximum likelihood method. 
+
+### Method of Moments
+
+Recall that the moments of a distribution are given by $\mu^k = E[X^k]$, where $k \in \mathbb{N}_{+}$. The idea of the method of moments is to equate the population quantity to the sample quantity, i.e.
+
+$$\mu^k = E[X^k] = \frac{1}{n} \sum_{i=1}^{n} X_i^k$$
+where $k=1,2,...$ and $\textbf{X}=(X_1,..., X_n)$ is the sample from a distribution $f(x|\theta)$ where $\theta = (\theta_1,..., \theta_k)$. Usually we use find $k$ equations of sample average and moments to estimate $k$ parameters. 
+
+::: {.example}
+Suppose we want to find MOM estimators for $\alpha, \beta$ from a $X\sim\Gamma(\alpha,\beta)$ random variable. Let $\textbf{X}=(X_1,...,X_n)$ be and iid sample from the gamma distribution. In this case we know that $E[X]=\alpha/\beta$ and $Var(X)= \alpha/\beta^2$. Since we are estimating two parameters, we will be using the first two moments, namely, $E[X], E[X^2]$. Observe that $Var(X) = E[X^2] - E[X]^2 \Rightarrow  E[X^2] =  \alpha/\beta^2 + (\alpha/\beta)^2$. Now, we can proceed with the method of moments estimation with the following two equations.
+
+$$ \bar{X} = \alpha/\beta\\ \bar{X^2} = \alpha/\beta^2 + (\alpha/\beta)^2$$
+Solving for $\alpha, \beta$ we obtain that 
+
+$$ \hat{\beta} = \frac{\bar{X}}{\bar{X^2} - \bar{X}^2},\\ \hat{\alpha} = \hat{\beta}\bar{X} = \frac{\bar{X}^2}{\bar{X^2} - \bar{X}^2}.$$
+:::
+
+**Remarks:**
+
+- MOM estimators may not exist. Suppose $Y_1,...,Y_n$ is a random sample from a $Unif(-\theta, \theta)$. Then $E[X] = 0$ and a MOM estimator would solve the following equation, $\bar{Y} = 0$, which has no solutions in $\theta$. Thus a MOM estimator of $\theta$ does not exist. 
+
+- MOM estimators may be outside of the parameter space. 
+
+- MOM estimators are not invariant to transformations. 
+
+- MOM estimators can offer a starting point for iterative methods used to find solutions of likelihood equations. 
+
+
+### MLE Theory 
 
 :::{.definition name="Likelihood"}
 
@@ -111,10 +138,12 @@ Of course, if $\theta$ is a single parameter, then $U(\theta|X) = \frac{d}{d\the
 
 Therefore, the first step in finding an MLE is to set the score to 0, and solve for the desired parameter. Let's see an example.
 
-:::{.example name="MLE of _______"}
-example
-:::
+:::{.example }
+Let $\textbf{X} = (X_1,..., X_n)$ be an iid sample from a $Bern(p)$ distribution. To find the MLE for $p$, let us find maximize wrt $p$ the log likelihood function. The likelihood function is $\mathcal{L}(p|\textbf{X}) = \prod_{i=1}^{n} p^X_i(1-p)^{1-X_i} = p^{\sum X_i}(1-p)^{n-\sum X_i}$. Now, the log-likehood is given by $\mathcal{l}(p|\textbf{X}) = log(p) \sum X_i + log(1-p)(n-\sum X_i)$. The score equation goes as follows.
 
+$$ U(p|\textbf{X}) = \frac{\sum X_i}{p} - \frac{(n-\sum X_i)}{1-p} \overset{set}= 0$$
+and the solution wrt $p$ is $\bar{X}$. Now, the second derivative test is always negative which implies that $\hat{p}_{MLE} = \bar{X}$. 
+:::
 
 The score has two useful properties in MLE theory. First, under [regularity conditions](#regularity-conditions), $E(U(\theta|X)) = 0$ - its mean is 0. This is because the regularity conditions imply [Leibniz's rule](#leibniz-rule); that is,
 
@@ -159,16 +188,160 @@ $$\mathcal{J}(\theta|X) = -\nabla\nabla^\top\ell(\theta|X) = \begin{bmatrix}\fra
 
 The observed information can be used to estimate the Fisher information for a given sample $X$.
 
-## Unbiasedness
+The MLE theory is essential is the task of finding estimators for a given parameter. By definition, the solution that maximizes the likelihood function is called the maximum likelihood estimator for the parameter. This estimator has very properties, namely, it is a statistic that respects the parameter space. We previously saw an example in which we found an MLE for a one-dimensional parameter. However, we can find multidimensional MLEs for multidimensional parameters. There are two main approaches. 
 
-## Minimum Variance (Cramer-Rao Lower Bound)
+Let $\theta = (\theta_1, \theta_2)$, a two-dimensional parameter. 
+1. Find MLE candidates for $\theta_1, \theta_2$ by setting partial derivative wrt $\theta_1, \theta_2$ respectively to zero and solving.
+2. Find second partial derivatives and show that at least one of them is negative. 
+3. Find the second order partial derivative matrix and show that the determinant is positive. 
+If 2. and 3. are shown to be true, then then candidates from 1. are MLE's for $\theta_1, \theta_2$. 
+
+Let $\theta$ be a $k$-dimensional parameter, ie, $k$ parameters. Then we can employ the profile-likelihood approach to find an MLE candidate. The profile-likelihood approach consists of maximizing wrt a parameter of interest and profiling out the rest of the parameters (which can be considered nuissance parameters). In the case in which we want to find MLE for all $k$ parameters, then we would have to maximize wrt to each parameter and then substitute back our solutions until we prove that the candidates maximize each of the profile likelihoods for each parameter. This method is necessary when we want to find the MLE of an unknown, but fixed, number of parameters. 
+<!-- EXPLAIN BETTER -->
+<!-- https://web.stat.tamu.edu/~suhasini/teaching613/chapter3.pdf -->
+
+
+**Remarks:** Suppose $X \sim f(x|\eta)$ is an exponential family with natural parametrization. Then MOM estimators correspond to MLE.
+
+::: {.theorem}
+If an MLE is unique and an MSS exists, then the MLE is a function of the MSS. 
+:::
+
+::: {.theorem name="Invariance property of MLE"}
+If $\hat{\theta}$ is MLE for $\theta$, then $\tau(\hat{\theta})$ is MLE for $\tau(\theta)$.
+:::
+
+::: {.example}
+invariance of mle example
+
+:::
+
+
+## Properties of estimators
+
+After we have found our estimators, we are usually interested in choosing the best estimator. This is not always possible, but there are properties we can check to at least guarantee that some characteristics will be satisfied. Let us discuss the finite- sample properties of estimators.
+
+## Unbiasedness
+Let $\textbf{X} = (X_1,..., X_n), X_i \sim f(x|\theta), \theta \in \Theta$ and let $\hat{\theta}$ be an estimator of $\theta$
+
+::: {.definition name="Bias of an estimator"}
+$$bias(\hat{\theta}) = E[\hat{\theta}] - \theta$$
+:::
+If $bias(\hat{\theta})=0$ then $E[\hat{\theta}] = \theta$ and we say that $\hat{\theta}$ is an **unbiased** estimator of $\theta$. 
+
+**Note:** Bias is a measure of accuracy. 
+
+::: {.definition name="Variance of an estimator"}
+$$Var(\hat{\theta}) = E[(\hat{\theta} - E[\hat{\theta}])^2] = E[\hat{\theta}^2]- E[\hat{\theta}]^2 $$
+:::
+**Note:** Variance is a measure of precision
+
+::: {.definition name="Mean squared error, MSE"}
+$$MSE(\hat{\theta}) = Var(\hat{\theta}) + bias^2(\hat{\theta})$$
+:::
+**Note:** MSE is a measure of precision and accuracy. 
+
+Ideally we want an unbiased estimator with minimal variance. Often we have a [variance-bias tradeoff](https://en.wikipedia.org/wiki/Bias–variance_tradeoff), a situation in which when bias decreases, variance increases and viceversa. For example, for any distribution we have the following facts:
+
+- $S^2$ is unbiased
+- $\hat{\sigma^2}$ is biased
+- $Var(\hat{\sigma^2}) < Var(S^2)$
+
+::: {.definition}
+Let $\hat{\theta}, \tilde{\theta}$ be two estimators of $\theta$. If $MSE(\hat{\theta}) \le MSE (\tilde{\theta}) \forall \theta$ and  $MSE(\hat{\theta}) < MSE (\tilde{\theta})$ for at least one $\theta$, then we say that $\tilde{\theta}$ is inadmissible. 
+:::
+
+::: {.definition}
+Let $\hat{\theta}, \tilde{\theta}$ be any unbiased estimators of $\theta$ whose variances exist. Then, 
+
+$$RE(\hat{\theta};\tilde{\theta}) = \frac{Var(\tilde{\theta})}{Var(\hat{\theta})}$$
+
+is the *relative efficiency* of $\hat{\theta}$ to $\tilde{\theta}$. 
+:::
+
+
 
 ## Uniform Minimum Variance Unbiased Estimators (UMVUEs)
 
-::: {.definition name="Lehmann-Scheffe Theorem"}
-This theorem
-
+::: {.definition name="Uniform minimum variance unbiased estimator (UMVUE)"}
+An estimator $W$ of a parameter $\tau(\theta)$ is called *uniform minimum variance unbiased estimator (UMVUE)* of $\tau(\theta)$ if $E_{\theta}(W)= \tau(\theta)$ and $Var_{\theta}(W) \le Var_{\theta}(Q)$ for any other unbiased estimator, Q, of $\tau(\theta)$.
 :::
+
+The UMVUE is the unbiased estimator of $\tau(\theta)$ with the minimum variance among all other unbiased estimators of $\tau(\theta)$. Proving that an estimator is UMVUE by the definition alone becomes a difficult task easily, because there might exist an infinite number of unbiased estimators! Thankfully, a plethora of results exist that aids statisticians in the task of proving -or finding- an UMVUE. 
+
+### Cramér-Rao Bound
+
+The Cramér-Rao Bound provides *lower* bound for the variance of all estimators of a parameter $\tau(\theta)$. This result is extremely powerful because if we can show that an *unbiased* estimator attains the *Cramér-Rao Lower Bound* (CRLB), then the estimator is UMVUE. 
+
+::: {.definition name="Cramér-Rao Bound"}
+Let $\textbf{X}=(X_1,..., X_n), \textbf{X} \sim f_{\textbf{X}}(x|\theta), \theta \in \Theta$. If $W=W(\textbf{X})$ is some estimator such that
+$$
+\begin{equation}
+\frac{\partial}{\partial\theta} E_{\theta}(W)=\int \frac{\partial}{\partial\theta} \bigg[ W(\textbf{X})f_{\textbf{X}}(x|\theta)\bigg]dx 
+(\#eq:reg-cond-1)
+\end{equation}
+$$
+then, 
+
+$$Var(W) \ge \frac{[\frac{\partial}{\partial\theta} E_{\theta}(W)]^2}{E_{\theta}([\frac{\partial}{\partial\theta} ln(f_{\textbf{X}}(x|\theta))]^2)}.$$
+:::
+
+**Remark:** If the sample is iid and 
+
+$$
+\begin{equation}
+\frac{\partial^2}{\partial\theta^2} \int f(x|\theta) dx =  \int \frac{\partial^2}{\partial\theta^2} f(x|\theta) dx
+(\#eq:reg-cond-2)
+\end{equation}
+$$
+then, 
+ $$Var(W) \ge \frac{[\frac{\partial}{\partial\theta} E_{\theta}(W)]^2}{nE_{\theta}[-\frac{\partial^2}{\partial\theta^2} ln(f_{X_i}(x|\theta))]}.$$
+Before continuing, let's discuss conditions \@ref(eq:reg-cond-1) and \@ref(eq:reg-cond-2). First, if \@ref(eq:reg-cond-1) is satisfied then 
+$$E_{\theta}\bigg[\frac{\partial}{\partial\theta}ln(f_{\textbf{X}}(X|\theta))\bigg] = 0,  \forall \theta \in \Theta.$$
+Furthermore, if \@ref(eq:reg-cond-2) is satisfied, then 
+
+$$E_{\theta}\bigg[\frac{\partial^2}{\partial\theta^2} ln(f(x|\theta))\bigg] = -E_{\theta}\bigg[\bigg(\frac{\partial}{\partial\theta} ln(f(x|\theta))\bigg)^2\bigg]. $$
+**Remarks:** 
+
+- \@ref(eq:reg-cond-2) is satisfied for exponential families. 
+- If \@ref(eq:reg-cond-1) and \@ref(eq:reg-cond-2) are not satisfied, then the CRLB might not be the lower bound for the variance. 
+
+::: {.example}
+CRLB example
+:::
+
+::: {.theorem name="Attainment Theorem"}
+Let $W(X)$ be an unbiased $\tau(\theta)$ and suppose that \@ref(eq:reg-cond-1) holds. Then $W$ attains CRLB if and only if $\frac{\partial}{\partial \theta} ln (\mathcal{L}(\theta|X)) = a(\theta)[W-\tau(\theta)]$ for some $a(\theta)$.
+:::
+
+::: {.example}
+attainment theorem example
+:::
+
+**Remark:** An estimator that does not attain CRLB can still be UMVUE. For some parameters, CRLB might not be achieved. 
+
+::: {.theorem}
+If $E_{\theta}(W(X))= \tau(\theta)$, then $W(X)$ is best unbiased if and only if $W(X)$ is uncorrelated with all unbiased estimators of 0.
+:::
+
+::: {.theorem name=Rao-Blackwell}
+Suppose $W$ is unbiased for $\tau(\theta)$ and $T$ is a SS for $\tau(\theta)$. Let $Y:=E(W|T)$. Then,
+
+1. $Y$ is a statistic (not a function of $\theta$)
+2. $E[Y] = \tau(\theta), \forall \theta$
+3. $Var(Y)\le Var(W), \forall \theta$. 
+:::
+
+Rao-Blackwell theorem provides a method to improve upon any unbiased estimator, i.e. provides a *better* unbiased estimator. Let us see a result from Lehmann-Scheffé, which provides a method to find an UMVUE. 
+
+::: {.theorem name=Lehmann-Scheffé}
+Suppose $W$ is unbiased for $\tau(\theta)$ and $T$ is a *complete* and *sufficient* for $\tau(\theta)$. Then $Y:=E(W|T)$ is UMVUE of $\tau(\theta)$.
+:::
+
+::: {.theorem}
+Let $W$ be a statistic such that $Var(W)<\infty$, and $W$ is UMVUE for $\tau(\theta)$. Then $W$ is the unique UMVUE of $\tau(\theta)$. 
+:::
+
 
 ## Inferential Properties of Exponential Families Distributions
 
