@@ -1,3 +1,196 @@
 # Hypothesis Tests: Finite Samples {#hypothesis-tests-finite-samples}
 
-Constructing finite-sample hypothesis tests and evaluating their properties.
+Scientists often formulate scientific hypotheses about the world. Subsequently, statisticians are called upon to determine whether these scientific hypotheses are supported by the data at hand. As statisticians, how do we do this? Here, we prove a simple procedure:
+
+## Constructing a Test
+
+**Step 1: Determine Hypotheses.** To start, we first formulate *statistical hypotheses*, which are mathematical statements about a population parameter. These hypotheses come in pairs: one **null** hypothesis, $H_0$, and one **alternative** hypothesis, $H_1$. We write these
+
+$$H_0: \theta \in \Theta_0 \text{  and  } H_1: \theta \in \Theta_1$$
+
+Commonly, the sets $\Theta_0$ and $\Theta_1$ are just (in)equality statements. A *simple* hypothesis is one where $\theta = \theta_0$, where $\theta_0$ is known to be some fixed value. A *composite* hypothesis is one where $\theta$ is *not* known to be a fixed value, but rather is in some range. Examples of composite hypotheses include $\theta < \theta_0$ and $\theta > \theta_0$ ("one-sided" hypotheses), as well as $\theta \neq \theta_0$ (a "two-sided" hypothesis).
+
+In any case, it must be true that $\Theta_0 \cap \Theta_1 = \emptyset$. This guarantees that only one of the hypotheses can be true. In addition, we assume the sample sample of $\theta$ is $\Theta = \Theta_0 \cup \Theta_1$.
+
+In a problem, the hypotheses are often given - our job is to construct a test, which is a decision rule telling us which hypotheses we ought to accept.
+
+**Step 2: Determine test statistic and its rejection region.** How do we determine which hypothesis is correct? To this, we specify two components:
+
+1. The **test statistic**, a function to summarize the data. The test statistic is analogous to an estimator in [Chapter 8](#point-estimators-finite-samples) - it should be selected on the basis of certain properties, which we discuss shortly.
+2. The **rejection region**, a set of values of the test statistic for which the null hypothesis $H_0$ is rejected.
+
+The rejection region constitutes our decision rule. For a given test statistic $T$, it is commonly expressed in two ways:
+
+- Directly as a set, like so: $\{T > c\}$, where $c$ is a constant.
+- As an indicator function: $\phi(T) = I(T > c)$, which outputs 1 if we reject the null $H_0$ and 0 if we reject the alternative $H_1$. 
+
+**Step 3: Compute the rejection region for a given $\alpha$.** For a rejection region $\{T > c\}$, the goal is to set $c$ such that we control $\alpha$, the maximum probability of wrongly rejecting $H_0$. This is discussed in the [Power](#power) section below.
+
+Accomplishing all three of these steps yields a valid hypothesis test! Now let's delve more deeply into how exactly each step is accomplished.
+
+
+## Likelihood Ratio Tests {#lrt}
+
+Firstly, how do we find a valid test statistic? In some cases, the test statistic may be given. In others, we can use the **likelihood ratio test** (LRT), which is analogous to the MLE for point estimators. The likelihood ratio test statistic for $H_0: \theta \in \Theta_0$ is
+
+$$\lambda(x) = \frac{\sup_{\theta\in\Theta_0}\mathcal{L}(\theta|x)}{\sup_{\theta\in\Theta}\mathcal{L}(\theta|x)}$$
+aka, the ratio of the likelihood under the null to the full likelihood. Then, the likelihood ratio test rejection region is 
+
+$$R = \{\lambda(x) \leq c\}$$
+where $0 < c < 1$.  
+
+The easiest way to compute $\lambda(x)$ is to do the following:
+
+1. Find the MLE of $\theta$, call it $\hat{\theta}$.
+2. Find the "restricted MLE", such that $\theta\in\Theta_0$, call it $\hat{\theta}_0$.
+3. Plug the MLE and restricted MLE into the likelihood, effectively computing the ratio
+
+$$\lambda(x) = \frac{\mathcal{L}(\hat{\theta}_0|x)}{\mathcal{L}(\hat{\theta}|x)}$$
+This yields the LRT. Another potentially simpler way to find the LRT is to use a sufficient statistic $T(X)$. By the [Factorization Theorem](#factorization-theorem), $\mathcal{L}(\theta|x) = f_X(x|\theta) = f_{T(X)}(t|\theta)\cdot h(x)$. In this case,
+
+$$\lambda(x) = \frac{\sup_{\theta\in\Theta_0}\mathcal{L}(\theta|x)}{\sup_{\theta\in\Theta}\mathcal{L}(\theta|x)} = \frac{\sup_{\theta\in\Theta_0}f_{T(X)}(t|\theta)\cdot h(x)}{\sup_{\theta\in\Theta}f_{T(X)}(t|\theta)\cdot h(x)} = \frac{\sup_{\theta\in\Theta_0}\mathcal{L}(\theta|t)}{\sup_{\theta\in\Theta}\mathcal{L}(\theta|t)}$$
+
+
+Therefore, if we know the distribution of a sufficient statistic $T$, we can construct an LRT based on $T$ instead of $X$. This can be very useful if $X$ is known to be an exponential family or otherwise admits an easy-to-find sufficient statistic.
+
+## Power {#power}
+
+Once we have the LRT or some other statistic, we need to find $c$ in the rejection region $R = \{T(X) \leq c\}$ (or $\{T(X) \geq c\}$, depending on the hypothesis). This is done by controlling error rates. There are two types of error: 
+
+- **Type I:** When $\theta \in \Theta_0$, but the test incorrectly rejects $H_0$.
+- **Type II:** When $\theta \in \Theta_1$, but the test incorrectly rejects $H_1$ (or equivalently, accepts $H_0$)
+
+Here is a nifty table summarizing the errors:
+
+| Truth | Accept $H_0$ | Reject $H_0$ |
+| :---: | :---: | :---: |
+| $H_0$ | ✔️ | Type I |
+| $H_1$ | Type II | ✔️ |
+
+If you're familiar with the children's fable "[The Boy Who Cried Wolf](https://en.wikipedia.org/wiki/The_Boy_Who_Cried_Wolf)," one way to remember which error is which is via the mnemonic:  
+
+"When the boy cried wolf, the villagers committed a Type I and a Type II error, in that order."  
+
+Back to statistics! These two error rates are summarized by the test's **power**. The **power function** of a test is 
+
+$$\beta(\theta) = P(T \in R | \theta) = \begin{cases}P(\text{Type I error}) & \text{if } \theta \in \Theta_0\\ 1 - P(\text{Type II error}) & \text{if } \theta \in \Theta_1\end{cases}$$
+
+When choosing $c$ in the hypothesis test, we want to control these errors. The most common way of doing so is by specifying the **size**, $\alpha$, of the test, defined as:
+
+$$\alpha = \sup_{\theta \in \Theta_0}\beta(\theta)$$
+Hence, the size measures the maximum type I error that we may commit when $H_0$ is true. When $X$ is discrete, sometimes consider the **level** \alpha, which is defined analogously as 
+
+$$\alpha \leq \sup_{\theta \in \Theta_0}\beta(\theta)$$
+Level $\alpha$ is essentially the same as size $\alpha$, but conservative. It accounts for the fact that when $X$ is discrete, we may not be able to set $c$ to achieve an exact $\alpha$.
+
+We may also be asked to consider the **maximum Type II** error, which is defined analogously assuming $H_1$ is true instead as 
+
+$$\alpha = \sup_{\theta \in \Theta_1}\beta(\theta)$$
+How might we do this in practice? Let's see an example.
+
+::: {.example name="Finding an LRT and its Power Function}
+FORTHCOMING
+:::
+
+## How to Find Optimal Tests
+
+In [Chapter 8](#point-estimators-finite-samples), we discussed how construction of a point estimator must consider two properties - unbiasedness and minimum variance - and how the ultimate goal is to construct an UMVUE. Hypothesis tests have analogous properties. In this section, we define these properties and show how to achieve them.
+
+### Properties
+
+**Unbiased**: A test is said to be "unbiased" if, for all $\theta_1 \in \Theta_1$ and $\theta_0 \in \Theta_0$,
+
+$$\beta(\theta_1) > \beta(\theta_0)$$
+or, equivalently,
+
+$$\inf_{\theta\in\Theta_1} \beta(\theta) \geq \sup_{\theta\in\Theta_0}\beta(\theta)$$
+Intuitively, this means that an unbiased test, even in the worst-case scenario, has a higher probability of rejecting $H_0$ when it is actually false than rejecting $H_0$ when it is true. Unbiasedness can be proven directly from the power function. 
+
+**Most Powerful**
+Consider the set $C$ of all level $\alpha$ tests for a given $\theta_1 \in \Theta_1$. Among these tests, $W$ is considered the "most powerful" (MP) if
+
+$$\beta_W(\theta_1) \geq \beta_{W^*}(\theta_1)$$
+for all $W^* \in C$. 
+
+Intuitively, a "most powerful" test has the highest probability of correctly rejecting $H_0$ when $H_0$ is actually false (considering the "worst-case scenario" across all other possible tests). An MP test is defined for a specific $\theta_1$.
+
+**Uniformly Most Powerful**
+Usually, we care about a test's performance across *all* $\theta_1 \in \Theta_1$. A test is considered "uniformly most powerful" (UMP) if it is the most powerful for all $\theta_1 \in \Theta_1$. 
+
+In other words, for a class $C$ of level $\alpha$ tests, if $\beta_W(\theta) \geq \beta_{W^*}(\theta)$ for all $\theta \in \Theta_1$ and $W^* \in C$, then $W$ is the UMP test.
+
+**Locally Most Powerful**
+
+Sometimes it may not be possible to find a UMP test. In this case, we can consider Locally Most Powerful (LMP) tests.
+
+FORTHCOMING
+
+
+### Optimality for Simple Hypotheses: The Neyman-Pearson Lemma
+
+
+The Neyman-Pearson Lemma defines a UMP test when both the null and alternative hypotheses are simple.
+
+::: {.lemma name="Neyman-Pearson Lemma"}
+
+Suppose we have a set of simple hypotheses:
+
+$$H_0: \theta = \theta_0, H_1: \theta = \theta_1$$
+
+For $X \sim f(x|\theta)$, let the rejection region be
+
+$$R =  \Big\{\frac{f(x|\theta_1)}{f(x|\theta_0)} > k\Big\}$$
+with $k \geq 0$. Then,
+
+1. The test with rejection region $R$ is UMP level $\alpha = P(X \in R | \theta = \theta_0)$ (Sufficiency)
+2. Every UMP level $\alpha$ test satisfies the above and is size $\alpha$ (except on a set with probability 0) (Necessary).
+
+:::
+
+In addition, a corollary to the Neyman-Pearson lemma states that we can also construct such a test based on a sufficient statistic, using the Factorization theorem on both the numerator and the denominator to cancel out the extraneous $h(x)$. Then,
+
+$$R =  \Big\{\frac{f(t|\theta_1)}{f(t|\theta_0)} > k\Big\}$$
+is an UMP level $\alpha$ test.
+
+### Optimality for One-Sided Hypotheses: The Karlin-Rubin Theorem
+
+It is more common to see one-sided tests. The Karlin-Rubin Theorem defines a UMP test when both the null and alternative hypotheses are one-sided composite.
+
+::: {.theorem name="Karlin-Rubin Theorem"}
+
+Suppose $H_0: \theta \leq \theta_0$ and $H_1: \theta > \theta_0$. Then, if...
+
+1. $T$ is a sufficient statistic
+2. $T$ has a monotone likelihood ratio
+3. $P(T > t_0 |\theta_0) = \alpha$
+
+then the test with rejection region $R = \Big\{T > t_0 \Big\}$ is the UMP level $\alpha$ test of $H_0$ versus $H_1$. 
+
+:::
+
+This theorem follows from the Neyman-Pearson corollary. As a result, finding an UMP test typically amounts to identifying a sufficient statistic, and proving that it has a monotone likelihood ratio.
+
+::: {.definition name="Monotone Likelihood Ratio"}
+
+A family $f(t|\theta)$ has a monotone likelihood ratio if, for all $\theta_1, \theta_2 \in \Theta$ such that $\theta_1 < \theta_2$, 
+
+$$\frac{f(t|\theta_2)}{f(t|\theta_1)}$$
+
+is a monotone nondecreasing function of $t$ when either $f(t|\theta_1) >0$ or $f(t|\theta_0) >0$
+
+:::
+
+If instead $f(t|\theta)$ is nonincreasing, use $-T$ instead of $T$ in the Karlin-Rubin theorem to obtain a statistic with a monotone likelihood ratio.  
+
+Also, note that all 1-parameter exponential families have a monotone likelihood ratio - a convenient property simplifying proofs. 
+
+### Optimality for Two-Sided Hypotheses.
+
+In this section we will show how to construct a UMP test for a two-sided composite hypothesis.  
+
+Sike! This is actually impossible. No UMP test exists for $H_0: \theta = \theta_0, H_1: \theta \neq \theta_0$. For such a test to be UMP, it must be UMP for both $\theta < \theta_0$ and for $\theta > \theta_0$, which creates a contradiction.
+
+## Nuisance Parameters
+
+FORTHCOMING
+

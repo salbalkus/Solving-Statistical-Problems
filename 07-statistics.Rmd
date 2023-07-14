@@ -67,7 +67,7 @@ As can be seen from the example, we need a candidate statistic to prove sufficie
 
 Even if you are not given a statistic, a sufficient statistic can still be identified using the *factorization theorem*:
 
-::: {.theorem name="Factorization Theorem"}
+::: {#factorization-theorem .theorem name="Factorization Theorem"}
 $T(X)$ is sufficient for $\theta \Longleftrightarrow \exists g(t|\theta)$ and $h(x)$, such that 
 
 $$f(x|\theta)=g(t|\theta)h(x)$$
