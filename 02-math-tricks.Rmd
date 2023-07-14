@@ -14,6 +14,18 @@ This chapter will cover highly specific mathematical techniques used to solve st
 
 ## Combinatorics
 
+## Binomial and Multinomial Theorems
+
+The [binomial theorem](https://en.wikipedia.org/wiki/Binomial_theorem) states that
+
+$$(x + y)^n = \sum_{k=0}^n {n\choose k}x^ky^{n-k}$$
+It can be used to prove that the pmf of a [Binomial Random Variable](#binomial-distribution) sums to 1.
+
+Analogously, the [multinomial theorem](https://en.wikipedia.org/wiki/Multinomial_theorem) states
+
+$$(x_1 + x_2 + ... + x_m)^n = \sum_{k_1, k_2,...,k_m \geq 0}\frac{n!}{k_1!k_2!...k_m!}\prod_{i=1}^nx_i^{k_i}$$
+provided $\sum_{i=1}^m k_i = n$. It can be used to prove that the pmf of a [Multinomial Random Variable](#multinomial-distribution) sums to 1.
+
 ## Geometric Series {#geometric-series}
 
 The **geometric series** is a useful series convergence, defined as follows:
@@ -61,6 +73,26 @@ If $a(\theta)$, $b(\theta)$, and $f(x, \theta)$ are differentiable w.r.t to $\th
 $$\frac{d}{d\theta}\int_{a(\theta)}^{b(\theta)}f(x,\theta)dx = f(b(\theta), \theta)\frac{d}{d\theta}b(\theta) - f(a(\theta), \theta)\frac{d}{d\theta}a(\theta) + \int_{a(\theta)}^{b(\theta)} \frac{\partial}{\partial\theta}f(x,\theta)dx$$
 :::
 
+## Fubini's Theorem
+
+One useful problem-solving technique is exchanging the order of integrals or infinite series to more easily solve an equation. But when can we do this?
+
+::: {.theorem name="Fubini's Theorem: Integrals"}
+
+$\int_\mathcal{X}\int_\mathcal{Y}f(x,y)dydx = \int_\mathcal{Y}\int_\mathcal{X}f(x,y)dxdy$ if $\int_\mathcal{X}\int_\mathcal{Y}|f(x,y)|dydx < \infty$
+
+that is, if the integral of its absolute value is finite.
+
+:::
+
+::: {.theorem name="Fubini's Theorem: Infinite Series"}
+
+$\sum_{m=1}^\infty\sum_{n=1}^\infty a_{m,n} = \sum_{n=1}^\infty\sum_{m=1}^\infty a_{m,n}$ if $\sum_{m=1}^\infty\sum_{n=1}^\infty |a_{m,n}| < \infty$ 
+
+that is, if the original series is absolutely convergent
+
+:::
+
 ## Gamma Function {#gamma-function}
 
 Defined as 
@@ -96,26 +128,6 @@ $$
 $$
 3. Take the square root of the final implication to get $|a + b| \leq |a| + |b|$
 
-
-## Fubini's Theorem
-
-One useful problem-solving technique is exchanging the order of integrals or infinite series to more easily solve an equation. But when can we do this?
-
-::: {.theorem name="Fubini's Theorem: Integrals"}
-
-$\int_\mathcal{X}\int_\mathcal{Y}f(x,y)dydx = \int_\mathcal{Y}\int_\mathcal{X}f(x,y)dxdy$ if $\int_\mathcal{X}\int_\mathcal{Y}|f(x,y)|dydx < \infty$
-
-that is, if the integral of its absolute value is finite.
-
-:::
-
-::: {.theorem name="Fubini's Theorem: Infinite Series"}
-
-$\sum_{m=1}^\infty\sum_{n=1}^\infty a_{m,n} = \sum_{n=1}^\infty\sum_{m=1}^\infty a_{m,n}$ if $\sum_{m=1}^\infty\sum_{n=1}^\infty |a_{m,n}| < \infty$ 
-
-that is, if the original series is absolutely convergent
-
-:::
 
 
 
