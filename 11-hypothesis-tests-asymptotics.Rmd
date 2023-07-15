@@ -94,7 +94,21 @@ Disadvantages:
 
 ## Composite Null Hypotheses
 
-A composite null hypothesis involves multiple parameters, some of which are [nuisance parameters](#nuisance-parameters). Suppose we have a null hypothesis $H_0: \alpha = \alpha_0$, where $\alpha$ is a vector of length $k$, and we have a vector $\beta$ of nuisance parameters. In a composite null, we can partition $\theta^\top = (\alpha^\top, \beta^\top)$.
+### Multiple Parameters
+
+What if our hypothesis tests multiple parameters at once? In this case, we must construct a matrix $C$ describing how these parameters may be combined and tested.  
+
+Let $\theta = \begin{bmatrix}\theta_0 & \theta_1 & \theta_2 \end{bmatrix}$. Suppose we want to test $\theta_0 = \theta_1 - 2\theta_2$. This equates to $\theta_0 - \theta_1 + 2\theta_2 = 0$. Then, we can construct the $C$ matrix as
+
+$$C = \begin{bmatrix}1 & -1 & 2\end{bmatrix}$$
+And $C\hat{\theta} \sim N(0, C(X^\top X)^{-1}C^\top\sigma^2)$, which allows us to construct a chi-squared test
+
+$$C\hat{\theta}^\top(C(X^\top X)^{-1}C^\top)C\hat{\theta} / \sigma^2 \sim \chi^2(k)$$
+where $k$ is the number of parameters (in this case, $k=3$)
+
+### Nuisance Parameters
+
+A composite null hypothesis may instead involve [nuisance parameters](#nuisance-parameters). Suppose we have a null hypothesis $H_0: \alpha = \alpha_0$, where $\alpha$ is a vector of length $k$, and we have a vector $\beta$ of nuisance parameters. In a composite null, we can partition $\theta^\top = (\alpha^\top, \beta^\top)$.
 
 ::: {#adjusted-information .definition name="Adjusted Information"}
 To use a normal asymptotic approximation in this situation, it is necessary to compute the "adjusted information" $I_{n,\alpha\alpha|\beta}(\alpha, \beta)$ - the information for $\alpha$, conditional on our $\beta$ estimate:

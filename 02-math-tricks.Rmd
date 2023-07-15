@@ -34,12 +34,30 @@ $$\sum_{x=0}^\infty ar^x = \frac{a}{1-r} \text{ for } |r| < 1$$
 
 One place it arises is computing the moments of the [Geometric Distribution](#geometric-distribution).
 
-## Exponential Taylor Series {#exponential-taylor}
+## Taylor Series for Exponential Function {#exponential-taylor}
 Some distributions such as the Poisson rely on infinite sums. Often, we can simplify these infinite sums to an exponential by rewriting them using the following series convergence:
 
 $$\sum_{x=0}^\infty \frac{\lambda^x}{x!} = \exp(\lambda)$$
 
 This is the Taylor series for the exponential function, sometimes called the "exponential series".
+
+## Taylor's Formula
+
+If the $(n+1)$th derivative of a function $f$ exists for all $\xi \in (c, x)$, then
+
+$$
+
+f(x) = f(c) + f'(c)(x-c) + \frac{f''(c)}{2!}(x-c)^2 + ...\\
++ \frac{f^{(n)}(c)}{n!}(x - c)^n + R_n(x)
+$$
+where 
+
+$$R_n(x) = \frac{f^{(n+1)}(\xi)}{(n+1)!}(x - c)^{n+1}$$
+
+This can be found on page 550 of @Keisler2013. Taylor's formula is key to proofs of several important statistical theorems, including the [Delta Method](#delta-method) and the [asymptotic properties of the MLE](#point-estimators-asymptotics). Do note the following points of confusion:
+- Although it is based on Taylor's Formula, this is not identical to the infinite "Taylor Series" used to define functions like the exponential as mentioned previously. Taylor's Formula terminates with $R_n(x)$, a function defining the remaining error when approximating a function by a finite number of derivatives. This property is key, because showing that $R_n(x) \rightarrow 0$ allows asymptotic proofs to be developed.
+- The aforementioned asymptotic proofs typically only rely on $n = 1$ or $n = 2$, with the remainder appearing only after the second or third term.
+
 
 ## Exponential Limit {#exponential-limit}
 Another way to express the exponential function is by the limit

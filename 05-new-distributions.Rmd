@@ -131,12 +131,16 @@ test
 
 Besides finding the joint pdf of a function, one may also be asked to compute a probability involving two random variables, such as $P(X > Y)$, given a joint distribution $f_{X, Y}(x,y)$. Solving these is generally a two-step process:
 
-1. Define the Region of interest. This will be a set $\{(x, y)\}$ with restriction on $x$ and $y$ given in the problem. For example, to compute $P(X > Y)$ where $x, y \in [-1, 1]$, it might take the form $\{(x,y) :  -1 < y < x < 1\}$.
+1. Define the region of interest. This will be a set $\{(x, y)\}$ with restriction on $x$ and $y$ given in the problem. For example, to compute $P(X > Y)$ where $x, y \in [-1, 1]$, it might take the form $\{(x,y) :  -1 < y < x < 1\}$.
 
 2. Set up and solve a double integral over the region of interest. Following the above, you might write
 
 $$P(X > Y) = \int_{-1}^1\int_{-1}^x f(x,y)dydx$$
-Setting up the bounds of these integrals can be very tricky, so make sure they are computed carefully!
+Setting up the bounds of these integrals can be very tricky, so make sure they are computed carefully! Some tips:
+
+- It is generally always advisable to graph the region to be integrated, in order to ensure that is has been specified correctly.
+- Unlike when computing a CDF, when computing the value of an expression with a "greater than" sign, such as $P(X + Y > 1)$, you can proceed directly. You do not need to "flip" the sign - and in fact, it may result in error if the new expression with "$<$" is not strictly the complement of the old one containing "$>$".
+- However, if you have the joint CDF rather than the joint PDF, it may be advantageous to do the above if it allows you to evaluate the CDF directly, without requiring any integration.
 
 ## Probability Integral Transform
 

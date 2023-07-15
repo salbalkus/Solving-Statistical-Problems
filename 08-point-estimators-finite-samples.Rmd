@@ -196,7 +196,9 @@ Let $\theta = (\theta_1, \theta_2)$, a two-dimensional parameter.
 3. Find the second order partial derivative matrix and show that the determinant is positive. 
 If 2. and 3. are shown to be true, then then candidates from 1. are MLE's for $\theta_1, \theta_2$. 
 
-Let $\theta$ be a $k$-dimensional parameter, ie, $k$ parameters. Then we can employ the profile-likelihood approach to find an MLE candidate. The profile-likelihood approach consists of maximizing wrt a parameter of interest and profiling out the rest of the parameters (which can be considered nuissance parameters). In the case in which we want to find MLE for all $k$ parameters, then we would have to maximize wrt to each parameter and then substitute back our solutions until we prove that the candidates maximize each of the profile likelihoods for each parameter. This method is necessary when we want to find the MLE of an unknown, but fixed, number of parameters. 
+Let $\theta$ be a $k$-dimensional parameter, ie, $k$ parameters. Then we can employ the profile-likelihood approach to find an MLE candidate. The profile-likelihood approach consists of maximizing with respect to a parameter of interest and profiling out the rest of the parameters (which can be considered nuisance parameters). In the case in which we want to find MLE for all $k$ parameters, then we would have to maximize with respect to each parameter and then substitute back our solutions until we prove that the candidates maximize each of the profile likelihoods for each parameter. This method is necessary when we want to find the MLE of an unknown, but fixed, number of parameters. 
+
+EXAMPLE FORTHCOMING
 <!-- EXPLAIN BETTER -->
 <!-- https://web.stat.tamu.edu/~suhasini/teaching613/chapter3.pdf -->
 

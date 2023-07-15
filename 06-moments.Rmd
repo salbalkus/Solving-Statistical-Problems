@@ -122,8 +122,28 @@ $Cov(X,Y) = 0$, which simplifies calculations. *However*, make no
 mistake, this implication is not bidirectional: $Cov(X,Y) = 0$ does NOT
 imply X, Y\$ are independent!
 
-Occasionally, we might want to work with a measure of joint dispersion
-that is normalized. This is called the **correlation**.
+**Covariance of Linear Combinations**: Similar to variance, covariance also has a special property for linear combinations of random variables.
+
+$$Cov(aX + bY, cW + dV) = ac\cdot Cov(X,W) + ad\cdot Cov(X,V) + bc\cdot Cov(Y,W) + bd\cdot Cov(Y, V)$$
+
+Stemming from this, when covariance is calculated for a sum of random variables, independent components can be ignored. For example, if $Y_1 = X_1 + Z_1$ and $Y_2 = X_2 + Z_2$, and $X_1$ and $X_2$ are independent, then
+
+$$Cov(Y_1, Y_2) = Cov(X_1 + Z_1, X_2 + Z_2) = Cov(Z_1, Z_2)$$
+**Relationship Between Covariance and Variance**. 
+
+$$Cov(X, X) = Var(X)$$
+**The Covariance Matrix**. For vectors of random variables, we can define a covariance matrix as follows. Let $X = \begin{bmatrix} X_1, ..., X_n \end{bmatrix}$. Then,
+
+$$
+Cov(X) = \begin{bmatrix}
+Var(X_1) & ... & Cov(X_1,X_n)\\
+... & ... & ... \\
+Cov(X_n, X_1) & ... & Var(X_n)
+\end{bmatrix}
+$$
+This is especially useful when working with the [Multivariate Normal](#multivariate-normal)
+
+Occasionally, we might want to work with a measure of joint dispersion that is normalized. This is called the **correlation**.
 
 ::: {.definition name="Covariance"}
 **Correlation** is a measure of the joint dispersion of two random
