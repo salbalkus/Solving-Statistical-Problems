@@ -133,7 +133,7 @@ If $X_i$ is an exponential family, we automatically know its sufficient statisti
 
 ### A Note on Distributions of Sufficient Statistics
 
-Recall a convenient property of [exponential families](#exponential-family): that their maximum likelihood estimate is a function of their sufficient statistic. Because of this, in order to prove [Finite Sample Properties](#point-estimators-finite-samples) of an estimator or construct [Hypothesis Tests](#hypothesis-tests-finite-samples), it is often useful to understand their distributions. This is why the distributions of each of the sufficient statistics are included in the fourth column of the table below These distributions are mostly derived from additive, location-scale, and other properties in [Chapter 4 - Known Distributions](#known-distributions)
+Recall a convenient property of [exponential families](#exponential-family): that their maximum likelihood estimate is a function of their sufficient statistic. Because of this, in order to prove [Finite Sample Properties](#point-estimators-finite-samples) of an estimator or construct [Hypothesis Tests](#hypothesis-tests-finite-samples), it is often useful to understand their distributions. This is why the distributions of each of the sufficient statistics are included in the fourth column of the table below. These distributions are mostly derived from additive, location-scale, and other properties in [Chapter 4 - Known Distributions](#known-distributions)
 
 ### Moments of the Sufficient Statistic
 
@@ -166,7 +166,7 @@ Using these theorems, we can calculate the moments of the sufficient statistics 
 $$E(T(X)) = E\Big(\sum_{i=1}^nt(X_i)\Big) = nE(t(X_i)) = n\cdot-\frac{\partial}{\partial \eta}\log(c^*(\eta))$$
 In fact, letting $A(\eta) = -\log(c^*(\eta))$, we can obtain all of the moments of $T(X)$ by simply differentiating $A(\eta)$
 
-### Table of Sufficient Statistics
+### Table of Sufficient Statistics {#table-ss}
 
 Translated from https://en.wikipedia.org/wiki/Exponential_family
 

@@ -78,7 +78,7 @@ Multiple values of $\beta$ and $\beta'$ can be chosen to satisfy this equation (
 
 ## Finding estimators
 
-There are several methods used to find parameter estimators. In this chapter we will discuss two very popular methods, the method of moments and the maximum likelihood method. 
+How do we take a guess at what a good estimator might be? There are several methods used to find parameter estimators. In this chapter we will discuss two very popular methods, the method of moments and the maximum likelihood method. 
 
 ### Method of Moments
 
@@ -96,7 +96,7 @@ Solving for $\alpha, \beta$ we obtain that
 $$ \hat{\beta} = \frac{\bar{X}}{\bar{X^2} - \bar{X}^2},\\ \hat{\alpha} = \hat{\beta}\bar{X} = \frac{\bar{X}^2}{\bar{X^2} - \bar{X}^2}.$$
 :::
 
-**Remarks:**
+**Issues with the MoM Estimators:**  
 
 - MOM estimators may not exist. Suppose $Y_1,...,Y_n$ is a random sample from a $Unif(-\theta, \theta)$. Then $E[X] = 0$ and a MOM estimator would solve the following equation, $\bar{Y} = 0$, which has no solutions in $\theta$. Thus a MOM estimator of $\theta$ does not exist. 
 
@@ -104,10 +104,16 @@ $$ \hat{\beta} = \frac{\bar{X}}{\bar{X^2} - \bar{X}^2},\\ \hat{\alpha} = \hat{\b
 
 - MOM estimators are not invariant to transformations. 
 
-- MOM estimators can offer a starting point for iterative methods used to find solutions of likelihood equations. 
+**Advantages of MoM Estimators:**  
+
+- They are guaranteed to be [unbiased](#unbiasedness) and [consistent](#consistency) for the parameter they estimate.
+
+- MOM estimators can offer a starting point for iterative methods used to find solutions of likelihood equations.
 
 
-### MLE Theory 
+### Maximum Likelihood Estimation
+
+Rather than simply matching moments, often a more effective strategy for finding an estimator is by finding the value which maximizes the *entire* likelihood of the sample. That is, for a given $X = X_1, X_2, ... X_n$, we choose the estimator for which this sample is most likely. This is called the *maximum likelihood estimator*. Because of how common this approach is, we introduce several terms to describe the components of MLE.
 
 :::{.definition name="Likelihood"}
 
@@ -162,7 +168,7 @@ Var(U(\theta|X)) = E(U(\theta|X)U(\theta|X)^\top) \\
 
 If $\theta$ is one-dimensional, $Var(U(\theta|X)) = E(U(\theta|X)^2) = -E\Big(\frac{\partial^2}{\partial\theta^2}\ell(\theta|X)\Big)$. The rather insightful derivation of this is available [here](https://en.wikipedia.org/wiki/Score_(statistics)#Variance). This variance has a special name, the **information** (or sometimes, "Fisher Information")
 
-:::{.definition name="Information"}
+:::{#information .definition name="Information"}
 
 In statistics, **information** refers to the amount of information that a random variable $X$ contains about a parameter $\theta$. It is defined mathematically as the variance of the score, which is
 
@@ -219,12 +225,9 @@ invariance of mle example
 :::
 
 
-## Properties of estimators
+## Properties of Estimators
 
-After we have found our estimators, we are usually interested in choosing the best estimator. This is not always possible, but there are properties we can check to at least guarantee that some characteristics will be satisfied. Let us discuss the finite- sample properties of estimators.
-
-## Unbiasedness
-Let $\textbf{X} = (X_1,..., X_n), X_i \sim f(x|\theta), \theta \in \Theta$ and let $\hat{\theta}$ be an estimator of $\theta$
+How do we know if a particular estimator is considered "good"? There are two main properties by which we measure the quality of an estimator: **bias**, which measures the *accuracy* of the estimator, and **variance**, which measures the *precision*. Let $\textbf{X} = (X_1,..., X_n), X_i \sim f(x|\theta), \theta \in \Theta$ and let $\hat{\theta}$ be an estimator of $\theta$. Then, we have the following:
 
 ::: {.definition name="Bias of an estimator"}
 $$bias(\hat{\theta}) = E[\hat{\theta}] - \theta$$
@@ -258,34 +261,36 @@ Let $\hat{\theta}, \tilde{\theta}$ be any unbiased estimators of $\theta$ whose 
 
 $$RE(\hat{\theta};\tilde{\theta}) = \frac{Var(\tilde{\theta})}{Var(\hat{\theta})}$$
 
-is the *relative efficiency* of $\hat{\theta}$ to $\tilde{\theta}$. 
+is the *relative efficiency* of $\hat{\theta}$ to $\tilde{\theta}$. This allows use to compare variance between estimators
 :::
 
 
 
 ## Uniform Minimum Variance Unbiased Estimators (UMVUEs)
 
+Is it possible for there to be a "best" estimator with respect to MSE? If we restrict consideration only to unbiased estimators, then the answer may be yes. An unbiased estimator with the minimum possible variance among all possible $\theta$ is known as a *Uniform Minimum Variance Unbiased Estimator*, or UMVUE for short. Let's define this mathematically.
+
 ::: {.definition name="Uniform minimum variance unbiased estimator (UMVUE)"}
 An estimator $W$ of a parameter $\tau(\theta)$ is called *uniform minimum variance unbiased estimator (UMVUE)* of $\tau(\theta)$ if $E_{\theta}(W)= \tau(\theta)$ and $Var_{\theta}(W) \le Var_{\theta}(Q)$ for any other unbiased estimator, Q, of $\tau(\theta)$.
 :::
 
-The UMVUE is the unbiased estimator of $\tau(\theta)$ with the minimum variance among all other unbiased estimators of $\tau(\theta)$. Proving that an estimator is UMVUE by the definition alone becomes a difficult task easily, because there might exist an infinite number of unbiased estimators! Thankfully, a plethora of results exist that aids statisticians in the task of proving -or finding- an UMVUE. 
+The UMVUE is the unbiased estimator of $\tau(\theta)$ with the minimum variance among all other unbiased estimators of $\tau(\theta)$. First, let's consider when the UMVUE exists - in this case, there are generally two strategies to construct the UMVUE.
 
-### Cramér-Rao Bound
+### Finding UMVUEs I: Cramér-Rao Bound
 
-The Cramér-Rao Bound provides *lower* bound for the variance of all estimators of a parameter $\tau(\theta)$. This result is extremely powerful because if we can show that an *unbiased* estimator attains the *Cramér-Rao Lower Bound* (CRLB), then the estimator is UMVUE. 
+If you can find an unbiased estimator of $\tau(\theta)$, one way to show that it is an UMVUE is by showing that it attains the minimum possible variance among all estimators. The Cramér-Rao Bound provides such a *lower* bound for the variance of all estimators of a parameter $\tau(\theta)$. This result is extremely powerful because if we can show that an *unbiased* estimator attains the *Cramér-Rao Lower Bound* (CRLB), then the estimator is UMVUE. 
 
 ::: {.definition name="Cramér-Rao Bound"}
 Let $\textbf{X}=(X_1,..., X_n), \textbf{X} \sim f_{\textbf{X}}(x|\theta), \theta \in \Theta$. If $W=W(\textbf{X})$ is some estimator such that
-$$
+
 \begin{equation}
 \frac{\partial}{\partial\theta} E_{\theta}(W)=\int \frac{\partial}{\partial\theta} \bigg[ W(\textbf{X})f_{\textbf{X}}(x|\theta)\bigg]dx 
 (\#eq:reg-cond-1)
 \end{equation}
-$$
+
 then, 
 
-$$Var(W) \ge \frac{[\frac{\partial}{\partial\theta} E_{\theta}(W)]^2}{E_{\theta}([\frac{\partial}{\partial\theta} ln(f_{\textbf{X}}(x|\theta))]^2)}.$$
+$$Var(W) \ge \frac{[\frac{\partial}{\partial\theta} E_{\theta}(W)]^2}{E_{\theta}([\frac{\partial}{\partial\theta} \log(f_{\textbf{X}}(x|\theta))]^2)}.$$
 :::
 
 **Remark:** If the sample is iid and 
@@ -298,33 +303,47 @@ $$
 $$
 then, 
  $$Var(W) \ge \frac{[\frac{\partial}{\partial\theta} E_{\theta}(W)]^2}{nE_{\theta}[-\frac{\partial^2}{\partial\theta^2} ln(f_{X_i}(x|\theta))]}.$$
+ 
 Before continuing, let's discuss conditions \@ref(eq:reg-cond-1) and \@ref(eq:reg-cond-2). First, if \@ref(eq:reg-cond-1) is satisfied then 
-$$E_{\theta}\bigg[\frac{\partial}{\partial\theta}ln(f_{\textbf{X}}(X|\theta))\bigg] = 0,  \forall \theta \in \Theta.$$
+$$E_{\theta}\bigg[\frac{\partial}{\partial\theta}\log(f_{\textbf{X}}(X|\theta))\bigg] = 0,  \forall \theta \in \Theta.$$
 Furthermore, if \@ref(eq:reg-cond-2) is satisfied, then 
 
-$$E_{\theta}\bigg[\frac{\partial^2}{\partial\theta^2} ln(f(x|\theta))\bigg] = -E_{\theta}\bigg[\bigg(\frac{\partial}{\partial\theta} ln(f(x|\theta))\bigg)^2\bigg]. $$
+$$E_{\theta}\bigg[\frac{\partial^2}{\partial\theta^2} \log(f(x|\theta))\bigg] = -E_{\theta}\bigg[\bigg(\frac{\partial}{\partial\theta} \log(f(x|\theta))\bigg)^2\bigg]. $$
 **Remarks:** 
 
 - \@ref(eq:reg-cond-2) is satisfied for exponential families. 
-- If \@ref(eq:reg-cond-1) and \@ref(eq:reg-cond-2) are not satisfied, then the CRLB might not be the lower bound for the variance. 
+- If \@ref(eq:reg-cond-1) and \@ref(eq:reg-cond-2) are not satisfied, then the CRLB might not be the lower bound for the variance.
+- Sometimes, especially for multiple parameters, we can also write the CRLB as $Var(W) \geq I(\theta)^{-1}$, the inverse of of the [information](#information) mentioned previously. Thus, if one is computing the MLE, the CRLB follows from the same calculations used for the MLE, which can save time, especially for problems involving common families of distributions.
 
 ::: {.example}
 CRLB example
 :::
 
+Since the CRLB is a lower bound, if the variance of an unbiased estimator $Var(\hat{\theta})$ equals the CRLB, then it must be the UMVUE.  
+
+While it is certainly possible to compute the CRLB directly, and then compute the variance of the estimator $Var(\hat{\theta})$, and check if these values are the same, there is also a simpler method. The *Attainment Theorem* tells us whether a specific estimator attains the CRLB without requiring that the bound actually be computed:
+
 ::: {.theorem name="Attainment Theorem"}
-Let $W(X)$ be an unbiased $\tau(\theta)$ and suppose that \@ref(eq:reg-cond-1) holds. Then $W$ attains CRLB if and only if $\frac{\partial}{\partial \theta} ln (\mathcal{L}(\theta|X)) = a(\theta)[W-\tau(\theta)]$ for some $a(\theta)$.
+Let $W(X)$ be an unbiased $\tau(\theta)$ and suppose that \@ref(eq:reg-cond-1) holds. Then $W$ attains CRLB if and only if 
+
+$$\frac{\partial}{\partial \theta} \log (\mathcal{L}(\theta|X)) = a(\theta)[W-\tau(\theta)]$$
+
+for some $a(\theta)$
 :::
+
+As a result, to prove whether an estimator does *or does not* attain the CRLB, we simply must show that the [score](#score) of the sample can or cannot be factorized as above, which is often faster than computing the variance of the estimator.
 
 ::: {.example}
 attainment theorem example
 :::
 
-**Remark:** An estimator that does not attain CRLB can still be UMVUE. For some parameters, CRLB might not be achieved. 
+**Note:** An estimator that does not attain CRLB can still be UMVUE! For some parameters, CRLB might not be achieved. 
 
-::: {.theorem}
-If $E_{\theta}(W(X))= \tau(\theta)$, then $W(X)$ is best unbiased if and only if $W(X)$ is uncorrelated with all unbiased estimators of 0.
-:::
+### Rao-Blackwell and Lehmann-Scheffé Theorem
+
+The more common approach to finding an UMVUE is to use the Lehmann-Scheffé theorem, which describes specifically how to construct an UMVUE using a complete sufficient statistic (as discussed in [Chapter 7](#statistics)). 
+
+Before introducing the Lehmann-Scheffé theorem, first let us state the more general theorem upon which its proof is based:
 
 ::: {.theorem name=Rao-Blackwell}
 Suppose $W$ is unbiased for $\tau(\theta)$ and $T$ is a SS for $\tau(\theta)$. Let $Y:=E(W|T)$. Then,
@@ -334,15 +353,90 @@ Suppose $W$ is unbiased for $\tau(\theta)$ and $T$ is a SS for $\tau(\theta)$. L
 3. $Var(Y)\le Var(W), \forall \theta$. 
 :::
 
-Rao-Blackwell theorem provides a method to improve upon any unbiased estimator, i.e. provides a *better* unbiased estimator. Let us see a result from Lehmann-Scheffé, which provides a method to find an UMVUE. 
-
-::: {.theorem name=Lehmann-Scheffé}
-Suppose $W$ is unbiased for $\tau(\theta)$ and $T$ is a *complete* and *sufficient* for $\tau(\theta)$. Then $Y:=E(W|T)$ is UMVUE of $\tau(\theta)$.
-:::
+The Rao-Blackwell theorem provides a method to improve upon any unbiased estimator, i.e. provides a *better* unbiased estimator, by conditioning on a sufficient statistic. However, if this statistic is *also* complete, then the Lehmann-Scheffé  provides a method to find an UMVUE. This is because of the following theorem:
 
 ::: {.theorem}
-Let $W$ be a statistic such that $Var(W)<\infty$, and $W$ is UMVUE for $\tau(\theta)$. Then $W$ is the unique UMVUE of $\tau(\theta)$. 
+If $E_{\theta}(W(X))= \tau(\theta)$, then $W(X)$ is best unbiased if and only if $W(X)$ is uncorrelated with all unbiased estimators of 0.
 :::
+
+How do we guarantee that $W$ is uncorrelated with all unbiased estimators of 0? A complete statistic contains no unbiased estimators of 0 (other than 0 itself). This is by definition; $E(g(T) = 0 \implies g(T) = 0$ with probability 1, as established in [Complete Statistics](#complete-stats). Therefore, if we condition on a complete statistic, then the resulting statistic must be uncorrelated with all unbiased estimators of 0, and therefore be an UMVUE. This principle forms the foundation of the Lehmann-Scheffé Theorem:
+
+::: {.theorem name="Lehmann-Scheffé"}
+Suppose $W$ is unbiased for $\tau(\theta)$ and $T$ is a *complete* and *sufficient* for $\tau(\theta)$. Then $Y:=E(W|T)$ is UMVUE of $\tau(\theta)$.
+
+In addition, let $W$ be a statistic such that $Var(W)<\infty$, and $W$ is UMVUE for $\tau(\theta)$. Then $W$ is the unique UMVUE of $\tau(\theta)$. 
+
+:::
+
+### Finding UMVUEs II: Using the Lehmann-Scheffé Theorem
+
+How would one use the Lehmann-Scheffé Theorem to construct an UMVUE in practice? Let's consider an example.
+
+::: {.example name="Conditioning on a Complete Statistic"}
+Let $X_i \overset{iid}{\sim} \text{Bernoulli}(p)$, and our goal is to find an UMVUE of $p^2$.  
+
+First, we need to find an unbiased estimator of $p^2$. Since all observations are iid, $X_1\cdot X_2$ should suffice, as $E(X_1X_2) = E(X_1) \cdot E(X_2) = p^2$.
+
+Since the Bernoulli is an exponential family with $w(\theta) = \log(\frac{p}{1-p})$ an open set, we know its CSS is $\sum_{i=1}^n X_i$ by Lehmann-Scheffé, the UMVUE is
+
+$$E(X_1X_2 | \sum_{i=1}^n X_i = t)$$
+Since the expected value of a Bernoulli can be written as a probability, this equals
+
+$$
+P(X_1X_2 = 1 | \sum_{i=1}^n X_i = t) = \frac{P(X_1 = 1, X_2 = 1, \sum_{i=3}^n X_i = t - 2)}{P(\sum_{i=1}^n X_i = t)} \\
+= \frac{P(X_1=1) \cdot P(X_2=1) \cdot P(\sum_{i=3}^n X_i = t-2)}{{n\choose t}p^x(1-p)^{n-t}}\\
+= \frac{p^2{n-2\choose t-2}p^{t-2}(1-p)^{n-2 - t+2}}{{n\choose t}p^t(1-p)^{n-t}}\\
+= \frac{{n-2\choose t-2}}{{n\choose t}} = \frac{t(t-1)}{n(n-1)}\\
+$$
+using the fact that $\sum_{i=1}^nX_i \sim \text{Binomial}(n,p)$. Therefore, the UMVUE is $\frac{t(t-1)}{n(n-1)}$
+
+:::
+
+
+
+### Finding UMVUEs III: Lehmann-Scheffé Corollary
+
+::: {.corollary name="Lehmann-Scheffé"}
+Suppose $T$ is a complete sufficient statistic for $\theta$. Let $g(T)$ be an estimator based solely on $T$. Then, $g(T)$ is the UMVUE of its expected value - that is, $E(g(T))$ is an UMVUE.
+
+:::
+
+Rather than playing around with conditional probabilities to construct an UMVUE using Lehmann-Scheffé, it can often be much easier to "work backwards" based on what you know about the CSS and find a function $g$ such that $E(g(T)) = \tau(\theta)$. Here is an algorithm for using the Lehmann-Scheffé corollary for a function of a parameter $\tau(\theta)$ given $X_1, ..., X_n \sim f_{X_i}(x|\theta)$
+
+1. Find the CSS of the distribution $f_{X_i}(x|\theta)$. Call it $T$.
+2. Find the distribution of $T$. Often, these are known based on convolution formulas. See Chapter 7 for a [table of sufficient statistic distributions](##table-ss).
+3. Set $E(g(T)) = \tau(\theta)$, and rearrange to get $E\Big(\frac{g(T)}{\tau(\theta)}\Big) = 1$.
+4. (Optional) Use the linearity of expectation to split the above into multiple integration problems. For example, if $\tau(\theta) = \tau_1(\theta) + \tau_2(\theta) + ... + \tau_k(\theta)$, then we can let $E(g(T)) = E(g_1(T)) + E(g_2(T)) + ... + E(g_k(T))$ with each $E(g_1(T)) = \tau_i(\theta)$
+5. Because $E\Big(\frac{g(T)}{\tau(\theta)}\Big)$ must integrate to 1, $\frac{g(T)}{\tau(\theta)}$ must be a pdf. Therefore, you can use the [Kernel Technique](#kernel-technique) to solve for the $g(T)$ that converts the rest of the integrand into a pdf.
+
+That last step probably sounds a bit complicated. Let's look at an example.
+
+::: {.example name="Constructing an UMVUE using a function of a CSS"}
+
+Suppose $X_i \sim \text{Exp}(\lambda)$. Find an UMVUE for $\tau(\lambda) = \lambda^k$ with $k \in \{1, ... n\}$ using the algorithm above.  
+
+Let us proceed step-by-step.  
+
+1. Since the exponential distribution is (trivially) a single-parameter exponential family, $T = \sum_{i=1}^nt_1(X) = \sum_{i=1}^nX_i$ is a sufficient statistic.
+2. It is known, [by convolution properties](#table-SS), that $T = \sum_{i=1}^nX_i \sim \text{Gamma}(n, \lambda)$. Hence, we've found the distribution of $T$
+3. Let $E\Big(\frac{g(T)}{\tau(\theta)}\Big) = 1$, which implies
+
+$$
+E\Big(\frac{g(T)}{\tau(\theta)}\Big) = \int_0^\infty\frac{g(t)}{\lambda^k}\cdot\frac{1}{\Gamma(n)\lambda^n}t^{n-1}\exp(-\frac{t}{\lambda})dt = 1\\
+\implies \int_0^\infty g(t)\cdot\frac{1}{\Gamma(n)\lambda^{n+k}}t^{n-1}\exp(-\frac{t}{\lambda})dt = 1
+$$
+
+5. Clearly this can be converted into a $\text{Gamma}(n+k, \lambda)$ pdf by setting $g(t)$ appropriately. Let's algebraically manipulate to insert $n+k$ where it is needed, and keep track of our transformations.  
+
+  1. Since $n$ and $k$ are integers, $\frac{1}{\Gamma(n+k)} = \frac{1}{(n+k)(n+k-1)...(n+1)\Gamma(n)}$
+  2. $t^{n + k -1} = t^{n - 1}\cdot t^k$
+  
+These transformations give us the $\text{Gamma}(n+k, \lambda)$ pdf we need. Let $g(T) = \frac{T^k}{(n+k)(n+k-1)...(n+1)}$. Then, by the Lehmann Scheffé Corollary, $g(T)$ must be an UMVUE for $\tau(\lambda)$, since $E(g(T)) = \lambda^k$ and $T$ is a complete sufficient statistic.
+
+:::
+
+
+### Proving an UMVUE Does Not Exist
 
 
 ## Inferential Properties of Exponential Families Distributions
@@ -373,42 +467,71 @@ Since the Binomial has $n$ as a parameter, notation in problems that involve a *
 
 ### Geometric
 
-|                   Log-likelihood                   |                   Score Equations                   | Fisher Information |              MLE              |
-|:----------------:|:----------------:|:----------------:|:----------------:|
-| $n\log(p) + \log(1-p)\sum_{i=1}^n x_i$ | $\frac{n}{p} - \frac{1}{1-p}\sum_{i=1}^n x_i$ |  | $\frac{n}{\sum_{i=1}^n x_i}$ |
+|   |   |
+| :-----------: | :-----------: | 
+|  Log-likelihood |  $\ell(\theta|X) = n\log(p) + \log(1-p)\sum_{i=1}^n x_i$ |
+|   Score Equations | $U_n(\theta|X) = \frac{n}{p} - \frac{1}{1-p}\sum_{i=1}^n x_i$ |
+| Observed Information | | 
+|  Fisher Information | |
+|   MLE  | $\frac{n}{\sum_{i=1}^n x_i}$ |
+
 
 ### Negative Binomial
 
-|                   Log-likelihood                   |                   Score Equations                   | Fisher Information |              MLE              |
-|:----------------:|:----------------:|:----------------:|:----------------:|
-| $nr\log(\frac{p}{1-p}) + \sum_{i=1}^n x_i\log(1-p) + \log{x_i + r - 1\choose x_i}$ | $-\frac{nr}{p} - \frac{1}{1-p}\sum_{i=1}^n x_i$ | $\frac{r}{(1-p)^2p}$ | $\frac{1}{1 - \frac{1}{nr}\sum_{i=1}^nx_i}$ |
+|   |   |
+| :-----------: | :-----------: | 
+|  Log-likelihood |  $\ell(\theta|X) = nr\log(\frac{p}{1-p}) + \sum_{i=1}^n x_i\log(1-p) + \log{x_i + r - 1\choose x_i}$ |
+|   Score Equations | $U_n(\theta|X) = -\frac{nr}{p} - \frac{1}{1-p}\sum_{i=1}^n x_i$ |
+| Observed Information | | 
+|  Fisher Information | $\frac{r}{(1-p)^2p}$ |
+|   MLE  | $\frac{1}{1 - \frac{1}{nr}\sum_{i=1}^nx_i}$ |
 
 ### Poisson
 
-|                   Log-likelihood                   |                   Score Equations                   | Fisher Information |              MLE              |
-|:----------------:|:----------------:|:----------------:|:----------------:|
-| $n\lambda + \sum_{i=1}^n x_i\log(\lambda) - \log(x_i!)$ | $-n + \frac{1}{\lambda}x_i$ | $\frac{1}{\lambda}$ | $\frac{1}{n}\sum_{i=1}^nx_i$ |
+|   |   |
+| :-----------: | :-----------: | 
+|  Log-likelihood |  $\ell(\theta|X) = n\lambda + \sum_{i=1}^n x_i\log(\lambda) - \log(x_i!)$ |
+|   Score Equations | $U_n(\theta|X) = -n + \frac{1}{\lambda}x_i$ |
+| Observed Information | | 
+|  Fisher Information | $\frac{1}{\lambda}$ |
+|   MLE  | $\frac{1}{n}\sum_{i=1}^nx_i$ |
 
 ### Normal
 
-|                   Log-likelihood                   |                   Score Equations                   | Fisher Information |              MLE              |
-|:----------------:|:----------------:|:----------------:|:----------------:|
-| $-\frac{n}{2}\log(2\pi\sigma^2) - \frac{1}{2\sigma^2}\sum_{i=1}^n (x_i - \mu)^2$ | $U(\mu | x, \sigma^2) = -n\mu -\frac{1}{\sigma^2}\sum_{i=1}^n x_i \\ U(\sigma^2 | x, \mu) = -\frac{n}{2\sigma^2} + \frac{1}{2(\sigma^2)^2}\sum_{i=1}^n(x_i-\mu)^2$ | $\begin{bmatrix}\frac{1}{\sigma^2} & 0 \\ 0 & \frac{1}{2\sigma^4}\end{bmatrix}$ | $\frac{1}{n}\sum_{i=1}^nx_i$ |
+|   |   |
+| :-----------: | :-----------: | 
+|  Log-likelihood |  $\ell(\theta|X) = -\frac{n}{2}\log(2\pi\sigma^2) - \frac{1}{2\sigma^2}\sum_{i=1}^n (x_i - \mu)^2$ |
+|   Score Equations | $U(\mu | x, \sigma^2) = -n\mu -\frac{1}{\sigma^2}\sum_{i=1}^n x_i \\ U(\sigma^2 | x, \mu) = -\frac{n}{2\sigma^2} + \frac{1}{2(\sigma^2)^2}\sum_{i=1}^n(x_i-\mu)^2$ |
+| Observed Information | | 
+|  Fisher Information | $\begin{bmatrix}\frac{1}{\sigma^2} & 0 \\ 0 & \frac{1}{2\sigma^4}\end{bmatrix}$ |
+|   MLE  | $\frac{1}{n}\sum_{i=1}^nx_i$ |
 
 ### Exponential
 
-|                   Log-likelihood                   |                   Score Equations                   | Fisher Information |              MLE              |
-|:----------------:|:----------------:|:----------------:|:----------------:|
-| $-n\log(\lambda) - \frac{1}{\lambda}\sum_{i=1}^n x_i$ | $-\frac{n}{\lambda} + \frac{1}{\lambda^2}\sum_{i=1}^n x_i$ | $\lambda^2$ | $\frac{1}{n}\sum_{i=1}^nx_i$ |
+|   |   |
+| :-----------: | :-----------: | 
+|  Log-likelihood |  $\ell(\theta|X) = -n\log(\lambda) - \frac{1}{\lambda}\sum_{i=1}^n x_i$ |
+|   Score Equations | $U(\mu | x, \sigma^2) = -\frac{n}{\lambda} + \frac{1}{\lambda^2}\sum_{i=1}^n x_i$ |
+| Observed Information | | 
+|  Fisher Information | $\lambda^2$ |
+|   MLE  | $\frac{1}{n}\sum_{i=1}^nx_i$ |
 
 ### Gamma
 
-|                   Log-likelihood                   |                   Score Equations                   | Fisher Information |              MLE              |
-|:----------------:|:----------------:|:----------------:|:----------------:|
-| $-n\log(\Gamma(k)) - nk\log(\lambda) + (k - 1 - \frac{1}{\lambda})\sum_{i=1}^n x_i$ | $-\frac{nk}{\lambda} + \frac{1}{\lambda^2}\sum_{i=1}^n x_i$ with $k$ known (otherwise, requires differentiating $\Gamma(k)$) | $\begin{bmatrix}\psi^{(1)}(k) & \frac{1}{\lambda}\\ \frac{1}{\lambda} & \frac{k}{\lambda^2}\end{bmatrix}$ |  |
+|   |   |
+| :-----------: | :-----------: | 
+|  Log-likelihood |  $\ell(\theta|X) = -n\log(\Gamma(k)) - nk\log(\lambda) + (k - 1 - \frac{1}{\lambda})\sum_{i=1}^n x_i$ |
+|   Score Equations | $U(\mu | x, \sigma^2) = -\frac{nk}{\lambda} + \frac{1}{\lambda^2}\sum_{i=1}^n x_i$ with $k$ known (otherwise, requires differentiating $\Gamma(k)$) |
+| Observed Information | | 
+|  Fisher Information | $\begin{bmatrix}\psi^{(1)}(k) & \frac{1}{\lambda}\\ \frac{1}{\lambda} & \frac{k}{\lambda^2}\end{bmatrix}$ |
+|   MLE  | |
 
 ### Pareto
 
-|                   Log-likelihood                   |                   Score Equations                   | Fisher Information |              MLE              |
-|:----------------:|:----------------:|:----------------:|:----------------:|
-| $n\log{\alpha} + n\alpha\log(x_m) - (\alpha + 1)\sum_{i=1}^n\log(x_i)$ | $U(\alpha | x_i) = \frac{n}{\alpha} + n\log(x_m) - \sum_{i=1}^n \log(x_i)$ | $\frac{n}{\alpha^2}$ | $\frac{n}{\sum_{i=1}^n\log(x_i)}$
+|   |   |
+| :-----------: | :-----------: | 
+|  Log-likelihood |  $\ell(\theta|X) = n\log{\alpha} + n\alpha\log(x_m) - (\alpha + 1)\sum_{i=1}^n\log(x_i)$ |
+|   Score Equations | $U(\mu | x, \sigma^2) = \frac{n}{\alpha} + n\log(x_m) - \sum_{i=1}^n \log(x_i)$ |
+| Observed Information | | 
+|  Fisher Information | $\frac{n}{\alpha^2}$ | $\frac{n}{\sum_{i=1}^n\log(x_i)}$ |
+|   MLE  | |
