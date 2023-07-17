@@ -407,7 +407,7 @@ Rather than playing around with conditional probabilities to construct an UMVUE 
 2. Find the distribution of $T$. Often, these are known based on convolution formulas. See Chapter 7 for a [table of sufficient statistic distributions](##table-ss).
 3. Set $E(g(T)) = \tau(\theta)$, and rearrange to get $E\Big(\frac{g(T)}{\tau(\theta)}\Big) = 1$.
 4. (Optional) Use the linearity of expectation to split the above into multiple integration problems. For example, if $\tau(\theta) = \tau_1(\theta) + \tau_2(\theta) + ... + \tau_k(\theta)$, then we can let $E(g(T)) = E(g_1(T)) + E(g_2(T)) + ... + E(g_k(T))$ with each $E(g_1(T)) = \tau_i(\theta)$
-5. Because $E\Big(\frac{g(T)}{\tau(\theta)}\Big)$ must integrate to 1, $\frac{g(T)}{\tau(\theta)}$ must be a pdf. Therefore, you can use the [Kernel Technique](#kernel-technique) to solve for the $g(T)$ that converts the rest of the integrand into a pdf.
+5. Because $E\Big(\frac{g(T)}{\tau(\theta)}\Big)$ must integrate to 1, $\frac{g(T)}{\tau(\theta)}$ multiplied by the integrand must be a pdf. Therefore, you can use the [Kernel Technique](#kernel-technique) to solve for the $g(T)$ that converts the rest of the integrand into a pdf.
 
 That last step probably sounds a bit complicated. Let's look at an example.
 
