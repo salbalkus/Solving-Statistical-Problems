@@ -246,6 +246,8 @@ Let $X \sim f(x|\theta)$. The statistic $S(X)$ is **ancillary** for $\theta$ if 
 $$g(s|\theta_1)=g(s|\theta_2) \text{ for all } s.$$ 
 :::
 
+From this definition, it is generally possible to prove ancillary by definition - i.e., by showing that the distribution of $S$ does not depend on $\theta$. However, several theorems also establish results about ancillary.
+
 ::: {.example}
 Let $\textbf{X} = (X_1,..., X_n), X_i$ iid $U(\theta, \theta + 1)$. Consider the order statistics of the sample $\textbf{X}$. The range statistic $R = X_{(n)} - X_{(1)}$ is ancillary for $\theta$ by showing that the pdf of $R$ is independent of $\theta$. Intuitive, the range does not tell anything about the location of $\theta$ in the real line. In this case the ancillarity of $R$ does not depend on the uniformity of the observations, but on the parameter of the distribution being a location parameter. 
 :::

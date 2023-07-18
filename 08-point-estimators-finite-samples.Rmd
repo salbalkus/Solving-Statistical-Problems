@@ -353,13 +353,15 @@ Suppose $W$ is unbiased for $\tau(\theta)$ and $T$ is a SS for $\tau(\theta)$. L
 3. $Var(Y)\le Var(W), \forall \theta$. 
 :::
 
-The Rao-Blackwell theorem provides a method to improve upon any unbiased estimator, i.e. provides a *better* unbiased estimator, by conditioning on a sufficient statistic. However, if this statistic is *also* complete, then the Lehmann-Scheffé  provides a method to find an UMVUE. This is because of the following theorem:
+The Rao-Blackwell theorem provides a method to improve upon any unbiased estimator, i.e. provides a *better* unbiased estimator, by conditioning on a [sufficient statistic](#sufficient-stats). But how do we know the estimator is the **best**? Fortunately, there exists a sufficient and necessary condition for an estimator to be an UMVUE:
 
-::: {.theorem}
-If $E_{\theta}(W(X))= \tau(\theta)$, then $W(X)$ is best unbiased if and only if $W(X)$ is uncorrelated with all unbiased estimators of 0.
+::: {.theorem name="The UMVUE Sufficient and Necessary Condition"}
+If $E_{\theta}(W(X))= \tau(\theta)$, then $W(X)$ is an UMVUE *if and only if* $W(X)$ is uncorrelated with all unbiased estimators of 0.
 :::
 
-How do we guarantee that $W$ is uncorrelated with all unbiased estimators of 0? A complete statistic contains no unbiased estimators of 0 (other than 0 itself). This is by definition; $E(g(T) = 0 \implies g(T) = 0$ with probability 1, as established in [Complete Statistics](#complete-stats). Therefore, if we condition on a complete statistic, then the resulting statistic must be uncorrelated with all unbiased estimators of 0, and therefore be an UMVUE. This principle forms the foundation of the Lehmann-Scheffé Theorem:
+As a result, one might wonder: is there a way to guarantee that $W$ is uncorrelated with all unbiased estimators of 0? The answer is yes. A [Complete Statistic](#complete-stats) contains no unbiased estimators of 0 (other than 0 itself). This is by definition; $E(g(T) = 0 \implies g(T) = 0$ with probability 1. Therefore, if we condition on a complete statistic, then the resulting statistic must be uncorrelated with all unbiased estimators of 0, and therefore be an UMVUE. After all, the family does not contain **any** unbiased estimators of 0 (besides 0 itself), so it is not possible for the resulting estimator to be correlated with estimators that do not exist.  
+
+As a result, we obtain the Lehmann-Scheffé Theorem, which provides a method to find an UMVUE:
 
 ::: {.theorem name="Lehmann-Scheffé"}
 Suppose $W$ is unbiased for $\tau(\theta)$ and $T$ is a *complete* and *sufficient* for $\tau(\theta)$. Then $Y:=E(W|T)$ is UMVUE of $\tau(\theta)$.
@@ -391,7 +393,6 @@ $$
 using the fact that $\sum_{i=1}^nX_i \sim \text{Binomial}(n,p)$. Therefore, the UMVUE is $\frac{t(t-1)}{n(n-1)}$
 
 :::
-
 
 
 ### Finding UMVUEs III: Lehmann-Scheffé Corollary
@@ -428,8 +429,8 @@ $$
 
 5. Clearly this can be converted into a $\text{Gamma}(n+k, \lambda)$ pdf by setting $g(t)$ appropriately. Let's algebraically manipulate to insert $n+k$ where it is needed, and keep track of our transformations.  
 
-  1. Since $n$ and $k$ are integers, $\frac{1}{\Gamma(n+k)} = \frac{1}{(n+k)(n+k-1)...(n+1)\Gamma(n)}$
-  2. $t^{n + k -1} = t^{n - 1}\cdot t^k$
+  -  Since $n$ and $k$ are integers, $\frac{1}{\Gamma(n+k)} = \frac{1}{(n+k)(n+k-1)...(n+1)\Gamma(n)}$
+  -  $t^{n + k -1} = t^{n - 1}\cdot t^k$
   
 These transformations give us the $\text{Gamma}(n+k, \lambda)$ pdf we need. Let $g(T) = \frac{T^k}{(n+k)(n+k-1)...(n+1)}$. Then, by the Lehmann Scheffé Corollary, $g(T)$ must be an UMVUE for $\tau(\lambda)$, since $E(g(T)) = \lambda^k$ and $T$ is a complete sufficient statistic.
 
@@ -437,6 +438,37 @@ These transformations give us the $\text{Gamma}(n+k, \lambda)$ pdf we need. Let 
 
 
 ### Proving an UMVUE Does Not Exist
+
+There are generally two ways to prove that an UMVUE for $\tau(\theta)$ does not exist:
+
+1. Prove that no unbiased estimators exist.
+2. Prove that there exists no unbiased estimator that is uncorrelated with every other unbiased estimator of 0 (a *necessary* condition of an UMVUE).
+
+For option 1, the general approach is **proof by contradiction**. Assume that there exists an estimator $T$ such that $E(T) = \tau(\theta)$, and then show that this results in a mathematical impossibility. Below, we provide an example inspired by [a post on StackExchange](https://math.stackexchange.com/questions/681638/for-the-binomial-distribution-why-does-no-unbiased-estimator-exist-for-1-p)
+
+::: {.example name="No Unbiased Estimator: Bernoulli}
+
+Show that for $X_1,...,X_n \overset{iid}{\sim}\text{Bernoulli}(p)$ that there exists no unbiased estimator of $\frac{1}{p}$.  
+
+Let us assume that $T(X)$ is unbiased for $\frac{1}{p}$. Then, since $X_i$ are independent, the expected value of $T(X)$ can be computed based on the joint density of the $X_i$'s:
+
+$$
+E(T(X)) = \sum_xt(x)\cdot \prod_{i = 0}^n p^{x_i}(1-p)^{1-x_i} = \frac{1}{p}\\
+\implies \sum_xt(x)\cdot p^{1 + \sum_{i=1}^nx_i}(1-p)^{n-\sum_{i=1}^nx_i} = 1
+$$
+Similar to showing completeness, we can proceed with a polynomial argument. The term $p^{1 + \sum_{i=1}^nx_i}(1-p)^{n-\sum_{i=1}^nx_i}$ is a polynomial of at most $n + 1$ roots (since $\sum_{i=1}^nx_i$ is added to the first term but subtracted from the second). Therefore, any unbiased estimator of $T(X)$ may be unbiased for at most $n+1$ values of $p$. Finally, since $p \in (0,1)$, a set with more than $n+1$ elements, $T(X)$ is not unbiased for all $p$.
+
+Note that if the domain of $p$ were restricted to fewer than $n+1$ possibilities, or if dividing by $\tau(p)$ did not yield a polynomial term in the summand, then unbiased estimation would be possible.
+
+:::
+
+Another way to show that no unbiased estimator exists is by using [Ancillary Statistics](#ancillary-stats). Suppose $X\sim f_X(x|\theta)$, but we only observe $Y = g(X)$ with $Y$ and $X$ independent. In this case, $Y$ is ancillary for $\theta$ (since $X$ and $Y$ are uncorrelated by independence) and there is no way to unbiasedly estimate $\theta$.  
+
+Even if an unbiased estimator exists, it is possible for no UMVUE to exist. If all unbiased estimators of $\tau(\theta)$ are correlated with some unbiased estimator of 0, then an UMVUE cannot exist by the UMVUE Necessary and Sufficient Condition. However, note that by the Lehmann-Scheffé, this cannot be true for families which contain a CSS (on which we may condition to obtain an UMVUE). Therefore, the only families for which no UMVUE exists are either non-exponential or curved exponential. 
+
+::: {.example name="No UMVUE: Uniform}
+FORTHCOMING
+:::
 
 
 ## Inferential Properties of Exponential Families Distributions
