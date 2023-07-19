@@ -167,11 +167,20 @@ For $p \leq \frac{1}{2}, 1$ is the minimum. Thus, $\eta=P(\text{Extinction})=1.$
 
 ## Poisson Processes
 
-A **Poisson Process** is a model for a series of discrete events where the average time between events is known, but the exact timing of events is random. A poisson process has the following properties:
+A **Poisson Process** is a model for a series of discrete events where the average time between events is known, but the exact timing of events is random. In a Poisson process,
 
-* Events are independent of each other.
-* The average rate (events per time period) is constant.
-* Two events cannot occur at the same time.
+$$X(t) = \text{# of occurrences in } (0, t] $$
+
+All Poisson processes feature an intensity $\lambda$ which controls the frequency at which events occur. 
+
+**Definition**: A Poisson process with intensity $\lambda$ is defined by the following properties, which are all equivalent:
+
+* Events are independent of each other. That is, all $X(t_k) - X(t_{k-1})$ are independent for all $k$. Note that $X(t_k) - X(t_{k-1}) \sim \text{Poisson}(\lambda(t_k-t_{k-1}))$
+* $P(1\text{ occurence in }(t, t+h]) = \lambda h + o(h)$ as $h\rightarrow0$, while $P(\geq2\text{ occurence in }(t, t+h]) = o(h)$
+* If $T_k$ is the time between the $k-1$ and $k$th occurrences, then $T_k\sim \text{Exp}(\frac{1}{\lambda})$
+
+Note that two events cannot occur at the same time. We often assume that the average rate (events per time period) is constant, though this assumption will later be relaxed. Let's discuss the implications of this definition.
+
 
 ### Memorylessness of the Exponential 
 
@@ -307,5 +316,39 @@ $$
 \quad = \quad \sum_{x=0}^{n-1} \frac{e^{-\lambda (t-n \nu)} (\lambda (t-n \nu))^x}{x!}
 $$
 
+Next, we'll state some further results about Poisson processes (note that these are from the notes of Isabella Nogues)
+
+### Merging and Splitting
+
+Suppose we have $m$ independent Poisson processes $X_1(t),...,X_m(t)$ with intensities $\lambda_1,...,\lambda_m$. Let
+
+$$Y(t) = \sum_{i=1}^m X_i(t)$$
+
+Then $Y(t)$ is a merged Poisson process with intensity $\sum_{i=1}^m \lambda_i$.
+
+In addition to merging as in the above, we may also be interested in the probability that a particular Poisson process $k$ procedures an event before others - this is "splitting". In general, such probabilities are modeled as $Geometric$ random variables involving a function of the parameter
+
+$$p_k = \frac{\lambda_k}{\sum_{i=1}^n\lambda_i}$$
+- $p_k$ represents the probability that the first occurrence is caused by $X_k(t)$. 
+- $p_k^n$ is the probability that the first $n$ occurrences are caused by $X_k(t)$.
+
+Then, 
+
+- The number of occurrences from any $X_i(t)$, $i\neq k$ preceding an occurrence from $X_k(t)$ is $Z \sim \text{Geo}(p_k)$ 
+- The number of occurrences from any $X_j(t)$ between two occurrences in $X_k(t)$ is $Z \sim \text{Geo}(p_k)$ 
+- The number of occurrences from $X_k(t)$ preceding an occurrence from the $k-1$ other processes is $Z \sim \text{Geo}(1-p_k)$
+
+Note that here the Geometric distribution is parametrized as $f_X(x|p) = (1-p)^x$.
+
+### Thinning
+Let $X(t)$ be a Poisson process in which not every occurrence is observed. Let $Y(t)$ be the number of observed occurrences, and $Z(t)$ the number of unobserved occurrences. If each occurrence is observed with probability $p$, then $Y(t)$ and $Z(t)$ are Poisson processes with intensities $\lambda p$ and $\lambda(1-p)$
+
+### Restarting
+If $X(t)$ is a Poisson Process, then all of the following are also Poisson processes:  
+
+1. $X(t + s) - X(s)$
+2. $X(T_k + t) - X(t)$
+3. $X(T + t) + X(t)$ for $T \geq 0$ random variable independent of $X(t)$
+4. $X(T_k^* + t) - X(T_k^*)$ or $T \geq 0$ random variable independent of $X(t)$ and $T_k^* = \min(T_k, T)$
 
 
