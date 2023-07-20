@@ -307,7 +307,7 @@ Since this is such a fundamental technique arising throughout statistics, in lie
 
 $$f_Y(y) = P(Y = y) = \sum_{x \in g^{-1}(y)}P(X=x) = \sum_{x \in g^{-1}(y)}f_X(x)$$
 
-meaning the pmf of $Y$ is just the sum of the probabilities of $X$ over all $y \in \mathcal{Y}$ (where $\mathcal{Y}$ is the sample space of $Y$). For more information, see Chapter 2 of @Casella1990.
+meaning the pmf of $Y$ is just the sum of the probabilities of $X$ over all $y \in \mathcal{Y}$ (where $\mathcal{Y}$ is the sample space of $Y$). For more information, see Chapter 2 of @Casella1990. **This is very important! When in doubt, fall back on direct manipulation of the probability function.**
 
 
 ## Independence {#independence}
@@ -393,9 +393,30 @@ and so on. By induction, $X_{(i)} = \sum_{j=1}^{i-1}X_{(j)}$. Therefore, we can 
 
 ## Convergence
 
-What happens when, instead of a set of events or random variables, we observe a *sequence* of $n$ random variables? There exist two major types of **convergence** of random variables with which we are typically concerned: **convergence in probability** and **convergence in distribution**
+### Borel-Cantelli Lemmas
+
+Let $E_1$, $E_2$,... be a sequence of events. 
+
+::: {.lemma name="First Borel-Cantelli"}
+If $\sum_{n=1}^\infty P(E_n) \leq \infty$, then 
+
+$$P\Big(\limsup_{n\rightarrow\infty}E_n\Big) = P\Big(\bigcap_{n=1}^\infty\bigcup_{k=n}^\infty E_k\Big) = 0$$
+
+:::
+
+::: {.lemma name="Second Borel-Cantelli"}
+
+If $\sum_{n=1}^\infty P(E_n) = \infty$ and $E_k$ are independent, then 
+
+
+$$P\Big(\limsup_{n\rightarrow\infty}E_n\Big) = P\Big(\bigcap_{n=1}^\infty\bigcup_{k=n}^\infty E_k\Big) = 1$$
+
+:::
+
 
 ### Convergence in Probability {#convergence-in-probability}
+
+What happens when, instead of a set of events or random variables, we observe a *sequence* of $n$ random variables? There exist two major types of **convergence** of random variables with which we are typically concerned: **convergence in probability** and **convergence in distribution**. Let's start with the former.
 
 :::{.definition name="Convergence in Probability"}
 
