@@ -145,6 +145,22 @@ $$
 $$
 3. Take the square root of the final implication to get $|a + b| \leq |a| + |b|$
 
+## Constrained Optimization
 
+Consider a vector $\theta = (\theta_1, \theta_2, ..., \theta_n)$. Suppose we want to maximize some function $\mathcal{L}(\theta)$, *but* subject to a constraint $g(\theta) = c$. How can this be accomplished using calculus? To do this, we rely on **Lagrange Multipliers**. The Lagrange function consists of the equation
+
+$$L(\theta, \lambda) = \mathcal{L}(\theta) - \lambda(g(\theta) - c)$$
+Rather than optimizing $\mathcal{L}(\theta)$ using the First/Second Derivative test as we would have before, we instead optimize $L(\theta, \lambda)$ over $\theta$ and $\lambda$, finding where $\nabla L(\theta, \lambda) = 0$.  We can even add multiple $\lambda_i, i = 1, 2,...$ to account for multiple constraints.
+
+Why does this work? Suppose we have some $L(\theta_1, \lambda_2)$ with $g(\theta_1, \theta_2) = c$. Then, the location where $L_x = L_y = L_\lambda = 0$ occurs where
+
+$$
+\frac{\partial}{\partial\theta_1}L = \frac{\partial}{\partial \theta_1}\mathcal{L}(\theta) - \lambda\frac{\partial}{\partial \theta_1}g(\theta_1, \theta_2)\\
+\frac{\partial}{\partial\theta_2}L = \frac{\partial}{\partial \theta_2}\mathcal{L}(\theta) - \lambda\frac{\partial}{\partial \theta_2}g(\theta_1, \theta_2)\\
+\frac{\partial}{\partial\lambda}L = -g(\theta_1, \theta_2) + c = 0\\
+$$
+That last equation guarantees that the constraint is satisfied during maximization. Within a problem, a system of equations will form in $\lambda$; simply solve for each $\theta_i$ in $\lambda$, solve for $\lambda$, and plug in the solution for $\lambda$ into the earlier equations for $\theta$ to get the solution.
+
+Within statistics, this technique arises in [Maximum Likelihood Estimation](#mle).
 
 
