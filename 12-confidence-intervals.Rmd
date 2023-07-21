@@ -1,0 +1,87 @@
+# Confidence Intervals {#confidence-intervals}
+
+As a final ask, problems in statistics will often involve computing a confidence interval based on some previously constructed statistic. This chapter defines confidence intervals and discusses how to construct them for three different types of problems from which the confidence interval may arise. The material from this chapter is mostly from @Casella1990 Chapter 9, but our goal is to relate it to previous chapters.
+
+## Definition
+
+In the abstract, an *interval estimator* is a pair of functions $(L(X), U(X))$ with $L(X) \leq U(X), \forall x \in \mathcal{X}$ that draws the inference $L(X) \leq \theta \leq U(X)$ where $\theta$ is some parameter.  
+
+*Coverage probability* is defined as $P(\theta \in (L(X), U(X)) | \theta)$. A $1 - \alpha$ *confidence interval* is an interval estimator defined such that $P(\theta \in (L(X), U(X)) | \theta) = 1 - \alpha$.
+
+## When You've Constructed a Hypothesis Test... {#test-inversion}
+
+Let's pretend we've just arrived from [Chapter 10](#hypothesis-tests-finite-samples) and constructed a size $\alpha$ hypothesis test of $H_0: \theta = \theta_0$ versus $H_1: \theta \neq \theta_0$ with rejection region $R = \{|T(X) - \theta_0| > c\}$. Here $c$ is defined as a function of $n$ and $\alpha$. This means that 
+
+$$P(|T(x) - \theta| > c \mid \theta = \theta_0) = \alpha$$
+
+by the definition of the rejection region. How do we construct a $1 - \alpha$ confidence interval from this test?  
+
+This is accomplished by *inverting the test statistic*. This procedure requires rewriting the probability statement in the form $P(L(X) < \theta < U(X)) = 1 - \alpha$, thus yielding the desired $L(X)$ and $U(X)$. For example, given the above, we could write
+
+$$
+P(|T(x) - \theta_0| > c \mid \theta = \theta_0) = \alpha \\
+\implies P(|T(x) - \theta_0| < c \mid \theta = \theta_0) = 1 - \alpha \\
+\implies P(T(x) - c < \theta < T(x) + c \mid \theta = \theta_0) = 1 - \alpha \\
+\implies P(L(x) < \theta < U(x)) = 1 - \alpha
+$$
+with $L(x) = T(x) - c$ and $U(x) = T(x) + c$ since line 3 is true for all $\theta$. This yields the $1 - \alpha$ confidence interval $(T(x) - c, T(x) + c)$ by inversion of the test statistic.  
+
+In general, if we've already constructed a hypothesis test with rejection region $R$, we can then identify an *acceptance region* $A(\theta_0)$ (where $H_0: \theta = \theta_0$ is true) which is the *complement* of $R$. Then, our confidence set - which is often, but is not required to be, an interval - is $C(x) = \{\theta_0 : x \in A(\theta_0)\}$. This yields a confidence interval from our hypothesis set.
+
+## When You've Found a Pivot (Including Asymptotic Normality)...
+
+Sometimes, you may be asked to construct a confidence interval simply after proving that a test statistic follows (or converges to) a particular distribution. In this case, we can use a device called a pivotal quantity, or *pivot*.  
+
+::: {.definition name="Pivot"}
+A random variable $Q(x,\theta)$ whose distribution is independent of all parameters of interest.
+:::
+
+Pivots commonly occur for location-scale families. This is because if $X_1,...,X_n \overset{iid}{\sim}\frac{1}{\sigma}f(\frac{x-\mu}{\sigma})$ - a location family with $Z \sim f(z)$ - then 
+
+$$\frac{\bar{X} - \mu}{S}$$
+is a pivot. Of course, this is not the only pivot; if $\sigma$ is known then we can replace $S$ with $\sigma$ as well.  
+
+Because their distribution is known, pivots can be used to construct confidence intervals by simply setting
+
+$$P(a \leq Q(x, \theta) \leq b) = 1 - \alpha$$
+
+and then solving for $a,b$ by using the [test inversion](#test-inversion) method mentioned in the previous section. Such a problem commonly occurs in scenarios involving asymptotic normality.
+
+::: {.example name="CI from Asymptotically Normal Statistic"}
+Suppose, for some $g$, we've just used the Delta Method to prove that 
+
+$$\sqrt{n}(g(\hat{\theta}) - g(\theta)) \overset{\mathcal{D}}{\rightarrow}N(0, v^2)$$
+where $v^2 = (g'(\theta))^2\sigma^2$. How can we construct a $1-\alpha$ confidence interval for $\theta$? Since the Normal is a location-scale family, by some algebra we know 
+
+$$\frac{g(\hat{\theta}) - g(\theta)}{v / \sqrt{n}} \sim N(0,1)$$
+which is therefore a pivot. Hence, a confidence interval can be constructed by inverting this statistic (using the fact that the normal is symmetric):
+
+$$
+P\Big(-z_{\alpha/2} \leq \frac{g(\hat{\theta}) - g(\theta)}{v / \sqrt{n}} \leq z_{\alpha/2}\Big) = 1 - \alpha\\
+\implies P(g(\hat{\theta})-z_{\alpha/2}\cdot\frac{v}{\sqrt{n}} \leq g(\theta) \leq g(\hat{\theta})+z_{\alpha/2}\cdot\frac{v}{\sqrt{n}}) = 1 - \alpha
+$$
+
+:::
+
+so our $1 - \alpha$ confidence interval for $g(\theta)$ is $\Big(g(\hat{\theta})-z_{\alpha/2}\cdot\frac{v}{\sqrt{n}}, g(\hat{\theta})+z_{\alpha/2}\cdot\frac{v}{\sqrt{n}}\Big)$
+
+Of course, the pivotal quantity does not *have* to be used with asymptotics. For example, if $X_1,...,X_n \sim N(\mu, \sigma^2)$ with unknown $\sigma^2$, a pivotal quantity is the T-statistic $\frac{\bar{X} - \mu}{S / \sqrt{n}} \sim t(n - 1)$, and we can invert the test statistic to obtain a confidence interval the same way as before.
+
+## When All You Have Is a Distribution...
+
+Not every statistic will have a nice and symmetric distribution with convenient quantiles to use. Suppose instead we have $\alpha_1 + \alpha_2 = \alpha$, and $T$ is a statistic with continuous cdf $F_T(t | \theta)$. In this case, we can directly pivot the CDF by solving a set of equations for two values: $\theta_L(t)$ and $\theta_U(t)$.  
+
+If $F_T(t|\theta)$ is a decreasing function of $\theta$, then these bounds can be found by solving the equations
+
+$$
+F_t(t | \theta_U(t)) = \alpha_1\\
+F_t(t | \theta_L(t)) = 1 - \alpha_2
+$$
+while for an increasing function of $\theta$, instead solve
+
+$$
+F_t(t | \theta_U(t)) = 1 - \alpha_2\\
+F_t(t | \theta_L(t)) = \alpha_1
+$$
+
+Solving these equations for $\theta_L(t)$ and $\theta_U(t)$ yields the $1 - \alpha$ CI $(\theta_L(t), \theta_U(t))$. An example of this for the minimum of a location exponential family can be found in Example 9.2.13 of @Casella1990.

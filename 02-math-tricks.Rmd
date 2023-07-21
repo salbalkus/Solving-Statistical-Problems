@@ -46,7 +46,6 @@ This is the Taylor series for the exponential function, sometimes called the "ex
 If the $(n+1)$th derivative of a function $f$ exists for all $\xi \in (c, x)$, then
 
 $$
-
 f(x) = f(c) + f'(c)(x-c) + \frac{f''(c)}{2!}(x-c)^2 + ...\\
 + \frac{f^{(n)}(c)}{n!}(x - c)^n + R_n(x)
 $$

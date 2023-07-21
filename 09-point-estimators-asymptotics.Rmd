@@ -190,6 +190,5 @@ This is done by setting $f'(\theta) = \frac{c}{\tau(\theta)}$. Then, for $T_n(X)
 
 $$\sqrt{n}(f(T_n) - f(\theta)) \overset{\mathcal{D}}{\rightarrow} N(0, f'(\theta)^2 \cdot\tau^2(\theta)) = N(0, c)$$
 
-## Asymptotic Confidence Intervals
 
 
