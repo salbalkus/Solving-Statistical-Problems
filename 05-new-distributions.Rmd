@@ -17,7 +17,7 @@ f_Y(y)= \begin{cases}f_X\left(g^{-1}(y)\right)\left|\frac{d}{d y} g^{-1}(y)\righ
 $$
 :::
 
-A non-rigorous sketch of the proof of this follows from the [Direction Probability Manipulation](#direct-manipulation) of the CDF described in Chapter 2. Note
+A non-rigorous sketch of the proof of this follows from the [Direct Probability Manipulation](#direct-manipulation) of the CDF described in Chapter 2. Note
 
 $$
 F(Y < y) = P(Y < y) = P(g(X) < y) \\
@@ -166,7 +166,7 @@ $$
 
 *[Click Here: Visual Explanation of Universality of the Uniform](https://www.youtube.com/watch?v=TzKANDzAXnQ)*
 
-### Hiearchical Models (Iterated Moments)
+### Hierarchical Models (Iterated Moments)
 
 ::: {.definition name="Theorem 4.4.3 and Theorem 4.4.7"}
 If $X$ and $Y$ are any two random variables and the relevant expectations exist, then

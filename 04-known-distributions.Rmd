@@ -502,7 +502,6 @@ $$
 F_X(x) = \frac{1}{\pi}\arctan\Big(\frac{m-x_0}{\gamma}\Big) + \frac{1}{2} = \frac{1}{2}\\
 \iff \frac{m- x_0}{\gamma} = \tan(0)\\
 \iff m = x_0
-
 $$
 proving the median of the Cauchy is its scale parameter.
 
@@ -526,7 +525,6 @@ $$
 F(q) = \frac{1}{\pi}\arctan\Big(\frac{q}{\gamma}\Big) + \frac{1}{2} = \frac{3}{4} \\
 \iff \frac{q}{\gamma} = \tan(\frac{\pi}{4}) = 1\\
 \iff q = \gamma
-
 $$
 The same process can be repeated for the 25th percentile, since $\tan(\frac{3\pi}{4}) = -1$, so the 25th percentile is $-\gamma$. 
 

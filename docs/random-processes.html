@@ -23,14 +23,14 @@
 <meta name="author" content="Salvador Balkus, Kimberly Greco, and Mónica Robles Fontán" />
 
 
-<meta name="date" content="2023-07-17" />
+<meta name="date" content="2023-07-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="generating-random-variables.html"/>
+<link rel="prev" href="confidence-intervals.html"/>
 <link rel="next" href="references.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -176,6 +176,7 @@ div.csl-indent {
 <li class="chapter" data-level="2.9" data-path="math-tricks.html"><a href="math-tricks.html#fubinis-theorem"><i class="fa fa-check"></i><b>2.9</b> Fubini’s Theorem</a></li>
 <li class="chapter" data-level="2.10" data-path="math-tricks.html"><a href="math-tricks.html#gamma-function"><i class="fa fa-check"></i><b>2.10</b> Gamma Function</a></li>
 <li class="chapter" data-level="2.11" data-path="math-tricks.html"><a href="math-tricks.html#triangle-inequality"><i class="fa fa-check"></i><b>2.11</b> Triangle Inequality</a></li>
+<li class="chapter" data-level="2.12" data-path="math-tricks.html"><a href="math-tricks.html#constrained-optimization"><i class="fa fa-check"></i><b>2.12</b> Constrained Optimization</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="probability.html"><a href="probability.html"><i class="fa fa-check"></i><b>3</b> Probability</a>
 <ul>
@@ -189,7 +190,7 @@ div.csl-indent {
 <li class="chapter" data-level="3.3" data-path="probability.html"><a href="probability.html#conditional-probability"><i class="fa fa-check"></i><b>3.3</b> Conditional Probability</a>
 <ul>
 <li class="chapter" data-level="3.3.1" data-path="probability.html"><a href="probability.html#conditional-probability-in-practice"><i class="fa fa-check"></i><b>3.3.1</b> Conditional Probability in Practice</a></li>
-<li class="chapter" data-level="3.6.3" data-path="probability.html"><a href="probability.html#important-theorems"><i class="fa fa-check"></i><b>3.6.3</b> Important Theorems</a></li>
+<li class="chapter" data-level="3.6.4" data-path="probability.html"><a href="probability.html#important-theorems"><i class="fa fa-check"></i><b>3.6.4</b> Important Theorems</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="known-distributions.html"><a href="known-distributions.html"><i class="fa fa-check"></i><b>4</b> Known Distributions</a>
@@ -248,7 +249,7 @@ div.csl-indent {
 <li class="chapter" data-level="5.2" data-path="new-distributions.html"><a href="new-distributions.html#computing-joint-probabilities"><i class="fa fa-check"></i><b>5.2</b> Computing Joint Probabilities</a></li>
 <li class="chapter" data-level="5.3" data-path="new-distributions.html"><a href="new-distributions.html#probability-integral-transform"><i class="fa fa-check"></i><b>5.3</b> Probability Integral Transform</a>
 <ul>
-<li class="chapter" data-level="5.3.1" data-path="new-distributions.html"><a href="new-distributions.html#hiearchical-models-iterated-moments"><i class="fa fa-check"></i><b>5.3.1</b> Hiearchical Models (Iterated Moments)</a></li>
+<li class="chapter" data-level="5.3.1" data-path="new-distributions.html"><a href="new-distributions.html#hierarchical-models-iterated-moments"><i class="fa fa-check"></i><b>5.3.1</b> Hierarchical Models (Iterated Moments)</a></li>
 <li class="chapter" data-level="5.3.2" data-path="new-distributions.html"><a href="new-distributions.html#convolutions"><i class="fa fa-check"></i><b>5.3.2</b> Convolutions</a></li>
 </ul></li>
 </ul></li>
@@ -339,11 +340,10 @@ div.csl-indent {
 <li class="chapter" data-level="9.2.1" data-path="point-estimators-asymptotics.html"><a href="point-estimators-asymptotics.html#central-limit-theorems"><i class="fa fa-check"></i><b>9.2.1</b> Central Limit Theorems</a></li>
 <li class="chapter" data-level="9.2.2" data-path="point-estimators-asymptotics.html"><a href="point-estimators-asymptotics.html#the-delta-method"><i class="fa fa-check"></i><b>9.2.2</b> The Delta Method</a></li>
 <li class="chapter" data-level="9.2.3" data-path="point-estimators-asymptotics.html"><a href="point-estimators-asymptotics.html#cramer-wold-device"><i class="fa fa-check"></i><b>9.2.3</b> Cramer-Wold Device</a></li>
-<li class="chapter" data-level="9.2.4" data-path="point-estimators-asymptotics.html"><a href="point-estimators-asymptotics.html#asymptotic-distribution-in-practice."><i class="fa fa-check"></i><b>9.2.4</b> Asymptotic Distribution in Practice.</a></li>
+<li class="chapter" data-level="9.2.4" data-path="point-estimators-asymptotics.html"><a href="point-estimators-asymptotics.html#asymptotic-distribution-in-practice"><i class="fa fa-check"></i><b>9.2.4</b> Asymptotic Distribution in Practice</a></li>
 </ul></li>
 <li class="chapter" data-level="9.3" data-path="point-estimators-asymptotics.html"><a href="point-estimators-asymptotics.html#asymptotic-properties-of-mles"><i class="fa fa-check"></i><b>9.3</b> Asymptotic Properties of MLEs</a></li>
 <li class="chapter" data-level="9.4" data-path="point-estimators-asymptotics.html"><a href="point-estimators-asymptotics.html#variance-stabilizing-transformations"><i class="fa fa-check"></i><b>9.4</b> Variance Stabilizing Transformations</a></li>
-<li class="chapter" data-level="9.5" data-path="point-estimators-asymptotics.html"><a href="point-estimators-asymptotics.html#asymptotic-confidence-intervals"><i class="fa fa-check"></i><b>9.5</b> Asymptotic Confidence Intervals</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="hypothesis-tests-finite-samples.html"><a href="hypothesis-tests-finite-samples.html"><i class="fa fa-check"></i><b>10</b> Hypothesis Tests: Finite Samples</a>
 <ul>
@@ -370,7 +370,13 @@ div.csl-indent {
 <li class="chapter" data-level="11.4.2" data-path="hypothesis-tests-asymptotics.html"><a href="hypothesis-tests-asymptotics.html#nuisance-parameters-1"><i class="fa fa-check"></i><b>11.4.2</b> Nuisance Parameters</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="generating-random-variables.html"><a href="generating-random-variables.html"><i class="fa fa-check"></i><b>12</b> Generating Random Variables</a></li>
+<li class="chapter" data-level="12" data-path="confidence-intervals.html"><a href="confidence-intervals.html"><i class="fa fa-check"></i><b>12</b> Confidence Intervals</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="confidence-intervals.html"><a href="confidence-intervals.html#definition-1"><i class="fa fa-check"></i><b>12.1</b> Definition</a></li>
+<li class="chapter" data-level="12.2" data-path="confidence-intervals.html"><a href="confidence-intervals.html#test-inversion"><i class="fa fa-check"></i><b>12.2</b> When You’ve Constructed a Hypothesis Test…</a></li>
+<li class="chapter" data-level="12.3" data-path="confidence-intervals.html"><a href="confidence-intervals.html#when-youve-found-a-pivot-including-asymptotic-normality"><i class="fa fa-check"></i><b>12.3</b> When You’ve Found a Pivot (Including Asymptotic Normality)…</a></li>
+<li class="chapter" data-level="12.4" data-path="confidence-intervals.html"><a href="confidence-intervals.html#when-all-you-have-is-a-distribution"><i class="fa fa-check"></i><b>12.4</b> When All You Have Is a Distribution…</a></li>
+</ul></li>
 <li class="chapter" data-level="13" data-path="random-processes.html"><a href="random-processes.html"><i class="fa fa-check"></i><b>13</b> Random Processes</a>
 <ul>
 <li class="chapter" data-level="13.1" data-path="random-processes.html"><a href="random-processes.html#branching-process"><i class="fa fa-check"></i><b>13.1</b> Branching Processes</a>
@@ -388,6 +394,9 @@ div.csl-indent {
 <li class="chapter" data-level="13.2.3" data-path="random-processes.html"><a href="random-processes.html#poisson-distribution"><i class="fa fa-check"></i><b>13.2.3</b> Poisson Distribution</a></li>
 <li class="chapter" data-level="13.2.4" data-path="random-processes.html"><a href="random-processes.html#exponential-distribution"><i class="fa fa-check"></i><b>13.2.4</b> Exponential Distribution</a></li>
 <li class="chapter" data-level="13.2.5" data-path="random-processes.html"><a href="random-processes.html#example-1"><i class="fa fa-check"></i><b>13.2.5</b> Example</a></li>
+<li class="chapter" data-level="13.2.6" data-path="random-processes.html"><a href="random-processes.html#merging-and-splitting"><i class="fa fa-check"></i><b>13.2.6</b> Merging and Splitting</a></li>
+<li class="chapter" data-level="13.2.7" data-path="random-processes.html"><a href="random-processes.html#thinning"><i class="fa fa-check"></i><b>13.2.7</b> Thinning</a></li>
+<li class="chapter" data-level="13.2.8" data-path="random-processes.html"><a href="random-processes.html#restarting"><i class="fa fa-check"></i><b>13.2.8</b> Restarting</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
@@ -549,12 +558,16 @@ a&amp;=p, b=-1, c=q\\
 </div>
 <div id="poisson-processes" class="section level2 hasAnchor" number="13.2">
 <h2><span class="header-section-number">13.2</span> Poisson Processes<a href="random-processes.html#poisson-processes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>A <strong>Poisson Process</strong> is a model for a series of discrete events where the average time between events is known, but the exact timing of events is random. A poisson process has the following properties:</p>
+<p>A <strong>Poisson Process</strong> is a model for a series of discrete events where the average time between events is known, but the exact timing of events is random. In a Poisson process,</p>
+<p><span class="math display">\[X(t) = \text{# of occurrences in } (0, t] \]</span></p>
+<p>All Poisson processes feature an intensity <span class="math inline">\(\lambda\)</span> which controls the frequency at which events occur.</p>
+<p><strong>Definition</strong>: A Poisson process with intensity <span class="math inline">\(\lambda\)</span> is defined by the following properties, which are all equivalent:</p>
 <ul>
-<li>Events are independent of each other.</li>
-<li>The average rate (events per time period) is constant.</li>
-<li>Two events cannot occur at the same time.</li>
+<li>Events are independent of each other. That is, all <span class="math inline">\(X(t_k) - X(t_{k-1})\)</span> are independent for all <span class="math inline">\(k\)</span>. Note that <span class="math inline">\(X(t_k) - X(t_{k-1}) \sim \text{Poisson}(\lambda(t_k-t_{k-1}))\)</span></li>
+<li><span class="math inline">\(P(1\text{ occurence in }(t, t+h]) = \lambda h + o(h)\)</span> as <span class="math inline">\(h\rightarrow0\)</span>, while <span class="math inline">\(P(\geq2\text{ occurence in }(t, t+h]) = o(h)\)</span></li>
+<li>If <span class="math inline">\(T_k\)</span> is the time between the <span class="math inline">\(k-1\)</span> and <span class="math inline">\(k\)</span>th occurrences, then <span class="math inline">\(T_k\sim \text{Exp}(\frac{1}{\lambda})\)</span></li>
 </ul>
+<p>Note that two events cannot occur at the same time. We often assume that the average rate (events per time period) is constant, though this assumption will later be relaxed. Let’s discuss the implications of this definition.</p>
 <div id="memorylessness-of-the-exponential" class="section level3 hasAnchor" number="13.2.1">
 <h3><span class="header-section-number">13.2.1</span> Memorylessness of the Exponential<a href="random-processes.html#memorylessness-of-the-exponential" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Recall that the exponential distribution is <strong>memoryless</strong>, meaning <span class="math inline">\(P(X&gt;x+a \mid X&gt;a)=P(X&gt;x)\)</span>. The memoryless property of the exponential distribution applies to waiting times in a Poisson process. It means that the time between events remains independent of past events, allowing us to predict future waiting times solely based on the average rate of event occurrences (i.e., the interarrival times between events are i.i.d.).</p>
@@ -627,6 +640,38 @@ P(T_n&gt;t)=P(N_t&lt;n)
 \int_t^{\infty} \frac{1}{\Gamma(n)\lambda^{-n}}  (x-n \nu)^{n-1} e^{-\lambda (x-n \nu)} d x
 \quad = \quad \sum_{x=0}^{n-1} \frac{e^{-\lambda (t-n \nu)} (\lambda (t-n \nu))^x}{x!}
 \]</span></p>
+<p>Next, we’ll state some further results about Poisson processes (note that these are from the notes of Isabella Nogues)</p>
+</div>
+<div id="merging-and-splitting" class="section level3 hasAnchor" number="13.2.6">
+<h3><span class="header-section-number">13.2.6</span> Merging and Splitting<a href="random-processes.html#merging-and-splitting" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Suppose we have <span class="math inline">\(m\)</span> independent Poisson processes <span class="math inline">\(X_1(t),...,X_m(t)\)</span> with intensities <span class="math inline">\(\lambda_1,...,\lambda_m\)</span>. Let</p>
+<p><span class="math display">\[Y(t) = \sum_{i=1}^m X_i(t)\]</span></p>
+<p>Then <span class="math inline">\(Y(t)\)</span> is a merged Poisson process with intensity <span class="math inline">\(\sum_{i=1}^m \lambda_i\)</span>.</p>
+<p>In addition to merging as in the above, we may also be interested in the probability that a particular Poisson process <span class="math inline">\(k\)</span> procedures an event before others - this is “splitting”. In general, such probabilities are modeled as <span class="math inline">\(Geometric\)</span> random variables involving a function of the parameter</p>
+<p><span class="math display">\[p_k = \frac{\lambda_k}{\sum_{i=1}^n\lambda_i}\]</span>
+- <span class="math inline">\(p_k\)</span> represents the probability that the first occurrence is caused by <span class="math inline">\(X_k(t)\)</span>.
+- <span class="math inline">\(p_k^n\)</span> is the probability that the first <span class="math inline">\(n\)</span> occurrences are caused by <span class="math inline">\(X_k(t)\)</span>.</p>
+<p>Then,</p>
+<ul>
+<li>The number of occurrences from any <span class="math inline">\(X_i(t)\)</span>, <span class="math inline">\(i\neq k\)</span> preceding an occurrence from <span class="math inline">\(X_k(t)\)</span> is <span class="math inline">\(Z \sim \text{Geo}(p_k)\)</span></li>
+<li>The number of occurrences from any <span class="math inline">\(X_j(t)\)</span> between two occurrences in <span class="math inline">\(X_k(t)\)</span> is <span class="math inline">\(Z \sim \text{Geo}(p_k)\)</span></li>
+<li>The number of occurrences from <span class="math inline">\(X_k(t)\)</span> preceding an occurrence from the <span class="math inline">\(k-1\)</span> other processes is <span class="math inline">\(Z \sim \text{Geo}(1-p_k)\)</span></li>
+</ul>
+<p>Note that here the Geometric distribution is parametrized as <span class="math inline">\(f_X(x|p) = (1-p)^x\)</span>.</p>
+</div>
+<div id="thinning" class="section level3 hasAnchor" number="13.2.7">
+<h3><span class="header-section-number">13.2.7</span> Thinning<a href="random-processes.html#thinning" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Let <span class="math inline">\(X(t)\)</span> be a Poisson process in which not every occurrence is observed. Let <span class="math inline">\(Y(t)\)</span> be the number of observed occurrences, and <span class="math inline">\(Z(t)\)</span> the number of unobserved occurrences. If each occurrence is observed with probability <span class="math inline">\(p\)</span>, then <span class="math inline">\(Y(t)\)</span> and <span class="math inline">\(Z(t)\)</span> are Poisson processes with intensities <span class="math inline">\(\lambda p\)</span> and <span class="math inline">\(\lambda(1-p)\)</span></p>
+</div>
+<div id="restarting" class="section level3 hasAnchor" number="13.2.8">
+<h3><span class="header-section-number">13.2.8</span> Restarting<a href="random-processes.html#restarting" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>If <span class="math inline">\(X(t)\)</span> is a Poisson Process, then all of the following are also Poisson processes:</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(X(t + s) - X(s)\)</span></li>
+<li><span class="math inline">\(X(T_k + t) - X(t)\)</span></li>
+<li><span class="math inline">\(X(T + t) + X(t)\)</span> for <span class="math inline">\(T \geq 0\)</span> random variable independent of <span class="math inline">\(X(t)\)</span></li>
+<li><span class="math inline">\(X(T_k^* + t) - X(T_k^*)\)</span> or <span class="math inline">\(T \geq 0\)</span> random variable independent of <span class="math inline">\(X(t)\)</span> and <span class="math inline">\(T_k^* = \min(T_k, T)\)</span></li>
+</ol>
 
 </div>
 </div>
@@ -636,7 +681,7 @@ P(T_n&gt;t)=P(N_t&lt;n)
           </div>
         </div>
       </div>
-<a href="generating-random-variables.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="confidence-intervals.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>

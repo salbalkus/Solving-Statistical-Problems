@@ -88,7 +88,7 @@ We may also be asked to consider the **maximum Type II** error, which is defined
 $$\alpha = \sup_{\theta \in \Theta_1}\beta(\theta)$$
 How might we do this in practice? Let's see an example.
 
-::: {.example name="Finding an LRT and its Power Function}
+::: {.example name="Finding an LRT and its Power Function"}
 FORTHCOMING
 :::
 

@@ -37,7 +37,7 @@ There are several ways to find a sufficient statistic - this section will outlin
 Firstly, if you are given a statistic and you wish to check whether it is sufficient, you can do so directly.
 
 
-::: {.example name="Checking Whether a Sample Mean is Sufficient}
+::: {.example name="Checking Whether a Sample Mean is Sufficient"}
 Let $X = (X_1, ..., X_n), X_i$ iid N($\theta$, 1) and $T = \bar{X}$. Recall that $\bar{X} \sim N(\theta, 1/n)$. 
 $$
 \begin{aligned}

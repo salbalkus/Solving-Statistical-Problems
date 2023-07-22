@@ -446,7 +446,7 @@ There are generally two ways to prove that an UMVUE for $\tau(\theta)$ does not 
 
 For option 1, the general approach is **proof by contradiction**. Assume that there exists an estimator $T$ such that $E(T) = \tau(\theta)$, and then show that this results in a mathematical impossibility. Below, we provide an example inspired by [a post on StackExchange](https://math.stackexchange.com/questions/681638/for-the-binomial-distribution-why-does-no-unbiased-estimator-exist-for-1-p)
 
-::: {.example name="No Unbiased Estimator: Bernoulli}
+::: {.example name="No Unbiased Estimator: Bernoulli"}
 
 Show that for $X_1,...,X_n \overset{iid}{\sim}\text{Bernoulli}(p)$ that there exists no unbiased estimator of $\frac{1}{p}$.  
 
@@ -466,7 +466,7 @@ Another way to show that no unbiased estimator exists is by using [Ancillary Sta
 
 Even if an unbiased estimator exists, it is possible for no UMVUE to exist. If all unbiased estimators of $\tau(\theta)$ are correlated with some unbiased estimator of 0, then an UMVUE cannot exist by the UMVUE Necessary and Sufficient Condition. However, note that by the Lehmann-Scheffé, this cannot be true for families which contain a CSS (on which we may condition to obtain an UMVUE). Therefore, the only families for which no UMVUE exists are either non-exponential or curved exponential. 
 
-::: {.example name="No UMVUE: Uniform}
+::: {.example name="No UMVUE: Uniform"}
 FORTHCOMING
 :::
 

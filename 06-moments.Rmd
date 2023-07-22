@@ -232,11 +232,16 @@ The next two inequalities bound probabilities based on moments. They are
 named the student-teacher pair that developed them.
 
 ::: {.definition name="Markov's Inequality"}
-$$P(X \geq t) \leq \frac{E(X)}{t}$$
+$$P(X \geq \varepsilon) \leq \frac{E(X)}{\varepsilon}$$
 :::
 
 ::: {.definition name="Chebychev's Inequality"}
-This inequality can be stated in several ways:
+$$P(|X - \mu| \geq \epsilon) \leq \frac{Var(X)}{\varepsilon^2}$$
+
+or alternatively, if $Var(X) = \sigma^2$,
+
+$$P(|X - \mu| \geq \varepsilon\sigma) \leq \frac{1}{\epsilon^2}$$
+
 :::
 
 Chebychev's inequality is instrumental in proving the Weak Law of Large Numbers.

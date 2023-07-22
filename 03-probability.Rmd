@@ -430,7 +430,6 @@ If $Z$ is degenerate (meaning it equals a constant value, or $Z = c$), we can sh
 $$
 P(|Z_n - c| > \epsilon) = P(( Z_n - c > \varepsilon) \cup (Z_n - c <-\varepsilon)) \text{ with } ( Z_n - c > \varepsilon), (Z_n - c <-\varepsilon) \text{ disjoint} \\
 = P(Z_n > c + \epsilon) + P(Z_n < c - \epsilon) = 1 - P(Z_n < c + \epsilon) + P(Z_n < c - \epsilon)
-
 $$
 From here, we can use the CDF of $Z_n$ to compute the necessary probability. But be careful - this method may not work if the convergence of the CDF cannot be evaluated easily.
 
@@ -466,7 +465,7 @@ $$Z_n \overset{p}{\rightarrow} Z \implies Z_n \overset{\mathcal{D}}{\rightarrow}
 Unless, that is, the random variable converges in distribution to a *constant* - then, convergence in distribution *does* imply convergence in probability! That is,
 
 $$Z_n \overset{\mathcal{D}}{\rightarrow} c \implies Z_n \overset{p}{\rightarrow} c $$
-:::{.definition name="Multivariate Convergence in Distribution"}
+::: {.definition name="Multivariate Convergence in Distribution"}
 If $X$ is random vector and $X_n$ is a sequence of random vectors, then
 
 $$X_n \overset{\mathcal{D}}{\rightarrow} X \iff \lim_{n\rightarrow\infty}F_n(X_1, ..., X_k) = F(X_1,...,X_k), \forall\text{ continuity points of }F$$

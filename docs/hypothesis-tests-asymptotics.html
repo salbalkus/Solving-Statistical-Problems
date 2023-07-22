@@ -23,7 +23,7 @@
 <meta name="author" content="Salvador Balkus, Kimberly Greco, and Mónica Robles Fontán" />
 
 
-<meta name="date" content="2023-07-17" />
+<meta name="date" content="2023-07-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="hypothesis-tests-finite-samples.html"/>
-<link rel="next" href="generating-random-variables.html"/>
+<link rel="next" href="confidence-intervals.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -176,6 +176,7 @@ div.csl-indent {
 <li class="chapter" data-level="2.9" data-path="math-tricks.html"><a href="math-tricks.html#fubinis-theorem"><i class="fa fa-check"></i><b>2.9</b> Fubini’s Theorem</a></li>
 <li class="chapter" data-level="2.10" data-path="math-tricks.html"><a href="math-tricks.html#gamma-function"><i class="fa fa-check"></i><b>2.10</b> Gamma Function</a></li>
 <li class="chapter" data-level="2.11" data-path="math-tricks.html"><a href="math-tricks.html#triangle-inequality"><i class="fa fa-check"></i><b>2.11</b> Triangle Inequality</a></li>
+<li class="chapter" data-level="2.12" data-path="math-tricks.html"><a href="math-tricks.html#constrained-optimization"><i class="fa fa-check"></i><b>2.12</b> Constrained Optimization</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="probability.html"><a href="probability.html"><i class="fa fa-check"></i><b>3</b> Probability</a>
 <ul>
@@ -189,7 +190,7 @@ div.csl-indent {
 <li class="chapter" data-level="3.3" data-path="probability.html"><a href="probability.html#conditional-probability"><i class="fa fa-check"></i><b>3.3</b> Conditional Probability</a>
 <ul>
 <li class="chapter" data-level="3.3.1" data-path="probability.html"><a href="probability.html#conditional-probability-in-practice"><i class="fa fa-check"></i><b>3.3.1</b> Conditional Probability in Practice</a></li>
-<li class="chapter" data-level="3.6.3" data-path="probability.html"><a href="probability.html#important-theorems"><i class="fa fa-check"></i><b>3.6.3</b> Important Theorems</a></li>
+<li class="chapter" data-level="3.6.4" data-path="probability.html"><a href="probability.html#important-theorems"><i class="fa fa-check"></i><b>3.6.4</b> Important Theorems</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="known-distributions.html"><a href="known-distributions.html"><i class="fa fa-check"></i><b>4</b> Known Distributions</a>
@@ -248,7 +249,7 @@ div.csl-indent {
 <li class="chapter" data-level="5.2" data-path="new-distributions.html"><a href="new-distributions.html#computing-joint-probabilities"><i class="fa fa-check"></i><b>5.2</b> Computing Joint Probabilities</a></li>
 <li class="chapter" data-level="5.3" data-path="new-distributions.html"><a href="new-distributions.html#probability-integral-transform"><i class="fa fa-check"></i><b>5.3</b> Probability Integral Transform</a>
 <ul>
-<li class="chapter" data-level="5.3.1" data-path="new-distributions.html"><a href="new-distributions.html#hiearchical-models-iterated-moments"><i class="fa fa-check"></i><b>5.3.1</b> Hiearchical Models (Iterated Moments)</a></li>
+<li class="chapter" data-level="5.3.1" data-path="new-distributions.html"><a href="new-distributions.html#hierarchical-models-iterated-moments"><i class="fa fa-check"></i><b>5.3.1</b> Hierarchical Models (Iterated Moments)</a></li>
 <li class="chapter" data-level="5.3.2" data-path="new-distributions.html"><a href="new-distributions.html#convolutions"><i class="fa fa-check"></i><b>5.3.2</b> Convolutions</a></li>
 </ul></li>
 </ul></li>
@@ -339,11 +340,10 @@ div.csl-indent {
 <li class="chapter" data-level="9.2.1" data-path="point-estimators-asymptotics.html"><a href="point-estimators-asymptotics.html#central-limit-theorems"><i class="fa fa-check"></i><b>9.2.1</b> Central Limit Theorems</a></li>
 <li class="chapter" data-level="9.2.2" data-path="point-estimators-asymptotics.html"><a href="point-estimators-asymptotics.html#the-delta-method"><i class="fa fa-check"></i><b>9.2.2</b> The Delta Method</a></li>
 <li class="chapter" data-level="9.2.3" data-path="point-estimators-asymptotics.html"><a href="point-estimators-asymptotics.html#cramer-wold-device"><i class="fa fa-check"></i><b>9.2.3</b> Cramer-Wold Device</a></li>
-<li class="chapter" data-level="9.2.4" data-path="point-estimators-asymptotics.html"><a href="point-estimators-asymptotics.html#asymptotic-distribution-in-practice."><i class="fa fa-check"></i><b>9.2.4</b> Asymptotic Distribution in Practice.</a></li>
+<li class="chapter" data-level="9.2.4" data-path="point-estimators-asymptotics.html"><a href="point-estimators-asymptotics.html#asymptotic-distribution-in-practice"><i class="fa fa-check"></i><b>9.2.4</b> Asymptotic Distribution in Practice</a></li>
 </ul></li>
 <li class="chapter" data-level="9.3" data-path="point-estimators-asymptotics.html"><a href="point-estimators-asymptotics.html#asymptotic-properties-of-mles"><i class="fa fa-check"></i><b>9.3</b> Asymptotic Properties of MLEs</a></li>
 <li class="chapter" data-level="9.4" data-path="point-estimators-asymptotics.html"><a href="point-estimators-asymptotics.html#variance-stabilizing-transformations"><i class="fa fa-check"></i><b>9.4</b> Variance Stabilizing Transformations</a></li>
-<li class="chapter" data-level="9.5" data-path="point-estimators-asymptotics.html"><a href="point-estimators-asymptotics.html#asymptotic-confidence-intervals"><i class="fa fa-check"></i><b>9.5</b> Asymptotic Confidence Intervals</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="hypothesis-tests-finite-samples.html"><a href="hypothesis-tests-finite-samples.html"><i class="fa fa-check"></i><b>10</b> Hypothesis Tests: Finite Samples</a>
 <ul>
@@ -370,7 +370,13 @@ div.csl-indent {
 <li class="chapter" data-level="11.4.2" data-path="hypothesis-tests-asymptotics.html"><a href="hypothesis-tests-asymptotics.html#nuisance-parameters-1"><i class="fa fa-check"></i><b>11.4.2</b> Nuisance Parameters</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="generating-random-variables.html"><a href="generating-random-variables.html"><i class="fa fa-check"></i><b>12</b> Generating Random Variables</a></li>
+<li class="chapter" data-level="12" data-path="confidence-intervals.html"><a href="confidence-intervals.html"><i class="fa fa-check"></i><b>12</b> Confidence Intervals</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="confidence-intervals.html"><a href="confidence-intervals.html#definition-1"><i class="fa fa-check"></i><b>12.1</b> Definition</a></li>
+<li class="chapter" data-level="12.2" data-path="confidence-intervals.html"><a href="confidence-intervals.html#test-inversion"><i class="fa fa-check"></i><b>12.2</b> When You’ve Constructed a Hypothesis Test…</a></li>
+<li class="chapter" data-level="12.3" data-path="confidence-intervals.html"><a href="confidence-intervals.html#when-youve-found-a-pivot-including-asymptotic-normality"><i class="fa fa-check"></i><b>12.3</b> When You’ve Found a Pivot (Including Asymptotic Normality)…</a></li>
+<li class="chapter" data-level="12.4" data-path="confidence-intervals.html"><a href="confidence-intervals.html#when-all-you-have-is-a-distribution"><i class="fa fa-check"></i><b>12.4</b> When All You Have Is a Distribution…</a></li>
+</ul></li>
 <li class="chapter" data-level="13" data-path="random-processes.html"><a href="random-processes.html"><i class="fa fa-check"></i><b>13</b> Random Processes</a>
 <ul>
 <li class="chapter" data-level="13.1" data-path="random-processes.html"><a href="random-processes.html#branching-process"><i class="fa fa-check"></i><b>13.1</b> Branching Processes</a>
@@ -388,6 +394,9 @@ div.csl-indent {
 <li class="chapter" data-level="13.2.3" data-path="random-processes.html"><a href="random-processes.html#poisson-distribution"><i class="fa fa-check"></i><b>13.2.3</b> Poisson Distribution</a></li>
 <li class="chapter" data-level="13.2.4" data-path="random-processes.html"><a href="random-processes.html#exponential-distribution"><i class="fa fa-check"></i><b>13.2.4</b> Exponential Distribution</a></li>
 <li class="chapter" data-level="13.2.5" data-path="random-processes.html"><a href="random-processes.html#example-1"><i class="fa fa-check"></i><b>13.2.5</b> Example</a></li>
+<li class="chapter" data-level="13.2.6" data-path="random-processes.html"><a href="random-processes.html#merging-and-splitting"><i class="fa fa-check"></i><b>13.2.6</b> Merging and Splitting</a></li>
+<li class="chapter" data-level="13.2.7" data-path="random-processes.html"><a href="random-processes.html#thinning"><i class="fa fa-check"></i><b>13.2.7</b> Thinning</a></li>
+<li class="chapter" data-level="13.2.8" data-path="random-processes.html"><a href="random-processes.html#restarting"><i class="fa fa-check"></i><b>13.2.8</b> Restarting</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
@@ -438,13 +447,17 @@ It can be extended to the multidimensional setting by representing <span class="
 <li><span class="math inline">\(-\frac{\partial^2}{\partial\theta^2}\ell(\hat{\theta}_n | X_n)\)</span>; plug the MLE into the observed information</li>
 </ul>
 <p>However, <span class="math inline">\(I_n(\hat{\theta}_0)\)</span> is generally preferred, because it is more efficient.</p>
-<p>Advantages:
-- Simple to compute if you know the form of the MLE
-- Constructing confidence intervals is easy</p>
-<p>Disadvantages:
-- Requires knowing the form of the MLE
-- Not invariant if you transform the MLE
-- Approximation may not be as accurate as the other two tests</p>
+<p>Advantages:</p>
+<ul>
+<li>Simple to compute if you know the form of the MLE</li>
+<li>Constructing confidence intervals is easy</li>
+</ul>
+<p>Disadvantages:</p>
+<ul>
+<li>Requires knowing the form of the MLE</li>
+<li>Not invariant if you transform the MLE</li>
+<li>Approximation may not be as accurate as the other two tests</li>
+</ul>
 </div>
 <div id="score-test" class="section level2 hasAnchor" number="11.2">
 <h2><span class="header-section-number">11.2</span> Score Test<a href="hypothesis-tests-asymptotics.html#score-test" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -457,12 +470,16 @@ It can be extended to the multivariate setting by representing <span class="math
 <p><span class="math display">\[(U_n(\theta_0))^\top(I_n(\theta_0))^{-1}(U_n(\theta_0)) \approx \chi^2_k\]</span>
 which follows from the fact that <span class="math inline">\(U_n(\theta_0) \approx MVN_k(0, I_n(\theta_0))\)</span></p>
 </div>
-<p>Advantages:
-- Not actually necessary to know the form of the MLE to construct the test - all that is needed is the score equation and information under <span class="math inline">\(H_0\)</span>
-- More computationally efficient as a result</p>
-<p>Disadvantages:
-- Constructing confidence intervals is more complicated, since inverting the Score test statistic may be challenging
-- <a href="https://www.jstor.org/stable/2938281">Not invariant to under reparametrization</a></p>
+<p>Advantages:</p>
+<ul>
+<li>Not actually necessary to know the form of the MLE to construct the test - all that is needed is the score equation and information under <span class="math inline">\(H_0\)</span></li>
+<li>More computationally efficient as a result</li>
+</ul>
+<p>Disadvantages:</p>
+<ul>
+<li>Constructing confidence intervals is more complicated, since inverting the Score test statistic may be challenging</li>
+<li><a href="https://www.jstor.org/stable/2938281">Not invariant to under reparametrization</a></li>
+</ul>
 </div>
 <div id="likelihood-ratio-test" class="section level2 hasAnchor" number="11.3">
 <h2><span class="header-section-number">11.3</span> Likelihood Ratio Test<a href="hypothesis-tests-asymptotics.html#likelihood-ratio-test" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -472,13 +489,17 @@ which follows from the fact that <span class="math inline">\(U_n(\theta_0) \appr
 This can be extended to multiple dimensions by letting <span class="math inline">\(\ell(\theta|X_n)\)</span> by a <span class="math inline">\(k\)</span>-dimensional vector. Then,</p>
 <p><span class="math display">\[Q_n = 2(\ell(\hat{\theta}_n|X_n) - \ell(\theta_0|X_n)) \approx\chi^2(k)\]</span></p>
 </div>
-<p>Advantages:
-- No derivatives need to be calculated
-- Invariant to transformations of the MLE
-- Provides the most accurate approximation, especially if we decide to reparametrize the model, in which case the derivative in the Wald/Score tests would need to be recomputed.</p>
-<p>Disadvantages:
-- Inverting the test to construct a confidence interval is difficult
-- Requires knowledge of the log-likelihood under both the null hypothesis <span class="math inline">\(H_0\)</span> and the alternative <span class="math inline">\(H_1\)</span>.</p>
+<p>Advantages:</p>
+<ul>
+<li>No derivatives need to be calculated</li>
+<li>Invariant to transformations of the MLE</li>
+<li>Provides the most accurate approximation, especially if we decide to reparametrize the model, in which case the derivative in the Wald/Score tests would need to be recomputed.</li>
+</ul>
+<p>Disadvantages:</p>
+<ul>
+<li>Inverting the test to construct a confidence interval is difficult</li>
+<li>Requires knowledge of the log-likelihood under both the null hypothesis <span class="math inline">\(H_0\)</span> and the alternative <span class="math inline">\(H_1\)</span>.</li>
+</ul>
 </div>
 <div id="composite-null-hypotheses" class="section level2 hasAnchor" number="11.4">
 <h2><span class="header-section-number">11.4</span> Composite Null Hypotheses<a href="hypothesis-tests-asymptotics.html#composite-null-hypotheses" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -494,10 +515,10 @@ where <span class="math inline">\(k\)</span> is the number of parameters (in thi
 <div id="nuisance-parameters-1" class="section level3 hasAnchor" number="11.4.2">
 <h3><span class="header-section-number">11.4.2</span> Nuisance Parameters<a href="hypothesis-tests-asymptotics.html#nuisance-parameters-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>A composite null hypothesis may instead involve <a href="hypothesis-tests-finite-samples.html#nuisance-parameters">nuisance parameters</a>. Suppose we have a null hypothesis <span class="math inline">\(H_0: \alpha = \alpha_0\)</span>, where <span class="math inline">\(\alpha\)</span> is a vector of length <span class="math inline">\(k\)</span>, and we have a vector <span class="math inline">\(\beta\)</span> of nuisance parameters. In a composite null, we can partition <span class="math inline">\(\theta^\top = (\alpha^\top, \beta^\top)\)</span>.</p>
-<p>::: {#adjusted-information .definition name=“Adjusted Information”}
-To use a normal asymptotic approximation in this situation, it is necessary to compute the “adjusted information” <span class="math inline">\(I_{n,\alpha\alpha|\beta}(\alpha, \beta)\)</span> - the information for <span class="math inline">\(\alpha\)</span>, conditional on our <span class="math inline">\(\beta\)</span> estimate:</p>
+<div class="definition">
+<p><span id="def:adjusted-information" class="definition"><strong>Definition 11.4  (Adjusted Information) </strong></span>To use a normal asymptotic approximation in this situation, it is necessary to compute the “adjusted information” <span class="math inline">\(I_{n,\alpha\alpha|\beta}(\alpha, \beta)\)</span> - the information for <span class="math inline">\(\alpha\)</span>, conditional on our <span class="math inline">\(\beta\)</span> estimate:</p>
 <p><span class="math display">\[I_{n,\alpha\alpha|\beta}(\alpha, \beta) = I_{n,\alpha\alpha}(\alpha, \beta) - I_{n,\alpha\beta}(\alpha, \beta)(I_{n,\beta\beta}(\alpha, \beta))^{-1}I_{n,\beta\alpha}(\alpha, \beta)\]</span></p>
-<p>::</p>
+</div>
 <p>The adjusted information is derived from the block-matrix partition formula for the partition</p>
 <p><span class="math display">\[I_n(\alpha, \beta) = \begin{bmatrix} I_{n,\alpha\alpha}(\alpha, \beta) &amp; I_{n,\alpha\beta}(\alpha, \beta) \\ I_{n,\beta\alpha}(\alpha, \beta) &amp; I_{n,\beta\beta}(\alpha, \beta) \\\end{bmatrix}\]</span>
 With the adjusted information computed, the previously-discussed asymptotic tests become the following:</p>
@@ -517,7 +538,7 @@ With the adjusted information computed, the previously-discussed asymptotic test
         </div>
       </div>
 <a href="hypothesis-tests-finite-samples.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="generating-random-variables.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="confidence-intervals.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -140,7 +140,7 @@ In other words, we can show convergence in distribution of a random vector by sh
 
 The Cramer-Wold Device allows us to convert a problem involving convergence of random vectors into a problem involving convergence of a single random variable.
 
-::: {.example name="Using the Cramer-Wold Device}
+::: {.example name="Using the Cramer-Wold Device"}
 Suppose $X_{1n} \overset{\mathcal{D}}{\rightarrow} X_1 \sim N(\mu_1, \sigma^2_1)$ and $X_{2n} \overset{\mathcal{D}}{\rightarrow} X_2 \sim N(\mu_2, \sigma^2_2)$. Then, by the Cramer-Wold Device, $(X_{1n}, X_{2n}) \overset{\mathcal{D}}{\rightarrow} MVN(\begin{bmatrix}\mu_1 \\ \mu_2\end{bmatrix}, \Sigma)$ where
 
 $$\Sigma = \begin{bmatrix}\sigma_1^2 & \rho\\\rho & \sigma_2^2\end{bmatrix}$$
@@ -161,7 +161,7 @@ By the Cramer-Wold Device, this implies that $(X_{1n}, X_{2n}) \overset{\mathcal
 
 The above example can be generalized to a $k$-vector of random variables $X_i$ which converge in distribution to a normal. 
 
-### Asymptotic Distribution in Practice.
+### Asymptotic Distribution in Practice
 
 Statistical problems are often more complicated than simply applying the CLT or Delta Method. Often, we may need to consider the convergences of other random variables. To do this, we can combine the CLT/Delta Method with Slutsky's Theorem or the Continuous Mapping Theorem to prove desired results. Or, we may need to employ a more direct proof. Here are some examples.
 
@@ -169,10 +169,10 @@ Statistical problems are often more complicated than simply applying the CLT or 
 
 ## Asymptotic Properties of MLEs
 
-While the CLT and Delta Method are extremely useful, if you are working with MLEs, it can often be faster to rely on their known properties. For $X_i$ satisfying a certain set of [regularity conditions](https://myweb.uiowa.edu/pbreheny/7110/wiki/regularity-conditions.html) (where? better link), the MLE $\hat{\theta}_n has the two import properties discussed above:
+While the CLT and Delta Method are extremely useful, if you are working with MLEs, it can often be faster to rely on their known properties. For $X_i$ satisfying a certain set of [regularity conditions](https://myweb.uiowa.edu/pbreheny/7110/wiki/regularity-conditions.html) (where? better link), the MLE $\hat{\theta}_n$ has the two import properties discussed above:
 
 - **Consistency**: $\hat{\theta}_n \overset{p}{\rightarrow} \theta$
-- **Asymptotic Efficiency**: $\sqrt{n}(\hat{\theta}_n - \theta) \overset{\mathcal{D}}{\rightarrow} N(0, \mathcal{I}(\theta_0)^{-1})$, the [Cramer-Rao Lower Bound](#crlb)
+- **Asymptotic Efficiency**: $\sqrt{n}(\hat{\theta}_n - \theta) \overset{\mathcal{D}}{\rightarrow} N(0, \mathcal{I}(\theta)^{-1})$, the [Cramer-Rao Lower Bound](#crlb)
 
 This holds true even for multi-parameter MLEs. Note that the regularity conditions are met by the MLE of all exponential families for which $\nu \in \Theta \subset \mathbb{R}$ is an open set, which can be useful in problem-solving.
 

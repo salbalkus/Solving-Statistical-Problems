@@ -35,10 +35,12 @@ To obtain $I_n(\theta_0)$, we can estimate it using either...
 However, $I_n(\hat{\theta}_0)$ is generally preferred, because it is more efficient.  
 
 Advantages:
+
 - Simple to compute if you know the form of the MLE
 - Constructing confidence intervals is easy
 
 Disadvantages:
+
 - Requires knowing the form of the MLE
 - Not invariant if you transform the MLE
 - Approximation may not be as accurate as the other two tests
@@ -62,11 +64,13 @@ which follows from the fact that $U_n(\theta_0) \approx MVN_k(0, I_n(\theta_0))$
 
 :::
 
-Advantages:
+Advantages:  
+
 - Not actually necessary to know the form of the MLE to construct the test - all that is needed is the score equation and information under $H_0$
 - More computationally efficient as a result
 
-Disadvantages:
+Disadvantages:  
+
 - Constructing confidence intervals is more complicated, since inverting the Score test statistic may be challenging
 - [Not invariant to under reparametrization](https://www.jstor.org/stable/2938281)
 
@@ -82,12 +86,14 @@ This can be extended to multiple dimensions by letting $\ell(\theta|X_n)$ by a $
 $$Q_n = 2(\ell(\hat{\theta}_n|X_n) - \ell(\theta_0|X_n)) \approx\chi^2(k)$$
 :::
 
-Advantages:
+Advantages:  
+
 - No derivatives need to be calculated
 - Invariant to transformations of the MLE
 - Provides the most accurate approximation, especially if we decide to reparametrize the model, in which case the derivative in the Wald/Score tests would need to be recomputed. 
 
-Disadvantages:
+Disadvantages:  
+
 - Inverting the test to construct a confidence interval is difficult
 - Requires knowledge of the log-likelihood under both the null hypothesis $H_0$ and the alternative $H_1$.
 
@@ -115,7 +121,7 @@ To use a normal asymptotic approximation in this situation, it is necessary to c
 
 $$I_{n,\alpha\alpha|\beta}(\alpha, \beta) = I_{n,\alpha\alpha}(\alpha, \beta) - I_{n,\alpha\beta}(\alpha, \beta)(I_{n,\beta\beta}(\alpha, \beta))^{-1}I_{n,\beta\alpha}(\alpha, \beta)$$
 
-::
+:::
 
 The adjusted information is derived from the block-matrix partition formula for the partition
 

@@ -4,20 +4,20 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Solving Statistical Problems</title>
-  <meta name="description" content="Solving Statistical Problems" />
+  <title>Chapter 12 Confidence Intervals | Solving Statistical Problems</title>
+  <meta name="description" content="Chapter 12 Confidence Intervals | Solving Statistical Problems" />
   <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Solving Statistical Problems" />
+  <meta property="og:title" content="Chapter 12 Confidence Intervals | Solving Statistical Problems" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="Solving Statistical Problems" />
+  <meta property="og:description" content="Chapter 12 Confidence Intervals | Solving Statistical Problems" />
   <meta name="github-repo" content="salbalkus/Solving-Statistical-Problems" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Solving Statistical Problems" />
+  <meta name="twitter:title" content="Chapter 12 Confidence Intervals | Solving Statistical Problems" />
   
-  <meta name="twitter:description" content="Solving Statistical Problems" />
+  <meta name="twitter:description" content="Chapter 12 Confidence Intervals | Solving Statistical Problems" />
   
 
 <meta name="author" content="Salvador Balkus, Kimberly Greco, and Mónica Robles Fontán" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="math-tricks.html"/>
+<link rel="prev" href="hypothesis-tests-asymptotics.html"/>
+<link rel="next" href="random-processes.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -420,24 +420,85 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Solving Statistical Problems</h1>
-<p class="author"><em>Salvador Balkus, Kimberly Greco, and Mónica Robles Fontán</em></p>
-<p class="date"><em>2023-07-22</em></p>
+<div id="confidence-intervals" class="section level1 hasAnchor" number="12">
+<h1><span class="header-section-number">Chapter 12</span> Confidence Intervals<a href="confidence-intervals.html#confidence-intervals" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>As a final ask, problems in statistics will often involve computing a confidence interval based on some previously constructed statistic. This chapter defines confidence intervals and discusses how to construct them for three different types of problems from which the confidence interval may arise. The material from this chapter is mostly from <span class="citation">Casella and Berger (<a href="#ref-Casella1990">1990</a>)</span> Chapter 9, but our goal is to relate it to previous chapters.</p>
+<div id="definition-1" class="section level2 hasAnchor" number="12.1">
+<h2><span class="header-section-number">12.1</span> Definition<a href="confidence-intervals.html#definition-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In the abstract, an <em>interval estimator</em> is a pair of functions <span class="math inline">\((L(X), U(X))\)</span> with <span class="math inline">\(L(X) \leq U(X), \forall x \in \mathcal{X}\)</span> that draws the inference <span class="math inline">\(L(X) \leq \theta \leq U(X)\)</span> where <span class="math inline">\(\theta\)</span> is some parameter.</p>
+<p><em>Coverage probability</em> is defined as <span class="math inline">\(P(\theta \in (L(X), U(X)) | \theta)\)</span>. A <span class="math inline">\(1 - \alpha\)</span> <em>confidence interval</em> is an interval estimator defined such that <span class="math inline">\(P(\theta \in (L(X), U(X)) | \theta) = 1 - \alpha\)</span>.</p>
 </div>
-<div id="introduction" class="section level1 hasAnchor" number="1">
-<h1><span class="header-section-number">Chapter 1</span> Introduction<a href="index.html#introduction" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Welcome to “Solving Statistical Problems”, a compilation of problem-solving tools and tricks for graduate-level Probability and Statistical Inference courses.</p>
-<p>Many of our examples originate from or are inspired by Casella and Berger’s <em>Statistical Inference</em>, <a href="https://statproofbook.github.io/">The Book of Statistical Proofs</a>, lectures slides and notes from <em>BIOSTAT 230: Probability I</em> and <em>BIOSTAT 231: Statistical Inference I</em> at the Harvard Department of Biostatistics, and other online resources. The goal of this site is to provide a supplement to the aforementioned works providing a better explanation of how to actually solve problems using the material presented.</p>
+<div id="test-inversion" class="section level2 hasAnchor" number="12.2">
+<h2><span class="header-section-number">12.2</span> When You’ve Constructed a Hypothesis Test…<a href="confidence-intervals.html#test-inversion" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Let’s pretend we’ve just arrived from <a href="hypothesis-tests-finite-samples.html#hypothesis-tests-finite-samples">Chapter 10</a> and constructed a size <span class="math inline">\(\alpha\)</span> hypothesis test of <span class="math inline">\(H_0: \theta = \theta_0\)</span> versus <span class="math inline">\(H_1: \theta \neq \theta_0\)</span> with rejection region <span class="math inline">\(R = \{|T(X) - \theta_0| &gt; c\}\)</span>. Here <span class="math inline">\(c\)</span> is defined as a function of <span class="math inline">\(n\)</span> and <span class="math inline">\(\alpha\)</span>. This means that</p>
+<p><span class="math display">\[P(|T(x) - \theta| &gt; c \mid \theta = \theta_0) = \alpha\]</span></p>
+<p>by the definition of the rejection region. How do we construct a <span class="math inline">\(1 - \alpha\)</span> confidence interval from this test?</p>
+<p>This is accomplished by <em>inverting the test statistic</em>. This procedure requires rewriting the probability statement in the form <span class="math inline">\(P(L(X) &lt; \theta &lt; U(X)) = 1 - \alpha\)</span>, thus yielding the desired <span class="math inline">\(L(X)\)</span> and <span class="math inline">\(U(X)\)</span>. For example, given the above, we could write</p>
+<p><span class="math display">\[
+P(|T(x) - \theta_0| &gt; c \mid \theta = \theta_0) = \alpha \\
+\implies P(|T(x) - \theta_0| &lt; c \mid \theta = \theta_0) = 1 - \alpha \\
+\implies P(T(x) - c &lt; \theta &lt; T(x) + c \mid \theta = \theta_0) = 1 - \alpha \\
+\implies P(L(x) &lt; \theta &lt; U(x)) = 1 - \alpha
+\]</span>
+with <span class="math inline">\(L(x) = T(x) - c\)</span> and <span class="math inline">\(U(x) = T(x) + c\)</span> since line 3 is true for all <span class="math inline">\(\theta\)</span>. This yields the <span class="math inline">\(1 - \alpha\)</span> confidence interval <span class="math inline">\((T(x) - c, T(x) + c)\)</span> by inversion of the test statistic.</p>
+<p>In general, if we’ve already constructed a hypothesis test with rejection region <span class="math inline">\(R\)</span>, we can then identify an <em>acceptance region</em> <span class="math inline">\(A(\theta_0)\)</span> (where <span class="math inline">\(H_0: \theta = \theta_0\)</span> is true) which is the <em>complement</em> of <span class="math inline">\(R\)</span>. Then, our confidence set - which is often, but is not required to be, an interval - is <span class="math inline">\(C(x) = \{\theta_0 : x \in A(\theta_0)\}\)</span>. This yields a confidence interval from our hypothesis set.</p>
+</div>
+<div id="when-youve-found-a-pivot-including-asymptotic-normality" class="section level2 hasAnchor" number="12.3">
+<h2><span class="header-section-number">12.3</span> When You’ve Found a Pivot (Including Asymptotic Normality)…<a href="confidence-intervals.html#when-youve-found-a-pivot-including-asymptotic-normality" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Sometimes, you may be asked to construct a confidence interval simply after proving that a test statistic follows (or converges to) a particular distribution. In this case, we can use a device called a pivotal quantity, or <em>pivot</em>.</p>
+<div class="definition">
+<p><span id="def:unlabeled-div-128" class="definition"><strong>Definition 12.1  (Pivot) </strong></span>A random variable <span class="math inline">\(Q(x,\theta)\)</span> whose distribution is independent of all parameters of interest.</p>
+</div>
+<p>Pivots commonly occur for location-scale families. This is because if <span class="math inline">\(X_1,...,X_n \overset{iid}{\sim}\frac{1}{\sigma}f(\frac{x-\mu}{\sigma})\)</span> - a location family with <span class="math inline">\(Z \sim f(z)\)</span> - then</p>
+<p><span class="math display">\[\frac{\bar{X} - \mu}{S}\]</span>
+is a pivot. Of course, this is not the only pivot; if <span class="math inline">\(\sigma\)</span> is known then we can replace <span class="math inline">\(S\)</span> with <span class="math inline">\(\sigma\)</span> as well.</p>
+<p>Because their distribution is known, pivots can be used to construct confidence intervals by simply setting</p>
+<p><span class="math display">\[P(a \leq Q(x, \theta) \leq b) = 1 - \alpha\]</span></p>
+<p>and then solving for <span class="math inline">\(a,b\)</span> by using the <a href="confidence-intervals.html#test-inversion">test inversion</a> method mentioned in the previous section. Such a problem commonly occurs in scenarios involving asymptotic normality.</p>
+<div class="example">
+<p><span id="exm:unlabeled-div-129" class="example"><strong>Example 12.1  (CI from Asymptotically Normal Statistic) </strong></span>Suppose, for some <span class="math inline">\(g\)</span>, we’ve just used the Delta Method to prove that</p>
+<p><span class="math display">\[\sqrt{n}(g(\hat{\theta}) - g(\theta)) \overset{\mathcal{D}}{\rightarrow}N(0, v^2)\]</span>
+where <span class="math inline">\(v^2 = (g&#39;(\theta))^2\sigma^2\)</span>. How can we construct a <span class="math inline">\(1-\alpha\)</span> confidence interval for <span class="math inline">\(\theta\)</span>? Since the Normal is a location-scale family, by some algebra we know</p>
+<p><span class="math display">\[\frac{g(\hat{\theta}) - g(\theta)}{v / \sqrt{n}} \sim N(0,1)\]</span>
+which is therefore a pivot. Hence, a confidence interval can be constructed by inverting this statistic (using the fact that the normal is symmetric):</p>
+<p><span class="math display">\[
+P\Big(-z_{\alpha/2} \leq \frac{g(\hat{\theta}) - g(\theta)}{v / \sqrt{n}} \leq z_{\alpha/2}\Big) = 1 - \alpha\\
+\implies P(g(\hat{\theta})-z_{\alpha/2}\cdot\frac{v}{\sqrt{n}} \leq g(\theta) \leq g(\hat{\theta})+z_{\alpha/2}\cdot\frac{v}{\sqrt{n}}) = 1 - \alpha
+\]</span></p>
+</div>
+<p>so our <span class="math inline">\(1 - \alpha\)</span> confidence interval for <span class="math inline">\(g(\theta)\)</span> is <span class="math inline">\(\Big(g(\hat{\theta})-z_{\alpha/2}\cdot\frac{v}{\sqrt{n}}, g(\hat{\theta})+z_{\alpha/2}\cdot\frac{v}{\sqrt{n}}\Big)\)</span></p>
+<p>Of course, the pivotal quantity does not <em>have</em> to be used with asymptotics. For example, if <span class="math inline">\(X_1,...,X_n \sim N(\mu, \sigma^2)\)</span> with unknown <span class="math inline">\(\sigma^2\)</span>, a pivotal quantity is the T-statistic <span class="math inline">\(\frac{\bar{X} - \mu}{S / \sqrt{n}} \sim t(n - 1)\)</span>, and we can invert the test statistic to obtain a confidence interval the same way as before.</p>
+</div>
+<div id="when-all-you-have-is-a-distribution" class="section level2 hasAnchor" number="12.4">
+<h2><span class="header-section-number">12.4</span> When All You Have Is a Distribution…<a href="confidence-intervals.html#when-all-you-have-is-a-distribution" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Not every statistic will have a nice and symmetric distribution with convenient quantiles to use. Suppose instead we have <span class="math inline">\(\alpha_1 + \alpha_2 = \alpha\)</span>, and <span class="math inline">\(T\)</span> is a statistic with continuous cdf <span class="math inline">\(F_T(t | \theta)\)</span>. In this case, we can directly pivot the CDF by solving a set of equations for two values: <span class="math inline">\(\theta_L(t)\)</span> and <span class="math inline">\(\theta_U(t)\)</span>.</p>
+<p>If <span class="math inline">\(F_T(t|\theta)\)</span> is a decreasing function of <span class="math inline">\(\theta\)</span>, then these bounds can be found by solving the equations</p>
+<p><span class="math display">\[
+F_t(t | \theta_U(t)) = \alpha_1\\
+F_t(t | \theta_L(t)) = 1 - \alpha_2
+\]</span>
+while for an increasing function of <span class="math inline">\(\theta\)</span>, instead solve</p>
+<p><span class="math display">\[
+F_t(t | \theta_U(t)) = 1 - \alpha_2\\
+F_t(t | \theta_L(t)) = \alpha_1
+\]</span></p>
+<p>Solving these equations for <span class="math inline">\(\theta_L(t)\)</span> and <span class="math inline">\(\theta_U(t)\)</span> yields the <span class="math inline">\(1 - \alpha\)</span> CI <span class="math inline">\((\theta_L(t), \theta_U(t))\)</span>. An example of this for the minimum of a location exponential family can be found in Example 9.2.13 of <span class="citation">Casella and Berger (<a href="#ref-Casella1990">1990</a>)</span>.</p>
 
+</div>
+</div>
+<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-Casella1990" class="csl-entry">
+Casella, G C, and Roger L Berger. 1990. <em>Statistical Inference</em>. 2nd ed. The Wadsworth &amp; Brooks/Cole Statistics/Probability Series. Florence, KY: Brooks/Cole.
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="math-tricks.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="hypothesis-tests-asymptotics.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="random-processes.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -468,7 +529,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/index.Rmd",
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/12-confidence-intervals.Rmd",
 "text": "Edit"
 },
 "history": {
