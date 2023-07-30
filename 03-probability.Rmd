@@ -292,6 +292,16 @@ It satisfies two properties from Kolmogorov's Axiom's:
 
 :::
 
+When computing the probability of a random variable, it is important to first manipulate the probability function itself algebraically to simply computation. For example, suppose we want to compute $P(X_1 \leq x_1, X_2 \leq x_2)$. However, it may be easier to use the previously-discussed probability properties to note
+
+$$
+P(X_1 \leq x_1, X_2 \leq x_2) = 1 - P(X_1 > X_1 \cup X_2 > x_2) \\
+= 1 - P(X_1 > x_1) - P(X_2 > x_2) + P(X_1 > x_1, X_2 > x_2)
+$$
+
+
+and compute each part separately. A more general approach to this philosophy is discussed next.
+
 
 ### Technique: Direct Probability Manipulation {#direct-manipulation}
 
@@ -395,7 +405,7 @@ and so on. By induction, $X_{(i)} = \sum_{j=1}^{i-1}X_{(j)}$. Therefore, we can 
 
 ### Borel-Cantelli Lemmas
 
-Let $E_1$, $E_2$,... be a sequence of events. 
+What do we do when an infinite number of events occur? How can we ascertain their probability? For this, we rely on the Borel-Cantelli Lemmas. Let $E_1$, $E_2$,... be a sequence of events. Then:
 
 ::: {.lemma name="First Borel-Cantelli"}
 If $\sum_{n=1}^\infty P(E_n) \leq \infty$, then 

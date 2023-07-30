@@ -232,7 +232,8 @@ Note that the parametrization below describes the distribution in terms of the s
 
 
 - The Exponential is a special case of the Gamma distribution: $\text{Exp}(\lambda) = \text{Gamma}(1, \lambda)$
-- By extension, the exponential has an additive property: If $X_i\sim Exp(\lambda) $, then $\sum_{i=1}^n X_i \sim \text{Gamma}(n, \lambda)$.
+- By extension, the exponential has an additive property: If $X_i \sim \text{Exp}(\lambda)$, then $\sum_{i=1}^n X_i \sim \text{Gamma}(n, \lambda)$.
+- If $X_i \sim \text{Exp}(\lambda_i)$, then $\min\{X_i: i=1,...n\} \sim \text{Exp}(\sum_{i=1}^n\lambda_i)$
 - The Exponential is the only continuous *memoryless* distribution; that is, for $k > i$, $P(X \geq k | X > i) = P(X \geq k - i)$.
 
 We can prove the memorylessness of the Exponential using [conditional probability](#conditional-probability):

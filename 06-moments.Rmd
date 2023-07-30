@@ -145,7 +145,7 @@ This is especially useful when working with the [Multivariate Normal](#multivari
 
 Occasionally, we might want to work with a measure of joint dispersion that is normalized. This is called the **correlation**.
 
-::: {.definition name="Covariance"}
+::: {.definition name="Correlation"}
 **Correlation** is a measure of the joint dispersion of two random
 variables normalized to [0,1], with $Corr(X,Y) = 0$ indicating that the
 variables are independent and $Corr(X,Y) = 1$ indicating perfect
@@ -153,6 +153,14 @@ collinearity. Mathematically,
 
 $$Cov(X,Y) = E\Big(\frac{X - E(X)}{\sqrt{Var(X)}}\cdot \frac{Y - E(Y)}{\sqrt{Var(Y)}}\Big) = \frac{Cov(X,Y)}{\sqrt{Var(X)Var(Y)}}$$
 :::
+
+An important property of the correlation (and by extension, covariance) is that
+
+$$-1 \leq \frac{Cov(X,Y)}{\sqrt{Var(X)Var(Y)}} \leq 1$$
+This property can be used to derive other inequalities by noting, for example, that the above implies
+
+$$\implies Cov(X,Y) \leq \sqrt{Var(X)Var(Y)}$$
+
 
 ## Conditional Expectation
 
