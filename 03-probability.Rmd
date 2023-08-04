@@ -209,21 +209,25 @@ Let $D$ be an outcome event and $S$ be an exposure event. The odds ratio, denote
 $$OR = \frac{P(D|S)/P(\bar{D}|S)}{P(D|\bar{S})/P(\bar{D}|\bar{S})}$$
 Note that $P(\bar{D}|S) = 1 - P(D|S)$. 
 
-- The odds ratio is invariant to switching $D$ and $S$, ie. 
-$$\frac{P(D|S)/P(\bar{D}|S)}{P(D|\bar{S})/P(\bar{D}|\bar{S})} = \frac{P(S|D)/P(\bar{S}|D)}{P(S|\bar{D})/P(\bar{S}|\bar{D})}.$$
-*Proof.*
+- The odds ratio is invariant to switching $D$ and $S$, ie.  
 
-$$
+$$\frac{P(D|S)/P(\bar{D}|S)}{P(D|\bar{S})/P(\bar{D}|\bar{S})} = \frac{P(S|D)/P(\bar{S}|D)}{P(S|\bar{D})/P(\bar{S}|\bar{D})}$$
+
+*Proof.*  
+
 \begin{aligned}
 \frac{P(D|S)/P(\bar{D}|S)}{P(D|\bar{S})/P(\bar{D}|\bar{S})} &= P(D|S) \cdot \frac{1}{P(\bar{D}|S)} \cdot \frac{1}{P(D|\bar{S})} \cdot P(\bar{D}|\bar{S})\\
 &= \frac{P(S|D) P(D)}{P(S)} \cdot \frac{P(S)}{P(S|\bar{D})P(\bar{D})} \cdot \frac{P(\bar{S})}{P(\bar{S}|D)P(D)} \cdot \frac{P(\bar{S}|\bar{D})P(\bar{D})}{P(\bar{S})} \\
 &= \frac{P(S|D)/P(\bar{S}|D)}{P(S|\bar{D})/P(\bar{S}|\bar{D})}
 \end{aligned}
-$$
+
 The second step plugs in the following equalities which follow from Bayes' Rule
 
 $$P(D|S) = \frac{P(S|D) P(D)}{P(S)}, P(\bar{D}|S) = \frac{P(S|\bar{D})P(\bar{D})}{P(S)},$$
+
 $$P(D|\bar{S}) = \frac{P(\bar{S}|D)P(D)}{P(\bar{S})}, \text{and } P(\bar{D}|\bar{S}) = \frac{P(\bar{S}|\bar{D})P(\bar{D})}{P(\bar{S})}$$
+:::
+
 
 ## Random Variables
 
