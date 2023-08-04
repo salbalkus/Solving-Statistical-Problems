@@ -204,7 +204,14 @@ known. For example, this occurs in [Chapter
 ::: {.definition name="MGF"}
 The **moment generating function** (MGF) is defined as
 
-$$\mathcal{M}_X(t) = E(e^{tx})$$ This function has three important
+$$\mathcal{M}_X(t) = E(e^{tx})$$ 
+
+or, if $X = \begin{bmatrix}X_1 & ... & X_n\end{bmatrix}$ a vector,
+
+$$\mathcal{M}_X(t) = E(e^{t^Tx})$$ 
+
+
+This function has three important
 properties:
 
 1.  The MGF fully characterizes a distribution. That is, if
