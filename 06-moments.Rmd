@@ -281,7 +281,7 @@ The next three inequalities are less commonly used, but are still useful
 is certain situations *(where?)*
 
 ::: {.definition name="Cauchy-Schwarz Inequality"}
-$$E(XY)^2 \leq E(X)^2E(Y)^2$$
+$$E(XY)^2 \leq E(X^2)E(Y^2)$$
 :::
 
 This equality can be generalized as follows

@@ -93,7 +93,7 @@ Why is this? Take $I(X_i < \theta)$ as an example. For iid $X_i$, $\prod_{i=1}^n
 
 This trick is useful for finding sufficient statistics. Here's an example involving the Uniform distribution.
 
-::: {.example name="Indicator Functions in the Factorization Theorem} 
+::: {.example name="Indicator Functions in the Factorization Theorem"} 
 Let $\textbf{X}= (X_1, ..., X_n), X_i$ iid $Uniform(0,\theta)$. Then,
 
 $$
@@ -103,6 +103,7 @@ P_{\theta}(x_1, ..., x_n) &= \frac{1}{\theta^n} \prod_{i=1}^{n}I(0<x_i<\theta)\\
 \end{aligned}
 $$
 $\Rightarrow T(X) = X_{(n)}$ sufficient for $\theta$.
+
 :::
 
 #### Important facts about SS
